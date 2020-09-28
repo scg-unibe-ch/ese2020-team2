@@ -53,6 +53,9 @@ export class UserLoginComponent implements OnInit {
     this.checkUserStatus();
   }
 
+  toForgotPassword(){
+    
+  }
   /**
    * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
    */
