@@ -4,7 +4,8 @@
     <div class="col-sm-6 offset-3">
         <form [formGroup]="userForm"
               (ngSubmit)="onSubmit()">
-            <div class="form-group">
+              <mat-card-title>Required Fields</mat-card-title>
+              <div class="form-group">
                 <mat-form-field>
                     <input required matInput placeholder="User Name" type="text"
                     formControlName="username"
@@ -13,50 +14,22 @@
                     <mat-error *ngIf="username.invalid"> username required</mat-error> 
                   </mat-form-field>
 
-                </div>
+                
 
 
-                <div class="form-group">
-                <mat-form-field>
-                    
-                    <mat-label>Enter your email</mat-label>
-                    <input required matInput placeholder="user@example.com" type="text"
-                    formControlName="email"
+                  <mat-form-field>
+                    <input required matInput placeholder="First Name" type="text"
+                    formControlName="firstname"
                     class="form-control"
-                    id="email">
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    id="firstname">
+                    <mat-error *ngIf="username.invalid"> First Name required</mat-error> 
                   </mat-form-field>
 
-                </div>
+                
 
 
-                <div class="form-group">
 
-                    <mat-form-field>
-                        <input required matInput placeholder="Last Name" type="text"
-                        formControlName="lastname"
-                        class="form-control"
-                        id="lastname">
-                        <mat-error *ngIf="username.invalid"> Last Name required</mat-error> 
-                      </mat-form-field>
-    
-                    </div>
-
-                    <div class="form-group">
-
-                        <mat-form-field>
-                            <input required matInput placeholder="First Name" type="text"
-                            formControlName="firstname"
-                            class="form-control"
-                            id="firstname">
-                            <mat-error *ngIf="username.invalid"> First Name required</mat-error> 
-                          </mat-form-field>
-        
-                        </div>
-             
-
-                <div class="form-group">
-                <mat-form-field> <input matInput placeholder="Password" 
+                  <mat-form-field> <input matInput placeholder="Password" 
                     [type]="hide ? 'password' : 'text'" 
                     formControlName="password"
                        class="form-control"
@@ -67,10 +40,32 @@
                      <mat-error *ngIf="password.invalid">Invalid Password</mat-error> 
                      <mat-error *ngIf="password.errors.pattern">1 upper case</mat-error> 
                     </mat-form-field>
+
                 </div>
 
+                    <div class="form-group">
+
+                        <mat-form-field>
+                            <mat-label>Enter your email</mat-label>
+                            <input required matInput placeholder="user@example.com" type="text"
+                            formControlName="email"
+                            class="form-control"
+                            id="email">
+                            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                          </mat-form-field>
+
+                        
+                          <mat-form-field>
+                            <input required matInput placeholder="Last Name" type="text"
+                            formControlName="lastname"
+                            class="form-control"
+                            id="lastname">
+                            <mat-error *ngIf="username.invalid"> Last Name required</mat-error> 
+                          </mat-form-field>
+                      
+                
+
                   
-                <div class="form-group">
                 <mat-form-field> 
                     <input matInput placeholder="Confirm Password" 
                     [type]="hide ? 'password' : 'text'" formControlName="confirmPassword"
@@ -85,11 +80,35 @@
                 </mat-error>
                   </mat-form-field>
                 </div>
+             
 
 
 
 
-                
+                <mat-card-title>Optional Fields</mat-card-title>
+
+
+
+                <div class="form-group"> 
+
+                <mat-form-field>
+                    <input matInput placeholder="Gender" type="text"
+                    formControlName="gender"
+                    class="form-control"
+                    id="gender">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <input matInput placeholder="Tel. Number" type="text"
+                    formControlName="telNumber"
+                    class="form-control"
+                    id="telNumber">
+                  </mat-form-field>
+
+                </div>
+
+
+              <mat-card-title style="font-size:120%;">Address</mat-card-title>
         
             <section formGroupName="address">
                 <div class="form-group">
@@ -99,40 +118,34 @@
                         class="form-control"
                         id="inputStreet">
                       </mat-form-field>
-                </div>
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
                         <mat-form-field>
                             <input matInput placeholder="Milan" type="text"
                             formControlName="city"
                             class="form-control"
                             id="inputCity">
                           </mat-form-field>
-                    </div>
+
+
+                        </div>
 
 
 
-                    <div class="form-group col-md-4">
                         <mat-form-field>
                             <input matInput placeholder="Italy" type="text"
                             formControlName="country"
                             class="form-control"
                             id="country">
                           </mat-form-field>
-                    </div>
 
-                    <div class="form-group col-md-2">
                         <mat-form-field>
                         <input matInput placeholder="20000" type="text"
                                formControlName="zip"
                                class="form-control"
                                id="inputZip">
                             </mat-form-field>
-                    </div>
-                </div>
             </section>
 
             
@@ -142,7 +155,7 @@
                         type="submit"
                         [disabled]="userForm.invalid"><i class="fas fa-save"></i> Sign Up</button>
                         <button class="btn btn-warning"
-                        (click)="clear()"><i class="fas fa-snowplow"></i> Clear Form</button>
+                        (click)="clear()" style="background-color: red;"><i class="fas fa-snowplow"></i> Clear Form</button>
                 <button class="btn btn-warning"
                         (click)="toLogIn()"><i class="fas fa-snowplow"></i> To Log in</button>
        
