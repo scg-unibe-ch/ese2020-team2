@@ -1,11 +1,11 @@
-<mat-card>
-    
+
+        
 <div class="row">
     <div class="col-sm-6 offset-3">
         <form [formGroup]="userForm"
               (ngSubmit)="onSubmit()">
+              <mat-card style="width: 75%;">
               <mat-card-title>Required Fields</mat-card-title>
-              <div class="form-group">
                 <mat-form-field>
                     <input required matInput placeholder="User Name" type="text"
                     formControlName="username"
@@ -41,10 +41,6 @@
                      <mat-error *ngIf="password.errors.pattern">1 upper case</mat-error> 
                     </mat-form-field>
 
-                </div>
-
-                    <div class="form-group">
-
                         <mat-form-field>
                             <mat-label>Enter your email</mat-label>
                             <input required matInput placeholder="user@example.com" type="text"
@@ -79,18 +75,18 @@
                     Passwords Don't Match
                 </mat-error>
                   </mat-form-field>
-                </div>
-             
+                
+  
+            </mat-card>
+            <mat-card style="width: 75%;">
+           
+
+            
 
 
-
-
-                <mat-card-title>Optional Fields</mat-card-title>
-
-
-
-                <div class="form-group"> 
-
+                        <mat-card-title>Optional Fields</mat-card-title> 
+                        <mat-card-subtitle style="margin-left: 31.5%;font-size: 120%;"> Adress</mat-card-subtitle>
+                        
                 <mat-form-field>
                     <input matInput placeholder="Gender" type="text"
                     formControlName="gender"
@@ -98,20 +94,18 @@
                     id="gender">
                   </mat-form-field>
 
+                  
+                
+              
+                
+            
                   <mat-form-field>
-                    <input matInput placeholder="Tel. Number" type="text"
-                    formControlName="telNumber"
+                    <input matInput placeholder="Milan" type="text"
+                    formControlName="city"
                     class="form-control"
-                    id="telNumber">
+                    id="inputCity">
                   </mat-form-field>
-
-                </div>
-
-
-              <mat-card-title style="font-size:120%;">Address</mat-card-title>
-        
-            <section formGroupName="address">
-                <div class="form-group">
+            
                     <mat-form-field>
                         <input matInput placeholder="Street" type="text"
                         formControlName="street"
@@ -119,18 +113,12 @@
                         id="inputStreet">
                       </mat-form-field>
 
-
-
-                        <mat-form-field>
-                            <input matInput placeholder="Milan" type="text"
-                            formControlName="city"
-                            class="form-control"
-                            id="inputCity">
-                          </mat-form-field>
-
-
-                        </div>
-
+                      <mat-form-field>
+                        <input matInput placeholder="Tel. Number" type="text"
+                        formControlName="telNumber"
+                        class="form-control"
+                        id="telNumber">
+                      </mat-form-field>
 
 
                         <mat-form-field>
@@ -145,11 +133,9 @@
                                formControlName="zip"
                                class="form-control"
                                id="inputZip">
+                               
                             </mat-form-field>
-            </section>
-
-            
-
+        </mat-card>
             <p>
                 <button class="btn btn-success"
                         type="submit"
@@ -160,10 +146,9 @@
                         (click)="toLogIn()"><i class="fas fa-snowplow"></i> To Log in</button>
        
             </p>
+        
         </form>
-
+    
     </div>
 
 </div>
-
-</mat-card>
