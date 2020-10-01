@@ -51,5 +51,4 @@ export class AppComponent implements OnInit {
       this.todoLists.splice(this.todoLists.indexOf(todoList), 1);
     });
   }
-
 }
