@@ -1,11 +1,16 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>ESE-2020 Frontend Scaffolding</span>
+    <span>ESE-2020 Frontend Scaffolding </span>
+    <span class="example-spacer"></span>
+    <button class="btn btn-success" routerLink="/login">Login</button>
+    <button class="btn btn-success" routerLink="/toDoList">ToDo-List</button>
+    <button class="btn btn-success" routerLink="/register">Register</button>
+    <button class="btn btn-success" routerLink="/account">Account</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-divider></mat-divider>
-
+<!---
 <mat-tab-group animationDuration="800ms">
   <mat-tab label="Todo List Example">
     <mat-card>
@@ -31,3 +36,8 @@
   <app-testsignup></app-testsignup>
   </mat-tab>
 </mat-tab-group>
+-->
+
+<div class="app">
+  <router-outlet></router-outlet>
+</div>
