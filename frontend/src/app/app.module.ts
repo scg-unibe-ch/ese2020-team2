@@ -19,6 +19,17 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
+import { Routes, RouterModule } from "@angular/router";
+import {UserAccountComponent} from "./user-account/user-account.component";
+
+const appRoutes: Routes = [
+  //{ path: '', component: HomeComponent },
+  { path: 'register', component: TestsignupComponent },
+  { path: 'login', component: UserLoginComponent },
+  { path: 'toDoList', component: TodoListComponent },
+  { path: 'account', component: UserAccountComponent }
+
+];
 
 @NgModule({
   declarations: [
@@ -28,6 +39,7 @@ import { TestsignupComponent } from './testsignup/testsignup.component';
     UserLoginComponent,
     UserSignupComponent,
     TestsignupComponent,
+    UserAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +54,8 @@ import { TestsignupComponent } from './testsignup/testsignup.component';
     MatCardModule,
     MatTabsModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     {
