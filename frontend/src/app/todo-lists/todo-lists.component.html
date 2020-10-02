@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="List Name" [(ngModel)]="newTodoListName" name="name">
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="onListCreate()" [disabled]="newTodoListName === ''">Create new list
+  </button>
+</mat-card>
+
+<app-todo-list
+  *ngFor="let todoList of todoLists" [todoList]="todoList"
+  (update)="onListUpdate($event)"
+  (delete)="onListDelete($event)"
+></app-todo-list>
+
+
+

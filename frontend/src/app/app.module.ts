@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
+import { TodoListComponent } from './todo-lists/todo-list/todo-list.component';
+import { TodoItemComponent } from './todo-lists/todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -21,12 +21,13 @@ import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
 import { Routes, RouterModule } from "@angular/router";
 import {UserAccountComponent} from "./user-account/user-account.component";
+import {ToDoListsComponent} from "./todo-lists/todo-lists.component";
 
 const appRoutes: Routes = [
   //{ path: '', component: HomeComponent },
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'toDoList', component: TodoListComponent },
+  { path: 'toDoLists', component: ToDoListsComponent },
   { path: 'account', component: UserAccountComponent }
 
 ];
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     UserSignupComponent,
     TestsignupComponent,
     UserAccountComponent,
+    ToDoListsComponent,
   ],
   imports: [
     BrowserModule,

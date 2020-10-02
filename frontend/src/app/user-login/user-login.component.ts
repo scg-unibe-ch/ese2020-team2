@@ -16,6 +16,7 @@ export class UserLoginComponent implements OnInit {
   loggedIn = false;
 
   secureEndpointResponse = '';
+  hide= true;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -53,8 +54,14 @@ export class UserLoginComponent implements OnInit {
     this.checkUserStatus();
   }
 
+  getUsersStatus(): boolean {
+    this.checkUserStatus();
+    return this.loggedIn;
+
+  }
+
   toForgotPassword(){
-    
+
   }
   /**
    * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
