@@ -1,18 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import {UserLoginComponent} from "../user-login/user-login.component";
 
 @Component({
-  providers: [UserLoginComponent],
   selector: 'app-user-account',
-  templateUrl: './user-account.component.html'
+  templateUrl: './user-account.component.html',
+  styleUrls: ['./user-account.component.css']
 })
-export class UserAccountComponent implements OnInit {
+export class UserAccountComponent {
 
-  constructor(private UserLoginComponent: UserLoginComponent ) { }
+  constructor( ) { }
 
-  ngOnInit(): void {
-    this.UserLoginComponent.checkUserStatus();
-  }
 
 }
 

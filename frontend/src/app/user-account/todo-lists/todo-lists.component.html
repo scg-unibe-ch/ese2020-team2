@@ -1,3 +1,4 @@
+<!--Here the user can generate a new list -->
 <mat-card>
   <mat-form-field>
     <input matInput placeholder="List Name" [(ngModel)]="newTodoListName" name="name">
@@ -6,6 +7,7 @@
   </button>
 </mat-card>
 
+<!--Here all the current lists are displayed-->
 <app-todo-list
   *ngFor="let todoList of todoLists" [todoList]="todoList"
   (update)="onListUpdate($event)"
