@@ -38,12 +38,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
-                unique: true
             },
             userName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
+                unique: true
             },
             password: {
                 type: DataTypes.STRING,
