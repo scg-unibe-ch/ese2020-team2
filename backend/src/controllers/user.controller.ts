@@ -2,14 +2,21 @@
 import express, { Router, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { verifyToken } from '../middlewares/checkAuth';
+import {checkUniqueUserName, checkUniqueEmail} from '../middlewares/checkRegistration';
 
 const userController: Router = express.Router();
 const userService = new UserService();
 
 userController.post('/register',
     (req: Request, res: Response) => {
-        userService.register(req.body).then(registered => res.send(registered)).catch(err => res.status(500).send(err));
-    }
+       // if (checkUniqueEmail(req) == null) {
+          // if (checkUniqueUserName(req) == null) {
+                userService.register(req.body).then(registered => res.send(registered)).catch(err => res.status(500).send(err));
+           // }
+          //  res.status(333).send('User name already exist. Try a different one.');
+        // }
+        // res.status(333).send('Email already exist. Try with new one.');
+     }
 );
 
 userController.post('/login',

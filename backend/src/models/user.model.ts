@@ -1,5 +1,5 @@
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import {Optional, Model, Sequelize, DataTypes, STRING} from 'sequelize';
 
 export interface UserAttributes {
     userId: number;
@@ -11,7 +11,7 @@ export interface UserAttributes {
     gender: string;
     telephone: string;
     street: string;
-    pincode: number;
+    pinCode: number;
     city: string;
     country: string;
 }
@@ -28,7 +28,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     gender!: string;
     telephone!: string;
     street!: string;
-    pincode!: number;
+    pinCode!: number;
     city!: string;
     country!: string;
 
@@ -37,11 +37,13 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             userId: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
-                primaryKey: true
+                primaryKey: true,
+                unique: true
             },
             userName: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true,
             },
             password: {
                 type: DataTypes.STRING,
@@ -49,7 +51,8 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             },
             firstName: {
                 type: DataTypes.STRING,
@@ -68,7 +71,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             street: {
                 type: DataTypes.STRING,
             },
-            pincode: {
+            pinCode: {
                 type: DataTypes.NUMBER,
             },
             city: {
