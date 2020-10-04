@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { CustomValidationService } from "src/app/services/passwordChecker";
@@ -80,15 +78,14 @@ toggleFieldTextType() {
     this.userForm.reset();
     //this.username.setValue("");
   }
-  toShoppingList() {
 
-  }
+  
 
   toLogIn() {
 
   }
 
-  onSubmit() {
+  onSignUp() {
     console.log(this.userForm.value);
   }
 }
