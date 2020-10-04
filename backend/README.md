@@ -200,7 +200,16 @@ Some endpoints can be called in a [browser](http://localhost:3000), others have 
 	```json
 	{
 		"userName":"string",
-		"password":"stiring"
+		"password":"stiring",
+		"email": "string",
+	    "firstName": "string",
+       	"lastName": "string",
+  		"gender": "string",
+   	    "telephone": "string",
+    	"street": "string",
+    	"pinCode": "number",
+    	"city": "string",
+    	"country": "string"
 	}
 
 	```

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [style.backgroundColor]="'rgba(8, 89, 164, 0.4  )'">
   <div *ngIf="!loggedIn">
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
@@ -6,7 +6,7 @@
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" >
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-      </mat-icon> 
+      </mat-icon>
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()">Login</button>
   </div>
@@ -15,14 +15,11 @@
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}
   </div>
- 
+
 </mat-card>
 
-<mat-card>
+<mat-card [style.backgroundColor]="'rgba(8, 89, 164, 0.4  )'">
   <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
   {{ secureEndpointResponse }}
-</mat-card>
-
-<mat-card>
-  <button mat-flat-button style="background-color:rgba(255, 59, 59, 0.925)" (click)="toForgotPassword()">Reset Password</button>
+  <button mat-flat-button style="background-color:rgba(228, 62, 62, 0.858)" (click)="toForgotPassword()">Reset Password</button>
 </mat-card>

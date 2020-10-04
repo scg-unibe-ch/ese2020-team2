@@ -1,33 +1,34 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>ESE-2020 Frontend Scaffolding</span>
-  </mat-toolbar-row>
-</mat-toolbar>
 
-<mat-divider></mat-divider>
 
-<mat-tab-group animationDuration="800ms">
-  <mat-tab label="Todo List Example">
-    <mat-card>
-      <mat-form-field>
-        <input matInput placeholder="List Name" [(ngModel)]="newTodoListName" name="name">
-      </mat-form-field>
-      <button mat-flat-button color="primary" (click)="onListCreate()" [disabled]="newTodoListName === ''">Create new list</button>
-    </mat-card>
 
-    <app-todo-list
-      *ngFor="let todoList of todoLists" [todoList]="todoList"
-      (update)="onListUpdate($event)"
-      (delete)="onListDelete($event)"
-    ></app-todo-list>
+    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
+        style=
+        "max-height: 130px;
+        height: 70%;
+        width: 100%;
+        object-fit: cover;">
+
+<div class="my-theme">
+	<mat-tab-group [backgroundColor]="'primary'" [color]="'warn'">
+
+  <mat-tab label="Home">
+    <app-home></app-home>
   </mat-tab>
 
-
-  <mat-tab label="User Login Example">
+  <mat-tab label="Login">
     <app-user-login></app-user-login>
   </mat-tab>
 
-  <mat-tab label="User SignUp">
-  <app-testsignup></app-testsignup>
+  <mat-tab label="Registration">
+    <app-testsignup></app-testsignup>
   </mat-tab>
+ 
+  <mat-tab label="Account">
+<app-user-account></app-user-account>
+  </mat-tab>
+
 </mat-tab-group>
+</div>
+
+
+

@@ -10,15 +10,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
+import { TodoListComponent } from './user-account/todo-lists/todo-list/todo-list.component';
+import { TodoItemComponent } from './user-account/todo-lists/todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { UserSignupComponent } from './user-signup/user-signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
+import {UserAccountComponent} from "./user-account/user-account.component";
+import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component";
+import {WalletComponent} from "./user-account/wallet/wallet.component";
+import { HomeComponent } from './home/home.component';
+import { HistoryComponent } from './user-account/history/history.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSelectModule} from '@angular/material/select';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { AppRoutingModule } from './app-routing.module';
+
+
 
 @NgModule({
   declarations: [
@@ -26,11 +36,20 @@ import { TestsignupComponent } from './testsignup/testsignup.component';
     TodoListComponent,
     TodoItemComponent,
     UserLoginComponent,
-    UserSignupComponent,
     TestsignupComponent,
+    UserAccountComponent,
+    ToDoListsComponent,
+    WalletComponent,
+    HomeComponent,
+    HistoryComponent,
   ],
-  imports: [
+  imports: [ 
+    MatSelectModule,
+    MatSelectCountryModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -42,7 +61,8 @@ import { TestsignupComponent } from './testsignup/testsignup.component';
     MatCardModule,
     MatTabsModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [
     {
