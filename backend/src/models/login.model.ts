@@ -1,5 +1,10 @@
 import { User } from './user.model';
 
+/**
+ * TODO: add description
+ *
+ */
+
 export interface LoginResponse {
     user?: User;
     token?: string;

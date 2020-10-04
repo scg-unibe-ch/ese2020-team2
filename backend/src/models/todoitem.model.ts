@@ -1,6 +1,11 @@
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { TodoList } from './todolist.model';
 
+/**
+ * TODO: add description
+ *
+ */
+
 export interface TodoItemAttributes {
     todoItemId: number;
     name: string;
@@ -18,6 +23,10 @@ export class TodoItem extends Model<TodoItemAttributes, TodoItemCreationAttribut
     done!: boolean;
     todoListId!: number;
 
+    /**
+     * TODO: add method description
+     * @param sequelize
+     */
 
     public static initialize(sequelize: Sequelize) { // definition for database
         TodoItem.init({
@@ -43,6 +52,12 @@ export class TodoItem extends Model<TodoItemAttributes, TodoItemCreationAttribut
         );
 
     }
+
+    /**
+     * TODO: add method description
+     *
+     */
+
     public static createAssociations() {
         TodoItem.belongsTo(TodoList, {
             targetKey: 'todoListId',

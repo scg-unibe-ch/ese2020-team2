@@ -1,6 +1,13 @@
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
 import {Optional, Model, Sequelize, DataTypes, STRING} from 'sequelize';
 
+/**
+ * The responsibility of this class is to hold all attributes that we need to configure an user registration.
+ *
+ * Here are defined the attributes of the user, these define the type of input expected in the filling brackets
+ * in a registration.
+ */
+
 export interface UserAttributes {
     userId: number;
     userName: string;
@@ -33,6 +40,12 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     city!: string;
     country!: string;
     moneyInWallet!: number;
+
+    /**
+     * TODO: add description
+     *
+     * @param sequelize
+     */
 
     public static initialize(sequelize: Sequelize) {
         User.init({

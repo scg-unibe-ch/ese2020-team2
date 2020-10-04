@@ -11,10 +11,19 @@ import { User } from './models/user.model';
 
 import cors from 'cors';
 
+/**
+ * TODO: add description
+ *
+ */
+
 export class Server {
     private server: Application;
     private sequelize: Sequelize;
     private port = process.env.PORT || 3000;
+
+    /**
+     * TODO: add construction function
+     */
 
     constructor() {
         this.server = this.configureServer();
@@ -32,6 +41,12 @@ export class Server {
             });
         });
     }
+
+    /**
+     * TODO: add method description
+     *
+     * @private
+     */
 
     private configureServer(): Application {
         // options for cors middleware
@@ -62,6 +77,11 @@ export class Server {
             // this is the message you get if you open http://localhost:3000/ when the server is running
             .get('/', (req, res) => res.send('<h1>Welcome to the ESE-2020 Backend Scaffolding <span style="font-size:50px">&#127881;</span></h1>'));
     }
+
+    /**
+     * TODO: add method description
+     * @private
+     */
 
     private configureSequelize(): Sequelize {
         return new Sequelize({
