@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { UserSignupComponent } from './user-signup/user-signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
 import { Routes, RouterModule } from "@angular/router";
@@ -24,9 +25,6 @@ import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component
 import {WalletComponent} from "./user-account/wallet/wallet.component";
 import { HomeComponent } from './home/home.component';
 import { HistoryComponent } from './user-account/history/history.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSelectModule} from '@angular/material/select';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 // In  appRoutes the connections between the path and the component are specified
 const appRoutes: Routes = [
@@ -45,6 +43,7 @@ const appRoutes: Routes = [
     TodoListComponent,
     TodoItemComponent,
     UserLoginComponent,
+    UserSignupComponent,
     TestsignupComponent,
     UserAccountComponent,
     ToDoListsComponent,
@@ -53,12 +52,7 @@ const appRoutes: Routes = [
     HistoryComponent,
   ],
   imports: [
-    MatSelectModule,
-    MatSelectCountryModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
-    FlexLayoutModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,

@@ -1,11 +1,8 @@
+
+
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
-import {Country} from '@angular-material-extensions/select-country'; 
 import { CustomValidationService } from "src/app/services/passwordChecker";
-export interface Gender {
-  value: string;
-  display: string;
-}
 
 @Component({
   selector: 'app-testsignup',
@@ -21,7 +18,10 @@ export class TestsignupComponent implements OnInit {
   passwordPatern = "[a-z]+[A-Z]+[0-9]+[@#\$&]*";
   fieldTextType: boolean;
 
-  
+toggleFieldTextType() {
+  this.fieldTextType = !this.fieldTextType;
+}
+
   userForm = this.fb.group(
     {
       username: [
@@ -32,13 +32,13 @@ export class TestsignupComponent implements OnInit {
       password: ["", [Validators.required, Validators.pattern(this.passwordPatern)]],
       confirmPassword: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      gender: ["male"],
       address: this.fb.group({
         street: [""],
         city: [""],
-        country: [""],
+        state: [""],
         zip: [""]
-      })
+      }),
+      daysAvailable: this.fb.array([this.fb.control("")])
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -47,14 +47,6 @@ export class TestsignupComponent implements OnInit {
       )
     }
   );
-  selectedValue: string; 
-   genders: Gender[] = [
-      {value: 'female', display: 'Female'},
-      {value: 'male', display: 'Male'}
-   ];
-
-
-
 
 
   get email() {
@@ -75,11 +67,6 @@ export class TestsignupComponent implements OnInit {
 
   ngOnInit() {}
 
-  onCountrySelected($event: Country) {
-    console.log($event);
-  }
-
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -93,14 +80,15 @@ export class TestsignupComponent implements OnInit {
     this.userForm.reset();
     //this.username.setValue("");
   }
+  toShoppingList() {
 
-  
+  }
 
   toLogIn() {
 
   }
 
-  onSignUp() {
+  onSubmit() {
     console.log(this.userForm.value);
   }
 }
