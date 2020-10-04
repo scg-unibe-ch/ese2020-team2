@@ -1,15 +1,36 @@
-<!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span [style.cursor]="'pointer'" routerLink="/home">ESE-2020-Project Team 2</span>
-    <span class="example-spacer"></span>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/register">Register</button>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/login">Login</button>
-    <button *ngIf="loggedIn"class="btn btn-success" routerLink="/login">Logout</button>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/account">Account</button>
-  </mat-toolbar-row>
-</mat-toolbar>
 
-<!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
-  <router-outlet></router-outlet>
+
+    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
+        style=
+        "max-height: 130px;
+        height: 70%;
+        width: 100%;
+        object-fit: cover;">
+
+<div class="my-theme">
+	<mat-tab-group [backgroundColor]="'primary'" [color]="'warn'">
+
+  <mat-tab label="Home">
+    <app-home></app-home>
+  </mat-tab>
+
+  <mat-tab label="Login">
+    <app-user-login></app-user-login>
+  </mat-tab>
+
+  <mat-tab label="Registration">
+    <app-testsignup></app-testsignup>
+  </mat-tab>
+ 
+  <mat-tab label="Account">
+<app-user-account></app-user-account>
+  </mat-tab>
+
+</mat-tab-group>
+</div>
+
+
+
+
+
 

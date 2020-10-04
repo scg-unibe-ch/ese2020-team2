@@ -18,7 +18,7 @@ export class TestsignupComponent implements OnInit {
     private customValidator: CustomValidationService
   ) {}
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  passwordPatern = "[a-z]+[A-Z]+[0-9]+[@#\$&]*";
+  passwordPattern = "[a-z]+[A-Z]+[0-9].*"
   fieldTextType: boolean;
 
   
@@ -29,15 +29,16 @@ export class TestsignupComponent implements OnInit {
         [Validators.required, Validators.minLength(3)],
         this.customValidator.validateUsernameNotTaken.bind(this.customValidator)
       ],
-      password: ["", [Validators.required, Validators.pattern(this.passwordPatern)]],
+      password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      gender: ["male"],
+      gender: [""],
       address: this.fb.group({
         street: [""],
         city: [""],
         country: [""],
-        zip: [""]
+        zip: [""],
+        streetNumber: [""]
       })
     },
     {

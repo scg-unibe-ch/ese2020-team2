@@ -4,12 +4,11 @@
 
 
 
-              <mat-card class="mat-elevation-z4">
+              <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.4  )'">
               <mat-card-title>Required Fields</mat-card-title>
                 <mat-form-field>
                     <input required matInput placeholder="User Name" type="text"
                     formControlName="username"
-                    class="form-control"
                     id="username">
                     <mat-error *ngIf="username.invalid"> username required</mat-error> 
                     <mat-error *ngIf="username.errors?.minlength">username must have 3 chars</mat-error>
@@ -21,33 +20,44 @@
                   <mat-form-field>
                     <input required matInput placeholder="First Name" type="text"
                     formControlName="firstname"
-                    class="form-control"
                     id="firstname">
                     <mat-error *ngIf="username.invalid"> First Name required</mat-error>
                   </mat-form-field>
 
 
+                    
+    
 
 
-
-                  <mat-form-field> <input matInput placeholder="Password"
-                    [type]="hide ? 'password' : 'text'"
-                    formControlName="password"
-                       class="form-control"
+                  <mat-form-field>
+                    <input [type]="hide ? 'password' : 'text'"
+                       formControlName="password"
+                       [pattern]="passwordPattern"
                        [ngClass]="{'is-invalid':password.errors && password.touched}"
-                       id="password" required minlength="7">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-                    </mat-icon> <mat-error *ngIf="password.errors?.minlength">name must be 7 long</mat-error>
-                     <mat-error *ngIf="password.invalid">Invalid Password</mat-error>
-                     <mat-error *ngIf="password.errors.pattern">1 upper case</mat-error>
-                    </mat-form-field>
+                       minlength="7"
+                       id="password"
+                       matInput placeholder="Password">
+                       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                      </mat-icon> 
+                <mat-error class="invalid-feedback"
+                     *ngIf="password.hasError('required')">
+                    Password is required.
+                  </mat-error>
+                  <mat-error *ngIf="password.errors?.pattern">
+                    Password not valid.
+                  </mat-error> 
+                  <mat-error *ngIf="password.errors?.minlength">
+                    Password must have 7 chars.
+                  </mat-error> 
+                  </mat-form-field>
+
+
                     <br>
 
                         <mat-form-field>
                             <mat-label>Enter your email</mat-label>
                             <input required matInput placeholder="user@example.com" type="text"
                             formControlName="email"
-                            class="form-control"
                             id="email">
                             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                           </mat-form-field>
@@ -56,32 +66,36 @@
                           <mat-form-field>
                             <input required matInput placeholder="Last Name" type="text"
                             formControlName="lastname"
-                            class="form-control"
                             id="lastname">
                             <mat-error *ngIf="username.invalid"> Last Name required</mat-error>
                           </mat-form-field>
 
 
 
-
-                <mat-form-field>
-                    <input matInput placeholder="Confirm Password"
-                    [type]="hide ? 'password' : 'text'" formControlName="confirmPassword"
-                    class="form-control"
-                    [ngClass]="{'is-invalid':confirmPassword.errors && confirmPassword.touched}"
-                    id="confirmPassword" required autocomplete>
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    <mat-error *ngIf="password.invalid">Invalid Password</mat-error>
-                    <mat-error class="invalid-feedback"
-                     *ngIf="confirmPassword.hasError('passwordMismatch')">
-                    Passwords Don't Match
-                </mat-error>
+                      <mat-form-field>
+                          <input
+                          formControlName="confirmPassword"
+                          [type]="hide ? 'password' : 'text'"
+                          [ngClass]="{'is-invalid':confirmPassword.errors && confirmPassword.touched}"
+                          id="confirmPassword"
+                          matInput placeholder="Confirm Password"
+                          >
+                          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                   <mat-error class="invalid-feedback"
+                        *ngIf="confirmPassword.hasError('passwordMismatch')">
+                       Passwords Don't Match
+                    </mat-error>
+                   <mat-error class="invalid-feedback"
+                        *ngIf="confirmPassword.hasError('required')">
+                       Confirm password is required
+                  </mat-error>
                   </mat-form-field>
+
 
 
             </mat-card>
 
-            <mat-card class="mat-elevation-z4">
+            <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.4  )'">
 
 
 
@@ -90,6 +104,14 @@
                         <mat-card-title>Optional Fields</mat-card-title>
 
 
+
+                      <br>
+                  <mat-select-country 
+                label="Country"
+                formControlName="country"
+                appearance="outline" 
+                (onCountrySelected)="onCountrySelected($event)">
+                </mat-select-country>
 
 
                           
@@ -108,44 +130,45 @@
 
 
                   <mat-form-field>
-                    <input matInput placeholder="Milan" type="text"
+                    <input matInput placeholder="City" type="text"
                     formControlName="city"
-                    class="form-control"
                     id="inputCity">
                   </mat-form-field>
                   
             
                     <mat-form-field>
+                      <mat-label>Street</mat-label>
                         <input matInput placeholder="Street" type="text"
                         formControlName="street"
-                        class="form-control"
                         id="inputStreet">
                       </mat-form-field>
                       <br>
 
-                      <mat-select-country 
-                    label="Country"
-                    formControlName="country"
-                    (onCountrySelected)="onCountrySelected($event)">
-</mat-select-country>
 
                       <mat-form-field>
                         <input matInput placeholder="Tel. Number" type="text"
                         formControlName="telNumber"
-                        class="form-control"
                         id="telNumber">
                       </mat-form-field>
 
 
 
                         <mat-form-field>
-                        <input matInput placeholder="20000" type="text"
+                        <input matInput placeholder="ZIP" type="text"
                                formControlName="zip"
-                               class="form-control"
                                id="inputZip">
 
                             </mat-form-field>
 
+                            <mat-form-field>
+                              <input matInput placeholder="Street Number" type="text"
+                                     formControlName="streetNumber"
+                                     id="streetNumber">
+      
+                                  </mat-form-field>
+
+                          
+                      
                             
 
         </mat-card>
