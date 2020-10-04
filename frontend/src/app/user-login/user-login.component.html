@@ -6,7 +6,7 @@
     <mat-form-field>
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" >
       <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-      </mat-icon> 
+      </mat-icon>
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()">Login</button>
   </div>
@@ -15,7 +15,7 @@
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}
   </div>
- 
+
 </mat-card>
 
 <mat-card>

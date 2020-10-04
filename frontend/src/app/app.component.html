@@ -1,33 +1,15 @@
+<!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>ESE-2020 Frontend Scaffolding</span>
+    <span [style.cursor]="'pointer'" routerLink="/home">ESE-2020-Project Team 2</span>
+    <span class="example-spacer"></span>
+    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/register">Register</button>
+    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/login">Login</button>
+    <button *ngIf="loggedIn"class="btn btn-success" routerLink="/login">Logout</button>
+    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/account">Account</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-divider></mat-divider>
+<!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
+  <router-outlet></router-outlet>
 
-<mat-tab-group animationDuration="800ms">
-  <mat-tab label="Todo List Example">
-    <mat-card>
-      <mat-form-field>
-        <input matInput placeholder="List Name" [(ngModel)]="newTodoListName" name="name">
-      </mat-form-field>
-      <button mat-flat-button color="primary" (click)="onListCreate()" [disabled]="newTodoListName === ''">Create new list</button>
-    </mat-card>
-
-    <app-todo-list
-      *ngFor="let todoList of todoLists" [todoList]="todoList"
-      (update)="onListUpdate($event)"
-      (delete)="onListDelete($event)"
-    ></app-todo-list>
-  </mat-tab>
-
-
-  <mat-tab label="User Login Example">
-    <app-user-login></app-user-login>
-  </mat-tab>
-
-  <mat-tab label="User SignUp">
-  <app-testsignup></app-testsignup>
-  </mat-tab>
-</mat-tab-group>
