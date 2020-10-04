@@ -8,7 +8,6 @@ import{FormsModule} from "@angular/forms";
 import {Observable} from "rxjs";
 import {runModuleAsObservableFork} from "@angular-devkit/build-angular/src/utils";
 import {AuthService} from "./auth/auth.service";
-import {AuthService2} from "./auth/auth.service2";
 
 @Component({
   selector: 'app-root',
@@ -17,12 +16,12 @@ import {AuthService2} from "./auth/auth.service2";
   providers:[AuthService]
 })
 export class AppComponent {
-  loggedIn = false;
+  loggedIn$ = false;
 
-  constructor(private authService2: AuthService2) {
+  constructor(private authService: AuthService) {
 
-    authService2.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn = nextValue;  // this will happen on every change
+    authService.loggedIn$.subscribe((nextValue) => {
+      this.loggedIn$ = nextValue;  // this will happen on every change
     })
   }
 }

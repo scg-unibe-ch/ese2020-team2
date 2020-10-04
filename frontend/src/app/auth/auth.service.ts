@@ -1,21 +1,11 @@
-import {Injectable, OnInit} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {BehaviorSubject} from 'rxjs';
+import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthService {
+  loggedIn$ = new BehaviorSubject<boolean>(this.login);
 
-  loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
-
-  getUsersStatus(): Observable<boolean> {
-    if (!!localStorage.getItem('userToken')) {
-      this.loggedInSubject.next(true);
-    }
-    else {
-      this.loggedInSubject.next(false)
-    }
-    return this.loggedInSubject.asObservable();
+  set login(value: boolean) {
+    this.loggedIn$.next(value); // this will make sure to tell every subscriber about the change.
   }
-
 }

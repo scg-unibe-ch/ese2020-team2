@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {BehaviorSubject, Observable} from "rxjs";
-import {AuthService2} from "../auth/auth.service2";
+import {AuthService} from "../auth/auth.service";
 
 1
 
@@ -24,7 +24,7 @@ export class UserLoginComponent implements OnInit {
   secureEndpointResponse = '';
   hide= true;
 
-  constructor(private httpClient: HttpClient, private authService2: AuthService2) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
@@ -49,7 +49,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
 
-      this.authService2.login = true;
+      this.authService.login = true;
       this.checkUserStatus();
     });
   }
@@ -59,7 +59,7 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
 
-    this.authService2.login = false;
+    this.authService.login = false;
     this.checkUserStatus();
   }
 
