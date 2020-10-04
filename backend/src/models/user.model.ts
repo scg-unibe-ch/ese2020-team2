@@ -86,7 +86,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 allowNull: false,
                 defaultValue: 100,
                 validate: {
-                    min:0
+                    min: 0
                 }
             }
         },
