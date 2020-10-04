@@ -84,6 +84,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             moneyInWallet: {
                 type: DataTypes.DOUBLE,
                 allowNull: false,
+                defaultValue: 100,
                 validate: {
                     min:0
                 }
