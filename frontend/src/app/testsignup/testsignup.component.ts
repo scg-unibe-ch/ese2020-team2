@@ -1,15 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
+import {Country} from '@angular-material-extensions/select-country'; 
 import { CustomValidationService } from "src/app/services/passwordChecker";
 export interface Gender {
   value: string;
   display: string;
-}
-export interface Country {
-  name: string;
-  alpha2Code: string;
-  alpha3Code: string;
-  numericCode: string;
 }
 
 @Component({
@@ -37,10 +32,11 @@ export class TestsignupComponent implements OnInit {
       password: ["", [Validators.required, Validators.pattern(this.passwordPatern)]],
       confirmPassword: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
+      gender: ["male"],
       address: this.fb.group({
         street: [""],
         city: [""],
-        state: [""],
+        country: [""],
         zip: [""]
       })
     },
@@ -78,6 +74,11 @@ export class TestsignupComponent implements OnInit {
 
 
   ngOnInit() {}
+
+  onCountrySelected($event: Country) {
+    console.log($event);
+  }
+
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
