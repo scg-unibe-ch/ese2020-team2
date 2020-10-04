@@ -1,6 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { CustomValidationService } from "src/app/services/passwordChecker";
+export interface Gender {
+  value: string;
+  display: string;
+}
+export interface Country {
+  name: string;
+  alpha2Code: string;
+  alpha3Code: string;
+  numericCode: string;
+}
 
 @Component({
   selector: 'app-testsignup',
@@ -16,10 +26,7 @@ export class TestsignupComponent implements OnInit {
   passwordPatern = "[a-z]+[A-Z]+[0-9]+[@#\$&]*";
   fieldTextType: boolean;
 
-toggleFieldTextType() {
-  this.fieldTextType = !this.fieldTextType;
-}
-
+  
   userForm = this.fb.group(
     {
       username: [
@@ -35,8 +42,7 @@ toggleFieldTextType() {
         city: [""],
         state: [""],
         zip: [""]
-      }),
-      daysAvailable: this.fb.array([this.fb.control("")])
+      })
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -45,6 +51,14 @@ toggleFieldTextType() {
       )
     }
   );
+  selectedValue: string; 
+   genders: Gender[] = [
+      {value: 'female', display: 'Female'},
+      {value: 'male', display: 'Male'}
+   ];
+
+
+
 
 
   get email() {
