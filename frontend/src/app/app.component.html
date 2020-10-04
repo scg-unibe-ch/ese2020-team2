@@ -1,6 +1,8 @@
+<!doctype html>
+<html>
+<body>
 
-
-
+  
     <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
         style=
         "max-height: 130px;
@@ -11,24 +13,50 @@
 <div class="my-theme">
 	<mat-tab-group [backgroundColor]="'primary'" [color]="'warn'">
 
-  <mat-tab label="Home">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">home</mat-icon>
+      Home
+    </ng-template>
     <app-home></app-home>
   </mat-tab>
 
-  <mat-tab label="Login">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">label_important</mat-icon>
+      Log-in
+    </ng-template>
     <app-user-login></app-user-login>
   </mat-tab>
 
-  <mat-tab label="Registration">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">assignment</mat-icon>
+      Registration
+    </ng-template>
     <app-testsignup></app-testsignup>
   </mat-tab>
- 
-  <mat-tab label="Account">
-<app-user-account></app-user-account>
+  
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">account_circle</mat-icon>
+      Account
+    </ng-template>
+    <app-user-account></app-user-account>
   </mat-tab>
+
+
+
+
 
 </mat-tab-group>
 </div>
+
+
+</body>
+</html>
 
 
 
