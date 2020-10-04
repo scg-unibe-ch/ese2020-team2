@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {BehaviorSubject, Observable} from "rxjs";
+import {AuthService2} from "../auth/auth.service2";
+
+1
+
 
 @Component({
   selector: 'app-user-login',
@@ -14,23 +19,25 @@ export class UserLoginComponent implements OnInit {
 
   userToken: string;
   loggedIn = false;
+  loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
 
   secureEndpointResponse = '';
   hide= true;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService2: AuthService2) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
   }
 
-  checkUserStatus(): void {
+  checkUserStatus(): void{
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
 
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
+
   }
 
   login(): void {
@@ -42,6 +49,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
 
+      this.authService2.login = true;
       this.checkUserStatus();
     });
   }
@@ -51,13 +59,12 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
 
+    this.authService2.login = false;
     this.checkUserStatus();
   }
 
-  getUsersStatus(): boolean {
-    this.checkUserStatus();
-    return this.loggedIn;
-
+  getUsersStatus(): Observable<boolean> {
+    return this.loggedInSubject.asObservable();
   }
 
   toForgotPassword(){

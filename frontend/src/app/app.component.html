@@ -3,12 +3,13 @@
   <mat-toolbar-row>
     <span [style.cursor]="'pointer'" routerLink="/home">ESE-2020-Project Team 2</span>
     <span class="example-spacer"></span>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/register">Register</button>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/login">Login</button>
-    <button *ngIf="loggedIn"class="btn btn-success" routerLink="/login">Logout</button>
-    <button *ngIf="!loggedIn" class="btn btn-success" routerLink="/account">Account</button>
+    <button *ngIf = "!(loggedIn )" class="btn btn-success" routerLink="/register">Register</button>
+    <button *ngIf = "!(loggedIn)" class="btn btn-success" routerLink="/login">Login</button>
+    <button *ngIf = "(loggedIn)"class="btn btn-success" routerLink="/login">Logout</button>
+    <button *ngIf = "(loggedIn)" class="btn btn-success" routerLink="/account">Account</button>
   </mat-toolbar-row>
 </mat-toolbar>
+
 
 <!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
   <router-outlet></router-outlet>
