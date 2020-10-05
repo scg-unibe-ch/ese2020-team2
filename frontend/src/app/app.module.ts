@@ -19,7 +19,6 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
-import { Routes, RouterModule } from "@angular/router";
 import {UserAccountComponent} from "./user-account/user-account.component";
 import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component";
 import {WalletComponent} from "./user-account/wallet/wallet.component";
@@ -27,18 +26,9 @@ import { HomeComponent } from './home/home.component';
 import { HistoryComponent } from './user-account/history/history.component';
 import {MatSelectModule} from "@angular/material/select";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import {Country} from "@angular-material-extensions/select-country";
+import { AppRoutingModule } from './app-routing.module';
 
-// In  appRoutes the connections between the path and the component are specified
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'register', component: TestsignupComponent },
-  { path: 'login', component: UserLoginComponent },
-  { path: 'toDoLists', component: ToDoListsComponent },
-  { path: 'account', component: UserAccountComponent }
 
-];
 
 @NgModule({
   declarations: [
@@ -68,8 +58,8 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
     MatSelectModule,
+    AppRoutingModule,
     MatSelectCountryModule
   ],
   providers: [
