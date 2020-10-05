@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormArray } from "@angular/forms";
+import { FormBuilder, Validators, FormArray, NgForm } from "@angular/forms";
 import {Country} from '@angular-material-extensions/select-country'; 
 import { environment } from '../../environments/environment';
 import { CustomValidationService } from "src/app/services/passwordChecker";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 export interface Gender {
   value: string;
   display: string;
@@ -23,13 +24,10 @@ export class TestsignupComponent implements OnInit {
 
 
   
-  ngOnInit() {
-
-    console.log("fromregistercomponent")
-
-    
-
+  
+  ngOnInit(): void {
   }
+
 
 
 
@@ -68,6 +66,7 @@ export class TestsignupComponent implements OnInit {
       {value: 'female', display: 'Female'},
       {value: 'male', display: 'Male'}
    ];
+   userToken: string;
 
 
 
@@ -114,26 +113,21 @@ export class TestsignupComponent implements OnInit {
     //this.username.setValue("");
   }
 
-  signup(): void {
-    this.httpClient.post(environment.endpointURL + 'user/register', {
-      userName: this.username,
-      password: this.password,
-      email: this.email,
-      firstName: this.firstname,
-      lastName: this.lastname,
-      gender: this.genders,
-      telephone: this.telNumber,
-      street: this.street,
-      pinCode: this.zip,
-      city: this.city,
-      country: this.country,
-      
-    }).subscribe((res: any) => {});
-  }
+  signup(userForm: FormBuilder) {
+    this.httpClient.post(environment.endpointURL + 'user/register', 
+      userForm
+
+    )}
+    
+    ;
+
 
   toLogIn() {
 
   }
 
+
 }
+
+
 
