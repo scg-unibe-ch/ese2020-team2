@@ -35,21 +35,5 @@ export class CustomValidationService {
     };
   }
 
-  validateUsernameNotTaken(control: AbstractControl) {
-    return this.checkUsernameNotTaken(control.value).pipe(
-      map(res => {
-        return res ? null : { usernameTaken: true };
-      })
-    );
-  }
 
-  //Fake API call -- You can have this in another service
-  checkUsernameNotTaken(username: string): Observable<boolean> {
-    return this.http.get("assets/fakedb.json").pipe(
-      map((usernameList: Array<any>) =>
-        usernameList.filter(user => user.username === username)
-      ),
-      map(users => !users.length)
-    );
-  }
 }

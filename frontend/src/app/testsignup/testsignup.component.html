@@ -1,18 +1,18 @@
 
-        <form [formGroup]="userForm"
-              (ngSubmit)="onSignUp()">
+        <form [formGroup]="userForm">
 
 
 
               <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.95  )'">
               <mat-card-title>Required Fields</mat-card-title>
               <div class="form-group">
+
+
                 <mat-form-field>
                     <input required matInput placeholder="User Name" type="text"
                     formControlName="username"
                     id="username">
                     <mat-error *ngIf="username.invalid"> username required</mat-error> 
-                    <mat-error *ngIf="username.errors?.minlength">username must have 3 chars</mat-error>
                   </mat-form-field>
 
                 
@@ -108,12 +108,12 @@
 
 
                       <br>
-                  <mat-select-country 
-                label="Country"
-                formControlName="country"
-                appearance="outline" 
-                (onCountrySelected)="onCountrySelected($event)">
-                </mat-select-country>
+                      <mat-form-field>
+                        <input matInput placeholder="Country" type="text"
+                        formControlName="country"
+                        id="country">
+                      </mat-form-field>
+                
 
 
                           
@@ -169,7 +169,8 @@
 
         </mat-card>
             <p>
-                <button class="btn btn-success"
+                <button class="btn btn-warning"
+                (click)="signup()"
                         type="submit"
                         [disabled]="userForm.invalid"><i class="fas fa-save"></i> Sign Up</button>
                         <button class="btn btn-warning"

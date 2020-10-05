@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import {Country} from '@angular-material-extensions/select-country'; 
+import { environment } from '../../environments/environment';
 import { CustomValidationService } from "src/app/services/passwordChecker";
+import { HttpClient } from '@angular/common/http';
 export interface Gender {
   value: string;
   display: string;
@@ -14,9 +16,11 @@ export interface Gender {
 export class TestsignupComponent implements OnInit {
   hide = true;
   constructor(
+    private httpClient: HttpClient,
     private fb: FormBuilder,
     private customValidator: CustomValidationService
   ) {}
+
 
   
   ngOnInit() {
@@ -38,9 +42,7 @@ export class TestsignupComponent implements OnInit {
     {
       username: [
         "",
-        [Validators.required, Validators.minLength(3)],
-        this.customValidator.validateUsernameNotTaken.bind(this.customValidator)
-      ],
+        Validators.required,],
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
@@ -49,10 +51,10 @@ export class TestsignupComponent implements OnInit {
       lastname: [""],
       country: [""],
       telNumber: [""],
-        street: [""],
-        city: [""],
-        zip: [""],
-        streetNumber: [""]
+      street: [""],
+      city: [""],
+      zip: [""],
+      streetNumber: [""]
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -71,15 +73,21 @@ export class TestsignupComponent implements OnInit {
 
 
 
-  get email() {
-    return this.userForm.get("email");
-  }
-  get username() {
-    return this.userForm.get("username");
+  get email() {return this.userForm.get("email")};
+  get username() {return this.userForm.get("username")};
+  get street() {return this.userForm.get("street")};
+  get zip() {return this.userForm.get("zip")};
+
+  get confirmPassword() {return this.userForm.get("confirmPassword")};
+  get city() {    return this.userForm.get("city")};
+  get firstname() {    return this.userForm.get("firstname")};
+  get telNumber() {    return this.userForm.get("telNumber")};
+  get lastname() {
+    return this.userForm.get("lastname");
   }
 
-  get confirmPassword() {
-    return this.userForm.get("confirmPassword");
+  get country() {
+    return this.userForm.get("country");
   }
 
   get password() {
@@ -87,11 +95,9 @@ export class TestsignupComponent implements OnInit {
   }
 
 
+
   
 
-  onCountrySelected($event: Country) {
-    console.log($event);
-  }
 
 
   getErrorMessage() {
@@ -108,14 +114,26 @@ export class TestsignupComponent implements OnInit {
     //this.username.setValue("");
   }
 
-  
+  signup(): void {
+    this.httpClient.post(environment.endpointURL + 'user/register', {
+      userName: this.username,
+      password: this.password,
+      email: this.email,
+      firstName: this.firstname,
+      lastName: this.lastname,
+      gender: this.genders,
+      telephone: this.telNumber,
+      street: this.street,
+      pinCode: this.zip,
+      city: this.city,
+      country: this.country,
+      
+    }).subscribe((res: any) => {});
+  }
 
   toLogIn() {
 
   }
 
-  onSignUp() {
-    console.log(this.userForm.value);
-  }
 }
 
