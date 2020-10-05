@@ -1,5 +1,5 @@
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import {Optional, Model, Sequelize, DataTypes, STRING} from 'sequelize';
+import {Optional, Model, Sequelize, DataTypes, STRING, DOUBLE} from 'sequelize';
 
 /**
  * The responsibility of this class is to hold all attributes that we need to configure an user registration.
@@ -21,7 +21,7 @@ export interface UserAttributes {
     pinCode: number;
     city: string;
     country: string;
-    moneyInWallet: number;
+    // moneyInWallet: number;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -39,7 +39,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     pinCode!: number;
     city!: string;
     country!: string;
-    moneyInWallet!: number;
+    // moneyInWallet!: number;
 
     /**
      * TODO: add description
@@ -94,14 +94,15 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             country: {
                 type: DataTypes.STRING,
             },
+            /**
             moneyInWallet: {
                 type: DataTypes.DOUBLE,
                 allowNull: false,
                 defaultValue: 100,
                 validate: {
-                    min:0
+                    min: 0
                 }
-            }
+            }*/
         },
             {
                 sequelize,

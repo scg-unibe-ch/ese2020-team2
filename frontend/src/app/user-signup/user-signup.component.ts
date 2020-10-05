@@ -20,9 +20,9 @@ export class UserSignupComponent implements OnInit {
   lastName = "";
   email = new FormControl('', [Validators.required, Validators.email]);
   gender ="";
-  adress="";
+  address="";
   telNumber="";
-  
+
 
 
 
@@ -33,7 +33,7 @@ export class UserSignupComponent implements OnInit {
 
   constructor() {}
 
-  
+
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -44,12 +44,12 @@ export class UserSignupComponent implements OnInit {
 
   }
 
-   
+
 
 
 
   signup() {
-    
+
   }
 
 }

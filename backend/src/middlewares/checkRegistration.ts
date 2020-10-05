@@ -2,9 +2,12 @@ import { Request, Response } from 'express';
 import { UserAttributes, User } from '../models/user.model';
 
 /**
- * TODO: Add description and return parameters
+ * Responsible for the registration checks: E-Mail and UserName have to be unique, two or more
+ * user shouldn't have same e-mails or username (easier to distinguish them and avoids multiple account
+ * registration <-> with same E-mail).
  *
- * @param req
+ * @param req parameter is needed to get the E-mail/Username input from the User to check for unique
+ * value
  */
 
 // This function is used to check if the email id entered by the new user already exists in the database.

@@ -11,6 +11,17 @@ import { User } from './models/user.model';
 
 import cors from 'cors';
 
+/** Here to implement our Express code
+   Middlewares is a method which is invoked if u want to own a request (e.g. secured.controller.ts)
+   HTTP database logic: services
+   jason formatting to return
+   todolist add ->
+   Promis? Promess?
+   complicated requests user.controller.ts
+   -> login requests checking password
+   -> user.service.ts find user, find matches password (if hash finds result, promise is resolved)
+   secure.controller.ts verify the tokens
+*/
 /**
  * TODO: add description
  *

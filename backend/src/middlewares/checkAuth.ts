@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 
 /**
  * TODO: add description
