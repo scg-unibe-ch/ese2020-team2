@@ -32,7 +32,8 @@ export class TestsignupComponent implements OnInit {
 
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  passwordPattern = "[a-z]+[A-Z]+[0-9].*"
+  passwordPattern = 	
+  "^(?=.*\d)(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   fieldTextType: boolean;
 
   
