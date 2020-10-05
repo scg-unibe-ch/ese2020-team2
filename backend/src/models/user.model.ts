@@ -1,5 +1,5 @@
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import {Optional, Model, Sequelize, DataTypes, STRING} from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
 
 /**
  * The responsibility of this class is to hold all attributes that we need to configure an user registration.
@@ -99,8 +99,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 allowNull: false,
                 defaultValue: 100,
                 validate: {
-                    min:0
+                    min: 0
                 }
+            }
         },
             {
                 sequelize,
