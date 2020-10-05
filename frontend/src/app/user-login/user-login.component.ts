@@ -4,8 +4,6 @@ import { environment } from '../../environments/environment';
 import {BehaviorSubject, Observable} from "rxjs";
 import {AuthService} from "../auth/auth.service";
 
-1
-
 
 @Component({
   selector: 'app-user-login',
@@ -63,9 +61,6 @@ export class UserLoginComponent implements OnInit {
     this.checkUserStatus();
   }
 
-  getUsersStatus(): Observable<boolean> {
-    return this.loggedInSubject.asObservable();
-  }
 
   toForgotPassword(){
 
