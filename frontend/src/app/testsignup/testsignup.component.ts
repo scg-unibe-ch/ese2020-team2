@@ -17,6 +17,18 @@ export class TestsignupComponent implements OnInit {
     private fb: FormBuilder,
     private customValidator: CustomValidationService
   ) {}
+
+  
+  ngOnInit() {
+
+    console.log("fromregistercomponent")
+
+    
+
+  }
+
+
+
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   passwordPattern = "[a-z]+[A-Z]+[0-9].*"
   fieldTextType: boolean;
@@ -33,13 +45,14 @@ export class TestsignupComponent implements OnInit {
       confirmPassword: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       gender: [""],
-      address: this.fb.group({
+      firstname: [""],
+      lastname: [""],
+      country: [""],
+      telNumber: [""],
         street: [""],
         city: [""],
-        country: [""],
         zip: [""],
         streetNumber: [""]
-      })
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -74,7 +87,7 @@ export class TestsignupComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  
 
   onCountrySelected($event: Country) {
     console.log($event);
