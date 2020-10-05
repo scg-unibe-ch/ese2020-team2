@@ -35,7 +35,7 @@ export class UserLoginComponent implements OnInit {
 
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
-
+    this.authService.login = !!(this.userToken);
   }
 
   login(): void {

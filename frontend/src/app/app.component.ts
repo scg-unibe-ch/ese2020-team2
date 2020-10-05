@@ -15,13 +15,20 @@ import {AuthService} from "./auth/auth.service";
   styleUrls: ['./app.component.css'],
   providers:[AuthService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   loggedIn$ = false;
 
   constructor(private authService: AuthService) {
-
     authService.loggedIn$.subscribe((nextValue) => {
       this.loggedIn$ = nextValue;  // this will happen on every change
     })
+  }
+
+  /**
+   * Checks if user is logged in
+   */
+  ngOnInit() {
+    this.authService.login = !!(localStorage.getItem('userToken'));
+
   }
 }
