@@ -16,22 +16,25 @@
 
 <p>
   <mat-toolbar color="primary">
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" btn btn-success routerLink="/home">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" class="btn btn-success" btn btn-success routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
-    <button *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
       <mat-icon>assignment</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);"  class="btn btn-success" routerLink="/catalog">
+      <mat-icon>credit_card</mat-icon>
     </button>
     
     <span>ESE Project</span>
     <span class="example-spacer"></span>
-    <button *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
       <mat-icon>forward</mat-icon>
     </button>
-    <button *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
       <mat-icon>archive</mat-icon>
     </button>
-    <button *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
       <mat-icon>clear</mat-icon>
     </button>
     

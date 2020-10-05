@@ -3,16 +3,16 @@
 
 
 
-              <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.95  )'">
+          <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
               <mat-card-title>Required Fields</mat-card-title>
               <div class="form-group">
 
 
                 <mat-form-field>
                     <input required matInput placeholder="User Name" type="text"
-                    formControlName="username"
-                    id="username">
-                    <mat-error *ngIf="username.invalid"> username required</mat-error> 
+                    formControlName="userName"
+                    id="userName">
+                    <mat-error *ngIf="userName.invalid"> username required</mat-error> 
                   </mat-form-field>
 
                 
@@ -20,9 +20,9 @@
 
                   <mat-form-field>
                     <input required matInput placeholder="First Name" type="text"
-                    formControlName="firstname"
-                    id="firstname">
-                    <mat-error *ngIf="username.invalid"> First Name required</mat-error> 
+                    formControlName="firstName"
+                    id="firstName">
+                    <mat-error *ngIf="firstName.invalid"> First Name required</mat-error> 
                   </mat-form-field>
 
                 
@@ -68,9 +68,9 @@
                         
                           <mat-form-field>
                             <input required matInput placeholder="Last Name" type="text"
-                            formControlName="lastname"
-                            id="lastname">
-                            <mat-error *ngIf="username.invalid"> Last Name required</mat-error> 
+                            formControlName="lastName"
+                            id="lastName">
+                            <mat-error *ngIf="lastName.invalid"> Last Name required</mat-error> 
                           </mat-form-field>
                       
                 
@@ -100,7 +100,7 @@
 
             </mat-card>
 
-            <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.9  )'">
+            <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.8  )'">
 
 
                         <mat-card-title>Optional Fields</mat-card-title>
@@ -108,11 +108,14 @@
 
 
                       <br>
+
                       <mat-form-field>
-                        <input matInput placeholder="Country" type="text"
-                        formControlName="country"
-                        id="country">
-                      </mat-form-field>
+                        <mat-select formControlName="country" placeholder="Country">
+                            <mat-option *ngFor="let country of countrys" [value]="country.value">
+                                    {{country.display}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 
 
 
@@ -156,13 +159,6 @@
                                id="inputZip">
                             </mat-form-field>
 
-                            <mat-form-field>
-                              <input matInput placeholder="Street Number" type="text"
-                                     formControlName="streetNumber"
-                                     id="streetNumber">
-      
-                                  </mat-form-field>
-
                           
                       
                             
@@ -172,7 +168,7 @@
                 <button class="btn btn-warning"
                 (click)="signup()"
                         type="submit"
-                        [disabled]="userForm.invalid"><i class="fas fa-save"></i> Sign Up</button>
+                        ><i class="fas fa-save"></i> Sign Up</button>
                         <button class="btn btn-warning"
                         (click)="clear()" style="background-color: red;"><i class="fas fa-snowplow"></i> Clear Form</button>
                 <button class="btn btn-warning"

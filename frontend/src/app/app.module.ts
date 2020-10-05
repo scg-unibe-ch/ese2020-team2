@@ -27,6 +27,9 @@ import { HistoryComponent } from './user-account/history/history.component';
 import {MatSelectModule} from "@angular/material/select";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { AppRoutingModule } from './app-routing.module';
+import { CatalogComponent } from './catalog/catalog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 
@@ -44,6 +47,7 @@ import { AppRoutingModule } from './app-routing.module';
     WalletComponent,
     HomeComponent,
     HistoryComponent,
+    CatalogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,9 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     MatSelectModule,
     AppRoutingModule,
-    MatSelectCountryModule
+    MatSelectCountryModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule
   ],
   providers: [
     {
