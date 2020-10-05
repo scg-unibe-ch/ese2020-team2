@@ -31,12 +31,13 @@ import {Country} from "@angular-material-extensions/select-country";
 
 // In  appRoutes the connections between the path and the component are specified
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'toDoLists', component: ToDoListsComponent },
-  { path: 'account', component: UserAccountComponent }
+  { path: 'account', component: UserAccountComponent },
+  { path: '**', redirectTo: ''}
 
 ];
 

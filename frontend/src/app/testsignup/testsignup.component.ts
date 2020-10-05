@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
-import {Country} from '@angular-material-extensions/select-country'; 
+import {Country} from '@angular-material-extensions/select-country';
 import { CustomValidationService } from "src/app/services/passwordChecker";
 export interface Gender {
   value: string;
@@ -9,7 +9,8 @@ export interface Gender {
 
 @Component({
   selector: 'app-testsignup',
-  templateUrl: './testsignup.component.html'
+  templateUrl: './testsignup.component.html',
+  styleUrls: ['./testsignup.component.css']
 })
 export class TestsignupComponent implements OnInit {
   hide = true;
@@ -21,7 +22,7 @@ export class TestsignupComponent implements OnInit {
   passwordPattern = "[a-z]+[A-Z]+[0-9].*"
   fieldTextType: boolean;
 
-  
+
   userForm = this.fb.group(
     {
       username: [
@@ -48,7 +49,7 @@ export class TestsignupComponent implements OnInit {
       )
     }
   );
-  selectedValue: string; 
+  selectedValue: string;
    genders: Gender[] = [
       {value: 'female', display: 'Female'},
       {value: 'male', display: 'Male'}
@@ -95,7 +96,7 @@ export class TestsignupComponent implements OnInit {
     //this.username.setValue("");
   }
 
-  
+
 
   toLogIn() {
 
