@@ -113,9 +113,9 @@ export class TestsignupComponent implements OnInit {
     //this.username.setValue("");
   }
 
-  signup(userForm: FormBuilder) {
+  signup() {
     this.httpClient.post(environment.endpointURL + 'user/register', 
-      userForm
+      this.userForm
 
     )}
     
