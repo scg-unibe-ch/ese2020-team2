@@ -44,12 +44,10 @@ export class TestsignupComponent implements OnInit {
   
   userForm = this.fb.group(
     {
-      userName: [
-        "",
-        Validators.required,],
+      userName: ["", Validators.required],
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
+      email: ["", Validators.required, Validators.email],
       gender: [""],
       firstName: [""],
       lastName: [""],
@@ -125,22 +123,7 @@ export class TestsignupComponent implements OnInit {
 
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register', 
-      {
-        userName: this.userForm.value,
-        password: this.password.value,
-        email: this.email.value,
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        gender: this.genders.values,
-        telephone: this.telNumber.value,
-        street: this.street.value,
-        pinCode: this.zip.value,
-        city: this.city.value,
-        country: this.country.value,
-      }).subscribe((res: any) => {
-
-        localStorage.setItem('userToken', res.token);
-        localStorage.setItem('userName', res.user.userName);
+      this.userForm.value).subscribe((res: any) => {
   });
 }
 
