@@ -14,7 +14,7 @@ export interface UserAttributes {
     pinCode: number;
     city: string;
     country: string;
-    moneyInWallet: number;
+   // moneyInWallet: number;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -32,7 +32,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     pinCode!: number;
     city!: string;
     country!: string;
-    moneyInWallet!: number;
+    // moneyInWallet!: number;
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -81,14 +81,14 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             country: {
                 type: DataTypes.STRING,
             },
-            moneyInWallet: {
-                type: DataTypes.DOUBLE,
-                allowNull: false,
-                defaultValue: 100,
-                validate: {
-                    min: 0
-                }
-            }
+            // moneyInWallet: {
+            //     type: DataTypes.DOUBLE,
+            //     allowNull: false,
+            //     defaultValue: 100,
+            //     validate: {
+            //         min: 0
+            //     }
+            // }
         },
             {
                 sequelize,

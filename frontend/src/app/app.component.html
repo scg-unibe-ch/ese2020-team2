@@ -1,16 +1,49 @@
+<!doctype html>
+<html>
+<body>
+
+  
+    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
+        style=
+        "max-height: 130px;
+        height: 70%;
+        width: 100%;
+        object-fit: cover;">
+
+
 <!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span [style.cursor]="'pointer'" routerLink="/home">ESE-2020-Project Team 2</span>
+
+
+<p>
+  <mat-toolbar color="primary">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" btn btn-success routerLink="/home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
+      <mat-icon>assignment</mat-icon>
+    </button>
+    
+    <span>ESE Project</span>
     <span class="example-spacer"></span>
-    <button *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">Register</button>
-    <button *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">Login</button>
-    <button *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">Logout</button>
-    <button *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">Account</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+    <button *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+      <mat-icon>forward</mat-icon>
+    </button>
+    <button *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
+      <mat-icon>archive</mat-icon>
+    </button>
+    <button *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
+      <mat-icon>clear</mat-icon>
+    </button>
+    
+  </mat-toolbar>
+</p>
 
 
 <!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
   <router-outlet></router-outlet>
 
+
+
+
+</body>
+</html>
