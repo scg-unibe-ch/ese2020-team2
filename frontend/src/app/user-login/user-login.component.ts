@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {BehaviorSubject, Observable} from "rxjs";
 import {AuthService} from "../auth/auth.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,19 +15,17 @@ export class UserLoginComponent implements OnInit {
 
   userName = '';
   password = '';
-
+  infoMessage = '';
   userToken: string;
   loggedIn = false;
   loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
 
   secureEndpointResponse = '';
   hide= true;
+  
+  constructor(private httpClient: HttpClient, private authService: AuthService,
+    private route: ActivatedRoute) { }
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.checkUserStatus();
-  }
 
   checkUserStatus(): void{
     // Get user data from local storage
@@ -51,6 +50,18 @@ export class UserLoginComponent implements OnInit {
       this.checkUserStatus();
     });
   }
+  
+
+ngOnInit() {
+  this.checkUserStatus();
+  this.route.queryParams
+      .subscribe(params => {
+        if(params.registered === 'true') {
+            this.infoMessage = 'Registration Successful! Please Login!';
+        }
+      });
+}
+
 
   logout(): void {
     // Remove user data from local storage

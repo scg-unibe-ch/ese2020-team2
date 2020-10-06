@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { CustomValidationService } from "src/app/services/passwordChecker";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 export interface Gender {
   value: string;
   display: string;
@@ -19,7 +20,9 @@ export interface Country {
 })
 export class TestsignupComponent implements OnInit {
   hide = true;
+  name ="";
   constructor(
+    private router: Router,
     private httpClient: HttpClient,
     private fb: FormBuilder,
     private customValidator: CustomValidationService
@@ -123,12 +126,13 @@ export class TestsignupComponent implements OnInit {
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register', 
       this.userForm.value).subscribe((res: any) => {
-  });
+  }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
+
+  
 }
 
 
   toLogIn() {
-
   }
 
 
