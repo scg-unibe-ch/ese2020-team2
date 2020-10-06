@@ -10,19 +10,9 @@ import {User} from "../../../../backend/src/models/user.model";
   templateUrl: './user-account.component.html',
   styleUrls: ['./user-account.component.css']
 })
-export class UserAccountComponent implements OnInit{
+export class UserAccountComponent {
 
-  user = '';
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit(): void {
-    this.httpClient.get(environment.endpointURL + '' + localStorage.getItem('userToken')).subscribe((instances: any) => {
-      this.user = instances.map((instance: any) => {
-        return instance.userName;
-      });
-    });
-  }
-
+  constructor() {}
 
 }
 

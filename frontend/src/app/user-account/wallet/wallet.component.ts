@@ -8,25 +8,19 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./wallet.component.css']
 
 })
-export class WalletComponent implements OnInit {
+export class WalletComponent {
 
   points = '';
   constructor(private httpClient: HttpClient) {}
 
-  ngOnInit(): void {
-    this.httpClient.get(environment.endpointURL + '/' + localStorage.getItem('userToken')).subscribe((instances: any) => {
-      this.points = instances.map((instance: any) => {
-        return instance.user.username;
-      });
-    });
-  }
   /**
+   * !!!! Does not work yet!!!!!
    * Checks the database for the current points the user has
    */
   checkWallet(): void {
     this.httpClient.get(environment.endpointURL + '/' + localStorage.getItem('userToken')).subscribe((instances: any) => {
     this.points = instances.map((instance: any) => {
-      return instance.user.username;
+      this.points = instance.user.moneyInWallet;
     });
   });
 }
