@@ -18,14 +18,13 @@ userController.post('/register',
         //    if (checkUniqueEmail(req) == null) {
         // //          Once the email id is true, check for the unique username.
         //        if (checkUniqueUserName(req) == null) {
-                userService.register(req.body).then(registered => res.send(registered)).catch(err => res.status(500).send(err));
-    //            }
-    //     //          If the userName already exits, prompt the user.
-    //            res.status(333).send('User name already exist. Try a different one.');
-    //        }
-    //   //        If the email already exits, prompt the user.
-    //      res.status(333).send('Email already exist. Try with new one.');
-
+        userService.register(req.body).then(registered => res.send(registered)).catch(err => res.status(500).send(err));
+        //            }
+        //     //          If the userName already exits, prompt the user.
+        //            res.status(333).send('User name already exist. Try a different one.');
+        //        }
+        //   //        If the email already exits, prompt the user.
+        //      res.status(333).send('Email already exist. Try with new one.');
     }
 );
 
