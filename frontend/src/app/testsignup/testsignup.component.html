@@ -167,6 +167,7 @@
             <p>
                 <button class="btn btn-warning"
                 (click)="signup()"
+                [disabled]="userForm.invalid"
                         type="submit"
                         ><i class="fas fa-save"></i> Sign Up</button>
                         <button class="btn btn-warning"

@@ -37,8 +37,7 @@ export class TestsignupComponent implements OnInit {
 
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  passwordPattern = 	
-  "^(?=.*\d)(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
+  passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   fieldTextType: boolean;
 
   
@@ -47,7 +46,7 @@ export class TestsignupComponent implements OnInit {
       userName: ["", Validators.required],
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
-      email: ["", Validators.required, Validators.email],
+      email: ["", [Validators.required, Validators.email]],
       gender: [""],
       firstName: [""],
       lastName: [""],

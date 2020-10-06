@@ -24,8 +24,12 @@ export class WalletComponent implements OnInit {
    * Checks the database for the current points the user has
    */
   checkWallet(): void {
-    this.points = 'aaa';
-  }
+    this.httpClient.get(environment.endpointURL + '/' + localStorage.getItem('userToken')).subscribe((instances: any) => {
+    this.points = instances.map((instance: any) => {
+      return instance.user.username;
+    });
+  });
+}
 
 }
 
