@@ -8,4 +8,9 @@ export class AuthService {
   set login(value: boolean) {
     this.loggedIn$.next(value); // this will make sure to tell every subscriber about the change.
   }
+
+  public isAuthenticated(): boolean {
+    return !!(localStorage.getItem('userToken'));
+  }
+
 }

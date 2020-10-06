@@ -6,6 +6,7 @@ import { TestsignupComponent } from './testsignup/testsignup.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import {AuthGuardService} from "./auth/auth-guard.service";
 
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'account', component: UserAccountComponent },
+  { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent },
   { path: "*", component: HomeComponent },
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuardService],
 })
 export class AppRoutingModule { }

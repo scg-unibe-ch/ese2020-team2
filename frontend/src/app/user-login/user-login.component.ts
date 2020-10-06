@@ -22,7 +22,7 @@ export class UserLoginComponent implements OnInit {
 
   secureEndpointResponse = '';
   hide= true;
-  
+
   constructor(private httpClient: HttpClient, private authService: AuthService,
     private route: ActivatedRoute) { }
 
@@ -50,7 +50,7 @@ export class UserLoginComponent implements OnInit {
       this.checkUserStatus();
     });
   }
-  
+
 
 ngOnInit() {
   this.checkUserStatus();

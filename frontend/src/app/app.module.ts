@@ -30,6 +30,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {AuthGuardService} from "./auth/auth-guard.service";
 
 
 
@@ -70,6 +71,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NgxMatSelectSearchModule
   ],
   providers: [
+    [AuthGuardService],
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
