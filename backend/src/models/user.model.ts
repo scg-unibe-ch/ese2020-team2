@@ -1,6 +1,6 @@
 
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import {Optional, Model, Sequelize, DataTypes, STRING} from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
 
 export interface UserAttributes {
     userId: number;
@@ -15,7 +15,7 @@ export interface UserAttributes {
     pinCode: number;
     city: string;
     country: string;
-   moneyInWallet: number;
+    moneyInWallet: number;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
