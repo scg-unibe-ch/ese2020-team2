@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-catalog',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
+  loggedIn$ = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) {
 
-  ngOnInit(): void {
+    //Subscribes to the loggIn$ observable
+    authService.loggedIn$.subscribe((nextValue) => {
+      this.loggedIn$ = nextValue;  // this will happen on every change
+    })
   }
 
+  /**
+   * Checks if user is logged in and updates the login status of the user
+   */
+  ngOnInit() {
+    this.authService.login = !!(localStorage.getItem('userToken'));
+  }
 }

@@ -4,11 +4,11 @@
   .flex-grid .col {
     flex: 1;
   }
-  .flex-grid-thirds {
+  .flex-grid-4 {
     display: flex;
     justify-content: space-between;
   }
-  .flex-grid-thirds .col {
+  .flex-grid-4 .col {
     padding: 20px;
   }
   
