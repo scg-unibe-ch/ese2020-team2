@@ -5,6 +5,7 @@ import { CustomValidationService } from "src/app/services/passwordChecker";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatSnackBar} from "@angular/material/snack-bar";
 export interface Gender {
   value: string;
   display: string;
@@ -21,20 +22,24 @@ export interface Country {
 export class TestsignupComponent implements OnInit {
   hide = true;
   name ="";
+  private registered = false;
+
   constructor(
     private router: Router,
     private httpClient: HttpClient,
     private fb: FormBuilder,
-    private customValidator: CustomValidationService
+    private customValidator: CustomValidationService,
+    public snackBar: MatSnackBar
   ) {}
 
 
-  
-  
+
+
   ngOnInit(): void {
+    this.registered = false;
   }
-  
-  
+
+
 
 
 //pattern to verify that it is a valid password/email
@@ -43,7 +48,7 @@ export class TestsignupComponent implements OnInit {
   passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   fieldTextType: boolean;
 
-  
+
   //the userform saves the informatin and applies validators to some fields
 
   userForm = this.fb.group(
@@ -68,7 +73,7 @@ export class TestsignupComponent implements OnInit {
       )
     }
   );
-  selectedValue: string; 
+  selectedValue: string;
    genders: Gender[] = [
       {value: 'female', display: 'Female'},
       {value: 'male', display: 'Male'}
@@ -77,7 +82,7 @@ export class TestsignupComponent implements OnInit {
    countrys: Country[] = [
       {value: 'panama', display: 'Panama'},{value: 'France', display: 'France'},{value: 'Russia', display: 'Russia'},
       {value: 'Ukraine', display: 'Ukraine  '},{value: 'Switzerland', display: 'Switzerland'},{value: 'Italy', display: 'Italy'},
-      
+
    ];
 
 
@@ -107,7 +112,7 @@ export class TestsignupComponent implements OnInit {
 
 
 
-  
+
 
 //error messages for email
 
@@ -120,7 +125,7 @@ export class TestsignupComponent implements OnInit {
 
   }
 
-  
+
   clear() {
     this.userForm.reset();
     //this.username.setValue("");
@@ -130,12 +135,24 @@ export class TestsignupComponent implements OnInit {
   //sends userform to bakcend to register new user
   // redirects to login but message doesnt quite work
   signup() {
-    this.httpClient.post(environment.endpointURL + 'user/register', 
+    this.httpClient.post(environment.endpointURL + 'user/register',
       this.userForm.value).subscribe((res: any) => {
-  }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
+      this.registered = true
+      this.openSnackBar('You successfully registered!', '')
+    }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
 
-  
+    //gives the user a message if login was successful
+    if (!this.registered) {
+      this.openSnackBar('Registering was not possible, please try again', '')
+    }
+
 }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 8000,
+    });
+  }
 
 }
 

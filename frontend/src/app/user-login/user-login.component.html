@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
   <span *ngIf="infoMessage.length > 0">{{ infoMessage }}</span>
   <div *ngIf="!loggedIn">
-    
+
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
