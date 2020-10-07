@@ -30,10 +30,10 @@
     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
        <mat-icon>forward</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
       <mat-icon>archive</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
       <mat-icon>clear</mat-icon>
     </button>
     
