@@ -37,13 +37,15 @@ export class TestsignupComponent implements OnInit {
   
 
 
-
+//pattern to verify that it is a valid password/email
 
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   fieldTextType: boolean;
 
   
+  //the userform saves the informatin and applies validators to some fields
+
   userForm = this.fb.group(
     {
       userName: ["", Validators.required],
@@ -80,17 +82,17 @@ export class TestsignupComponent implements OnInit {
 
 
 
+//getters for the form values
 
+  get email() { return this.userForm.get("email") };
+  get userName() { return this.userForm.get("userName") };
+  get street() { return this.userForm.get("street") };
+  get zip() { return this.userForm.get("zip") };
 
-  get email() {return this.userForm.get("email")};
-  get userName() {return this.userForm.get("userName")};
-  get street() {return this.userForm.get("street")};
-  get zip() {return this.userForm.get("zip")};
-
-  get confirmPassword() {return this.userForm.get("confirmPassword")};
-  get city() {    return this.userForm.get("city")};
-  get firstName() {    return this.userForm.get("firstName")};
-  get telNumber() {    return this.userForm.get("telNumber")};
+  get confirmPassword() { return this.userForm.get("confirmPassword") };
+  get city() { return this.userForm.get("city") };
+  get firstName() { return this.userForm.get("firstName") };
+  get telNumber() { return this.userForm.get("telNumber") };
   get lastName() {
     return this.userForm.get("lastName");
   }
@@ -107,22 +109,26 @@ export class TestsignupComponent implements OnInit {
 
   
 
-
+//error messages for email
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'You must enter a value';
+      return 'Email is required';
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
 
   }
 
+  
   clear() {
     this.userForm.reset();
     //this.username.setValue("");
   }
 
+
+  //sends userform to bakcend to register new user
+  // redirects to login but message doesnt quite work
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register', 
       this.userForm.value).subscribe((res: any) => {
@@ -130,11 +136,6 @@ export class TestsignupComponent implements OnInit {
 
   
 }
-
-
-  toLogIn() {
-  }
-
 
 }
 

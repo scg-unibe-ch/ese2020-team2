@@ -1,6 +1,7 @@
 <form [formGroup]="userForm">
 
   <!-- first mat card with required inputs-->
+  <!-- i dont understand how i can add elevation in css so i had to style it here-->
 
   <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
     <mat-card-title>Required Fields</mat-card-title>
@@ -11,12 +12,12 @@
       <mat-form-field>
         <input style="font-size: large;" required matInput placeholder="User Name" type="text"
           formControlName="userName" id="userName">
-        <mat-error *ngIf="userName.invalid"> username required</mat-error>
+        <mat-error *ngIf="userName.invalid"> username is required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input required matInput placeholder="First Name" type="text" formControlName="firstName" id="firstName">
-        <mat-error *ngIf="firstName.invalid"> First Name required</mat-error>
+        <mat-error *ngIf="firstName.invalid"> First Name is required</mat-error>
       </mat-form-field>
 
       <!-- password swaps between visible and not visible, differet errors for requirements-->
@@ -51,7 +52,7 @@
 
       <mat-form-field>
         <input required matInput placeholder="Last Name" type="text" formControlName="lastName" id="lastName">
-        <mat-error *ngIf="lastName.invalid"> Last Name required</mat-error>
+        <mat-error *ngIf="lastName.invalid"> Last Name is required</mat-error>
       </mat-form-field>
 
 
@@ -73,6 +74,7 @@
 
   </mat-card>
       <!-- second mat card with optional inputs-->
+      <!-- i dont understand how i can add elevation in css so i had to style it here-->
 
   <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.8  )'">
 
@@ -130,11 +132,8 @@
 
   </mat-card>
   <p>
-    <button class="btn btn-warning" (click)="signup()" [disabled]="userForm.invalid" type="submit"><i
-        class="fas fa-save"></i> Sign Up</button>
-    <button class="btn btn-warning" (click)="clear()" style="background-color: red;"><i class="fas fa-snowplow"></i>
+    <button class="btn btn-warning" (click)="signup()" [disabled]="userForm.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Sign Up</button>
+    <button class="btn btn-warning" (click)="clear()" style="background-color: red;">
       Clear Form</button>
-    <button class="btn btn-warning" (click)="toLogIn()"><i class="fas fa-snowplow"></i> To Log in</button>
-
   </p>
 </form>

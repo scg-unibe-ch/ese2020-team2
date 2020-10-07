@@ -1,17 +1,26 @@
 .flex-grid {
     display: flex;
   }
-  .flex-grid .col {
-    flex: 1;
-  }
   .flex-grid-4 {
     display: flex;
     justify-content: space-between;
   }
-  .flex-grid-4 .col {
-    padding: 20px;
+  .nice {
+    width: 22%;
+    padding-left: 1.2%;
+    padding-right: 1.2%;
+    background: rgba(105, 152, 206, 0.925);
   }
   
+  .outer {
+    overflow:scroll;
+    height: 80%;
+  }
+
+  .inner {
+    padding-right: 2%;
+    padding-left: 2%;
+  }
   
   
   
@@ -24,8 +33,3 @@
   .flex-grid { 
     margin: 20px 20px 20px 20px;
   }
-  .col {
-    background: rgba(105, 152, 206, 0.925);
-    padding: 20px;
-  }
-  
