@@ -1,0 +1,31 @@
+.flex-grid {
+    display: flex;
+  }
+  .flex-grid .col {
+    flex: 1;
+  }
+  .flex-grid-thirds {
+    display: flex;
+    justify-content: space-between;
+  }
+  .flex-grid-thirds .col {
+    padding: 20px;
+  }
+  
+  
+  
+  
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    padding: 20px;
+  }
+  .flex-grid { 
+    margin: 20px 20px 20px 20px;
+  }
+  .col {
+    background: rgba(105, 152, 206, 0.925);
+    padding: 20px;
+  }
+  
