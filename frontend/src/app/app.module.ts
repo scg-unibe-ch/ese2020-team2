@@ -31,6 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -68,7 +69,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSelectCountryModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
-    MatTooltipModule
+    MatTooltipModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     [AuthGuardService],
