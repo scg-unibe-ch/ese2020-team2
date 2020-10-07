@@ -33,7 +33,6 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
               "node_modules/material-design-icons/iconfont/material-icons.css"
-
             ],
             "scripts": []
           },
@@ -131,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "defaultProject": "frontend",
+  "cli": {
+    "analytics": "74adfa78-59ea-46d7-96ec-28190dbfd989"
+  }
 }

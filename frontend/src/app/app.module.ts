@@ -16,7 +16,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { UserSignupComponent } from './user-signup/user-signup.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
 import {UserAccountComponent} from "./user-account/user-account.component";
@@ -41,7 +40,6 @@ import {AuthGuardService} from "./auth/auth-guard.service";
     TodoListComponent,
     TodoItemComponent,
     UserLoginComponent,
-    UserSignupComponent,
     TestsignupComponent,
     UserAccountComponent,
     ToDoListsComponent,
