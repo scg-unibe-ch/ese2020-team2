@@ -7,11 +7,15 @@
   }
   .nice {
     width: 22%;
-    padding-left: 1.2%;
-    padding-right: 1.2%;
+    padding-left: 1.4%;
+    padding-right: 1.4%;
     background: rgba(105, 152, 206, 0.925);
   }
   
+  .padding {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
   .outer {
     overflow:scroll;
     height: 80%;
@@ -27,9 +31,7 @@
   * {
     box-sizing: border-box;
   }
-  body {
-    padding: 20px;
-  }
+  
   .flex-grid { 
     margin: 20px 20px 20px 20px;
   }
