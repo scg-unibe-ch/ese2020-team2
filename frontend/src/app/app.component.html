@@ -15,20 +15,20 @@
 
 
   <mat-toolbar color="primary" style="height: 8%;">
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" class="btn btn-success" btn btn-success routerLink="/home">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Home" class="btn btn-success" btn btn-success routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" User Registration" *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
       <mat-icon>assignment</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);"  class="btn btn-success" routerLink="/catalog">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog">
       <mat-icon>credit_card</mat-icon>
     </button>
     
     <span>ESE Project</span>
     <span class="example-spacer"></span>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
-      <mat-icon>forward</mat-icon>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+       <mat-icon>forward</mat-icon>
     </button>
     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
       <mat-icon>archive</mat-icon>

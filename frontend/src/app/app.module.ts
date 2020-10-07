@@ -30,6 +30,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AuthGuardService} from "./auth/auth-guard.service";
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -66,7 +67,8 @@ import {AuthGuardService} from "./auth/auth-guard.service";
     AppRoutingModule,
     MatSelectCountryModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatTooltipModule
   ],
   providers: [
     [AuthGuardService],
