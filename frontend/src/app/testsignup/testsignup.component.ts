@@ -133,19 +133,13 @@ export class TestsignupComponent implements OnInit {
 
 
   //sends userform to bakcend to register new user
-  // redirects to login but message doesnt quite work
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register',
       this.userForm.value).subscribe((res: any) => {
-      this.registered = true
-      this.openSnackBar('You successfully registered!', '')
+      this.openSnackBar('You successfully registered!', '');
+    }, (error: any) => {
+      this.openSnackBar('Registering was not possible, please try again', '');
     }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
-
-    //gives the user a message if login was successful
-    if (!this.registered) {
-      this.openSnackBar('Registering was not possible, please try again', '')
-    }
-
 }
 
   openSnackBar(message: string, action: string) {

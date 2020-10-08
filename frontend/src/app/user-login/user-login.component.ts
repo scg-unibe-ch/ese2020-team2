@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {BehaviorSubject, Observable} from "rxjs";
 import {AuthService} from "../auth/auth.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -19,7 +18,6 @@ export class UserLoginComponent implements OnInit {
   infoMessage = '';
   userToken: string;
   loggedIn = false;
-  loggedInSubject = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
 
   secureEndpointResponse = '';
   hide= true;
@@ -45,6 +43,9 @@ export class UserLoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Checks the user status
+   */
   checkUserStatus(): void{
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
@@ -55,6 +56,9 @@ export class UserLoginComponent implements OnInit {
     this.authService.login = !!(this.userToken);
   }
 
+  /**
+   * logs the user in and displays a message if login was successful or not
+   */
    login(): void {
      this.httpClient.post(environment.endpointURL + 'user/login', {
       userName: this.userName,
@@ -63,7 +67,6 @@ export class UserLoginComponent implements OnInit {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
-
       this.checkUserStatus();
       this.openSnackBar('You successfully logged in!', '')
     }, (error: any) => {
@@ -75,7 +78,7 @@ export class UserLoginComponent implements OnInit {
 
 
   /**
-   * Loges the user out
+   * Loges the user out and shows a message if logout was successful
    */
   logout(): void {
     // Remove user data from local storage
@@ -86,10 +89,6 @@ export class UserLoginComponent implements OnInit {
     this.openSnackBar('You successfully logged out!', '')
   }
 
-
-  toForgotPassword(){
-
-  }
   /**
    * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
    */
