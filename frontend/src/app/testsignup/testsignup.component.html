@@ -31,7 +31,7 @@
           Password is required.
         </mat-error>
         <mat-error *ngIf="password.errors?.pattern">
-          Password not valid.
+          Password must have 1 upper letter 1 lower letter 1 number.
         </mat-error>
         <mat-error *ngIf="password.errors?.minlength">
           Password must have 7 chars.
