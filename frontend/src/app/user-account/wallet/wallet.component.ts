@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {User, UserAttributes} from "../../../../../backend/src/models/user.model";
+import {CurrentUser} from "../../services/current-user";
 
 @Component({
   selector: 'app-wallet',
@@ -8,22 +10,25 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./wallet.component.css']
 
 })
-export class WalletComponent {
+export class WalletComponent implements OnInit{
 
-  points = '';
-  constructor(private httpClient: HttpClient) {}
+  points: number;
+
+  constructor(private httpClient: HttpClient,
+              private users: CurrentUser) {}
+
+    ngOnInit() {
+     this.checkWallet();
+ }
+
 
   /**
-   * !!!! Does not work yet!!!!!
    * Checks the database for the current points the user has
    */
-  checkWallet(): void {
-    this.httpClient.get(environment.endpointURL + '/' + localStorage.getItem('userToken')).subscribe((instances: any) => {
-    this.points = instances.map((instance: any) => {
-      this.points = instance.user.moneyInWallet;
-    });
-  });
-}
+    checkWallet(): void {
+      setTimeout(()=> this.points = this.users.getCurrentUser().moneyInWallet,200);
+    this.points = this.users.getCurrentUser().moneyInWallet;
+  }
 
 }
 

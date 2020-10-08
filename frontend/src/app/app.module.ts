@@ -75,7 +75,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatButtonModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     [AuthGuardService],
