@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TodoList } from "../../models/todo-list.model";
 import { TodoItem } from "../../models/todo-item.model";
 import { environment } from "../../../environments/environment";
+import {User} from "../../../../../backend/src/models/user.model";
 
 @Component({
   selector: 'app-todo-lists',

@@ -26,11 +26,6 @@
                 "glob": "**/*",
                 "input": "./node_modules/svg-country-flags/svg",
                 "output": "src/assets/svg-country-flags/svg"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/svg-country-flags/svg",
-                "output": "assets/svg-country-flags/svg"
               }
             ],
             "styles": [
@@ -135,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "defaultProject": "frontend",
+  "cli": {
+    "analytics": "74adfa78-59ea-46d7-96ec-28190dbfd989"
+  }
 }

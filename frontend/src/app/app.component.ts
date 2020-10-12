@@ -1,25 +1,27 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { TodoList } from './models/todo-list.model';
-import { TodoItem } from './models/todo-item.model';
-import { environment } from '../environments/environment';
-import {UserLoginComponent} from "./user-login/user-login.component";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "./auth/auth.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers:[AuthService]
 })
-export class AppComponent  {
-  userName = '';
-  password = '';
+export class AppComponent implements OnInit{
+  loggedIn$ = false;
 
-  userToken: string;
-  loggedIn = false;
+  constructor(private authService: AuthService) {
 
-  @ViewChild(UserLoginComponent) userLoginComponent:UserLoginComponent;
+    //Subscribes to the loggIn$ observable
+    authService.loggedIn$.subscribe((nextValue) => {
+      this.loggedIn$ = nextValue;  // this will happen on every change
+    })
+  }
 
+  /**
+   * Checks if user is logged in and updates the login status of the user
+   */
   ngOnInit() {
-    this.loggedIn = this.userLoginComponent.getUsersStatus();
+    this.authService.login = !!(localStorage.getItem('userToken'));
   }
 }

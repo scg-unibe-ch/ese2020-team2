@@ -23,10 +23,16 @@ import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component
 import {WalletComponent} from "./user-account/wallet/wallet.component";
 import { HomeComponent } from './home/home.component';
 import { HistoryComponent } from './user-account/history/history.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSelectModule} from '@angular/material/select';
+import {MatSelectModule} from "@angular/material/select";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { AppRoutingModule } from './app-routing.module';
+import { CatalogComponent } from './catalog/catalog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {AuthGuardService} from "./auth/auth-guard.service";
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+
 
 
 
@@ -42,14 +48,10 @@ import { AppRoutingModule } from './app-routing.module';
     WalletComponent,
     HomeComponent,
     HistoryComponent,
+    CatalogComponent,
   ],
-  imports: [ 
-    MatSelectModule,
-    MatSelectCountryModule,
-    FormsModule,
-    ReactiveFormsModule,
+  imports: [
     BrowserModule,
-    FlexLayoutModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -62,9 +64,21 @@ import { AppRoutingModule } from './app-routing.module';
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
+    MatSelectModule,
     AppRoutingModule,
+    MatSelectCountryModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+    MatTooltipModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
+    [AuthGuardService],
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -2,57 +2,47 @@
 <html>
 <body>
 
+  <!-- This is the picture on the top it takes 12% page-->
   
     <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
-        style=
-        "max-height: 130px;
-        height: 70%;
+        style="
+        height: 12%;
         width: 100%;
         object-fit: cover;">
 
-<div class="my-theme">
-	<mat-tab-group [backgroundColor]="'primary'" [color]="'warn'">
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">home</mat-icon>
-      Home
-    </ng-template>
-    <app-home></app-home>
-  </mat-tab>
-
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">label_important</mat-icon>
-      Log-in
-    </ng-template>
-    <app-user-login></app-user-login>
-  </mat-tab>
+<!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
 
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">assignment</mat-icon>
-      Registration
-    </ng-template>
-    <app-testsignup></app-testsignup>
-  </mat-tab>
-  
+  <mat-toolbar color="primary" style="height: 8%;">
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Home" class="btn btn-success" btn btn-success routerLink="/home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" User Registration" *ngIf = "!(loggedIn$ )" class="btn btn-success" routerLink="/register">
+      <mat-icon>assignment</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog">
+      <mat-icon>credit_card</mat-icon>
+    </button>
+    
+    <span>ESE Project</span>
+    <span class="example-spacer"></span>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+       <mat-icon>forward</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" *ngIf = "(loggedIn$)" class="btn btn-success" routerLink="/account">
+      <mat-icon>archive</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
+      <mat-icon>clear</mat-icon>
+    </button>
+    
+  </mat-toolbar>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <mat-icon class="example-tab-icon">account_circle</mat-icon>
-      Account
-    </ng-template>
-    <app-user-account></app-user-account>
-  </mat-tab>
 
+<!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
+  <router-outlet></router-outlet>
 
-
-
-
-</mat-tab-group>
-</div>
 
 
 </body>
@@ -60,3 +50,5 @@
 
 
 
+</body>
+</html>

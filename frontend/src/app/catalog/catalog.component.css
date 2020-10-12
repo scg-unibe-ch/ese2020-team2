@@ -1,0 +1,37 @@
+.flex-grid {
+    display: flex;
+  }
+  .flex-grid-4 {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nice {
+    width: 22%;
+    padding-left: 1.4%;
+    padding-right: 1.4%;
+    background: rgba(105, 152, 206, 0.925);
+  }
+  
+  .padding {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+  .outer {
+    overflow:scroll;
+    height: 80%;
+  }
+
+  .inner {
+    padding-right: 2%;
+    padding-left: 2%;
+  }
+  
+  
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .flex-grid { 
+    margin: 20px 20px 20px 20px;
+  }
