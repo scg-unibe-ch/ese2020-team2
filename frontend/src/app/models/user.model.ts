@@ -1,4 +1,3 @@
-import { TodoItem } from './todo-item.model';
 
 export class User {
 

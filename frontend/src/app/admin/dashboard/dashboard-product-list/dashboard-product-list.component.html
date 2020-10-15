@@ -22,11 +22,11 @@
   <!-- List of TodoItemComponents displaying all items of list -->
   <mat-list>
     <mat-list-item *ngFor="let todoItem of todoList.todoItems">
-      <app-todo-item
+      <app-dashboard-product
         [todoItem]="todoItem"
         (update)="onItemUpdate($event)"
         (delete)="onItemDelete($event)"
-      ></app-todo-item>
+      ></app-dashboard-product>
     </mat-list-item>
   </mat-list>
   <div *ngIf="todoList.todoItems.length === 0">No Todo Items available.</div>

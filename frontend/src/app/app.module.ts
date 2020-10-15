@@ -35,6 +35,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {UserDirective} from "./directives/user.directive";
 import {UserRoleDirective} from "./directives/user-role.directive";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
+import {DashboardComponent} from "./admin/dashboard/dashboard.component";
+import {DashboardProductListComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product-list.component";
+import {DashboardProductComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product/dashboard-product.component";
 
 
 
@@ -55,6 +58,7 @@ import {NotFoundComponent} from "./error/not-found/not-found.component";
     UserDirective,
     UserRoleDirective,
     NotFoundComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -90,6 +94,9 @@ import {NotFoundComponent} from "./error/not-found/not-found.component";
       useClass: AuthInterceptor,
       multi: true
     }
+  ],
+  exports: [
+    TodoListComponent,
   ],
   bootstrap: [
     AppComponent

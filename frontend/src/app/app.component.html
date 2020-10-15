@@ -36,19 +36,10 @@
     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
       <mat-icon>clear</mat-icon>
     </button>
-
-
-
-
     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Dashboard" *ngIf = "(isAdmin)"class="btn btn-success" routerLink="/admin/dashboard">
       Dashboard
     </button>
   </mat-toolbar>
-
-
-
-
-
 
 <!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
   <router-outlet></router-outlet>
