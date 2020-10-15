@@ -32,6 +32,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {UserDirective} from "./directives/user.directive";
+import {UserRoleDirective} from "./directives/user-role.directive";
+import {NotFoundComponent} from "./error/not-found/not-found.component";
 
 
 
@@ -49,6 +52,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     HomeComponent,
     HistoryComponent,
     CatalogComponent,
+    UserDirective,
+    UserRoleDirective,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

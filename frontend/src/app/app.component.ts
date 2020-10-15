@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
+import {Role} from "./models/role";
 
 @Component({
   selector: 'app-root',
@@ -23,5 +24,8 @@ export class AppComponent implements OnInit{
    */
   ngOnInit() {
     this.authService.login = !!(localStorage.getItem('userToken'));
+  }
+  get isAdmin() {
+    return this.authService.hasRole(Role.Admin);
   }
 }

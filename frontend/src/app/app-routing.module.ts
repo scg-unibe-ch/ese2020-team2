@@ -7,6 +7,8 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import {AuthGuardService} from "./auth/auth-guard.service";
+import {Role} from "./models/role";
+import {NotFoundComponent} from "./error/not-found/not-found.component";
 
 
 const routes: Routes = [
@@ -16,7 +18,19 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent },
-  { path: "*", component: HomeComponent },
+  {
+    path: 'admin',
+    canLoad: [AuthGuardService],
+    canActivate: [AuthGuardService],
+    data: {
+      roles: [
+        Role.Admin,
+      ]
+    },
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  // This line has to be at the very bottom, otherwise every route below does not work.
+  { path: "**", component: NotFoundComponent },
 
 ];
 

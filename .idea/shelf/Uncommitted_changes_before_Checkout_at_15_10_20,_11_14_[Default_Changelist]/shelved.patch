@@ -1,0 +1,44 @@
+Index: frontend/src/app/app.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html>\n<body>\n\n  <!-- This is the picture on the top it takes 12% page-->\n  \n    <img  src=\"https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg\" \n        style=\"\n        height: 12%;\n        width: 100%;\n        object-fit: cover;\">\n\n\n<!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->\n\n\n  <mat-toolbar color=\"primary\" style=\"height: 8%;\">\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip=\"Home\" class=\"btn btn-success\" btn btn-success routerLink=\"/home\">\n      <mat-icon>home</mat-icon>\n    </button>\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip=\" User Registration\" *ngIf = \"!(loggedIn$ )\" class=\"btn btn-success\" routerLink=\"/register\">\n      <mat-icon>assignment</mat-icon>\n    </button>\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip=\" View Products\" class=\"btn btn-success\" routerLink=\"/catalog\">\n      <mat-icon>credit_card</mat-icon>\n    </button>\n    \n    <span>ESE Project</span>\n    <span class=\"example-spacer\"></span>\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip=\"User Login\" *ngIf = \"!(loggedIn$)\" class=\"btn btn-success\" routerLink=\"/login\">\n       <mat-icon>forward</mat-icon>\n    </button>\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip= \"User Account\" *ngIf = \"(loggedIn$)\" class=\"btn btn-success\" routerLink=\"/account\">\n      <mat-icon>archive</mat-icon>\n    </button>\n    <button style=\"color: black; background-color: rgba(48, 129, 129, 0.781);\" matTooltip = \"Logout\" *ngIf = \"(loggedIn$)\"class=\"btn btn-success\" routerLink=\"/login\">\n      <mat-icon>clear</mat-icon>\n    </button>\n    \n  </mat-toolbar>\n\n\n<!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->\n  <router-outlet></router-outlet>\n\n\n\n</body>\n</html>\n\n\n\n</body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- frontend/src/app/app.component.html	(revision 13465bcfb0a214dcf5d00fa4f4319a90c02568ed)
++++ frontend/src/app/app.component.html	(date 1602531476424)
+@@ -3,8 +3,8 @@
+ <body>
+ 
+   <!-- This is the picture on the top it takes 12% page-->
+-  
+-    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg" 
++
++    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg"
+         style="
+         height: 12%;
+         width: 100%;
+@@ -24,7 +24,7 @@
+     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog">
+       <mat-icon>credit_card</mat-icon>
+     </button>
+-    
++
+     <span>ESE Project</span>
+     <span class="example-spacer"></span>
+     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+@@ -36,7 +36,7 @@
+     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" *ngIf = "(loggedIn$)"class="btn btn-success" routerLink="/login">
+       <mat-icon>clear</mat-icon>
+     </button>
+-    
++
+   </mat-toolbar>
+ 
+ 
+@@ -50,5 +50,3 @@
+ 
+ 
+ 
+-</body>
+-</html>
