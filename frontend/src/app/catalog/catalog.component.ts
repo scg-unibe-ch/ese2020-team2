@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../auth/auth.service";
+import {Product} from "../models/product.model";
+import {Catalog} from "../models/catalog.model";
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-catalog',
@@ -8,8 +12,10 @@ import {AuthService} from "../auth/auth.service";
 })
 export class CatalogComponent implements OnInit {
   loggedIn$ = false;
+  catalog: Catalog[] = [];
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+    private httpClient: HttpClient) {
 
     //Subscribes to the loggIn$ observable
     authService.loggedIn$.subscribe((nextValue) => {
@@ -20,7 +26,16 @@ export class CatalogComponent implements OnInit {
   /**
    * Checks if user is logged in and updates the login status of the user
    */
-  ngOnInit() {
+
+
+  ngOnInit(): void {
+    this.httpClient.get(environment.endpointURL + 'catalog').subscribe((instances: any) => {
+      this.catalog = instances.map((instance: any) => {
+        const products = instance.Product.map((item: any) => new Product(item.userName, item.approved, item.appearMarketplace, item.disapprovalMessage, item.title));
+
+        return new Catalog(products);
+      });
+    });
     this.authService.login = !!(localStorage.getItem('userToken'));
   }
 }
