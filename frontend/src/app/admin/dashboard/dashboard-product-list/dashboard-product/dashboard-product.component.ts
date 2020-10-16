@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TodoItem} from "../../../../models/todo-item.model";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Product} from "../../../../models/product.model";
+import {Approval} from "../../../../models/approval";
 
 @Component({
   selector: 'app-dashboard-product',
@@ -9,21 +10,21 @@ import { TodoItem} from "../../../../models/todo-item.model";
 export class DashboardProductComponent {
 
   @Input()
-  todoItem: TodoItem = new TodoItem(null, null, '', null);
+  product: Product = new Product(null,"", "", Approval.Pending, false,"");
 
   @Output()
-  update = new EventEmitter<TodoItem>();
+  update = new EventEmitter<Product>();
 
   @Output()
-  delete = new EventEmitter<TodoItem>();
+  delete = new EventEmitter<Product>();
 
   onItemUpdate(): void {
     // Emits event to parent component that TodoItem got updated
-    this.update.emit(this.todoItem);
+    this.update.emit(this.product);
   }
 
   onItemDelete(): void {
     // Emits event to parent component that TodoItem got deleted
-    this.delete.emit(this.todoItem);
+    this.delete.emit(this.product);
   }
 }

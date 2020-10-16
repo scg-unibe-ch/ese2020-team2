@@ -4,29 +4,32 @@ import {Observable} from "rxjs";
 import {User} from "../../../../backend/src/models/user.model";
 import {Product} from "../models/product.model";
 import {Approval} from "../models/approval";
+import {ProductList} from "../models/product-list.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductsService {
 
-  products: Product[]
+  products: Product[] = []
+  private productList: ProductList;
 
   constructor(private httpClient: HttpClient) {}
 //This is mocked data
-    getProducts(): Product[] {
-      this.products.push(new Product("aa",
+    getProducts(): ProductList {
+      this.products.push(new Product(1,"aa",
         "Product 1",
         Approval.Pending,
         false,
         "Unethical content"))
 
-      this.products.push(new Product("aa",
+      this.products.push(new Product(2,"aa",
         "Product 2",
         Approval.No,
         false,
         "Unethical content"))
-      return this.products;
+       this.productList.products = this.products;
+      return this.productList;
     }
 
 

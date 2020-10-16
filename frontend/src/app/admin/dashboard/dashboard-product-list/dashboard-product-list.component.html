@@ -1,33 +1,35 @@
-<mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
-  <!-- Input field with list name -->
+<!--<mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
+  &lt;!&ndash; Input field with list name &ndash;&gt;
   <mat-form-field>
     <input matInput placeholder="List Name" name="name" [(ngModel)]="todoList.name" (ngModelChange)="onListUpdate()">
   </mat-form-field>
-  <!-- Button to delete list -->
+  &lt;!&ndash; Button to delete list &ndash;&gt;
   <button mat-flat-button color="warn" (click)="onListDelete()" [disabled]="todoList.todoItems.length != 0">
     Delete list
   </button>
 
-  <br>
+  <br>-->
 
   <!-- Input field for new item name -->
+<!--
   <mat-form-field>
     <input matInput placeholder="Item Name" [(ngModel)]="newTodoItemName" name="name">
   </mat-form-field>
-  <!-- Button to create item -->
+  &lt;!&ndash; Button to create item &ndash;&gt;
   <button mat-flat-button color="primary" (click)="onItemCreate()" [disabled]="newTodoItemName === ''">Create new item</button>
 
   <hr>
+-->
 
   <!-- List of TodoItemComponents displaying all items of list -->
   <mat-list>
-    <mat-list-item *ngFor="let todoItem of todoList.todoItems">
+    <mat-list-item *ngFor="let product of productList.products">
       <app-dashboard-product
-        [todoItem]="todoItem"
-        (update)="onItemUpdate($event)"
-        (delete)="onItemDelete($event)"
-      ></app-dashboard-product>
+        [product]="product">
+<!--        (update)="onItemUpdate($event)">-->
+<!--        (delete)="onItemDelete($event)"-->
+      </app-dashboard-product>
     </mat-list-item>
   </mat-list>
-  <div *ngIf="todoList.todoItems.length === 0">No Todo Items available.</div>
-</mat-card>
+  <div *ngIf="productList.products.length === 0">No Todo Items available.</div>
+<!--</mat-card>-->
