@@ -16,6 +16,7 @@ export interface UserAttributes {
     city: string;
     country: string;
     moneyInWallet: number;
+    role: string;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -34,6 +35,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     city!: string;
     country!: string;
     moneyInWallet!: number;
+    role!: string;
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -89,6 +91,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 validate: {
                     min: 0
                 }
+            },
+            role: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: 'user'
             }
         },
             {
