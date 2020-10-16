@@ -12,11 +12,14 @@ import {ProductList} from "../models/product-list.model";
 export class ProductsService {
 
   products: Product[] = []
-  private productList: ProductList;
+  productList: ProductList;
 
   constructor(private httpClient: HttpClient) {}
 //This is mocked data
     getProducts(): ProductList {
+    this.productList = new ProductList([]);
+      this.products = []
+
       this.products.push(new Product(1,"aa",
         "Product 1",
         Approval.Pending,

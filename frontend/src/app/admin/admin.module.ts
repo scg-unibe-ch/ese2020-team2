@@ -13,6 +13,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {CommonModule} from "@angular/common";
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    CommonModule
+    CommonModule,
+    MatIconModule,
+    MatTableModule
   ],
   exports: [
     DashboardProductListComponent,

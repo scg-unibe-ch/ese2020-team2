@@ -10,7 +10,7 @@
 
   <br>-->
 
-  <!-- Input field for new item name -->
+<!-- Input field for new item name -->
 <!--
   <mat-form-field>
     <input matInput placeholder="Item Name" [(ngModel)]="newTodoItemName" name="name">
@@ -20,6 +20,7 @@
 
   <hr>
 -->
+
 
   <!-- List of TodoItemComponents displaying all items of list -->
   <mat-list>
@@ -33,3 +34,141 @@
   </mat-list>
   <div *ngIf="productList.products.length === 0">No Todo Items available.</div>
 <!--</mat-card>-->
+
+<mat-selection-list #products [multiple]="false">
+  <mat-list-option *ngFor="let product of productList.products">
+    <span>{{product.productId}} {{product.title}}   <mat-form-field>
+    <input matInput placeholder="Item Name" [(ngModel)]="product.disapprovalMessage" name="name">
+  </mat-form-field><button mat-icon-button (click)="delete">
+      <mat-icon>delete</mat-icon>
+    </button></span>
+
+  </mat-list-option>
+</mat-selection-list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="example-element-diagram">
+          <div class="example-element-position"> {{element.position}} </div>
+          <div class="example-element-symbol"> {{element.symbol}} </div>
+          <div class="example-element-name"> {{element.name}} </div>
+          <div class="example-element-weight"> {{element.weight}} </div>
+        </div>
+        <div class="example-element-description">
+          {{element.description}}
+          <button mat-icon-button (click)="delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <span class="example-element-description-attribution"> -- Wikipedia </span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+<hr>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="productId">
+    <th mat-header-cell *matHeaderCellDef> productId </th>
+    <td mat-cell *matCellDef="let product"> {{product["productId"]}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef> userName </th>
+    <td mat-cell *matCellDef="let product"> {{product["userName"]}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> title </th>
+    <td mat-cell *matCellDef="let product"> {{product["title"]}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="approved">
+    <th mat-header-cell *matHeaderCellDef> approved </th>
+    <td mat-cell *matCellDef="let product"> {{product["approved"]}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="appearMarketplace">
+    <th mat-header-cell *matHeaderCellDef> appearMarketplace </th>
+    <td mat-cell *matCellDef="let product"> {{product["appearMarketplace"]}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="disapprovalMessage">
+    <th mat-header-cell *matHeaderCellDef> disapprovalMessage </th>
+    <td mat-cell *matCellDef="let product"> {{product["disapprovalMessage"]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="aa">
+    <th mat-header-cell *matHeaderCellDef> disapprovalMessage </th>
+
+    <button mat-icon-button (click)="delete">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!--
+
+<mat-nav-list>
+  <h3 matSubheader>This is the listview</h3>
+  <a mat-list-item [routerLink]="['/detail']">
+    <span matLine>Title</span>
+    <button mat-icon-button (click)="onApprove($event)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onDisapprove($event)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </a>
+</mat-nav-list>
+
+-->

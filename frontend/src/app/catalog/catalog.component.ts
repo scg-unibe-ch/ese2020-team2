@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent {
   loggedIn$ = false;
   catalog: Catalog[] = [];
 
@@ -27,7 +27,7 @@ export class CatalogComponent implements OnInit {
    * Checks if user is logged in and updates the login status of the user
    */
 
-
+/*
   ngOnInit(): void {
     this.httpClient.get(environment.endpointURL + 'catalog').subscribe((instances: any) => {
       this.catalog = instances.map((instance: any) => {
@@ -37,5 +37,6 @@ export class CatalogComponent implements OnInit {
       });
     });
     this.authService.login = !!(localStorage.getItem('userToken'));
-  }
+  }*/
 }
+

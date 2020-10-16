@@ -1,22 +1,28 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TodoList} from "../../../models/todo-list.model";
 import { HttpClient } from '@angular/common/http';
-import { TodoItem} from "../../../models/todo-item.model";
 import { environment} from "../../../../environments/environment";
 import {Product} from "../../../models/product.model";
 import {Approval} from "../../../models/approval";
 import {ProductsService} from "../../../services/products.service";
 import {ProductList} from "../../../models/product-list.model";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-dashboard-product-list',
   templateUrl: './dashboard-product-list.component.html',
-  styleUrls: ['./dashboard-product-list.component.css']
+  styleUrls: ['./dashboard-product-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DashboardProductListComponent {
 
   @Input()
-  product: Product = new Product(3,"aa",
+  product: Product = new Product(3,"bbb",
     "Product 1",
     Approval.Pending,
     false,
@@ -29,6 +35,11 @@ export class DashboardProductListComponent {
   delete = new EventEmitter<Product>();
 
   productList: ProductList;
+  dataSource: Product[];
+  columnsToDisplay = ['productId', 'userName', 'title', 'approved', 'appearMarketplace', 'disapprovalMessage'];
+  displayedColumns: string[] = ['productId', 'userName', 'title', 'approved', 'appearMarketplace', 'disapprovalMessage'];
+
+  expandedElement: Product | null;
 
 
   constructor(private httpClient: HttpClient,
@@ -36,6 +47,7 @@ export class DashboardProductListComponent {
 
   ngOnInit(): void {
     this.productList = this.productsService.getProducts();
+    this.dataSource = this.productList.products;
   }
 
 /*
@@ -57,9 +69,11 @@ export class DashboardProductListComponent {
   // TodoItem - UPDATE
   onItemUpdate(product: Product): void{
     this.httpClient.put(environment.endpointURL + 'product/' + product.productId, {
-      /*name: todoItem.name,
-      done: todoItem.done,
-      todoListId: todoItem.listId*/
+      productId: product.productId,
+      title: product.title,
+      approved: product.approved,
+      disapprovalMessage: product.disapprovalMessage,
+      appearMarketplace: product.appearMarketplace,
     }).subscribe();
   }
 // We need this function!!!
