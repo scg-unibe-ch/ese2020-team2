@@ -33,8 +33,6 @@ export class WalletComponent implements OnInit{
    */
   checkWallet(): void {
      this.points$ = this.users.getCurrentUserProperty("moneyInWallet");
-
-
   }
 
 }

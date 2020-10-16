@@ -1,15 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TodoList } from '../../../models/todo-list.model';
+import { TodoList} from "../../../models/todo-list.model";
 import { HttpClient } from '@angular/common/http';
-import { TodoItem } from '../../../models/todo-item.model';
-import { environment } from '../../../../environments/environment';
+import { TodoItem} from "../../../models/todo-item.model";
+import { environment} from "../../../../environments/environment";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: 'app-dashboard-product-list',
+  templateUrl: './dashboard-product-list.component.html',
+  styleUrls: ['./dashboard-product-list.component.css']
 })
-export class TodoListComponent {
+export class DashboardProductListComponent {
 
   @Input()
   todoList: TodoList = new TodoList(null, '', []);
