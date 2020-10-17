@@ -1,7 +1,7 @@
 <div class="outer">
     <div class="inner">
 
-        <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
+        <div class="content" fxLayout="row wrap" fxLayoutGap="2%">
             <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of productList.products">
               <mat-card class="mat-elevation-z4" >
                 <mat-card-header>
@@ -14,9 +14,10 @@
                       </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button>LIKE</button>
-                  <button mat-button>SHARE</button>
-                </mat-card-actions>
+                    <button mat-button *ngIf = "(loggedIn$)">BUY</button> <button mat-button *ngIf = "(loggedIn$)">WISH</button>
+                    <p *ngIf = "!(loggedIn$)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
+                    <button mat-button *ngIf = "!(loggedIn$)"  routerLink="/login">TO LOGIN</button> <button mat-button *ngIf = "!(loggedIn$)" routerLink="/register">TO SIGN UP</button>
+                  </mat-card-actions>
               </mat-card>
             </div>
           </div>
