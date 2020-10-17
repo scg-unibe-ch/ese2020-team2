@@ -38,6 +38,12 @@ import {NotFoundComponent} from "./error/not-found/not-found.component";
 import {DashboardComponent} from "./admin/dashboard/dashboard.component";
 import {DashboardProductListComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product-list.component";
 import {DashboardProductComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product/dashboard-product.component";
+import { MatTableModule } from '@angular/material/table'
+import { DataSource } from '@angular/cdk/table';
+import { Catalog2Component } from './catalog2/catalog2.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { SellItemComponent } from './user-account/sell-item/sell-item.component';
+import { LendItemComponent } from './user-account/lend-item/lend-item.component';
 
 
 
@@ -58,6 +64,9 @@ import {DashboardProductComponent} from "./admin/dashboard/dashboard-product-lis
     UserDirective,
     UserRoleDirective,
     NotFoundComponent,
+    Catalog2Component,
+    SellItemComponent,
+    LendItemComponent,
 
   ],
   imports: [
@@ -66,6 +75,8 @@ import {DashboardProductComponent} from "./admin/dashboard/dashboard-product-lis
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatTableModule,
+    FlexLayoutModule,
     MatListModule,
     MatInputModule,
     MatIconModule,

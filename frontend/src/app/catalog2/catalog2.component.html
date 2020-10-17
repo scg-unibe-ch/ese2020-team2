@@ -1,0 +1,28 @@
+<div class="outer">
+    <div class="inner">
+
+        <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
+            <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of productList.products">
+              <mat-card class="mat-elevation-z4" >
+                <mat-card-header>
+                  <mat-card-title>{{product.title}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="./../assets/images/mountains.jpg">
+                <mat-card-content>
+                    <p>
+                        posted by: {{product.userName}}
+                      </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+
+
+
+  </div>
+</div>
+

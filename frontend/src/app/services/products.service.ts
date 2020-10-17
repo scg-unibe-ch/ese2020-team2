@@ -26,7 +26,77 @@ export class ProductsService {
         false,
         "Unethical content"))
 
-      this.products.push(new Product(2,"aa",
+      this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
+        "Product 2",
+        Approval.No,
+        false,
+        "Unethical content"))
+       this.productList.products = this.products;
+
+       this.products.push(new Product(2,"bb",
         "Product 2",
         Approval.No,
         false,
