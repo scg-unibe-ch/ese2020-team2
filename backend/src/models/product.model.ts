@@ -6,11 +6,11 @@ import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
 export interface ProductAttributes {
     // Id of the product
     productId: number;
-    // Type of the product: Produt or Service
+    // Type of the product: Product or Service
     type: string;
     // Title of the product
     title: string;
-    // Name of the user who created the product/servive
+    // Name of the user who created the product/service
      userName: string;
     // Price in points
     price: number;
@@ -18,7 +18,7 @@ export interface ProductAttributes {
     description: string;
     // Available location
     location: string;
-    // Seel or lend of product
+    // Sell or lend of product
     sellOrlend: string;
     // Status if the product is available or already lent
     status: string;
@@ -113,4 +113,5 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             }
         );
     }
+
 }
