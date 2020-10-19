@@ -38,6 +38,7 @@ productController.put('/edit/:id', (req: Request, res: Response) => {
     Product.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
+<<<<<<< HEAD
                 found.update(req.body).then(() => {
                     res.status(200).send('Product updated successfully.');
                 });
@@ -46,6 +47,14 @@ productController.put('/edit/:id', (req: Request, res: Response) => {
             }
         })
         .catch(err => res.status(500).send(err));
+=======
+                found.destroy().then(() => res.status(200).send('Product removed successfully'));
+            } else {
+                res.status(404).send('cannot find the product');
+            }
+        })
+        .catch(err => res.status(500).send('cannot delete the product'));
+>>>>>>> 2febaa5accdcb3e4841ac14ef40ce9b507c47ded
 });
 
 /**
