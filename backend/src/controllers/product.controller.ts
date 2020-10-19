@@ -28,12 +28,12 @@ productController.delete('/:id', (req: Request, res: Response) => {
     Product.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
-                found.destroy().then(() => res.status(200).send('Product removed success'));
+                found.destroy().then(() => res.status(200).send('Product removed successfully'));
             } else {
-                res.sendStatus(404).send('cannot delete the product');
+                res.status(404).send('cannot find the product');
             }
         })
-        .catch(err => res.status(500).send('cannot find the product'));
+        .catch(err => res.status(500).send('cannot delete the product'));
 });
 
 export const ProductController: Router = productController;
