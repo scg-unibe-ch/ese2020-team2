@@ -38,19 +38,15 @@ export class LendItemComponent implements OnInit {
 
 
 
-      productId: [33],
       type: ["", Validators.required],
       title: ["", Validators.required],
       userName: ["dkdkd"],
       price: [0, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrLend: ["", Validators.required],
+      sellOrlend: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [false, Validators.required],
-      adminApproval: [false],
-      disapprovalMsg:[""],
-      visibleInMarket: [false],
     });
 
 
@@ -79,7 +75,6 @@ contracts: SellOrLend[] = [
 
   get visibleInMarket() { return this.formular.get("visibleInMarket") };
   get disapprovalMsg() { return this.formular.get("disapprovalMsg") };
-
   get productId() { return this.formular.get("productId") };
   get userName() { return this.formular.get("userName") };
   get adminApproval() { return this.formular.get("adnminApproval") };
@@ -88,7 +83,7 @@ contracts: SellOrLend[] = [
   get price() { return this.formular.get("price") };
   get description() { return this.formular.get("description") };
   get location() { return this.formular.get("location") };
-  get sellOrLend() { return this.formular.get("sellOrLend") };
+  get sellOrlend() { return this.formular.get("sellOrlend") };
   get status() { return this.formular.get("status") };
   get deliveryPossible() { return this.formular.get("deliveryPossible") };
 
@@ -100,6 +95,10 @@ contracts: SellOrLend[] = [
     }, (error: any) => {
       this.openSnackBar('Posting was not possible, please try again', '');
     })
+}
+clear() {
+  this.formular.reset();
+  //this.username.setValue("");
 }
 
 openSnackBar(message: string, action: string) {

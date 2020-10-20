@@ -19,5 +19,6 @@ export class Product {
     public adminApproval: boolean,
     public disapprovalMsg: string,
     public visibleInMarket: boolean,
+    public purchasedby: string,
   ) {}
 }

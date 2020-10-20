@@ -2,7 +2,7 @@
     <div class="inner">
 
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
-            <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of productList.products">
+            <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of products">
             
               <mat-card class="mat-elevation-z4" *ngIf="product.status=='posted'">
                   <mat-card-title>{{product.title}}</mat-card-title>
@@ -23,7 +23,6 @@
                     <p *ngIf = "!(loggedIn$)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
                     <button mat-button *ngIf = "!(loggedIn$)"  routerLink="/login">TO LOGIN</button>
                      <button mat-button *ngIf = "!(loggedIn$)" routerLink="/register">TO SIGN UP</button>
-                     <button mat-button *ngIf = "(loggedIn$)" routerLink="/register">TO SIGN UP</button>
                   </mat-card-actions>
               </mat-card>
             </div>

@@ -35,7 +35,7 @@ export class DashboardProductListComponent {
     
     false,
     "Unethical content",
-    false,);
+    false,"");
 
   @Output()
   update = new EventEmitter<Product>();
