@@ -10,11 +10,11 @@ export interface Type {
   value: string;
   display: string;
 }
-export interface Delivery {
-  value: string;
+export interface DeliveryPossible {
+  value: boolean;
   display: string;
 }
-export interface Contract {
+export interface SellOrLend {
   value: string;
   display: string;
 }
@@ -35,18 +35,24 @@ export class LendItemComponent implements OnInit {
 
   formular = this.fb.group(
     {
+
+
+
+      productId: [33],
       type: ["", Validators.required],
       title: ["", Validators.required],
-      price: ["", Validators.required],
+      userName: ["dkdkd"],
+      price: [0, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      contract: ["", Validators.required],
-      delivery: ["", Validators.required],
-      username: [this.users.getCurrentUser()],
+      sellOrLend: ["", Validators.required],
       status: ["posted"],
-      picture: [""],
-      purchasedby: [""],
+      deliveryPossible: [false, Validators.required],
+      adminApproval: [false],
+      disapprovalMsg:[""],
+      visibleInMarket: [false],
     });
+
 
   
    types: Type[] = [
@@ -54,13 +60,13 @@ export class LendItemComponent implements OnInit {
       {value: 'service', display: 'Service'}
    ];
 
-   deliverys: Delivery[] = [
-    {value: 'yes', display: 'YES'},
-    {value: 'no', display: 'NO'}
+   deliverys: DeliveryPossible[] = [
+    {value: true, display: 'YES'},
+    {value: false, display: 'NO'}
  ];
 
 
-contracts: Contract[] = [
+contracts: SellOrLend[] = [
   {value: 'sell', display: 'Sell'},
   {value: 'lend', display: 'Lend'}
 ];
@@ -71,22 +77,24 @@ contracts: Contract[] = [
   ngOnInit(): void {
   }
 
+  get visibleInMarket() { return this.formular.get("visibleInMarket") };
+  get disapprovalMsg() { return this.formular.get("disapprovalMsg") };
 
-
+  get productId() { return this.formular.get("productId") };
+  get userName() { return this.formular.get("userName") };
+  get adminApproval() { return this.formular.get("adnminApproval") };
   get type() { return this.formular.get("type") };
   get title() { return this.formular.get("title") };
   get price() { return this.formular.get("price") };
   get description() { return this.formular.get("description") };
   get location() { return this.formular.get("location") };
-  get contract() { return this.formular.get("contract") };
+  get sellOrLend() { return this.formular.get("sellOrLend") };
   get status() { return this.formular.get("status") };
-  get delivery() { return this.formular.get("delivery") };
-  get picture() { return this.formular.get("picture") };
-  get purchasedby() { return this.formular.get("purchasedby") };
+  get deliveryPossible() { return this.formular.get("deliveryPossible") };
 
 
   post() {
-    this.httpClient.post(environment.endpointURL + 'product/post',
+    this.httpClient.post(environment.endpointURL + 'product/add',
       this.formular.value).subscribe((res: any) => {
       this.openSnackBar('You successfully posted!', '');
     }, (error: any) => {

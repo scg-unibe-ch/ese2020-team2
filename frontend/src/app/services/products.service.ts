@@ -20,33 +20,78 @@ export class ProductsService {
     this.productList = new ProductList([]);
       this.products = []
 
-      this.products.push(new Product(1,"aa",
+      this.products.push(new Product(1,
+        "service",
         "Product 1",
-        Approval.Pending,
-        false,
-        "Unethical content",
+        "aa",
+        23,
+        "this is a posting",
+        "be",
         "sell",
-        "posted",))
+        "posted",
+        true,
+        
+        true,
+        "",
+        true,
+        
+        
+        ))
 
-      this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content",
-        "sell",
-        "sold"))
+        this.products.push(new Product(2,
+          "service",
+          "Product 2",
+          "bb",
+          23,
+          "this is a posting",
+          "be",
+          "lend",
+          "posted",
+          true,
+          
+          true,
+          "",
+          true,
+          
+          
+          ))
 
-       this.products.push(new Product(3,"bb",
-        "Product 3",
-        Approval.No,
-        false,
-        "Unethical content","lend", "lent"))
+          this.products.push(new Product(3,
+            "service",
+            "Product 3",
+            "aa",
+            23,
+            "this is a posting",
+            "be",
+            "sell",
+            "sold",
+            true,
+            
+            true,
+            "",
+            false,
+            
+            
+            ))
 
-        this.products.push(new Product(4,"bb",
-        "Product 3",
-        Approval.No,
-        false,
-        "Unethical content","lend", "posted"))
+            this.products.push(new Product(4,
+              "service",
+              "Product 4",
+              "bb",
+              23,
+              "this is a posting",
+              "be",
+              "lend",
+              "lent",
+              true,
+              
+              true,
+              "",
+              false,
+              
+              
+              ))
+
        this.productList.products = this.products;
       return this.productList;
     }
