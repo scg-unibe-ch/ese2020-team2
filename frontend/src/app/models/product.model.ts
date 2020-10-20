@@ -10,5 +10,7 @@ export class Product {
     public approved: Approval,
     public appearMarketplace: boolean,
     public disapprovalMessage: string,
+    public contract: string,
+    public status: string,
   ) {}
 }

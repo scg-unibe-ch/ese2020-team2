@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ProductList } from '../models/product-list.model';
-import { Product } from '../models/product.model';
-import { ProductsService } from '../services/products.service';
+import { ProductList } from 'src/app/models/product-list.model';
+import { Product } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
-  selector: 'app-catalog2',
-  templateUrl: './catalog2.component.html',
-  styleUrls: ['./catalog2.component.css']
+  selector: 'app-sold',
+  templateUrl: './sold.component.html',
+  styleUrls: ['./sold.component.css']
 })
-export class Catalog2Component implements OnInit {
-productList: ProductList;
+export class SoldComponent implements OnInit {
+
+  productList: ProductList;
   products: Product[];
 
   ngOnInit(): void {
@@ -25,6 +26,5 @@ productList: ProductList;
     private productsService: ProductsService) {}
 
  
-
 
 }

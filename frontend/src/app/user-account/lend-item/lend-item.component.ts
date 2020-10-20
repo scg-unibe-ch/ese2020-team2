@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import {CurrentUser} from "../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface Type {
-  value: string;
-  display: string;
-}
-export interface Status {
   value: string;
   display: string;
 }
@@ -31,6 +28,7 @@ export class LendItemComponent implements OnInit {
   constructor(
     private router: Router,
     public snackBar: MatSnackBar,
+    private users: CurrentUser,
     private httpClient: HttpClient,
     private fb: FormBuilder) { }
     selectedValue: string;
@@ -43,9 +41,11 @@ export class LendItemComponent implements OnInit {
       description: ["", Validators.required],
       location: ["", Validators.required],
       contract: ["", Validators.required],
-      status  : ["", Validators.required],
       delivery: ["", Validators.required],
+      username: [this.users.getCurrentUser()],
+      status: ["posted"],
       picture: [""],
+      purchasedby: [""],
     });
 
   
@@ -59,10 +59,6 @@ export class LendItemComponent implements OnInit {
     {value: 'no', display: 'NO'}
  ];
 
- statuses: Status[] = [
-  {value: 'available', display: 'Available'},
-  {value: 'lent', display: 'Lent'}
-];
 
 contracts: Contract[] = [
   {value: 'sell', display: 'Sell'},
@@ -86,6 +82,7 @@ contracts: Contract[] = [
   get status() { return this.formular.get("status") };
   get delivery() { return this.formular.get("delivery") };
   get picture() { return this.formular.get("picture") };
+  get purchasedby() { return this.formular.get("purchasedby") };
 
 
   post() {

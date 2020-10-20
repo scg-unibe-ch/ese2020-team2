@@ -26,7 +26,7 @@ export class DashboardProductListComponent {
     "Product 1",
     Approval.Pending,
     false,
-    "Unethical content");
+    "Unethical content","","");
 
   @Output()
   update = new EventEmitter<Product>();

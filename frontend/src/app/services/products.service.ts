@@ -24,83 +24,29 @@ export class ProductsService {
         "Product 1",
         Approval.Pending,
         false,
-        "Unethical content"))
+        "Unethical content",
+        "sell",
+        "posted",))
 
       this.products.push(new Product(2,"bb",
         "Product 2",
         Approval.No,
         false,
-        "Unethical content"))
-       this.productList.products = this.products;
+        "Unethical content",
+        "sell",
+        "sold"))
 
-       this.products.push(new Product(2,"bb",
-        "Product 2",
+       this.products.push(new Product(3,"bb",
+        "Product 3",
         Approval.No,
         false,
-        "Unethical content"))
-       this.productList.products = this.products;
+        "Unethical content","lend", "lent"))
 
-       this.products.push(new Product(2,"bb",
-        "Product 2",
+        this.products.push(new Product(4,"bb",
+        "Product 3",
         Approval.No,
         false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
-       this.productList.products = this.products;
-
-       this.products.push(new Product(2,"bb",
-        "Product 2",
-        Approval.No,
-        false,
-        "Unethical content"))
+        "Unethical content","lend", "posted"))
        this.productList.products = this.products;
       return this.productList;
     }

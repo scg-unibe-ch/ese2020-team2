@@ -10,7 +10,7 @@ import {Approval} from "../../../../models/approval";
 export class DashboardProductComponent {
 
   @Input()
-  product: Product = new Product(null,"", "", Approval.Pending, false,"");
+  product: Product = new Product(null,"", "", Approval.Pending, false,"","","");
 
   @Output()
   update = new EventEmitter<Product>();
