@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TestsignupComponent } from './testsignup/testsignup.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { EdititemComponent} from './user-account/user-dashboard/edititem/edititem.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import {AuthGuardService} from "./auth/auth-guard.service";
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
+  { path: 'edititem', component: EdititemComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent },
   { path: 'catalog2', component: Catalog2Component },
   {

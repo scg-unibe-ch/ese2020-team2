@@ -23,6 +23,31 @@ productList: ProductList;
 
 
 
+  filterlend() {
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter( product => product.sellOrlend === "lend" )
+    )
+  );
+  }
+
+  filtersell() {
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter( product => product.sellOrlend === "sell" )
+    )
+  );
+  }
+  filterproducts() {
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter( product => product.typ === "product" )
+    )
+  );
+  }
+  filterservices() {
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter( product => product.typ === "service" )
+    )
+  );
+  }
 
   constructor(private httpClient: HttpClient,
     private authService: AuthService,

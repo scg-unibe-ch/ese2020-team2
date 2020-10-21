@@ -1,4 +1,4 @@
-<form [formGroup]="formular">
+<form [formGroup]="editformular">
 
     <!-- first mat card with required inputs-->
     <!-- i dont understand how i can add elevation in css so i had to style it here-->
@@ -63,6 +63,6 @@
       </div>
     </mat-card>
 
-    <button class="btn btn-warning" (click)="post(); clear()" [disabled]="formular.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Post</button>
+    <button class="btn btn-warning"  [disabled]="editformular.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
     
   </form>
