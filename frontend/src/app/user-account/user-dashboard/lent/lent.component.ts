@@ -4,6 +4,7 @@ import { ProductList } from 'src/app/models/product-list.model';
 import { Product } from 'src/app/models/product.model';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lent',
@@ -30,7 +31,12 @@ export class LentComponent implements OnInit {
       );
   }
 
+
+
   
+  remove(){
+    
+  }
   
 
 }
