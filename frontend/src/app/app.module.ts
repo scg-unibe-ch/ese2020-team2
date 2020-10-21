@@ -22,7 +22,6 @@ import {UserAccountComponent} from "./user-account/user-account.component";
 import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component";
 import {WalletComponent} from "./user-account/wallet/wallet.component";
 import { HomeComponent } from './home/home.component';
-import { HistoryComponent } from './user-account/history/history.component';
 import {MatSelectModule} from "@angular/material/select";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,15 +34,17 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {UserDirective} from "./directives/user.directive";
 import {UserRoleDirective} from "./directives/user-role.directive";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
-import {DashboardComponent} from "./admin/dashboard/dashboard.component";
-import {DashboardProductListComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product-list.component";
-import {DashboardProductComponent} from "./admin/dashboard/dashboard-product-list/dashboard-product/dashboard-product.component";
 import { MatTableModule } from '@angular/material/table'
 import { DataSource } from '@angular/cdk/table';
 import { Catalog2Component } from './catalog2/catalog2.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { SellItemComponent } from './user-account/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/lend-item/lend-item.component';
+import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
+import { PurchasedComponent } from './user-account/user-dashboard/purchased/purchased.component';
+import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
+import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
+import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
+import { ProductList } from './models/product-list.model';
 
 
 
@@ -59,14 +60,17 @@ import { LendItemComponent } from './user-account/lend-item/lend-item.component'
     ToDoListsComponent,
     WalletComponent,
     HomeComponent,
-    HistoryComponent,
     CatalogComponent,
     UserDirective,
     UserRoleDirective,
     NotFoundComponent,
     Catalog2Component,
-    SellItemComponent,
     LendItemComponent,
+    PurchasedComponent,
+    SoldComponent,
+    UserDashboardComponent,
+    PostedComponent,
+    LentComponent,
 
   ],
   imports: [

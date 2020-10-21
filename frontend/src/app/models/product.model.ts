@@ -4,11 +4,21 @@ export class Product {
 
 //Has to be extended
   constructor(
+
+
     public productId: number,
-    public userName: string,
+    public typ: string,
     public title: string,
-    public approved: Approval,
-    public appearMarketplace: boolean,
-    public disapprovalMessage: string,
+    public userName: string,
+    public price: number,
+    public description: string,
+    public location: string,
+    public sellOrlend: string,
+    public status: string,
+    public deliveryPossible: boolean,
+    public adminApproval: boolean,
+    public disapprovalMsg: string,
+    public visibleInMarket: boolean,
+    public purchasedby: string,
   ) {}
 }

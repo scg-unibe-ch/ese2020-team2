@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { ProductList } from '../models/product-list.model';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
@@ -10,19 +11,26 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./catalog2.component.css']
 })
 export class Catalog2Component implements OnInit {
-
-  productList: ProductList;
+  loggedIn$ = false;
+productList: ProductList;
   products: Product[];
-
-
-
-  constructor(private httpClient: HttpClient,
-    private productsService: ProductsService) {}
 
   ngOnInit(): void {
     this.productList = this.productsService.getProducts();
-    this.products = this.productList.products;
+    this.products = this.productList.products.filter(
+      product => product.status === "posted")
   }
+
+  
+
+
+  constructor(private httpClient: HttpClient,
+    private authService: AuthService,
+    private productsService: ProductsService) { authService.loggedIn$.subscribe((nextValue) => {
+      this.loggedIn$ = nextValue;  // this will happen on every change
+    })}
+
+ 
 
 
 }

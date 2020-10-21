@@ -2,15 +2,15 @@ import express from 'express';
 import { Router, Request, Response } from 'express';
 import { TodoItem } from '../models/todoitem.model';
 
-const todoitemController: Router = express.Router();
+const todoItemController: Router = express.Router();
 
-todoitemController.post('/', (req: Request, res: Response) => {
+todoItemController.post('/', (req: Request, res: Response) => {
     TodoItem.create(req.body)
         .then(inserted => res.send(inserted))
         .catch(err => res.status(500).send(err));
 });
 
-todoitemController.put('/:id', (req: Request, res: Response) => {
+todoItemController.put('/:id', (req: Request, res: Response) => {
     TodoItem.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
@@ -25,7 +25,7 @@ todoitemController.put('/:id', (req: Request, res: Response) => {
 
 });
 
-todoitemController.delete('/:id', (req: Request, res: Response) => {
+todoItemController.delete('/:id', (req: Request, res: Response) => {
     TodoItem.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
@@ -37,4 +37,4 @@ todoitemController.delete('/:id', (req: Request, res: Response) => {
         .catch(err => res.status(500).send(err));
 });
 
-export const TodoItemController: Router = todoitemController;
+export const TodoItemController: Router = todoItemController;

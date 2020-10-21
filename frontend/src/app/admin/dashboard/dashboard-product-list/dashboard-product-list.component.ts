@@ -22,11 +22,20 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class DashboardProductListComponent {
 
   @Input()
-  product: Product = new Product(3,"bbb",
-    "Product 1",
-    Approval.Pending,
+  product: Product = new Product(3,
+    "service",
+    "Product 3",
+    "aa",
+    23,
+    "this is a posting",
+    "be",
+    "sell",
+    "sold",
+    true,
+    
     false,
-    "Unethical content");
+    "Unethical content",
+    false,"");
 
   @Output()
   update = new EventEmitter<Product>();
@@ -71,11 +80,12 @@ export class DashboardProductListComponent {
     this.httpClient.put(environment.endpointURL + 'product/' + product.productId, {
       productId: product.productId,
       title: product.title,
-      approved: product.approved,
-      disapprovalMessage: product.disapprovalMessage,
-      appearMarketplace: product.appearMarketplace,
+      approved: product.adminApproval,
+      disapprovalMessage: product.disapprovalMsg,
+      appearMarketplace: product.visibleInMarket,
     }).subscribe();
   }
+
 // We need this function!!!
   /*
   // TodoItem - DELETE
