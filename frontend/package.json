@@ -14,7 +14,7 @@
   "dependencies": {
     "@angular-material-extensions/select-country": "^2.2.0",
     "@angular/animations": "~10.0.14",
-    "@angular/cdk": "~10.2.0-rc.0-sha-7ec514be9",
+    "@angular/cdk": "^10.2.5",
     "@angular/common": "~10.0.14",
     "@angular/compiler": "~10.0.14",
     "@angular/core": "~10.0.14",
