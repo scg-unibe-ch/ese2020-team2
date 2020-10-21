@@ -20,10 +20,10 @@ export class DashboardProductComponent {
     "sell",
     "sold",
     true,
-    
     false,
     "Unethical content",
-    false,"");
+    false,
+    "");
 
   @Output()
   update = new EventEmitter<Product>();

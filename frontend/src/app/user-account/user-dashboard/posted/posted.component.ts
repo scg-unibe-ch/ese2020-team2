@@ -4,6 +4,8 @@ import { ProductList } from 'src/app/models/product-list.model';
 import { Product } from 'src/app/models/product.model';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-posted',
@@ -13,7 +15,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class PostedComponent implements OnInit {
 
   productList: ProductList;
-  products: Product[];
+  products$: Observable<Product[]>;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -21,16 +23,15 @@ export class PostedComponent implements OnInit {
 
 }
 
-  
+
   ngOnInit(): void {
-    this.productList = this.productsService.getProducts();
-    this.products = this.productList.products.filter(
-      product => product.status === "posted").filter(
-        product => product.userName === localStorage.getItem('userName')
-      );
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter( product => product.status === "posted" )
+      )
+    );
   }
 
-  
-  
+
+
 
 }

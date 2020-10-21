@@ -5,6 +5,8 @@ import { Product } from 'src/app/models/product.model';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
 import { environment } from 'src/environments/environment';
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-lent',
@@ -14,7 +16,7 @@ import { environment } from 'src/environments/environment';
 export class LentComponent implements OnInit {
 
   productList: ProductList;
-  products: Product[];
+  products$: Observable<Product[]>;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -22,21 +24,20 @@ export class LentComponent implements OnInit {
 
 }
 
-  
+
   ngOnInit(): void {
-    this.productList = this.productsService.getProducts();
-    this.products = this.productList.products.filter(
-      product => product.status === "lent").filter(
-        product => product.userName === localStorage.getItem('userName')
-      );
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter( product => product.status === "posted" && product.userName === localStorage.getItem('userName') )
+      )
+    );
   }
 
 
 
-  
+
   remove(){
-    
+
   }
-  
+
 
 }

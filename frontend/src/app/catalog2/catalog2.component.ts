@@ -4,6 +4,8 @@ import { AuthService } from '../auth/auth.service';
 import { ProductList } from '../models/product-list.model';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
+import {Observable} from "rxjs";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-catalog2',
@@ -13,15 +15,13 @@ import { ProductsService } from '../services/products.service';
 export class Catalog2Component implements OnInit {
   loggedIn$ = false;
 productList: ProductList;
-  products: Product[];
+  products$: Observable<Product[]>;
 
   ngOnInit(): void {
-    this.productList = this.productsService.getProducts();
-    this.products = this.productList.products.filter(
-      product => product.status === "posted")
+    this.products$ = this.productsService.getProducts();
   }
 
-  
+
 
 
   constructor(private httpClient: HttpClient,
@@ -30,7 +30,7 @@ productList: ProductList;
       this.loggedIn$ = nextValue;  // this will happen on every change
     })}
 
- 
+
 
 
 }

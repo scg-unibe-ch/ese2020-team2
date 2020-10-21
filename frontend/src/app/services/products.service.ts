@@ -13,11 +13,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsService {
 
-  products: Product[] = []
-  productList: ProductList;
+  productList: Observable<Product[]>;
 
   constructor(private httpClient: HttpClient) {}
-//This is mocked data
+
+  getProducts() : Observable<Product[]> {
+     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/getAll')
+  }
+/*//This is mocked data
     getProducts(): ProductList {
     this.productList = new ProductList([]);
       this.products = []
@@ -32,13 +35,13 @@ export class ProductsService {
         "sell",
         "posted",
         true,
-        
+
         true,
         "",
         true,
         "",
-        
-        
+
+
         ))
 
         this.products.push(new Product(2,
@@ -51,13 +54,13 @@ export class ProductsService {
           "lend",
           "posted",
           true,
-          
+
           true,
           "",
           true,
           "",
-          
-          
+
+
           ))
 
           this.products.push(new Product(3,
@@ -70,13 +73,13 @@ export class ProductsService {
             "sell",
             "sold",
             true,
-            
+
             true,
             "",
             false,
             "rocco2",
-            
-            
+
+
             ))
 
             this.products.push(new Product(4,
@@ -89,13 +92,13 @@ export class ProductsService {
               "sell",
               "sold",
               true,
-              
+
               true,
               "",
               false,
               "baubau2",
-              
-              
+
+
               ))
 
               this.products.push(new Product(5,
@@ -108,13 +111,13 @@ export class ProductsService {
                 "sell",
                 "posted",
                 true,
-                
+
                 true,
                 "",
                 false,
                 "",
-                
-                
+
+
                 ))
 
             this.products.push(new Product(6,
@@ -127,20 +130,20 @@ export class ProductsService {
               "lend",
               "lent",
               true,
-              
+
               true,
               "",
               false,
               "",
-              
+
               ))
 
        this.productList.products = this.products;
       return this.productList;
-    }
+    }*/
 
 
-    
-  
+
+
 
 }
