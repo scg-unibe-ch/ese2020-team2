@@ -68,7 +68,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
       //Mocking the admin role!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      res.user.role = "Admin";
+      //res.user.role = "Admin";
       localStorage.setItem('user', JSON.stringify(res.user));
       this.checkUserStatus();
       this.openSnackBar('You successfully logged in!', '')
