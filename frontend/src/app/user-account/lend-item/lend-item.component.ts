@@ -18,6 +18,10 @@ export interface SellOrLend {
   value: string;
   display: string;
 }
+export interface PriceDur {
+  value: string;
+  display: string;
+}
 
 @Component({
   selector: 'app-lend-item',
@@ -47,6 +51,7 @@ export class LendItemComponent implements OnInit {
       sellOrlend: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [false, Validators.required],
+      pricedur: ["",],
     });
 
 
@@ -67,6 +72,10 @@ contracts: SellOrLend[] = [
   {value: 'lend', display: 'Lend'}
 ];
 
+prices: PriceDur[] = [
+  {value: 'hour', display: '/Hour'},
+  {value: 'day', display: '/Day'}
+];
 
   
 
@@ -78,7 +87,7 @@ contracts: SellOrLend[] = [
   get productId() { return this.formular.get("productId") };
   get userName() { return this.formular.get("userName") };
   get adminApproval() { return this.formular.get("adnminApproval") };
-  get type() { return this.formular.get("type") };
+  get typ() { return this.formular.get("type") };
   get title() { return this.formular.get("title") };
   get price() { return this.formular.get("price") };
   get description() { return this.formular.get("description") };

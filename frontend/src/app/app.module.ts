@@ -45,6 +45,7 @@ import { SoldComponent } from './user-account/user-dashboard/sold/sold.component
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
 import { ProductList } from './models/product-list.model';
+import { EdititemComponent } from './user-account/user-dashboard/edititem/edititem.component';
 
 
 
@@ -71,6 +72,7 @@ import { ProductList } from './models/product-list.model';
     UserDashboardComponent,
     PostedComponent,
     LentComponent,
+    EdititemComponent,
 
   ],
   imports: [
