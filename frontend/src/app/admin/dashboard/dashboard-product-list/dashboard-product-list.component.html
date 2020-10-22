@@ -32,20 +32,20 @@
           </mat-card-content>
           <mat-card-actions>
             <mat-button-toggle-group #group="matButtonToggleGroup" [value]="product.adminApproval" (change)="product.adminApproval=group.value">
-              <mat-button-toggle aria-label="Text align left" value="rejected">
+              <mat-button-toggle  value="rejected" [ngClass]="{'bg-red':product.adminApproval === Approval.rejected}" >
                 Rejected
               </mat-button-toggle>
-              <mat-button-toggle aria-label="Text align center" value="pending">
+              <mat-button-toggle value="pending"[ngClass]="{'bg-blue':product.adminApproval === Approval.pending}" >
                 Pending
               </mat-button-toggle>
-              <mat-button-toggle aria-label="Text align right" value="approved">
+              <mat-button-toggle value="approved" [ngClass]="{'bg-green':product.adminApproval === Approval.approved}" >
                 Approved
               </mat-button-toggle>
             </mat-button-toggle-group>
             <mat-form-field>
               <input matInput placeholder="Rejection message" [(ngModel)]="product.disapprovalMsg" name="name">
             </mat-form-field>
-            <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit" style="background-color: rgb(51,180,51);">Confirm</button>
+            <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit">Confirm</button>
           </mat-card-actions>
         </mat-card>
       </div>

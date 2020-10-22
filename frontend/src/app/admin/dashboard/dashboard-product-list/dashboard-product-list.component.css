@@ -11,9 +11,21 @@
   background-color: red;
 }
 mat-button-toggle-group {
-  margin-left: 15px;
+  margin-left: 0px;
   margin-bottom: 15px;
 }
-mat-button {
-: left;
+/deep/ button, input {
+  margin-left: 0px !important;
+  margin-right: 15px !important;
+}
+.bg-red {
+  background-color: #f59292;
+}
+
+.bg-green {
+  background-color: #7fe57f;
+}
+
+.bg-blue {
+  background-color: #7fdaec !important;
 }
