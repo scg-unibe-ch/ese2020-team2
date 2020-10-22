@@ -3,7 +3,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './admin-routing.module';
 import {DashboardProductListComponent} from "./dashboard/dashboard-product-list/dashboard-product-list.component";
-import {DashboardProductComponent} from "./dashboard/dashboard-product-list/dashboard-product/dashboard-product.component";
 import {FormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -23,7 +22,6 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
   declarations: [
     DashboardComponent,
     DashboardProductListComponent,
-    DashboardProductComponent
   ],
   imports: [
     RouterModule.forChild(routes),

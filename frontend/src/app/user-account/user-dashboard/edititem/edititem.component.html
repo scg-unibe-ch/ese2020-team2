@@ -1,32 +1,35 @@
+
 <form [formGroup]="editformular">
 
     <!-- first mat card with required inputs-->
     <!-- i dont understand how i can add elevation in css so i had to style it here-->
-  
+
     <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
       <mat-card-title>Required Fields</mat-card-title>
       <div class="form-group">
-  
+
          <!-- first row of required inputs-->
-  
+
         <mat-form-field>
           <input style="font-size: large;" required matInput placeholder="Title" type="text"
-            formControlName="title" id="title">
+            formControlName="title" [ngModel]="product?.title" (ngModelChange)="product.title=$event">
           <mat-error *ngIf="title.invalid"> title is required</mat-error>
         </mat-form-field>
-  
+
         <mat-form-field>
-          <input required matInput placeholder="Description" type="text" formControlName="description" id="description">
+          <input required matInput placeholder="Description" type="text" formControlName="description"
+                 [ngModel]="product?.description" (ngModelChange)="product.description=$event">
           <mat-error *ngIf="description.invalid">Description is required</mat-error>
         </mat-form-field>
-  
+
         <mat-form-field>
-          <input required matInput placeholder="Location" type="text" formControlName="location" id="location">
+          <input required matInput placeholder="Location" type="text" formControlName="location"
+                 [ngModel]="product?.location" (ngModelChange)="product.location=$event">
           <mat-error *ngIf="location.invalid">Location is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="type" placeholder="Type">
+          <mat-select formControlName="type" placeholder="Type" [ngModel]="product?.typ" (ngModelChange)="product.typ=$event">
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{type.display}}
             </mat-option>
@@ -50,19 +53,15 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input required matInput placeholder="Price" type="text" formControlName="price" id="price">
+          <input required matInput placeholder="Price" type="text" formControlName="price"
+                 [ngModel]="product?.price" (ngModelChange)="product.price=$event">
           <mat-error *ngIf="price.invalid">Price is required</mat-error>
         </mat-form-field>
 
-       
-
-
-
-        
 
       </div>
     </mat-card>
 
-    <button class="btn btn-warning"  [disabled]="editformular.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
-    
+    <button class="btn btn-warning" [disabled]="editformular.invalid" (click)="onProductUpdate(product)" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
+
   </form>

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
-  { path: 'edititem', component: EdititemComponent, canActivate: [AuthGuardService]},
+  { path: 'edititem/:id', component: EdititemComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent },
   { path: 'catalog2', component: Catalog2Component },
   {
