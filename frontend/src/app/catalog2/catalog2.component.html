@@ -1,5 +1,5 @@
 <mat-toolbar style=" background-color: rgba(48, 129, 129, 0.781); height: 4%;" >
-  <p>FILTER:</p>
+  <div>FILTER:</div>
   <button mat-button (click)="filtersell()">FOR SALE</button>
   <button mat-button (click)="filterlend()">TO RENT</button>
   <button mat-button (click)="filterproducts()">PRODUCTS</button>
@@ -22,7 +22,7 @@
                   <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
                 </mat-card-subtitle>
 
-                <img mat-card-image src="./../assets/images/mountains.jpg">
+                <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
                 <mat-card-content>
                   <p>{{product.description}}</p>
                     <p>
@@ -31,7 +31,7 @@
                       <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-button *ngIf = "(loggedIn$)">BUY</button> <button mat-button *ngIf = "(loggedIn$)">WISH</button>
+                    <button mat-button *ngIf = "(loggedIn$)" (click)="buy(product)" type="submit">BUY</button> <button mat-button *ngIf = "(loggedIn$)">WISH</button>
                     <p *ngIf = "!(loggedIn$)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
                     <button mat-button *ngIf = "!(loggedIn$)"  routerLink="/login">TO LOGIN</button>
                      <button mat-button *ngIf = "!(loggedIn$)" routerLink="/register">TO SIGN UP</button>

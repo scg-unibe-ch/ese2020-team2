@@ -1,7 +1,8 @@
 .outer {
-    overflow:scroll;
-    height: 80%;
-  }
+  overflow:scroll;
+  overflow-x: hidden;
+  height: 65%;
+}
 
   .inner {
     padding-right: 2%;

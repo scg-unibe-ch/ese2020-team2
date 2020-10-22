@@ -59,26 +59,8 @@ export class EdititemComponent implements OnInit {
   }
 
 
-  /**
-   * Updates the product regarding how the user edited the product
-   *
-   * If the product is edited, the approval is changed to pending
-   *
-   * @param product, the product that was edited
-   */
-  onProductUpdate(product: Product): void {
 
-    this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
-      adminApproval: Approval.pending,
-      title: product.title,
-      description: product.description,
-      location: product.location,
-      typ: product.typ,
-      sellOrlend: product.sellOrlend,
-      deliveryPossible: product.deliveryPossible,
-      price: product.price
-    }).subscribe();
-  }
+
 
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -136,6 +118,31 @@ export class EdititemComponent implements OnInit {
   get status() { return this.editformular.get("status") };
   get deliveryPossible() { return this.editformular.get("deliveryPossible") };
 
+
+    /**
+   * Updates the product regarding how the user edited the product
+   *
+   * If the product is edited, the approval is changed to pending
+   *
+   * @param product, the product that was edited
+   */
+
+confirm(product: Product): void {
+  this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
+    adminApproval: Approval.pending,
+    typ: product.type,
+    title: product.title,
+    price: product.price,
+    description: product.price,
+    location: product.location,
+    sellOrlend: product.sellOrlend,
+    deliveryPossible: product.deliveryPossible,
+  }).subscribe();
 }
 
+clear() {
+  this.editformular.reset();
+  //this.username.setValue("");
+}
 
+}

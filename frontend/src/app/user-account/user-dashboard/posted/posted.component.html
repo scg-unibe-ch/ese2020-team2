@@ -1,3 +1,4 @@
+<div class="outer">
 <div class="inner">
     <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
         <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of products$ | async">
@@ -8,17 +9,18 @@
                 <mat-card-title *ngIf="product.sellOrlend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
                 <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
               </mat-card-subtitle>
-            <img mat-card-image src="./../assets/images/mountains.jpg">
+            <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
             <mat-card-content>
               <p>{{product.description}}</p>
               <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
             </mat-card-content>
             <mat-card-actions>
-<!--  <button mat-button (click)="removeitem()" >REMOVE</button>-->
+<button mat-button (click)="removeitem(product)" >REMOVE</button>
   <button mat-button [routerLink]="['/edititem', product.productId]">EDIT</button>
               </mat-card-actions>
           </mat-card>
         </div>
 
       </div>
+</div>
 </div>

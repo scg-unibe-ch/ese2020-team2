@@ -2,3 +2,8 @@
     padding-right: 2%;
     padding-left: 2%;
   }
+  .outer {
+    overflow:scroll;
+    overflow-x: hidden;
+    height: 65%;
+  }

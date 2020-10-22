@@ -29,7 +29,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="type" placeholder="Type" [ngModel]="product?.typ" (ngModelChange)="product.typ=$event">
+          <mat-select formControlName="type" placeholder="Type" [ngModel]="product?.type" (ngModelChange)="product.type=$event">
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{type.display}}
             </mat-option>
@@ -37,7 +37,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="sellOrlend" placeholder="Sell/Lend">
+          <mat-select formControlName="sellOrlend" placeholder="Sell/Lend" [ngModel]="product?.sellOrlend" (ngModelChange)="product.sellOrlend=$event">
             <mat-option *ngFor="let contract of contracts" [value]="contract.value">
               {{contract.display}}
             </mat-option>
@@ -45,7 +45,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="deliveryPossible" placeholder="Delivery">
+          <mat-select formControlName="deliveryPossible" placeholder="Delivery" [ngModel]="product?.deliveryPossible" (ngModelChange)="product.deliveryPossible=$event">
             <mat-option *ngFor="let delivery of deliverys" [value]="delivery.value">
               {{delivery.display}}
             </mat-option>
@@ -62,6 +62,6 @@
       </div>
     </mat-card>
 
-    <button class="btn btn-warning" [disabled]="editformular.invalid" (click)="onProductUpdate(product)" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
+    <button class="btn btn-warning" [disabled]="editformular.invalid" [routerLink]="['/account']" (click)="confirm(product); clear()" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
 
   </form>

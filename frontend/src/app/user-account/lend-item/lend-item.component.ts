@@ -84,7 +84,6 @@ prices: PriceDur[] = [
 
   get visibleInMarket() { return this.formular.get("visibleInMarket") };
   get disapprovalMsg() { return this.formular.get("disapprovalMsg") };
-  get productId() { return this.formular.get("productId") };
   get userName() { return this.formular.get("userName") };
   get adminApproval() { return this.formular.get("adnminApproval") };
   get typ() { return this.formular.get("type") };
@@ -103,7 +102,7 @@ prices: PriceDur[] = [
       this.openSnackBar('You successfully posted!', '');
     }, (error: any) => {
       this.openSnackBar('Posting was not possible, please try again', '');
-    })
+    }); 
 }
 clear() {
   this.formular.reset();

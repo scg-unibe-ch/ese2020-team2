@@ -11,6 +11,8 @@ import {AuthGuardService} from "./auth/auth-guard.service";
 import {Role} from "./models/role";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
 import { Catalog2Component } from './catalog2/catalog2.component';
+import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
+import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,7 @@ const routes: Routes = [
   { path: 'login', component: UserLoginComponent },
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'edititem/:id', component: EdititemComponent, canActivate: [AuthGuardService]},
+  { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent },
   { path: 'catalog2', component: Catalog2Component },
   {

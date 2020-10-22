@@ -6,6 +6,7 @@ import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
 import {Observable} from "rxjs";
 import {filter, map} from "rxjs/operators";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-catalog2',
@@ -16,6 +17,8 @@ export class Catalog2Component implements OnInit {
   loggedIn$ = false;
 productList: ProductList;
   products$: Observable<Product[]>;
+  product: Product;
+
 
   ngOnInit(): void {
     this.products$ = this.productsService.getProducts();
@@ -38,17 +41,28 @@ productList: ProductList;
   }
   filterproducts() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.typ === "product" )
+      products.filter( product => product.type === "product" )
     )
   );
   }
   filterservices() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.typ === "service" )
+      products.filter( product => product.type === "service" )
     )
   );
   }
 
+  wish() {
+
+  }
+
+  buy(product: Product): void {
+    this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
+      purchasedby: localStorage.getItem('userName'),
+    }).subscribe();
+  }
+
+  
   constructor(private httpClient: HttpClient,
     private authService: AuthService,
     private productsService: ProductsService) { authService.loggedIn$.subscribe((nextValue) => {

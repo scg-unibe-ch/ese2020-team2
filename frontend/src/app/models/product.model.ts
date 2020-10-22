@@ -7,7 +7,7 @@ export class Product {
 
 
     public productId: number,
-    public typ: string,
+    public type: string,
     public title: string,
     public userName: string,
     public price: number,

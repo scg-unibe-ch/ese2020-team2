@@ -6,6 +6,10 @@ import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import { Routes } from '@angular/router';
+import { EdititemComponent } from '../edititem/edititem.component';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-posted',
@@ -16,7 +20,8 @@ export class PostedComponent implements OnInit {
 
   productList: ProductList;
   products$: Observable<Product[]>;
-
+  product: Product;
+  
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private users: CurrentUser) {
@@ -31,7 +36,10 @@ export class PostedComponent implements OnInit {
     );
   }
 
-
+  removeitem(product: Product): void {
+    this.httpClient.put(environment.endpointURL + 'product/delete' + product.productId, {
+    }).subscribe();
+  }
 
 
 }
