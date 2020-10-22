@@ -16,7 +16,7 @@ export class Product {
     public sellOrlend: string,
     public status: string,
     public deliveryPossible: boolean,
-    public adminApproval: boolean,
+    public adminApproval: string,
     public disapprovalMsg: string,
     public visibleInMarket: boolean,
     public purchasedby: string,

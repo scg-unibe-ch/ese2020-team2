@@ -1,5 +1,5 @@
 export enum Approval {
-  Yes = "Yes",
-  No = "No",
-  Pending = "Pending"
+  approved = "approved",
+  rejected = "rejected",
+  pending = "pending"
 }

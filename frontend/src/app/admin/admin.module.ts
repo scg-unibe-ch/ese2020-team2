@@ -15,6 +15,9 @@ import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {FlexModule} from "@angular/flex-layout";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -22,20 +25,23 @@ import {MatRadioModule} from "@angular/material/radio";
     DashboardProductListComponent,
     DashboardProductComponent
   ],
-    imports: [
-        RouterModule.forChild(routes),
-        FormsModule,
-        MatFormFieldModule,
-        MatCheckboxModule,
-        MatListModule,
-        MatCardModule,
-        MatButtonModule,
-        MatInputModule,
-        CommonModule,
-        MatIconModule,
-        MatTableModule,
-        MatRadioModule
-    ],
+  imports: [
+    RouterModule.forChild(routes),
+    FormsModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    CommonModule,
+    MatIconModule,
+    MatTableModule,
+    MatRadioModule,
+    MatToolbarModule,
+    FlexModule,
+    MatButtonToggleModule
+  ],
   exports: [
     DashboardProductListComponent,
   ],

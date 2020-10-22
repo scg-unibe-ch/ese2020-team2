@@ -20,7 +20,7 @@ export class DashboardProductComponent {
     "sell",
     "sold",
     true,
-    false,
+    "pending",
     "Unethical content",
     false,
     "");

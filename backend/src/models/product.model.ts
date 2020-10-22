@@ -94,9 +94,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 defaultValue: true
             },
             adminApproval: {
-                type: DataTypes.BOOLEAN,
+                type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: false
+                defaultValue: 'pending'
             },
             disapprovalMsg: {
                 type: DataTypes.STRING
