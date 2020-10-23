@@ -46,6 +46,7 @@ import { PostedComponent } from './user-account/user-dashboard/posted/posted.com
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
 import { ProductList } from './models/product-list.model';
 import { EdititemComponent } from './user-account/user-dashboard/edititem/edititem.component';
+import {AdminModule} from "./admin/admin.module";
 
 
 
@@ -103,6 +104,7 @@ import { EdititemComponent } from './user-account/user-dashboard/edititem/editit
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
+    AdminModule,
   ],
   providers: [
     [AuthGuardService],

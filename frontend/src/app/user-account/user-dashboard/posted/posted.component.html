@@ -15,7 +15,7 @@
               <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
             </mat-card-content>
             <mat-card-actions>
-<button mat-button (click)="removeitem(product)" >REMOVE</button>
+<button mat-button (click)="onProductDelete(product)" >REMOVE</button>
   <button mat-button [routerLink]="['/edititem', product.productId]">EDIT</button>
               </mat-card-actions>
           </mat-card>

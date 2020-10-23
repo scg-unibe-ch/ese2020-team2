@@ -133,7 +133,7 @@ confirm(product: Product): void {
     typ: product.type,
     title: product.title,
     price: product.price,
-    description: product.price,
+    description: product.description,
     location: product.location,
     sellOrlend: product.sellOrlend,
     deliveryPossible: product.deliveryPossible,

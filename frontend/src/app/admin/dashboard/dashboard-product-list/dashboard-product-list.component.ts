@@ -26,6 +26,10 @@ export class DashboardProductListComponent {
 
 
   ngOnInit(): void {
+    this.getAllProducts();
+  }
+
+  getAllProducts(): void {
     this.productList$ = this.productsService.getProducts();
   }
 

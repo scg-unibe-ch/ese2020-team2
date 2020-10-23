@@ -20,8 +20,30 @@ productList: ProductList;
   product: Product;
 
 
+
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
+    this.getAllProducts();
+  }
+
+  getAllProducts(): void {
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter(product => product.visibleInMarket === true)));
+  }
+
+  /**
+   * Filters all the products regarding their type status.
+   *
+   * @param type
+   */
+  filterProducts(type: string): void{
+    if (type !== null) {
+      this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter(product => product.type === type && product.visibleInMarket === true)))
+    }
+    else {
+      this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter(product => product.visibleInMarket === true)))
+    }
   }
 
 
@@ -62,7 +84,7 @@ productList: ProductList;
     }).subscribe();
   }
 
-  
+
   constructor(private httpClient: HttpClient,
     private authService: AuthService,
     private productsService: ProductsService) { authService.loggedIn$.subscribe((nextValue) => {

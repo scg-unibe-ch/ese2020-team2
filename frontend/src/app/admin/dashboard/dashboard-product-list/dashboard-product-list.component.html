@@ -1,15 +1,14 @@
-<mat-toolbar style=" background-color: rgba(48, 129, 129, 0.781); height: 4%;" >
-  <div>FILTER:</div>
-  <button mat-button [ngClass]="{red: filter === null}"(click)="filterProducts(filter = null)">All</button>
-  <button mat-button [ngClass]="{red: filter === Approval.approved}" (click)="filterProducts(filter = Approval.approved)">Approved</button>
-  <button mat-button [ngClass]="{red: filter === Approval.pending}"(click)="filterProducts(filter = Approval.pending)">Pending</button>
-  <button mat-button [ngClass]="{red: filter === Approval.rejected}"(click)="filterProducts(filter = Approval.rejected)">Rejected</button>
+<mat-toolbar style=" background-color: rgba(255,255,255,0.78); height: 4%;" >
+  <div>FILTER: </div>
+  <button mat-button [ngClass]="{'bg-yellow': filter === null}"(click)="filterProducts(filter = null)">All</button>
+  <button mat-button [ngClass]="{'bg-green': filter === Approval.approved}" (click)="filterProducts(filter = Approval.approved)">Approved</button>
+  <button mat-button [ngClass]="{'bg-blue': filter === Approval.pending}"(click)="filterProducts(filter = Approval.pending)">Pending</button>
+  <button mat-button [ngClass]="{'bg-red': filter === Approval.rejected}"(click)="filterProducts(filter = Approval.rejected)">Rejected</button>
 
 </mat-toolbar>
 <div class="outer">
 
   <div class="inner">
-
 
     <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
 
@@ -22,7 +21,7 @@
             <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
 
-          <img mat-card-image src="./../assets/images/mountains.jpg">
+          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
           <mat-card-content>
             <p>{{product.description}}</p>
             <p>
@@ -45,7 +44,7 @@
             <mat-form-field>
               <input matInput placeholder="Rejection message" [(ngModel)]="product.disapprovalMsg" name="name">
             </mat-form-field>
-            <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit">Confirm</button>
+            <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit" style="color: black">Confirm</button>
           </mat-card-actions>
         </mat-card>
       </div>

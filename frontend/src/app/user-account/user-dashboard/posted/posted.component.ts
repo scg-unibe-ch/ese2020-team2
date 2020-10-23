@@ -4,11 +4,12 @@ import { ProductList } from 'src/app/models/product-list.model';
 import { Product } from 'src/app/models/product.model';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
-import {map} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import { Routes } from '@angular/router';
 import { EdititemComponent } from '../edititem/edititem.component';
 import { environment } from 'src/environments/environment';
+import {TodoItem} from "../../../models/todo-item.model";
 
 
 @Component({
@@ -27,18 +28,30 @@ export class PostedComponent implements OnInit {
 
 }
 
-
   ngOnInit(): void {
+    this.getAllProducts()
+  }
+
+  /**
+   *
+   */
+  getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
         products.filter( product => product.status === "posted" )
       )
     );
   }
 
-  removeitem(product: Product): void {
-    this.httpClient.put(environment.endpointURL + 'product/delete' + product.productId, {
-    }).subscribe();
+  /**
+   * Deletes a product and updates the product list from the backend.
+   *
+   * @param product, that will be deleted
+   */
+  onProductDelete(product: Product): void{
+    this.httpClient.delete(environment.endpointURL + 'product/delete/' + product.productId).pipe(
+      finalize(() => this.getAllProducts())).subscribe()
   }
+
 
 
 }

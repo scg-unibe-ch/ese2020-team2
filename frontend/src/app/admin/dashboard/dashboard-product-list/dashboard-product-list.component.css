@@ -8,7 +8,7 @@
   padding-left: 2%;
 }
 .red {
-  background-color: red;
+  background-color: #f34e4e;
 }
 mat-button-toggle-group {
   margin-left: 0px;
@@ -28,4 +28,8 @@ mat-button-toggle-group {
 
 .bg-blue {
   background-color: #7fdaec !important;
+}
+
+.bg-yellow {
+  background-color: #E7AF5F !important;
 }
