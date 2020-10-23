@@ -44,13 +44,13 @@ export class LendItemComponent implements OnInit {
 
       type: ["", Validators.required],
       title: ["", Validators.required],
-      userName: ["dkdkd"],
-      price: [0, Validators.required],
+      userName: [localStorage.getItem('userName')],
+      price: [, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
       sellOrlend: ["", Validators.required],
       status: ["posted"],
-      deliveryPossible: [false, Validators.required],
+      deliveryPossible: [, Validators.required],
       pricedur: ["",],
     });
 
@@ -82,10 +82,7 @@ prices: PriceDur[] = [
   ngOnInit(): void {
   }
 
-  get visibleInMarket() { return this.formular.get("visibleInMarket") };
-  get disapprovalMsg() { return this.formular.get("disapprovalMsg") };
-  get userName() { return this.formular.get("userName") };
-  get adminApproval() { return this.formular.get("adnminApproval") };
+  
   get typ() { return this.formular.get("type") };
   get title() { return this.formular.get("title") };
   get price() { return this.formular.get("price") };
@@ -106,6 +103,8 @@ prices: PriceDur[] = [
 }
 clear() {
   this.formular.reset();
+  this.formular.controls['userName'].setValue(localStorage.getItem('userName'));
+  this.formular.controls['status'].setValue("posted");
   //this.username.setValue("");
 }
 

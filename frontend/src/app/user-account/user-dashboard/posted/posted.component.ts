@@ -21,7 +21,6 @@ export class PostedComponent implements OnInit {
   productList: ProductList;
   products$: Observable<Product[]>;
   product: Product;
-  
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private users: CurrentUser) {

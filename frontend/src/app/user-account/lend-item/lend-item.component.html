@@ -26,7 +26,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="type" placeholder="Type">
+          <mat-select formControlName="type" type="text" placeholder="Type">
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{type.display}}
             </mat-option>
@@ -34,7 +34,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="sellOrlend" placeholder="Sell/Lend">
+          <mat-select formControlName="sellOrlend" type="text" placeholder="Sell/Lend">
             <mat-option *ngFor="let contract of contracts" [value]="contract.value">
               {{contract.display}}
             </mat-option>
@@ -42,7 +42,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="deliveryPossible" placeholder="Delivery">
+          <mat-select formControlName="deliveryPossible" type="boolean" placeholder="Delivery">
             <mat-option *ngFor="let delivery of deliverys" [value]="delivery.value">
               {{delivery.display}}
             </mat-option>
@@ -50,7 +50,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input required matInput placeholder="Price" type="text" formControlName="price" id="price">
+          <input required matInput placeholder="Price" type="number" formControlName="price" id="price">
           <mat-error *ngIf="price.invalid">Price is required</mat-error>
         </mat-form-field>
 
