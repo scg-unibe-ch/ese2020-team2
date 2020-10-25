@@ -13,6 +13,7 @@ import {NotFoundComponent} from "./error/not-found/not-found.component";
 import { Catalog2Component } from './catalog2/catalog2.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
+import {AdminComponent} from "./admin/admin.component";
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'catalog2', component: Catalog2Component },
   {
     path: 'admin',
+    component: AdminComponent,
     canLoad: [AuthGuardService],
     canActivate: [AuthGuardService],
     data: {

@@ -17,11 +17,13 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {FlexModule} from "@angular/flex-layout";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { AdminComponent } from './admin.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardProductListComponent,
+    AdminComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

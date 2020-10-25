@@ -22,10 +22,10 @@ export class AppComponent implements OnInit{
   /**
    * Checks if user is logged in and updates the login status of the user
    */
-  ngOnInit() {
+   ngOnInit() {
     this.authService.login = !!(localStorage.getItem('userToken'));
   }
-  get isAdmin() {
+   get isAdmin() {
     return this.authService.hasRole(Role.Admin);
   }
 }

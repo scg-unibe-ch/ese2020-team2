@@ -15,9 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class Catalog2Component implements OnInit {
   loggedIn$ = false;
-productList: ProductList;
   products$: Observable<Product[]>;
-  product: Product;
 
 
 
