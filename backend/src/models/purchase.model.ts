@@ -63,7 +63,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
 
             },
             deliveryAddress: {
-                type: DataTypes.STRING(256)
+                type: DataTypes.STRING
             },
             paymentType: {
                 type: DataTypes.STRING,
