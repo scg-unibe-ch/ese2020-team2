@@ -11,7 +11,7 @@ export interface ProductAttributes {
     // Title of the product
     title: string;
     // Name of the user who created the product/service
-     userName: string;
+    userName: string;
     // Price in points
     price: number;
     // Product description
@@ -24,8 +24,9 @@ export interface ProductAttributes {
     status: string;
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
-    // Approval from the Admin. False by default. Changes when the admin approved
-    adminApproval: boolean;
+    // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected
+    // Allowed inputs: (approved, rejected, pending)
+    adminApproval: string;
     // Reason message in case of disapproval by admin.
     disapprovalMsg: string;
     // Product visibility in market place. True by default
@@ -45,7 +46,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     sellOrlend!: string;
     status!: string;
     deliveryPossible!: boolean;
-    adminApproval!: boolean;
+    adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
 
