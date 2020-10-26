@@ -1,2 +1,100 @@
 <hr>
 <h1> Welcome to the ESE-Project of Team 2</h1>
+<p *ngIf = "!(loggedIn$)">
+Hello, if you are not new to the website, go on with your journy.<br>
+Otherwise this little guide can help you better understand how our website works.
+</p>
+<h2>How to use the website</h2>
+<p>
+    As you can see there are some buttons on the top of the website. And you can do the followings by clicking each of them:</p>
+<dl>
+     <dt>
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Home" class="btn btn-success" btn btn-success routerLink="/home">
+            <mat-icon>home</mat-icon>
+        </button>
+    </dt>
+    <dd>
+        This is the homepage button, here you can find some guide to better use the website.
+    </dd>
+    <dt *ngIf = "!(loggedIn$ )">
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" User Registration" class="btn btn-success" routerLink="/register">
+            <mat-icon>assignment</mat-icon>
+          </button>
+    </dt>
+    <dd *ngIf = "!(loggedIn$ )">
+        This is the user registration button. Here you can register yourself and create an account for our website.<br>
+        With an account you can buy, lend and sell pruducts and buy and lend servicises. <br>
+        Because we are generouss, your account will start with 100 money, which you can spend however you want in our website.<br>
+        That said, some content are nor allowed on our website, so whenever you post products or servicises, they must be in line with our policies.
+    </dd>
+    <dt>
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog2">
+            <mat-icon>credit_card</mat-icon>
+          </button>
+    </dt>
+    <dd>
+        This is our catalog, here you can search for products and servicises. If you are logged in, you can also buy or rent them. <br>
+        If you are not logged in, you can still see what there is on the market, but you have to be logged in to buy or rent.
+    </dd>
+    <dt>
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+            <mat-icon>forward</mat-icon>
+         </button>
+    </dt>
+    <dd>
+        This is the loggin botton, here you can loggin, reset the password or access the "Secure Endpoint" (only if logged in).
+    </dd>
+    <dt *ngIf = "(loggedIn$)">
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" class="btn btn-success" routerLink="/account">
+            <mat-icon>archive</mat-icon>
+          </button>
+    </dt>
+    <dd *ngIf = "(loggedIn$)">
+        By clicking this button you can access informations about your account, such:
+        <dl>
+            <dt>
+                <mat-tab label="Wallet">
+                    <app-wallet></app-wallet>
+                  </mat-tab>
+            </dt>
+            <dd>
+                This is your wallet, you can check here how many money you have in your account.
+            </dd>
+            <dt>
+                <mat-tab label="Post Item">
+                    <app-lend-item></app-lend-item>
+                  </mat-tab>
+            </dt>
+            <dd>
+                From this tab you can post items. It is required a title, description, the location of the item, what type of item is your post about, <br>
+                you are selling or lending, if you can deliver it to the end custumer and the price.
+            </dd>
+            <dt>
+                 <mat-tab label="Dashboard">
+                    <app-user-dashboard></app-user-dashboard>
+                  </mat-tab>  
+            </dt>
+            <dd>
+                Here you can see what are your product and services. From here you can edit, delete or just check your products or services.
+            </dd>
+        </dl>
+    </dd>
+    
+    <dt *ngIf = "(loggedIn$)">
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" class="btn btn-success" routerLink="/login">
+            <mat-icon>clear</mat-icon>
+          </button>          
+    </dt>
+    <dd *ngIf = "(loggedIn$)">
+        This is the loggout button, it logs out your account
+    </dd>
+    <dt *ngIf = "(isAdmin)">
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Administrator" class="btn btn-success" routerLink="/admin/dashboard">
+            Administrator
+          </button>         
+    </dt>
+    <dd *ngIf = "(isAdmin)">
+        As the admin you can acess your dashboard, where you can exercise your power as Administrator.<br>
+        You can accept post of the other users or rejcet them and send a "rejcetion message", in which you write to the user what he did wrong.
+    </dd>
+</dl>
