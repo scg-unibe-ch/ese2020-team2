@@ -14,7 +14,7 @@ export interface DeliveryPossible {
   value: boolean;
   display: string;
 }
-export interface SellOrLend {
+export interface Duration {
   value: string;
   display: string;
 }
@@ -23,12 +23,14 @@ export interface PriceDur {
   display: string;
 }
 
+
 @Component({
   selector: 'app-lend-item',
   templateUrl: './lend-item.component.html',
   styleUrls: ['./lend-item.component.css']
 })
 export class LendItemComponent implements OnInit {
+
   constructor(
     private router: Router,
     public snackBar: MatSnackBar,
@@ -37,7 +39,7 @@ export class LendItemComponent implements OnInit {
     private fb: FormBuilder) { }
     selectedValue: string;
 
-  formular = this.fb.group(
+  lendformular = this.fb.group(
     {
 
 
@@ -48,11 +50,11 @@ export class LendItemComponent implements OnInit {
       price: [, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrlend: ["", Validators.required],
+      sellOrlend: ["lend", Validators.required],
+      duration: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [, Validators.required],
-      piecesAvailable: [, Validators.required],
-      pricedur: ["",],
+      piecesAvailable: [0, Validators.required],
 
     });
 
@@ -69,9 +71,9 @@ export class LendItemComponent implements OnInit {
  ];
 
 
-contracts: SellOrLend[] = [
-  {value: 'sell', display: 'Sell'},
-  {value: 'lend', display: 'Lend'}
+durations: Duration[] = [
+  {value: '/hour', display: '/Hour'},
+  {value: '/day', display: '/Day'}
 ];
 
 prices: PriceDur[] = [
@@ -85,29 +87,30 @@ prices: PriceDur[] = [
   }
 
   
-  get typ() { return this.formular.get("type") };
-  get title() { return this.formular.get("title") };
-  get price() { return this.formular.get("price") };
-  get description() { return this.formular.get("description") };
-  get location() { return this.formular.get("location") };
-  get sellOrlend() { return this.formular.get("sellOrlend") };
-  get status() { return this.formular.get("status") };
-  get deliveryPossible() { return this.formular.get("deliveryPossible") };
-  get piecesAvailable() { return this.formular.get("piecesAvailable") };
+  get typ() { return this.lendformular.get("type") };
+  get title() { return this.lendformular.get("title") };
+  get price() { return this.lendformular.get("price") };
+  get description() { return this.lendformular.get("description") };
+  get location() { return this.lendformular.get("location") };
+  get duration() { return this.lendformular.get("duration") };
+  get sellOrlend() { return this.lendformular.get("sellOrlend") };
+  get status() { return this.lendformular.get("status") };
+  get deliveryPossible() { return this.lendformular.get("deliveryPossible") };
+  get piecesAvailable() { return this.lendformular.get("piecesAvailable") };
 
 
   post() {
     this.httpClient.post(environment.endpointURL + 'product/add',
-      this.formular.value).subscribe((res: any) => {
+      this.lendformular.value).subscribe((res: any) => {
       this.openSnackBar('You successfully posted!', '');
     }, (error: any) => {
       this.openSnackBar('Posting was not possible, please try again', '');
     }); 
 }
 clear() {
-  this.formular.reset();
-  this.formular.controls['userName'].setValue(localStorage.getItem('userName'));
-  this.formular.controls['status'].setValue("posted");
+  this.lendformular.reset();
+  this.lendformular.controls['userName'].setValue(localStorage.getItem('userName'));
+  this.lendformular.controls['status'].setValue("posted");
   //this.username.setValue("");
 }
 

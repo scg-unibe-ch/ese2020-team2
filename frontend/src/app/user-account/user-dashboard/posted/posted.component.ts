@@ -37,7 +37,7 @@ export class PostedComponent implements OnInit {
    */
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.status === "posted" )
+        products.filter( product => product.status === "posted" && product.userName === localStorage.getItem('userName'))
       )
     );
   }

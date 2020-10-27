@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LendItemComponent } from './lend-item.component';
+import { PostItemComponent } from './post-item.component';
 
-describe('LendItemComponent', () => {
-  let component: LendItemComponent;
-  let fixture: ComponentFixture<LendItemComponent>;
+describe('PostItemComponent', () => {
+  let component: PostItemComponent;
+  let fixture: ComponentFixture<PostItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LendItemComponent ]
+      declarations: [ PostItemComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LendItemComponent);
+    fixture = TestBed.createComponent(PostItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,3 +23,5 @@ describe('LendItemComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+

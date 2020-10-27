@@ -20,7 +20,7 @@ purchaseController.post('/add/',
         } = req.body;
 
         const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
+        const user = await User.findOne({ where: { userName: req.body.buyingUserName } });
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
         if (user && product && user.moneyInWallet >= product.price * quantity && product.piecesAvailable >= quantity) {
             const { purchaseId } = await Purchase.create(req.body);
@@ -42,10 +42,10 @@ purchaseController.post('/add/',
     The wallet of the buyer os decremented and the wallet of the seller is incremented.*/
     async function updateUserWallets (req: Request, res: Response) {
         const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
+        const user = await User.findOne({ where: { userName: req.body.buyingUserName } });
         // Following code is to decrement the walletpoints in buyer wallet.
         let walletPoints = (user.moneyInWallet) - (product.price * req.body.quantity);
-        User.findByPk(req.body.buyingUserId)
+        User.findByPk(req.body.buyingUserName)
             .then(found => {
                 if (found != null) {
                     found.update({ moneyInWallet: walletPoints });
@@ -71,7 +71,7 @@ purchaseController.post('/add/',
         const availableProducts = product.piecesAvailable - req.body.quantity;
         let availabilityStatus = '';
         if (availableProducts > 0 ) {
-            availabilityStatus = 'available';
+            availabilityStatus = 'posted';
         } else if (availableProducts === 0 ) {
             if (product.type === 'product') {
                 availabilityStatus = 'sold';
@@ -80,7 +80,7 @@ purchaseController.post('/add/',
                 availabilityStatus = 'lent';
             }
         } else {
-            res.send('Olny ' + availableProducts + ' pieces of this product are available.');
+            res.send('Only ' + availableProducts + ' pieces of this product are available.');
         }
         Product.findByPk(req.body.productId)
             .then(found => {
@@ -94,7 +94,7 @@ purchaseController.post('/add/',
 
     purchaseController.get('/getAllUserPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({where: {buyingUserId:  req.params.id}})
+        Purchase.findAll({where: {buyingUserName:  req.params.id}})
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
     });

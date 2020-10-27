@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { environment } from 'src/environments/environment';
 
 export interface Type {
   value: string;
@@ -14,9 +14,9 @@ export interface DeliveryPossible {
   value: boolean;
   display: string;
 }
-export interface SellOrLend {
-  value: string;
-  display: string;
+export interface PiecesAvailable {
+  value: number;
+  display: number;
 }
 export interface PriceDur {
   value: string;
@@ -49,7 +49,7 @@ export class SellItemComponent implements OnInit {
       price: [, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrlend: ["", Validators.required],
+      sellOrlend: ["sell", Validators.required],
       status: ["posted"],
       deliveryPossible: [, Validators.required],
       piecesAvailable: [, Validators.required],
@@ -70,9 +70,24 @@ export class SellItemComponent implements OnInit {
  ];
 
 
-contracts: SellOrLend[] = [
-  {value: 'sell', display: 'Sell'},
-  {value: 'lend', display: 'Lend'}
+ piecesAvailables: PiecesAvailable[] = [
+  {value: 1, display: 1},
+  {value: 2, display: 2},
+  {value: 3, display: 3},
+  {value: 4, display: 4},
+  {value: 5, display: 5},
+  {value: 6, display: 6},
+  {value: 7, display: 7},
+  {value: 8, display: 8},
+  {value: 9, display: 9},
+  {value: 10, display: 10},
+  {value: 15, display: 15},
+  {value: 20, display: 20},
+  {value: 30, display: 30},
+  {value: 40, display: 40},
+  {value: 50, display: 50},
+  {value: 100, display: 100},
+
 ];
 
 prices: PriceDur[] = [

@@ -32,6 +32,7 @@ export interface ProductAttributes {
     // Reason message in case of disapproval by admin.
     disapprovalMsg: string;
     // Product visibility in market place. True by default
+
     visibleInMarket: boolean;
 }
 

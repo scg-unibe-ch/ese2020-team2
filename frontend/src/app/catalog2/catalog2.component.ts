@@ -18,6 +18,7 @@ import { CurrentUser } from '../services/current-user';
 export class Catalog2Component implements OnInit {
   loggedIn$ = false;
   products$: Observable<Product[]>;
+  buyingUserId = "";
 
 
 
@@ -66,12 +67,11 @@ export class Catalog2Component implements OnInit {
   }
 
   buy(product: Product): void {
-    this.httpClient.put(environment.endpointURL + 'purchase/add/', {
+    this.httpClient.post(environment.endpointURL + 'purchase/add/', {
       productId: product.productId,
       quantity: 1,
-      buyingUserId: this.users.getCurrentUserProperty('userId'),
-      deliveryAddress: this.users.getCurrentUserProperty("bipbip"),
-    }).subscribe();
+      buyingUserName: localStorage.getItem('userName'),
+      deliveryAddress: "kk"}).subscribe();
   }
 
 

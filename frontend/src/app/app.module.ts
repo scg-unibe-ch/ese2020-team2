@@ -38,12 +38,15 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
 import { PurchasedComponent } from './user-account/user-dashboard/purchased/purchased.component';
 import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
-import { PostItemComponent } from './user-account/user-post-item/post-item.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
 import { ProductList } from './models/product-list.model';
 import { EdititemComponent } from './user-account/user-dashboard/edititem/edititem.component';
 import {AdminModule} from "./admin/admin.module";
+import { PostItemComponent } from './user-account/post-item/post-item.component';
+import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
+import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
+import { from } from 'rxjs';
 
 
 
@@ -63,8 +66,11 @@ import {AdminModule} from "./admin/admin.module";
     Catalog2Component,
     PurchasedComponent,
     SoldComponent,
+    PostItemComponent,
     UserDashboardComponent,
     PostedComponent,
+    SellItemComponent,
+    LendItemComponent,
     LentComponent,
     EdititemComponent,
 
