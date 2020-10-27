@@ -18,9 +18,11 @@ export interface ProductAttributes {
     description: string;
     // Available location
     location: string;
-    // Sell or lend of product
+    // Type of purchase of the product. Sell or lend
     sellOrlend: string;
-    // Status if the product is available or already lent
+    // Number of items available
+    piecesAvailable: number;
+    // Status if the product is available or lent or soldout
     status: string;
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
@@ -44,6 +46,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     description!: string;
     location!: string;
     sellOrlend!: string;
+    piecesAvailable: number;
     status!: string;
     deliveryPossible!: boolean;
     adminApproval!: string;
@@ -85,9 +88,15 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            piecesAvailable: {
+                type: DataTypes.NUMBER,
+                allowNull: false,
+                defaultValue: 1
+            },
             status: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                defaultValue: 'available'
             },
             deliveryPossible: {
                 type: DataTypes.BOOLEAN,
@@ -106,7 +115,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: true
-            }
+            },
         },
             {
                 sequelize,
