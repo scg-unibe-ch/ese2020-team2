@@ -1,0 +1,25 @@
+dl {
+    display: flex;
+    flex-flow: row wrap;
+    border: solid rgba(8, 89, 164, 0.6);
+    border-width: 1px 1px 0 0;
+  }
+  dt {
+    flex-basis: 20%;
+    padding: 2px 4px;
+    background: rgba(8, 89, 164, 0.6);
+    text-align: right;
+    color: #fff;
+  }
+  dd {
+    flex-basis: 70%;
+    flex-grow: 1;
+    margin: 0;
+    padding: 2px 4px;
+    border-bottom: 1px solid rgba(8, 89, 164, 0.6);
+    background: rgba(255, 255, 255, 0.39);
+    color:  rgba(0, 0, 0, 1);
+  }
+  p {  
+    color:  rgba(0, 0, 0, 1);
+  }
