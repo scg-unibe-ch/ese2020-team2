@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import {CurrentUser} from "../../services/current-user";
+import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface Type {
@@ -51,7 +51,9 @@ export class LendItemComponent implements OnInit {
       sellOrlend: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [, Validators.required],
+      piecesAvailable: [, Validators.required],
       pricedur: ["",],
+
     });
 
 
@@ -91,6 +93,7 @@ prices: PriceDur[] = [
   get sellOrlend() { return this.formular.get("sellOrlend") };
   get status() { return this.formular.get("status") };
   get deliveryPossible() { return this.formular.get("deliveryPossible") };
+  get piecesAvailable() { return this.formular.get("piecesAvailable") };
 
 
   post() {

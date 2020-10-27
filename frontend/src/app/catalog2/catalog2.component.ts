@@ -70,7 +70,7 @@ export class Catalog2Component implements OnInit {
       productId: product.productId,
       quantity: 1,
       buyingUserId: this.users.getCurrentUserProperty('userId'),
-      deliveryAddress: this.users.getCurrentUserProperty("kdkdk"),
+      deliveryAddress: this.users.getCurrentUserProperty("bipbip"),
     }).subscribe();
   }
 

@@ -10,8 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './user-account/todo-lists/todo-list/todo-list.component';
-import { TodoItemComponent } from './user-account/todo-lists/todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -19,7 +17,6 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import {MatIconModule} from '@angular/material/icon';
 import { TestsignupComponent } from './testsignup/testsignup.component';
 import {UserAccountComponent} from "./user-account/user-account.component";
-import {ToDoListsComponent} from "./user-account/todo-lists/todo-lists.component";
 import {WalletComponent} from "./user-account/wallet/wallet.component";
 import { HomeComponent } from './home/home.component';
 import {MatSelectModule} from "@angular/material/select";
@@ -38,10 +35,10 @@ import { MatTableModule } from '@angular/material/table'
 import { DataSource } from '@angular/cdk/table';
 import { Catalog2Component } from './catalog2/catalog2.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { LendItemComponent } from './user-account/lend-item/lend-item.component';
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
 import { PurchasedComponent } from './user-account/user-dashboard/purchased/purchased.component';
 import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
+import { PostItemComponent } from './user-account/user-post-item/post-item.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
 import { ProductList } from './models/product-list.model';
@@ -54,12 +51,9 @@ import {AdminModule} from "./admin/admin.module";
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoItemComponent,
     UserLoginComponent,
     TestsignupComponent,
     UserAccountComponent,
-    ToDoListsComponent,
     WalletComponent,
     HomeComponent,
     CatalogComponent,
@@ -67,7 +61,6 @@ import {AdminModule} from "./admin/admin.module";
     UserRoleDirective,
     NotFoundComponent,
     Catalog2Component,
-    LendItemComponent,
     PurchasedComponent,
     SoldComponent,
     UserDashboardComponent,
@@ -115,7 +108,7 @@ import {AdminModule} from "./admin/admin.module";
     }
   ],
   exports: [
-    TodoListComponent,
+    
   ],
   bootstrap: [
     AppComponent
