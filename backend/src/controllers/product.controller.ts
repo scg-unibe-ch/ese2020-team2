@@ -1,12 +1,7 @@
 import express from 'express';
-<<<<<<< HEAD
-import { Router, Request, Response } from 'express';
-import { Product } from '../models/product.model';
-=======
 import { Router, Request, Response, RequestHandler } from 'express';
 import { Product } from '../models/product.model';
 import { Readable } from 'stream';
->>>>>>> 6db9ecac76c3d43155eb5f3c971e5e0d170d5640
 
 const productController: Router = express.Router();
 
@@ -20,10 +15,6 @@ productController.post('/add',
         .catch(err => res.status(500).send(err));
     });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6db9ecac76c3d43155eb5f3c971e5e0d170d5640
 /**
  * This Method enables to delete a product from the list of lend or sell products.
  *
@@ -35,11 +26,7 @@ productController.delete('/delete/:id', (req: Request, res: Response) => {
             if (found != null) {
                 found.destroy().then(() => res.status(200).send('Product removed successfully.'));
             } else {
-<<<<<<< HEAD
-                res.sendStatus(404).send('Product not found.');
-=======
                 res.status(404).send('Product not found.');
->>>>>>> 6db9ecac76c3d43155eb5f3c971e5e0d170d5640
             }
         })
         .catch(err => res.status(500).send(err));
@@ -56,11 +43,7 @@ productController.put('/edit/:id', (req: Request, res: Response) => {
                     res.status(200).send('Product updated successfully.');
                 });
             } else {
-<<<<<<< HEAD
-                res.sendStatus(404).send('Product not found.');
-=======
                 res.status(404).send('Product not found.');
->>>>>>> 6db9ecac76c3d43155eb5f3c971e5e0d170d5640
             }
         })
         .catch(err => res.status(500).send(err));
@@ -91,11 +74,7 @@ productController.get('/get/:id',
                         .then(product => res.status(200).send(product))
                         .catch(err => res.status(500).send(err));
                 } else {
-<<<<<<< HEAD
-                    res.sendStatus(404).send('Product not found.');
-=======
                     res.status(404).send('Product not found.');
->>>>>>> 6db9ecac76c3d43155eb5f3c971e5e0d170d5640
                 }
             })
             .catch(err => res.status(500).send(err));

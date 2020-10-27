@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { ProductList } from '../models/product-list.model';
 import { Product } from '../models/product.model';
+import { Purchase } from '../models/purchase.model';
 import { ProductsService } from '../services/products.service';
 import {Observable} from "rxjs";
 import {filter, map} from "rxjs/operators";
@@ -28,21 +29,6 @@ export class Catalog2Component implements OnInit {
       products.filter(product => product.visibleInMarket === true)));
   }
 
-  /**
-   * Filters all the products regarding their type status.
-   *
-   * @param type
-   */
-  filterProducts(type: string): void{
-    if (type !== null) {
-      this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter(product => product.type === type && product.visibleInMarket === true)))
-    }
-    else {
-      this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter(product => product.visibleInMarket === true)))
-    }
-  }
 
 
 
@@ -76,9 +62,12 @@ export class Catalog2Component implements OnInit {
 
   }
 
-  buy(product: Product): void {
-    this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
-      purchasedby: localStorage.getItem('userName'),
+  buy(purchase: Purchase): void {
+    this.httpClient.put(environment.endpointURL + 'purchase/add/', {
+      userId: localStorage.getItem('userName'),
+      userId:
+      productId:
+      quantity:
     }).subscribe();
   }
 
