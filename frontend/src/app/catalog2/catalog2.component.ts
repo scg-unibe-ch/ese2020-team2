@@ -8,6 +8,7 @@ import { ProductsService } from '../services/products.service';
 import {Observable} from "rxjs";
 import {filter, map} from "rxjs/operators";
 import { environment } from 'src/environments/environment';
+import { CurrentUser } from '../services/current-user';
 
 @Component({
   selector: 'app-catalog2',
@@ -26,7 +27,7 @@ export class Catalog2Component implements OnInit {
 
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.visibleInMarket === true)));
+      products.filter(product => product.status === "posted" && product.visibleInMarket === true)));
   }
 
 
@@ -34,26 +35,28 @@ export class Catalog2Component implements OnInit {
 
   filterlend() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.sellOrlend === "lend" )
+      products.filter( product => product.sellOrlend === "lend" && product.status === "posted" && product.adminApproval === "approved")
     )
   );
   }
 
   filtersell() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.sellOrlend === "sell" )
+      products.filter( product => product.sellOrlend === "sell" && product.status === "posted" && product.adminApproval === "approved")
     )
   );
+
   }
   filterproducts() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.type === "product" )
+      products.filter( product => product.type === "product" && product.status === "posted" && product.adminApproval === "approved")
     )
   );
+
   }
   filterservices() {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => product.type === "service" )
+      products.filter( product => product.type === "service" && product.status === "posted" && product.adminApproval === "approved")
     )
   );
   }
@@ -62,23 +65,22 @@ export class Catalog2Component implements OnInit {
 
   }
 
-  buy(purchase: Purchase): void {
+  buy(product: Product): void {
     this.httpClient.put(environment.endpointURL + 'purchase/add/', {
-      userId: localStorage.getItem('userName'),
-      userId:
-      productId:
-      quantity:
+      productId: product.productId,
+      quantity: 1,
+      buyingUserId: this.users.getCurrentUserProperty('userId'),
+      deliveryAddress: this.users.getCurrentUserProperty("kdkdk"),
     }).subscribe();
   }
 
 
   constructor(private httpClient: HttpClient,
     private authService: AuthService,
+    private users: CurrentUser,
     private productsService: ProductsService) { authService.loggedIn$.subscribe((nextValue) => {
       this.loggedIn$ = nextValue;  // this will happen on every change
     })}
 
 
-
-
-}
+  }

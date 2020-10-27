@@ -1,6 +1,4 @@
 export class Purchase {
-
-    //Has to be extended
       constructor(
     
     
