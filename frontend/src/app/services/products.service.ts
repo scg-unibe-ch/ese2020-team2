@@ -1,11 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../../../../backend/src/models/user.model";
 import {Product} from "../models/product.model";
-import {Approval} from "../models/approval";
-import {ProductList} from "../models/product-list.model";
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,10 +13,12 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Get all the products from the backend.
+   *
+   * @return Observable<Product[]>, all the products that are currently in the database of the backend.
+   */
   getProducts() : Observable<Product[]> {
      return this.httpClient.get<Product[]>(environment.endpointURL + 'product/getAll')
   }
-
-
-
 }

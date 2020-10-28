@@ -24,13 +24,13 @@ const routes: Routes = [
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'edititem/:id', component: EdititemComponent, canActivate: [AuthGuardService]},
   { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuardService]},
-  { path: 'catalog', component: CatalogComponent },
-  { path: 'catalog2', component: Catalog2Component },
+  { path: 'catalog', component: CatalogComponent},
+  { path: 'catalog2', component: Catalog2Component},
   {
     path: 'admin',
     component: AdminComponent,
-    canLoad: [AuthGuardService],
     canActivate: [AuthGuardService],
+    canLoad: [AuthGuardService],
     data: {
       roles: [
         Role.Admin,
@@ -39,7 +39,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   // This line has to be at the very bottom, otherwise every route below does not work.
-  { path: "**", component: NotFoundComponent },
+  { path: "**", component: NotFoundComponent},
 
 ];
 

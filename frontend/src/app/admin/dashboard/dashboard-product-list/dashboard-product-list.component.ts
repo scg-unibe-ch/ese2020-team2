@@ -1,13 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment} from "../../../../environments/environment";
 import {Product} from "../../../models/product.model";
-import {ProductList} from "../../../models/product-list.model";
 import {Observable} from "rxjs";
-import {TodoItem} from "../../../models/todo-item.model";
-import {TodoList} from "../../../models/todo-list.model";
 import {ProductsService} from "../../../services/products.service";
-import {map} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 import {Approval} from "../../../models/approval";
 
 @Component({
@@ -29,6 +26,9 @@ export class DashboardProductListComponent {
     this.getAllProducts();
   }
 
+  /**
+   * Get all the products currently stored in the database of the backend
+   */
   getAllProducts(): void {
     this.productList$ = this.productsService.getProducts();
   }
@@ -62,9 +62,7 @@ export class DashboardProductListComponent {
     this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
       adminApproval: product.adminApproval,
       disapprovalMsg: product.disapprovalMsg,
-    }).subscribe();
-
-    this.filterProducts(this.filter)
+    }).pipe(finalize(() => this.filterProducts(this.filter))).subscribe();
   }
 
 }
