@@ -51,7 +51,12 @@ export class PostedComponent implements OnInit {
     this.httpClient.delete(environment.endpointURL + 'product/delete/' + product.productId).pipe(
       finalize(() => this.getAllProducts())).subscribe()
   }
-
+  changeVisibleInMarket(product: Product): void {
+    product.visibleInMarket= !(product.visibleInMarket);
+    this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
+     visibleInMarket: product.visibleInMarket
+    }).subscribe();
+  }
 
 
 }
