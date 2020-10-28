@@ -5,4 +5,5 @@
   .outer {
     overflow:scroll;
     overflow-x: hidden;
+    height: 50%;
   }

@@ -30,7 +30,7 @@ export class Catalog2Component implements OnInit {
 
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.status === "posted" && product.visibleInMarket === true)));
+      products.filter(product => product.status === "posted")));
   }
 
 
