@@ -1,0 +1,72 @@
+<form [formGroup]="lendformular">
+
+    <!-- first mat card with required inputs-->
+    <!-- i dont understand how i can add elevation in css so i had to style it here-->
+  
+    <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
+      <mat-card-title>Required Fields</mat-card-title>
+      <div class="form-group">
+  
+         <!-- first row of required inputs-->
+  
+        <mat-form-field>
+          <input style="font-size: large;" required matInput placeholder="Title" type="text"
+            formControlName="title" id="title">
+          <mat-error *ngIf="title.invalid"> title is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input required matInput placeholder="Description" type="text" formControlName="description" id="description">
+          <mat-error *ngIf="description.invalid">Description is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input required matInput placeholder="Location" type="text" formControlName="location" id="location">
+          <mat-error *ngIf="location.invalid">Location is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select formControlName="type" type="text" placeholder="Type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{type.display}}
+            </mat-option>
+          </mat-select> 
+        </mat-form-field>
+
+        
+
+        <mat-form-field>
+          <mat-select formControlName="deliveryPossible" type="boolean" placeholder="Delivery">
+            <mat-option *ngFor="let delivery of deliverys" [value]="delivery.value">
+              {{delivery.display}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input required matInput placeholder="Price" type="number" formControlName="price" id="price">
+          <mat-error *ngIf="price.invalid">Price is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select formControlName="duration" type="text" placeholder="$ :">
+              <mat-option *ngFor="let duration of durations" [value]="duration.value">
+                {{duration.display}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+       
+
+
+
+        
+
+      </div>
+    </mat-card>
+
+    <button class="btn btn-warning" (click)="post(); clear()" [disabled]="lendformular.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Post</button>
+    
+  </form>

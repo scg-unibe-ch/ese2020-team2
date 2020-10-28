@@ -1,0 +1,9 @@
+.outer {
+    overflow:scroll;
+    height: 80%;
+  }
+
+  .inner {
+    padding-right: 2%;
+    padding-left: 2%;
+  }

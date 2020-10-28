@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import {AuthService} from "../auth/auth.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {User} from "../models/user.model";
 
 
 @Component({
@@ -12,7 +13,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-
   userName = '';
   password = '';
   infoMessage = '';
@@ -34,7 +34,7 @@ export class UserLoginComponent implements OnInit {
   /**
    * Displays a message at the bottom of the screen
    *
-   * @param message, a string with the message to deisplay
+   * @param message, a string with the message to display
    * @param action
    */
   openSnackBar(message: string, action: string) {
@@ -62,11 +62,14 @@ export class UserLoginComponent implements OnInit {
    login(): void {
      this.httpClient.post(environment.endpointURL + 'user/login', {
       userName: this.userName,
-      password: this.password
+      password: this.password,
     }).subscribe((res: any) => {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
+      //Mocking the admin role!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      //res.user.role = "Admin";
+      localStorage.setItem('user', JSON.stringify(res.user));
       this.checkUserStatus();
       this.openSnackBar('You successfully logged in!', '')
     }, (error: any) => {
@@ -84,6 +87,7 @@ export class UserLoginComponent implements OnInit {
     // Remove user data from local storage
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
+    localStorage.removeItem('user');
 
     this.checkUserStatus();
     this.openSnackBar('You successfully logged out!', '')

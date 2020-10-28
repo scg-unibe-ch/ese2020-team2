@@ -10,9 +10,19 @@
 {
     font-size:large;
 }
- 
+
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.outer {
+  overflow:scroll;
+  height: 80%;
+}
+
+.inner {
+  padding-right: 2%;
+  padding-left: 2%;
 }
 
 
@@ -21,16 +31,16 @@
 
 body {
   background-image: url(https://iili.io/2hfKQV.jpg);
-  
+
 
   background-position: center center;
 
-  
+
   background-repeat: no-repeat;
-  
+
   background-attachment: fixed;
-  
+
   background-size: cover;
-  
+
   background-color: #464646;
 }

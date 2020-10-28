@@ -1,0 +1,35 @@
+.outer {
+  overflow:scroll;
+  height: 80%;
+}
+
+.inner {
+  padding-right: 2%;
+  padding-left: 2%;
+}
+.red {
+  background-color: #f34e4e;
+}
+mat-button-toggle-group {
+  margin-left: 0px;
+  margin-bottom: 15px;
+}
+/deep/ button, input {
+  margin-left: 0px !important;
+  margin-right: 15px !important;
+}
+.bg-red {
+  background-color: #f59292;
+}
+
+.bg-green {
+  background-color: #7fe57f;
+}
+
+.bg-blue {
+  background-color: #7fdaec !important;
+}
+
+.bg-yellow {
+  background-color: #E7AF5F !important;
+}

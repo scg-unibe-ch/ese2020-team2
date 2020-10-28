@@ -12,7 +12,7 @@ export interface PurchaseAttributes {
     // quantity or number of items purchsed
     quantity: number;
     // Name of the user who is buying the product.
-    buyingUserId: number;
+    buyingUserName: string;
     // Price in points
     deliveryAddress: string;
     // Type of payment. Allows 'Cash on Delivery' and 'wallet  points'.
@@ -27,7 +27,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     purchaseId!: number;
     productId!: number;
     quantity!: number;
-    buyingUserId!: number;
+    buyingUserName!: string;
     deliveryAddress!: string;
     paymentType!: string;
     walletPayment!: boolean;
@@ -53,8 +53,8 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 allowNull: false,
                 defaultValue: 1
             },
-            buyingUserId: {
-                type: DataTypes.NUMBER,
+            buyingUserName: {
+                type: DataTypes.STRING,
                 allowNull: false,
                 // references: {
                 //     model: 'User',

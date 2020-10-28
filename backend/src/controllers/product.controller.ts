@@ -15,7 +15,6 @@ productController.post('/add',
         .catch(err => res.status(500).send(err));
     });
 
-
 /**
  * This Method enables to delete a product from the list of lend or sell products.
  *

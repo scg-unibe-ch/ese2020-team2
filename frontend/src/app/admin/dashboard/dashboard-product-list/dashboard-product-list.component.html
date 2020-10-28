@@ -1,0 +1,54 @@
+<mat-toolbar style=" background-color: rgba(255,255,255,0.78); height: 4%;" >
+  <div>FILTER: </div>
+  <button mat-button [ngClass]="{'bg-yellow': filter === null}"(click)="filterProducts(filter = null)">All</button>
+  <button mat-button [ngClass]="{'bg-green': filter === Approval.approved}" (click)="filterProducts(filter = Approval.approved)">Approved</button>
+  <button mat-button [ngClass]="{'bg-blue': filter === Approval.pending}"(click)="filterProducts(filter = Approval.pending)">Pending</button>
+  <button mat-button [ngClass]="{'bg-red': filter === Approval.rejected}"(click)="filterProducts(filter = Approval.rejected)">Rejected</button>
+
+</mat-toolbar>
+<div class="outer">
+
+  <div class="inner">
+
+    <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
+
+      <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of productList$ | async">
+
+        <mat-card class="mat-elevation-z4">
+          <mat-card-title>{{product.title}}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-card-title *ngIf="product.sellOrlend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+          </mat-card-subtitle>
+
+          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+          <mat-card-content>
+            <p>{{product.description}}</p>
+            <p>
+              posted by: {{product.userName}}
+            </p>
+            <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-button-toggle-group #group="matButtonToggleGroup" [value]="product.adminApproval" (change)="product.adminApproval=group.value">
+              <mat-button-toggle  value="rejected" [ngClass]="{'bg-red':product.adminApproval === Approval.rejected}" >
+                Rejected
+              </mat-button-toggle>
+              <mat-button-toggle value="pending"[ngClass]="{'bg-blue':product.adminApproval === Approval.pending}" >
+                Pending
+              </mat-button-toggle>
+              <mat-button-toggle value="approved" [ngClass]="{'bg-green':product.adminApproval === Approval.approved}" >
+                Approved
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+            <mat-form-field>
+              <input matInput placeholder="Rejection message" [(ngModel)]="product.disapprovalMsg" name="name">
+            </mat-form-field>
+            <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit" style="color: black">Confirm</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+

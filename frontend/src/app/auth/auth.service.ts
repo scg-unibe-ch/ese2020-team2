@@ -1,5 +1,7 @@
 import {BehaviorSubject} from 'rxjs';
 import {Injectable} from "@angular/core";
+import {User} from "../models/user.model";
+import {Role} from "../models/role";
 
 @Injectable({providedIn: 'root'})
 
@@ -7,6 +9,7 @@ import {Injectable} from "@angular/core";
  * Keeps track if the user is logged in
  */
 export class AuthService {
+  private user: User;
 
   loggedIn$ = new BehaviorSubject<boolean>(this.login);
 
@@ -27,5 +30,12 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return !!(localStorage.getItem('userToken'));
   }
+
+  hasRole(role: string) {
+    return this.isAuthenticated() && JSON.parse(localStorage.getItem('user')).role === role;
+  }
+
+
+
 
 }

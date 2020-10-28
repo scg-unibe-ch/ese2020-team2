@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
+import {Role} from "../models/role";
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,31 @@ export class AuthGuardService implements CanActivate {
    *
    * @return true, if user is logged in, false if user is not logged in.
    */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean|UrlTree> | Promise<boolean|UrlTree> | boolean | UrlTree {
-    if (this.auth.isAuthenticated()) {
-      return true;
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    if (!this.auth.isAuthenticated()) {
+      this.router.parseUrl('login');
+      return false;
     }
 
-    this.router.parseUrl('/login');
-    return false;
+    const roles = route.data.roles as Role[];
+    if (roles && !roles.some(r => this.auth.hasRole(r))) {
+      this.router.parseUrl('error/not-found');
+      return false;
+    }
+
+    return true;
+  }
+  canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.auth.isAuthenticated()) {
+      return false;
+    }
+
+    const roles = route.data && route.data.roles as Role[];
+    if (roles && !roles.some(r => this.auth.hasRole(r))) {
+      return false;
+    }
+
+    return true;
   }
 }
