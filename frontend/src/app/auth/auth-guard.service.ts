@@ -17,7 +17,7 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private auth: AuthService, private router: Router) {
     auth.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn$ = nextValue;  // this will happen on every change
+      this.loggedIn$ = nextValue;
     })
   }
 
@@ -29,25 +29,33 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     if (!this.auth.isAuthenticated()) {
-      this.router.parseUrl('login');
+      this.router.navigate(['/login']);
       return false;
     }
 
     const roles = route.data.roles as Role[];
     if (roles && !roles.some(r => this.auth.hasRole(r))) {
-      this.router.parseUrl('error/not-found');
+      this.router.navigate(['/error/not-found']);
       return false;
     }
 
     return true;
   }
+
+  /**
+   * Checks if the user should be able to load this page.
+   *
+   * @param route, the route the user tries to access.
+   */
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.auth.isAuthenticated()) {
+      this.router.navigate(['login']);
       return false;
     }
 
     const roles = route.data && route.data.roles as Role[];
     if (roles && !roles.some(r => this.auth.hasRole(r))) {
+      this.router.navigate(['/error/not-found']);
       return false;
     }
 

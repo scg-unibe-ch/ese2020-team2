@@ -23,9 +23,9 @@ Otherwise this little guide can help you better understand how our website works
     </dt>
     <dd *ngIf = "!(loggedIn$ )">
         This is the user registration button. Here you can register yourself and create an account for our website.<br>
-        With an account you can buy, lend and sell pruducts and buy and lend servicises. <br>
-        Because we are generouss, your account will start with 100 money, which you can spend however you want in our website.<br>
-        That said, some content are nor allowed on our website, so whenever you post products or servicises, they must be in line with our policies.
+        With an account you can buy, lend and sell products and buy and lend services. <br>
+        Because we are generous, your account will start with 100 money, which you can spend however you want in our website.<br>
+        That said, some content are nor allowed on our website, so whenever you post products or services, they must be in line with our policies.
     </dd>
     <dt>
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog2">
@@ -72,18 +72,18 @@ Otherwise this little guide can help you better understand how our website works
             <dt>
                  <mat-tab label="Dashboard">
                     <app-user-dashboard></app-user-dashboard>
-                  </mat-tab>  
+                  </mat-tab>
             </dt>
             <dd>
                 Here you can see what are your product and services. From here you can edit, delete or just check your products or services.
             </dd>
         </dl>
     </dd>
-    
+
     <dt *ngIf = "(loggedIn$)">
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" class="btn btn-success" routerLink="/login">
             <mat-icon>clear</mat-icon>
-          </button>          
+          </button>
     </dt>
     <dd *ngIf = "(loggedIn$)">
         This is the loggout button, it logs out your account
@@ -91,7 +91,7 @@ Otherwise this little guide can help you better understand how our website works
     <dt *ngIf = "(isAdmin)">
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Administrator" class="btn btn-success" routerLink="/admin/dashboard">
             Administrator
-          </button>         
+          </button>
     </dt>
     <dd *ngIf = "(isAdmin)">
         As the admin you can acess your dashboard, where you can exercise your power as Administrator.<br>
