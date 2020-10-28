@@ -18,7 +18,9 @@ import { CurrentUser } from '../services/current-user';
 export class Catalog2Component implements OnInit {
   loggedIn$ = false;
   products$: Observable<Product[]>;
-  buyingUserId = "";
+  buyingUserId = localStorage.getItem('user');
+  userId = 5;
+  UserId = parseInt(this.buyingUserId[10]);
 
 
 
@@ -28,7 +30,7 @@ export class Catalog2Component implements OnInit {
 
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.status === "posted" && product.visibleInMarket === true)));
+      products.filter(product => product.status === "posted")));
   }
 
 
@@ -70,9 +72,12 @@ export class Catalog2Component implements OnInit {
     this.httpClient.post(environment.endpointURL + 'purchase/add/', {
       productId: product.productId,
       quantity: 1,
-      buyingUserName: localStorage.getItem('userName'),
+      buyingUserId: this.UserId,
       deliveryAddress: "kk"}).subscribe();
   }
+  refresh(): void {
+    window.location.reload();
+}
 
 
   constructor(private httpClient: HttpClient,

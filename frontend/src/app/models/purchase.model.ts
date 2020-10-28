@@ -6,6 +6,7 @@ export class Purchase {
         public quantity: number,
         public buyingUserId: number,
         public deliveryAddress: string,
+        public paymentType: string,
 
       ) {}
     }
