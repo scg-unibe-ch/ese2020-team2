@@ -3,11 +3,16 @@ import morgan from 'morgan';
 import { TodoItemController } from './controllers/todoitem.controller';
 import { TodoListController } from './controllers/todolist.controller';
 import { UserController } from './controllers/user.controller';
+import { ProductController } from './controllers/product.controller';
 import { SecuredController } from './controllers/secured.controller';
+import { PurchaseController } from './controllers/purchase.controller';
+import {AdminController } from './controllers/admin.controller';
 import { Sequelize } from 'sequelize';
 import { TodoList } from './models/todolist.model';
 import { TodoItem } from './models/todoitem.model';
 import { User } from './models/user.model';
+import { Product } from './models/product.model';
+import {Purchase } from './models/purchase.model';
 
 import cors from 'cors';
 
@@ -25,6 +30,8 @@ export class Server {
         TodoItem.createAssociations();
         TodoList.createAssociations();
         User.initialize(this.sequelize);
+        Product.initialize(this.sequelize);
+        setTimeout(() => {Purchase.initialize(this.sequelize); }, 5000);
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
             this.server.listen(this.port, () => {                                   // start server on specified port
@@ -56,6 +63,9 @@ export class Server {
             .use('/todoitem', TodoItemController)   // any request on this path is forwarded to the TodoItemController
             .use('/todolist', TodoListController)
             .use('/user', UserController)
+            .use('/product', ProductController)
+            .use('/admin', AdminController)
+            .use('/purchase', PurchaseController)
             .use('/secured', SecuredController)
             .options('*', cors(options))
             .use(express.static('./src/public'))
