@@ -115,7 +115,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             visibleInMarket: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
-                defaultValue: true
+                defaultValue: false
             },
         },
             {

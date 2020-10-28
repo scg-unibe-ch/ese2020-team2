@@ -13,10 +13,14 @@
             <mat-card-content>
               <p>{{product.description}}</p>
               <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
+              <p>{{product.adminApproval}}</p>
+              <p *ngIf="product.adminApproval =='rejected' && product.disapprovalMsg">Reason of rejection: {{product.disapprovalMsg}}</p>
             </mat-card-content>
             <mat-card-actions>
 <button mat-button (click)="onProductDelete(product)" >REMOVE</button>
   <button mat-button [routerLink]="['/edititem', product.productId]">EDIT</button>
+  <button *ngIf="product.visibleInMarket" mat-button (click)="changeVisibleInMarket(product)">MAKE NOT VISIBLE</button>
+  <button *ngIf="!(product.visibleInMarket)" mat-button (click)="changeVisibleInMarket(product)">MAKE VISIBLE</button>
               </mat-card-actions>
           </mat-card>
         </div>
