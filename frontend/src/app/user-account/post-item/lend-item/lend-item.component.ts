@@ -54,7 +54,7 @@ export class LendItemComponent implements OnInit {
       duration: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [, Validators.required],
-      piecesAvailable: [0, Validators.required],
+      piecesAvailable: [1, Validators.required],
 
     });
 
