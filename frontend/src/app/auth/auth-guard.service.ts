@@ -12,13 +12,11 @@ import {Role} from "../models/role";
  * Provides an authentication for route guards
  */
 export class AuthGuardService implements CanActivate {
+  private test: boolean;
 
-  loggedIn$ = false;
 
-  constructor(private auth: AuthService, private router: Router) {
-    auth.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn$ = nextValue;
-    })
+  constructor(private auth: AuthService,
+              private router: Router) {
   }
 
   /**
@@ -49,6 +47,8 @@ export class AuthGuardService implements CanActivate {
    */
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.auth.isAuthenticated()) {
+      //this.auth.CheckAccessToSecuredEndpoint();
+      this.test = !this.auth.isAuthenticated();
       this.router.navigate(['login']);
       return false;
     }

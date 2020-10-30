@@ -36,12 +36,12 @@
                   <p>Posted by: {{product.userName}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-button *ngIf = "(loggedIn$) && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit">BUY</button> 
-                    <button mat-button *ngIf = "(loggedIn$) && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit">RENT</button> 
-                    <button mat-button *ngIf = "(loggedIn$)">WISH</button>
-                    <p *ngIf = "!(loggedIn$)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
-                    <button mat-button *ngIf = "!(loggedIn$)"  routerLink="/login">TO LOGIN</button>
-                     <button mat-button *ngIf = "!(loggedIn$)" routerLink="/register">TO SIGN UP</button>
+                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit">BUY</button>
+                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit">RENT</button>
+                    <button mat-button *ngIf = "(loggedIn$ | async)">WISH</button>
+                    <p *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
+                    <button mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
+                     <button mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
                   </mat-card-actions>
               </mat-card>
             </div>

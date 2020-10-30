@@ -5,7 +5,7 @@ import { ProductList } from '../models/product-list.model';
 import { Product } from '../models/product.model';
 import { Purchase } from '../models/purchase.model';
 import { ProductsService } from '../services/products.service';
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {filter, map} from "rxjs/operators";
 import { environment } from 'src/environments/environment';
 import { CurrentUser } from '../services/current-user';
@@ -16,11 +16,18 @@ import { CurrentUser } from '../services/current-user';
   styleUrls: ['./catalog2.component.css']
 })
 export class Catalog2Component implements OnInit {
-  loggedIn$ = false;
-  products$: Observable<Product[]>;
+  loggedIn$: BehaviorSubject<boolean>;  products$: Observable<Product[]>;
   buyingUserId = localStorage.getItem('user');
   userId = 5;
-  UserId = parseInt(this.buyingUserId[10]);
+  UserId = JSON.parse(this.buyingUserId);
+
+  constructor(private httpClient: HttpClient,
+              private authService: AuthService,
+              private users: CurrentUser,
+              private productsService: ProductsService)
+  {
+    this.loggedIn$ = authService.loggedIn$
+  }
 
 
 
@@ -78,14 +85,6 @@ export class Catalog2Component implements OnInit {
   refresh(): void {
     window.location.reload();
 }
-
-
-  constructor(private httpClient: HttpClient,
-    private authService: AuthService,
-    private users: CurrentUser,
-    private productsService: ProductsService) { authService.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn$ = nextValue;  // this will happen on every change
-    })}
 
 
   }

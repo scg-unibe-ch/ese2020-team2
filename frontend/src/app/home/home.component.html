@@ -1,6 +1,6 @@
 <hr>
 <h1> Welcome to the ESE-Project of Team 2</h1>
-<p *ngIf = "!(loggedIn$)">
+<p *ngIf = "!(loggedIn$ | async)">
 Hello, if you are not new to the website, go on with your journy.<br>
 Otherwise this little guide can help you better understand how our website works.
 </p>
@@ -16,12 +16,12 @@ Otherwise this little guide can help you better understand how our website works
     <dd>
         This is the homepage button, here you can find some guide to better use the website.
     </dd>
-    <dt *ngIf = "!(loggedIn$ )">
+    <dt *ngIf = "!(loggedIn$ | async)">
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" User Registration" class="btn btn-success" routerLink="/register">
             <mat-icon>assignment</mat-icon>
           </button>
     </dt>
-    <dd *ngIf = "!(loggedIn$ )">
+    <dd *ngIf = "!(loggedIn$ | async)">
         This is the user registration button. Here you can register yourself and create an account for our website.<br>
         With an account you can buy, lend and sell products and buy and lend services. <br>
         Because we are generous, your account will start with 100 money, which you can spend however you want in our website.<br>
@@ -37,19 +37,19 @@ Otherwise this little guide can help you better understand how our website works
         If you are not logged in, you can still see what there is on the market, but you have to be logged in to buy or rent.
     </dd>
     <dt>
-        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$)" class="btn btn-success" routerLink="/login">
+        <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn btn-success" routerLink="/login">
             <mat-icon>forward</mat-icon>
          </button>
     </dt>
     <dd>
         This is the loggin botton, here you can loggin, reset the password or access the "Secure Endpoint" (only if logged in).
     </dd>
-    <dt *ngIf = "(loggedIn$)">
+    <dt *ngIf = "(loggedIn$ | async)">
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" class="btn btn-success" routerLink="/account">
             <mat-icon>archive</mat-icon>
           </button>
     </dt>
-    <dd *ngIf = "(loggedIn$)">
+    <dd *ngIf = "(loggedIn$ | async)">
         By clicking this button you can access informations about your account, such:
         <dl>
             <dt>
@@ -80,12 +80,12 @@ Otherwise this little guide can help you better understand how our website works
         </dl>
     </dd>
 
-    <dt *ngIf = "(loggedIn$)">
+    <dt *ngIf = "(loggedIn$ | async)">
         <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" class="btn btn-success" routerLink="/login">
             <mat-icon>clear</mat-icon>
           </button>
     </dt>
-    <dd *ngIf = "(loggedIn$)">
+    <dd *ngIf = "(loggedIn$ | async)">
         This is the loggout button, it logs out your account
     </dd>
     <dt *ngIf = "(isAdmin)">
