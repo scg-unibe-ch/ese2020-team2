@@ -46,8 +46,6 @@ export class AuthService implements OnInit{
    * @return ture or false, depending if user is logged in or not
    */
   public isAuthenticated(): Promise<boolean> {
-
-    //this.CheckAccessToSecuredEndpoint();
     return this.loggedIn$.toPromise();
   }
 
@@ -58,7 +56,12 @@ export class AuthService implements OnInit{
    * @return boolean, true if the user has the required role
    */
   hasRole(role: string) {
-    return this.isAuthenticated() && JSON.parse(localStorage.getItem('user'))?.role === role;
+    if(JSON.parse(localStorage.getItem('user'))?.role === null) {
+      return false
+    }
+    else {
+      return this.isAuthenticated() && JSON.parse(localStorage.getItem('user'))?.role === role;
+    }
   }
 
 }

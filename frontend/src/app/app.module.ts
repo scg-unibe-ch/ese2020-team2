@@ -32,7 +32,6 @@ import {UserDirective} from "./directives/user.directive";
 import {UserRoleDirective} from "./directives/user-role.directive";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
 import { MatTableModule } from '@angular/material/table'
-import { DataSource } from '@angular/cdk/table';
 import { Catalog2Component } from './catalog2/catalog2.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
@@ -40,16 +39,12 @@ import { PurchasedComponent } from './user-account/user-dashboard/purchased/purc
 import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
-import { ProductList } from './models/product-list.model';
 import { EdititemComponent } from './user-account/user-dashboard/edititem/edititem.component';
 import {AdminModule} from "./admin/admin.module";
 import { PostItemComponent } from './user-account/post-item/post-item.component';
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
-import { from } from 'rxjs';
-
-
-
+import { DetailedProductComponent } from './detailed-product/detailed-product.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +68,7 @@ import { from } from 'rxjs';
     LendItemComponent,
     LentComponent,
     EdititemComponent,
-
+    DetailedProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +109,7 @@ import { from } from 'rxjs';
     }
   ],
   exports: [
-    
+
   ],
   bootstrap: [
     AppComponent

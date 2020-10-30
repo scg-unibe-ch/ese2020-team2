@@ -14,6 +14,7 @@ import { Catalog2Component } from './catalog2/catalog2.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
 import {AdminComponent} from "./admin/admin.component";
+import {DetailedProductComponent} from "./detailed-product/detailed-product.component";
 
 
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuardService]},
   { path: 'catalog', component: CatalogComponent},
   { path: 'catalog2', component: Catalog2Component},
+  { path: 'product/:id', component: DetailedProductComponent},
+
   {
     path: 'admin',
     component: AdminComponent,

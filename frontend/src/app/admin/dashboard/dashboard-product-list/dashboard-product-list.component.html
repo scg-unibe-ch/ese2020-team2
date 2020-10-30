@@ -45,6 +45,9 @@
               <input matInput placeholder="Rejection message" [(ngModel)]="product.disapprovalMsg" name="name">
             </mat-form-field>
             <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit" style="color: black">Confirm</button>
+            <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Administrator" class="btn btn-success" [routerLink]="['/product', product.productId]">
+              Administrator
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
