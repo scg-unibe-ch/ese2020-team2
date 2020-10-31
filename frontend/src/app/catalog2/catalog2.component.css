@@ -8,3 +8,7 @@
     padding-right: 2%;
     padding-left: 2%;
   }
+
+  .flexExpand {
+    flex: 1 1 auto;
+  }
