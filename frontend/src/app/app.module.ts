@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Ng5SliderModule } from 'ng5-slider';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,6 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
@@ -73,16 +76,19 @@ import { DetailedProductComponent } from './detailed-product/detailed-product.co
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatSliderModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
     MatTableModule,
+    MatSlideToggleModule,
     FlexLayoutModule,
     MatListModule,
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
+    Ng5SliderModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,

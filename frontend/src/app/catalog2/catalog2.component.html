@@ -1,14 +1,20 @@
-<mat-toolbar style=" background-color: rgba(48, 129, 129, 0.781); height: 4%;" >
+
+
+<mat-toolbar style=" background-color: rgba(48, 129, 129, 0.781); height: 7%;" >
   <span>FILTER:</span>
   <button mat-button (click)="filtersell()">FOR SALE</button>
   <button mat-button (click)="filterlend()">TO RENT</button>
   <button mat-button (click)="filterproducts()">PRODUCTS</button>
   <button mat-button (click)="filterservices()">SERVICES</button>
 <span class="flexExpand"></span>
+
+
+<ng5-slider style="width: 20%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filterprice(minValue,maxValue)" [options]="options"></ng5-slider>
+<span class="flexExpand"></span>
 <span>
   <input type="text" [(ngModel)]="search">
 </span>
-<button (click)="searchsite(search)">Search</button>
+<button [disabled]="search == ''" (click)="searchsite(search)">Search</button>
 </mat-toolbar>
 
 <div class="outer">
@@ -28,26 +34,21 @@
 
                 <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
                 <mat-card-content>
-                  <div>Description:</div>
-                  <p>{{product.description}}</p>
                   <p>{{product.piecesAvailable}}</p>
                   <p>Location: {{product.location}}</p>
                   <p>Delivery: {{product.deliveryPossible}}</p>
-                  <p>{{product.productId}}</p>
-                  <p>{{userId}}</p>
-                  <p>Posted by: {{product.userName}}</p>
                 </mat-card-content>
                 <mat-card-actions>
                   <div style="text-align: center;">
                   <button mat-button [routerLink]="['/product', product.productId]" style="width: 20%;">VIEW</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">BUY</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">RENT</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 20%;">WISH</button>
+                    <button mat-button *ngIf = "loggedIn$ && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">BUY</button>
+                    <button mat-button *ngIf = "loggedIn$ && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">RENT</button>
+                    <button mat-button *ngIf = "loggedIn$" style="width: 20%;">WISH</button>
                   </div>
-                    <p *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
+                    <p *ngIf = "!loggedIn$" style="text-align: center; font-size: 120%;">Log in to buy item</p>
                     
-                    <button mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
-                     <button mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
+                    <button mat-button *ngIf = "!loggedIn$"  routerLink="/login">TO LOGIN</button>
+                     <button mat-button *ngIf = "!loggedIn$" routerLink="/register">TO SIGN UP</button>
                   </mat-card-actions>
               </mat-card>
             </div>
