@@ -1,7 +1,5 @@
 
-import { User, UserAttributes, UserCreationAttributes } from './user.model';
-import { Product, ProductAttributes, ProductCreationAttributes } from './product.model';
-import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 /*This is the Purchase model used to save the data about purchases*/
 export interface PurchaseAttributes {
@@ -9,16 +7,20 @@ export interface PurchaseAttributes {
     purchaseId: number;
     // Id of the product
     productId: number;
-    // quantity or number of items purchsed
+    // quantity or number of items purchased
     quantity: number;
     // Name of the user who is buying the product.
-    buyingUserId: number;
+    buyerUserId: number;
+    // Name of the user who is selling the product.
+    sellerUserId: number;
     // Price in points
     deliveryAddress: string;
     // Type of payment. Allows 'Cash on Delivery' and 'wallet  points'.
     paymentType: string;
     // True if the payment is done with wallet points.
     walletPayment: boolean;
+    // True if the User saw the Notification
+    notificationCheck: boolean;
 }
 
 export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes, 'purchaseId'> { }
@@ -27,10 +29,12 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     purchaseId!: number;
     productId!: number;
     quantity!: number;
-    buyingUserId!: number;
+    buyerUserId!: number;
+    sellerUserId!: number;
     deliveryAddress!: string;
     paymentType!: string;
     walletPayment!: boolean;
+    notificationCheck!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         Purchase.init({
@@ -53,7 +57,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 allowNull: false,
                 defaultValue: 1
             },
-            buyingUserId: {
+            buyerUserId: {
                 type: DataTypes.NUMBER,
                 allowNull: false,
                 // references: {
@@ -62,6 +66,15 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 // }
 
             },
+                sellerUserId: {
+                    type: DataTypes.NUMBER,
+                    allowNull: false,
+                    // references: {
+                    //     model: 'User',
+                    //     key: 'userId'
+                    // }
+
+                },
             deliveryAddress: {
                 type: DataTypes.STRING
             },
@@ -73,8 +86,13 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
             walletPayment: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
-            }
-        },
+            },
+
+            notificationCheck: {
+            type: DataTypes.BOOLEAN,
+                defaultValue: false
+             }
+             },
             {
                 sequelize,
                 tableName: 'purchases'
