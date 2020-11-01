@@ -2,6 +2,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Injectable, OnInit} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {filter, skipWhile} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 
@@ -10,15 +11,19 @@ import {HttpClient} from "@angular/common/http";
  */
 export class AuthService implements OnInit{
 
-  loggedIn$ = new BehaviorSubject<boolean>(false);
+  loggedIn$ = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
+  loggedIn: boolean;
+  firstConnection: boolean;
 
   constructor(private httpClient: HttpClient) {
-    this.CheckAccessToSecuredEndpoint();
+      this.CheckAccessToSecuredEndpoint();
   }
 
   ngOnInit() {
     this.CheckAccessToSecuredEndpoint();
   }
+
+
 
   /**
    * Checks if the user can access a secure endpoint that can only be accessed by users by providing their token.
@@ -45,8 +50,11 @@ export class AuthService implements OnInit{
    *
    * @return ture or false, depending if user is logged in or not
    */
-  public isAuthenticated(): Promise<boolean> {
-    return this.loggedIn$.toPromise();
+   isAuthenticated(): boolean{
+     this.loggedIn$.pipe(skipWhile( value => value == undefined)).subscribe(
+       value => {this.loggedIn = value}
+     );
+     return (this.loggedIn && !!(localStorage.getItem('userName')));
   }
 
   /**
@@ -60,7 +68,7 @@ export class AuthService implements OnInit{
       return false
     }
     else {
-      return this.isAuthenticated() && JSON.parse(localStorage.getItem('user'))?.role === role;
+      return JSON.parse(localStorage.getItem('user'))?.role === role;
     }
   }
 

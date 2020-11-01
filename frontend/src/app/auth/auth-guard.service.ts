@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Route, Router} from '@angular/router';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
 import {Role} from "../models/role";
@@ -12,7 +12,6 @@ import {Role} from "../models/role";
  * Provides an authentication for route guards
  */
 export class AuthGuardService implements CanActivate {
-  private test: boolean;
 
 
   constructor(private auth: AuthService,
@@ -47,8 +46,6 @@ export class AuthGuardService implements CanActivate {
    */
   canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.auth.isAuthenticated()) {
-      //this.auth.CheckAccessToSecuredEndpoint();
-      this.test = !this.auth.isAuthenticated();
       this.router.navigate(['login']);
       return false;
     }

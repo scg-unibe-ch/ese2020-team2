@@ -19,6 +19,6 @@ export class AppComponent {
   }
 
    get isAdmin() {
-    return this.authService.hasRole(Role.Admin);
+    return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
   }
 }

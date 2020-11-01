@@ -44,7 +44,7 @@ import {AdminModule} from "./admin/admin.module";
 import { PostItemComponent } from './user-account/post-item/post-item.component';
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
-import { DetailedProductComponent } from './detailed-product/detailed-product.component';
+import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
 
 @NgModule({
   declarations: [

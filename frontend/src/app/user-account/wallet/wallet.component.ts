@@ -1,11 +1,7 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {User, UserAttributes} from '../../../../../backend/src/models/user.model';
 import {CurrentUser} from '../../services/current-user';
-import {BehaviorSubject, from, Subject} from 'rxjs';
 import {Observable} from 'rxjs';
-import {map, pluck} from 'rxjs/operators';
 
 @Component({
   selector: 'app-wallet',
