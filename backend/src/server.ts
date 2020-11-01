@@ -7,7 +7,6 @@ import { ProductController } from './controllers/product.controller';
 import { SecuredController } from './controllers/secured.controller';
 import { PurchaseController } from './controllers/purchase.controller';
 import {AdminController } from './controllers/admin.controller';
-import { moneyInWalletController } from './controllers/wallet.controller';
 // import { productImageController } from './controllers/productImage.controller';
 
 import { Sequelize } from 'sequelize';
@@ -16,7 +15,7 @@ import { TodoItem } from './models/todoitem.model';
 import { User } from './models/user.model';
 import { Product } from './models/product.model';
 import {Purchase } from './models/purchase.model';
-import { Wallet } from './models/wallet.model';
+// import { ProductImage } from './models/productImage.model';
 
 
 
@@ -38,7 +37,7 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         setTimeout(() => {Purchase.initialize(this.sequelize); }, 5000);
-        Wallet.initialize(this.sequelize);
+        // ProductImage.initialize(this.sequelize);
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
             this.server.listen(this.port, () => {                                   // start server on specified port
@@ -73,7 +72,6 @@ export class Server {
             .use('/product', ProductController)
             .use('/admin', AdminController)
             .use('/purchase', PurchaseController)
-            .use('/moneyInWallet', moneyInWalletController)
             .use('/secured', SecuredController)
             // .use('/imageProduct', ImageController)
             .options('*', cors(options))
