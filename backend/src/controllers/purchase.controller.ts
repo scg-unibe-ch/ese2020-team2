@@ -21,7 +21,7 @@ purchaseController.post('/add/',
 
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
-        // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
+        // This condition is to allow purchase only if the buying has enough wallet points to buy the product.
         if (user && product && user.moneyInWallet >= product.price * quantity && product.piecesAvailable >= quantity) {
             const { purchaseId } = await Purchase.create(req.body);
             if (purchaseId === undefined) {
@@ -39,11 +39,11 @@ purchaseController.post('/add/',
     });
 
     /*This function updates the user wallets with (product price * qnatity of purchase).
-    The wallet of the buyer os decremented and the wallet of the seller is incremented.*/
+    The wallet of the buying os decremented and the wallet of the seller is incremented.*/
     async function updateUserWallets (req: Request, res: Response) {
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
-        // Following code is to decrement the walletpoints in buyer wallet.
+        // Following code is to decrement the walletpoints in buying wallet.
         let walletPoints = (user.moneyInWallet) - (product.price * req.body.quantity);
         User.findByPk(req.body.buyingUserId)
             .then(found => {
@@ -96,9 +96,9 @@ purchaseController.post('/add/',
     }
 
 
-    purchaseController.get('/getAllBuyerPurchases/:id',
+    purchaseController.get('/getAllbuyingPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({where: {buyerUserId:  req.params.id}})
+        Purchase.findAll({where: {buyingUserId:  req.params.id}})
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
     });

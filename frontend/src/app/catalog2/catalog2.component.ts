@@ -103,6 +103,7 @@ export class Catalog2Component implements OnInit {
       productId: product.productId,
       quantity: 1,
       buyingUserId: JSON.parse(localStorage.getItem('user')).userId,
+      sellerUserId: 1,
       deliveryAddress: "kk"}).subscribe();
   }
   refresh(): void {

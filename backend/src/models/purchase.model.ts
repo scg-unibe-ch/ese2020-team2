@@ -10,7 +10,7 @@ export interface PurchaseAttributes {
     // quantity or number of items purchased
     quantity: number;
     // Name of the user who is buying the product.
-    buyerUserId: number;
+    buyingUserId: number;
     // Name of the user who is selling the product.
     sellerUserId: number;
     // Price in points
@@ -29,7 +29,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     purchaseId!: number;
     productId!: number;
     quantity!: number;
-    buyerUserId!: number;
+    buyingUserId!: number;
     sellerUserId!: number;
     deliveryAddress!: string;
     paymentType!: string;
@@ -57,7 +57,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 allowNull: false,
                 defaultValue: 1
             },
-            buyerUserId: {
+            buyingUserId: {
                 type: DataTypes.NUMBER,
                 allowNull: false,
                 // references: {
