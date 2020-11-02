@@ -48,6 +48,7 @@ import { PostItemComponent } from './user-account/post-item/post-item.component'
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
 import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
+import {MatBadgeModule} from '@angular/material/badge'; 
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { DetailedProductComponent } from './catalog2/detailed-product/detailed-p
     FormsModule,
     ReactiveFormsModule,
     AdminModule,
+    MatBadgeModule,
   ],
   providers: [
     [AuthGuardService],

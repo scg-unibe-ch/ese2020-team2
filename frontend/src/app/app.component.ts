@@ -10,8 +10,9 @@ import {BehaviorSubject} from "rxjs";
   providers:[AuthService]
 })
 export class AppComponent {
+  numberOfNotification = 0;
   loggedIn$: BehaviorSubject<boolean>;
-
+  hidden = false;
   constructor(private authService: AuthService) {
 
     //Gets the loggIn$ observable
@@ -20,5 +21,10 @@ export class AppComponent {
 
    get isAdmin() {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
+  }
+
+  toggleBadgeVisibility() {
+    if(!this.hidden)
+    this.hidden = !this.hidden;
   }
 }
