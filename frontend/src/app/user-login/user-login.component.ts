@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {AuthService} from "../auth/auth.service";
-import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {User} from "../models/user.model";
+import {BehaviorSubject, Observable} from "rxjs";
 
 
 @Component({
@@ -17,15 +16,18 @@ export class UserLoginComponent implements OnInit {
   password = '';
   infoMessage = '';
   userToken: string;
-  loggedIn = false;
 
   secureEndpointResponse = '';
   hide= true;
+  loggedIn$: BehaviorSubject<boolean>;
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
-              private route: ActivatedRoute,
-              public snackBar: MatSnackBar) { }
+              public snackBar: MatSnackBar) {
+
+    this.loggedIn$ = authService.loggedIn$
+  }
+
 
   ngOnInit() {
     this.checkUserStatus()
@@ -51,9 +53,7 @@ export class UserLoginComponent implements OnInit {
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
 
-    // Set boolean whether a user is logged in or not
-    this.loggedIn = !!(this.userToken);
-    this.authService.login = !!(this.userToken);
+    this.authService.CheckAccessToSecuredEndpoint();
   }
 
   /**
@@ -67,8 +67,6 @@ export class UserLoginComponent implements OnInit {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
-      //Mocking the admin role!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      //res.user.role = "Admin";
       localStorage.setItem('user', JSON.stringify(res.user));
       this.checkUserStatus();
       this.openSnackBar('You successfully logged in!', '')
@@ -76,7 +74,6 @@ export class UserLoginComponent implements OnInit {
        this.checkUserStatus();
        this.openSnackBar('Login was not successful, please check username and password', '')
      });
-
   }
 
 
@@ -93,18 +90,6 @@ export class UserLoginComponent implements OnInit {
     this.openSnackBar('You successfully logged out!', '')
   }
 
-  toForgotPassword() {
-  }
-
-  /**
-   * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
-   */
-  accessSecuredEndpoint(): void {
-    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
-      this.secureEndpointResponse = 'Successfully accessed secure endpoint. Message from server: ' + res.message;
-    }, (error: any) => {
-      this.secureEndpointResponse = 'Unauthorized';
-    });
-  }
+  toForgotPassword(){}
 
 }

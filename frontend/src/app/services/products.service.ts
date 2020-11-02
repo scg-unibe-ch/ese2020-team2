@@ -21,4 +21,8 @@ export class ProductsService {
   getProducts() : Observable<Product[]> {
      return this.httpClient.get<Product[]>(environment.endpointURL + 'product/getAll')
   }
+
+  getProductById(id: number) : Observable<Product> {
+    return this.httpClient.get<Product>(environment.endpointURL + 'product/get/' + id)
+  }
 }

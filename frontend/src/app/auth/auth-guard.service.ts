@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Route, Router} from '@angular/router';
 import { AuthService } from './auth.service';
 import {Observable} from "rxjs";
 import {Role} from "../models/role";
@@ -13,12 +13,9 @@ import {Role} from "../models/role";
  */
 export class AuthGuardService implements CanActivate {
 
-  loggedIn$ = false;
 
-  constructor(private auth: AuthService, private router: Router) {
-    auth.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn$ = nextValue;
-    })
+  constructor(private auth: AuthService,
+              private router: Router) {
   }
 
   /**

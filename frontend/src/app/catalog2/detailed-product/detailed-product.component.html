@@ -1,0 +1,63 @@
+
+
+<div class="outer">
+
+  <div class="inner">
+
+
+
+      <div fxFlex="100%"fxLayoutAlign=" stretch" style="padding-left: 15%; padding-right: 15%; padding-top: 1%; padding-bottom: 1%;">
+
+        <mat-card class="mat-elevation-z4" style="width: 60%; background-color: rgba(0, 0, 0, 0.5);" >
+
+          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" style=" min-height: max-content; object-fit: cover; ">
+        </mat-card>
+
+
+        <mat-card class="mat-elevation-z4" style="width: 40%; ">
+          <div style="text-align: end;">
+          <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="back to catalog" class="btn btn-success" btn btn-success routerLink="/catalog2">
+            <mat-icon >settings_backup_restore
+            </mat-icon>
+          </button>
+        </div>
+          <mat-card-title style="text-align: center; font-size: 350%;">{{product.title}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            <br>
+
+            <mat-card-title *ngIf="product.sellOrlend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+          </mat-card-subtitle>
+          <mat-card-content>
+            <div style="font-size: 200%;">Description:</div>
+            <p style="font-size: 130%;">{{product.description}}</p>
+<br>
+            <p style="font-size: 200%;">Quantity Available: {{product.piecesAvailable}}</p>
+            <br>
+            <p style="font-size: 200%;">Location: {{product.location}}</p>
+            <br>
+
+            <p style="font-size: 200%;">Delivery: {{product.deliveryPossible}}</p>
+          </mat-card-content>
+          <br>
+          <br>
+          <mat-card-actions>
+            <div style="text-align: center;">
+              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;" >BUY</button>
+              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;">RENT</button>
+              <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 35%; height: 20%; font-size: 200%;">WISH</button>
+            </div>
+              <p *ngIf = "!(loggedIn$ | async)" style=" font-size: 120%;">Log in to buy item</p>
+
+              <button mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login" style="width: 35%; height: 20%; font-size: 200%;">TO LOGIN</button>
+               <button mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register" style="width: 35%; height: 20%; font-size: 200%;">TO SIGN UP</button>
+
+      <br>
+      <br>
+            </mat-card-actions>
+        </mat-card>
+
+      </div>
+  </div>
+</div>
