@@ -1,6 +1,7 @@
 
 import { User, UserAttributes, UserCreationAttributes } from './user.model';
-import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
+import {Optional, Model, Sequelize, DataTypes, ARRAY} from 'sequelize';
+import {appendFile, link} from 'fs';
 
 /*This is the Product model used to save the data about products*/
 export interface ProductAttributes {
@@ -24,6 +25,8 @@ export interface ProductAttributes {
     piecesAvailable: number;
     // Status if the product is available or lent or soldout
     status: string;
+    // Parameter for adding the Product Image
+    // productImages: Array<object>;
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
     // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected
@@ -33,6 +36,8 @@ export interface ProductAttributes {
     disapprovalMsg: string;
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
+    // Needed to grade the seller behavior (review)
+    sellerReview: Array<string>;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -48,10 +53,12 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     sellOrlend!: string;
     piecesAvailable: number;
     status!: string;
+    // productImages!: Array<object>;
     deliveryPossible!: boolean;
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
+    sellerReview!: Array<string>;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -103,6 +110,12 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: true
             },
+            /*
+                productImages: {
+                    // type: DataTypes.ARRAY
+                    type: DataTypes.STRING,
+                },
+             */
             adminApproval: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -116,6 +129,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: false
             },
+            sellerReview: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: 'none'
+            }
         },
             {
                 sequelize,

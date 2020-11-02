@@ -69,7 +69,9 @@ purchaseController.post('/add/',
     async function updateProductsAvailable (req: Request, res: Response) {
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const availableProducts = product.piecesAvailable - req.body.quantity;
-        let availabilityStatus = '';
+
+        const availabilityStatus = '';
+        /*
         if (availableProducts > 0 ) {
             availabilityStatus = 'posted';
         } else if (availableProducts === 0 ) {
@@ -79,7 +81,9 @@ purchaseController.post('/add/',
             if (product.type === 'service') {
                 availabilityStatus = 'lent';
             }
-        } else {
+        }
+        */
+        if (availableProducts > 0) {
             res.send('Only ' + availableProducts + ' pieces of this product are available.');
         }
         Product.findByPk(req.body.productId)
@@ -92,11 +96,18 @@ purchaseController.post('/add/',
     }
 
 
-    purchaseController.get('/getAllUserPurchases/:id',
+    purchaseController.get('/getAllBuyerPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({where: {buyingUserId:  req.params.id}})
+        Purchase.findAll({where: {buyerUserId:  req.params.id}})
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
+    });
+
+purchaseController.get('/getAllSellerSold/:id',
+    (req: Request, res: Response) => {
+        Purchase.findAll({where: {sellerUserId:  req.params.id}})
+            .then(list => res.status(200).send(list))
+            .catch(err => res.status(500).send(err));
     });
 
 export const PurchaseController: Router = purchaseController;

@@ -7,12 +7,17 @@ import { ProductController } from './controllers/product.controller';
 import { SecuredController } from './controllers/secured.controller';
 import { PurchaseController } from './controllers/purchase.controller';
 import {AdminController } from './controllers/admin.controller';
+// import { productImageController } from './controllers/productImage.controller';
+
 import { Sequelize } from 'sequelize';
 import { TodoList } from './models/todolist.model';
 import { TodoItem } from './models/todoitem.model';
 import { User } from './models/user.model';
 import { Product } from './models/product.model';
 import {Purchase } from './models/purchase.model';
+// import { ProductImage } from './models/productImage.model';
+
+
 
 import cors from 'cors';
 
@@ -32,6 +37,7 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         setTimeout(() => {Purchase.initialize(this.sequelize); }, 5000);
+        // ProductImage.initialize(this.sequelize);
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
             this.server.listen(this.port, () => {                                   // start server on specified port
@@ -67,6 +73,7 @@ export class Server {
             .use('/admin', AdminController)
             .use('/purchase', PurchaseController)
             .use('/secured', SecuredController)
+            // .use('/imageProduct', ImageController)
             .options('*', cors(options))
             .use(express.static('./src/public'))
             // this is the message you get if you open http://localhost:3000/ when the server is running
