@@ -45,7 +45,10 @@ export class DetailedProductComponent implements OnInit {
   /**
    * Gets the product, but only if it is approved and set to visible in the market
    *
-   * @param productID the id of the product that should be displayed in detail
+   * If the product is not approved or visibleInMarket the user gets rerouted to an error page.
+   * The rerouting also happens if the product does not exist (error 404).
+   *
+   * @param productId the id of the product that should be displayed in detail
    */
   loadProductDetails(productId){
     this.product$ = this.productsService.getProductById(productId).pipe(
@@ -53,15 +56,19 @@ export class DetailedProductComponent implements OnInit {
       defaultIfEmpty(null))
 
     this.product$.subscribe(result => {
-      if(result == null) {
+      if(result === null) {
         this.router.navigate(['/error/not-found'])
       }
       else{
         this.product = result
       }
-
-    })
-
+    },
+    error => {
+      if (error.status ==404) {
+        this.router.navigate(['/error/not-found'])
+      }
+    }
+  )
   }
 
   wish() {
