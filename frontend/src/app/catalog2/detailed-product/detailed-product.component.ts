@@ -59,16 +59,13 @@ export class DetailedProductComponent implements OnInit {
       if(result === null) {
         this.router.navigate(['/error/not-found'])
       }
-      else{
+      else {
         this.product = result
-      }
-    },
+      }},
     error => {
       if (error.status ==404) {
         this.router.navigate(['/error/not-found'])
-      }
-    }
-  )
+      }})
   }
 
   wish() {
