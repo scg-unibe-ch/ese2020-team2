@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 import { TodoItemController } from './controllers/todoitem.controller';
 import { TodoListController } from './controllers/todolist.controller';
@@ -32,6 +32,7 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         setTimeout(() => {Purchase.initialize(this.sequelize); }, 5000);
+        Purchase.initialize(this.sequelize);
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
             this.server.listen(this.port, () => {                                   // start server on specified port
