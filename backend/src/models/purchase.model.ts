@@ -40,9 +40,9 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
         Purchase.init({
             purchaseId: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
-                allowNull: false,
                 primaryKey: true,
+                allowNull: false,
+                autoIncrement: true,
             },
             productId: {
                 type: DataTypes.INTEGER,

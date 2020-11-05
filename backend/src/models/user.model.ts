@@ -17,6 +17,7 @@ export interface UserAttributes {
     country: string;
     moneyInWallet: number;
     role: string;
+    shoppingCart: String[];
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -36,6 +37,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     country!: string;
     moneyInWallet!: number;
     role!: string;
+    shoppingCart!: String[];
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -96,8 +98,13 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.STRING,
                 allowNull: false,
                 defaultValue: 'user'
+            },
+            shoppingCart: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: 'empty'
             }
-        },
+            },
             {
                 sequelize,
                 tableName: 'users'

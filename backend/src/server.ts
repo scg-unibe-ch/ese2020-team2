@@ -38,6 +38,7 @@ export class Server {
         Product.initialize(this.sequelize);
         setTimeout(() => {Purchase.initialize(this.sequelize); }, 5000);
         // ProductImage.initialize(this.sequelize);
+        Purchase.initialize(this.sequelize);
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
             this.server.listen(this.port, () => {                                   // start server on specified port

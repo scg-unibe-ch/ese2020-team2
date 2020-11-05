@@ -1,5 +1,4 @@
 
-import { User, UserAttributes, UserCreationAttributes } from './user.model';
 import {Optional, Model, Sequelize, DataTypes, ARRAY} from 'sequelize';
 import {appendFile, link} from 'fs';
 
@@ -7,6 +6,8 @@ import {appendFile, link} from 'fs';
 export interface ProductAttributes {
     // Id of the product
     productId: number;
+    // If of the User which holds the products
+    userId: number;
     // Type of the product: Product or Service
     type: string;
     // Title of the product
@@ -37,13 +38,14 @@ export interface ProductAttributes {
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
     // Needed to grade the seller behavior (review)
-    sellerReview: Array<string>;
+    sellerReview: String[];
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
 
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
     productId!: number;
+    userId!: number;
     type!: string;
     title!: string;
     userName!: string;
@@ -58,7 +60,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
-    sellerReview!: Array<string>;
+    sellerReview!: String[];
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -67,6 +69,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 autoIncrement: true,
                 primaryKey: true,
             },
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                unique: true
+                },
             type: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -132,7 +139,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             sellerReview: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'none'
+                defaultValue: 'empty'
             }
         },
             {

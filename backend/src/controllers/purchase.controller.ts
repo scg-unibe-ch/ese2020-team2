@@ -1,11 +1,8 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import sequelize from 'sequelize';
-import { Router, Request, Response, RequestHandler } from 'express';
+import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
 import { Purchase } from '../models/purchase.model';
 import { User } from '../models/user.model';
-import { Readable } from 'stream';
 
 /*This controller is to add the purchase to the purchase model.*/
 const purchaseController: Router = express.Router();
@@ -20,7 +17,7 @@ purchaseController.post('/add/',
         } = req.body;
 
         const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
+        const user = await User.findOne({ where: { userId: req.body.buyerUserId } });
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
         if (user && product && user.moneyInWallet >= product.price * quantity && product.piecesAvailable >= quantity) {
             const { purchaseId } = await Purchase.create(req.body);
@@ -42,17 +39,17 @@ purchaseController.post('/add/',
     The wallet of the buyer os decremented and the wallet of the seller is incremented.*/
     async function updateUserWallets (req: Request, res: Response) {
         const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
-        // Following code is to decrement the walletpoints in buyer wallet.
+        const user = await User.findOne({ where: { userId: req.body.buyerUserId } });
+        // Following code is to decrement the wallet points in buyer wallet.
         let walletPoints = (user.moneyInWallet) - (product.price * req.body.quantity);
-        User.findByPk(req.body.buyingUserId)
+        User.findByPk(req.body.buyerUserId)
             .then(found => {
                 if (found != null) {
                     found.update({ moneyInWallet: walletPoints });
                 }
             })
             .catch(err => res.status(500).send(err));
-        // Following code is to increment the walletpoints in seller wallet.
+        // Following code is to increment the wallet points in seller wallet.
         const seller = await User.findOne({ where: { userName: product.userName } });
         walletPoints = seller.moneyInWallet + (product.price * req.body.quantity);
         User.findByPk(seller.userId)
@@ -70,8 +67,8 @@ purchaseController.post('/add/',
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const availableProducts = product.piecesAvailable - req.body.quantity;
 
-        const availabilityStatus = '';
-        /*
+        let availabilityStatus = '';
+
         if (availableProducts > 0 ) {
             availabilityStatus = 'available';
         } else if (availableProducts === 0 ) {
@@ -82,7 +79,7 @@ purchaseController.post('/add/',
                 availabilityStatus = 'lent';
             }
         }
-        */
+
         if (availableProducts > 0) {
             res.send('Only ' + availableProducts + ' pieces of this product are available.');
         }
