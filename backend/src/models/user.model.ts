@@ -1,6 +1,5 @@
 
-import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 export interface UserAttributes {
     userId: number;

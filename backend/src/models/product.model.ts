@@ -1,6 +1,5 @@
 
-import {Optional, Model, Sequelize, DataTypes, ARRAY} from 'sequelize';
-import {appendFile, link} from 'fs';
+import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 /*This is the Product model used to save the data about products*/
 export interface ProductAttributes {
@@ -21,10 +20,10 @@ export interface ProductAttributes {
     // Available location
     location: string;
     // Type of purchase of the product. Sell or lend
-    sellOrlend: string;
+    sellOrLend: string;
     // Number of items available
     piecesAvailable: number;
-    // Status if the product is available or lent or soldout
+    // Status if the product is available or lent or sold out
     status: string;
     // Parameter for adding the Product Image
     // productImages: Array<object>;
@@ -52,7 +51,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     price!: number;
     description!: string;
     location!: string;
-    sellOrlend!: string;
+    sellOrLend!: string;
     piecesAvailable: number;
     status!: string;
     // productImages!: Array<object>;
@@ -98,7 +97,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            sellOrlend: {
+            sellOrLend: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
