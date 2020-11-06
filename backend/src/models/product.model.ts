@@ -37,7 +37,7 @@ export interface ProductAttributes {
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
     // Needed to grade the seller behavior (review)
-    sellerReview: String[];
+    sellerReview: string[];
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -59,7 +59,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
-    sellerReview!: String[];
+    sellerReview!: string[];
 
     public static initialize(sequelize: Sequelize) {
         Product.init({

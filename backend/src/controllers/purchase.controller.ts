@@ -33,12 +33,12 @@ purchaseController.post('/add/',
                 res.status(500); // or some other bad code
                 res.send('Purchase failed! Try again');
                 } else {
-                updateUserWallets(req, res);
-                updateProductsAvailable(req, res);
-                res.json({ purchaseId });
+                await updateUserWallets(req, res);
+                await updateProductsAvailable(req, res);
+                // res.json({ purchaseId });
                 }
         } else {
-        res.send('User do not have enough money');
+        res.send('User do not have enough money or product quantity exceeded!');
             }
     });
 
@@ -87,6 +87,8 @@ purchaseController.post('/add/',
 
         let availabilityStatus = '';
 
+        // Manages the Status of the product or service
+
         if (availableProducts > 0 ) {
             availabilityStatus = 'available';
         } else if (availableProducts === 0 ) {
@@ -98,9 +100,14 @@ purchaseController.post('/add/',
             }
         }
 
+        // Outputs the quantity of the product still available
+
         if (availableProducts > 0) {
             res.send('Only ' + availableProducts + ' pieces of this product are available.');
         }
+
+        // The Product quantity and its status are updated
+
         Product.findByPk(req.body.productId)
             .then(found => {
                 if (found != null) {
@@ -122,7 +129,7 @@ purchaseController.post('/add/',
     });
 
 /**
- * This method if called outputs all sold product of a precise user (seller)
+ * This method if called outputs all sold products of a precise user (seller)
  */
 
 purchaseController.get('/getAllSellerSold/:id',
