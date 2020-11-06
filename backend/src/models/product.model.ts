@@ -70,8 +70,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             userId: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                unique: true
+                allowNull: false
                 },
             type: {
                 type: DataTypes.STRING,

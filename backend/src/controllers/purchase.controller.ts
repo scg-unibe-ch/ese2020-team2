@@ -8,7 +8,6 @@ import { User } from '../models/user.model';
  * This controller is to add the purchase to the purchase model.
  */
 
-
 const purchaseController: Router = express.Router();
 purchaseController.use(express.json());
 
@@ -27,19 +26,28 @@ purchaseController.post('/add/',
 
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
 
-        if (user && product && user.moneyInWallet >= product.price * quantity && product.piecesAvailable >= quantity) {
-            const { purchaseId } = await Purchase.create(req.body);
-            if (purchaseId === undefined) {
-                res.status(500); // or some other bad code
-                res.send('Purchase failed! Try again');
+        if (user && product && user.moneyInWallet >= product.price * quantity) {
+            if (product.piecesAvailable > 0) {
+                if (product.piecesAvailable >= quantity && quantity > 0) {
+                    const { purchaseId } = await Purchase.create(req.body);
+                    if (purchaseId === undefined) {
+                        res.status(500); // or some other bad code
+                        res.send('Purchase failed! Try again');
+                    } else {
+                        await updateUserWallets(req, res);
+                        await updateProductsAvailable(req, res);
+                        // res.json({ purchaseId });
+                    }
                 } else {
-                await updateUserWallets(req, res);
-                await updateProductsAvailable(req, res);
-                // res.json({ purchaseId });
+                    res.send('Product quantity exceeded or the quantity entered is nonsense!\nPlease try again.');
                 }
-        } else {
-        res.send('User do not have enough money or product quantity exceeded!');
+            } else {
+                res.send('The product has run out of quantity!');
             }
+
+        } else {
+        res.send('The Buyer has run out of money!\nPlease check your wallet.');
+        }
     });
 
     /**
