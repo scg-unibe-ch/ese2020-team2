@@ -1,7 +1,10 @@
 
-import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import {Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin} from 'sequelize';
+import {User} from './user.model';
+import {ProductImage} from './productImage.model';
 
 /*This is the Product model used to save the data about products*/
+
 export interface ProductAttributes {
     // Id of the product
     productId: number;
@@ -26,7 +29,7 @@ export interface ProductAttributes {
     // Status if the product is available or lent or sold out
     status: string;
     // Parameter for adding the Product Image
-    // productImages: Array<object>;
+    // productImages: object[];
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
     // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected
@@ -54,12 +57,12 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     sellOrLend!: string;
     piecesAvailable: number;
     status!: string;
-    // productImages!: Array<object>;
     deliveryPossible!: boolean;
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
     sellerReview!: string[];
+    public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -117,9 +120,8 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             /*
                 productImages: {
-                    // type: DataTypes.ARRAY
-                    type: DataTypes.STRING,
-                },
+                type: DataTypes.OBJECT,
+            },
              */
             adminApproval: {
                 type: DataTypes.STRING,
@@ -146,5 +148,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             }
         );
     }
+    public static createAssociations() {
+        Product.belongsTo(User);
+        Product.hasMany(ProductImage);
+    }
+
 
 }

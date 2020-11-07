@@ -18,9 +18,7 @@ purchaseController.use(express.json());
 
 purchaseController.post('/add/',
     async (req: Request, res: Response) => {
-        const {
-            quantity,
-        } = req.body;
+        const { quantity }  = req.body;
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const user = await User.findOne({ where: { userId: req.body.buyerUserId } });
 
@@ -36,10 +34,12 @@ purchaseController.post('/add/',
                     } else {
                         await updateUserWallets(req, res);
                         await updateProductsAvailable(req, res);
+                        // console.log({ purchaseId });
                         // res.json({ purchaseId });
                     }
                 } else {
-                    res.send('Product quantity exceeded or the quantity entered is nonsense!\nPlease try again.');
+                    res.send('Product quantity exceeded (' + product.piecesAvailable  + ' available) ' +
+                        'or the quantity entered is nonsense!\nPlease try again.');
                 }
             } else {
                 res.send('The product has run out of quantity!');
@@ -92,7 +92,6 @@ purchaseController.post('/add/',
     async function updateProductsAvailable (req: Request, res: Response) {
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const availableProducts = product.piecesAvailable - req.body.quantity;
-
         let availabilityStatus = '';
 
         // Manages the Status of the product or service

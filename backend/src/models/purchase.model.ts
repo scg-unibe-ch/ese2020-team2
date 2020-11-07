@@ -1,7 +1,10 @@
-
+import { Product } from './product.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { User } from './user.model';
+import {ProductImage} from './productImage.model';
 
 /*This is the Purchase model used to save the data about purchases*/
+
 export interface PurchaseAttributes {
     // Id of the purchase
     purchaseId: number;
@@ -99,5 +102,8 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
             }
         );
     }
-
+    public static createAssociations() {
+        Purchase.belongsTo(User);
+        Purchase.belongsTo(Product);
+    }
 }
