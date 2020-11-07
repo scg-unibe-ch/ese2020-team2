@@ -64,6 +64,7 @@ export class TestsignupComponent implements OnInit {
       telNumber: [""],
       street: [""],
       city: [""],
+      role: ["admin"],
       zip: [""],
     },
     {
@@ -93,7 +94,7 @@ export class TestsignupComponent implements OnInit {
   get userName() { return this.userForm.get("userName") };
   get street() { return this.userForm.get("street") };
   get zip() { return this.userForm.get("zip") };
-
+  get role() {return this.userForm.get("role")};
   get confirmPassword() { return this.userForm.get("confirmPassword") };
   get city() { return this.userForm.get("city") };
   get firstName() { return this.userForm.get("firstName") };

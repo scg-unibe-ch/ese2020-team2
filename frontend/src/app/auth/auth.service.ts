@@ -1,17 +1,40 @@
 import {BehaviorSubject} from 'rxjs';
-import {Injectable} from "@angular/core";
-import {User} from "../models/user.model";
-import {Role} from "../models/role";
+import {Injectable, OnInit} from "@angular/core";
+import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {filter, skipWhile} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 
 /**
  * Keeps track if the user is logged in
  */
-export class AuthService {
-  private user: User;
+export class AuthService implements OnInit{
 
-  loggedIn$ = new BehaviorSubject<boolean>(this.login);
+  loggedIn$ = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
+  loggedIn: boolean;
+  firstConnection: boolean;
+
+  constructor(private httpClient: HttpClient) {
+      this.CheckAccessToSecuredEndpoint();
+  }
+
+  ngOnInit() {
+    this.CheckAccessToSecuredEndpoint();
+  }
+
+
+
+  /**
+   * Checks if the user can access a secure endpoint that can only be accessed by users by providing their token.
+   */
+  CheckAccessToSecuredEndpoint() {
+    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
+      this.login = true;
+    }, (error: any) => {
+      this.login = false
+    });
+  }
 
   /**
    * It will make sure to tell every subscriber about the change.
@@ -27,15 +50,26 @@ export class AuthService {
    *
    * @return ture or false, depending if user is logged in or not
    */
-  public isAuthenticated(): boolean {
-    return !!(localStorage.getItem('userToken'));
+   isAuthenticated(): boolean{
+     this.loggedIn$.pipe(skipWhile( value => value == undefined)).subscribe(
+       value => {this.loggedIn = value}
+     );
+     return (this.loggedIn && !!(localStorage.getItem('userName')));
   }
 
+  /**
+   * Checks if the user has the required role
+   *
+   * @param role, the role the user should have to access
+   * @return boolean, true if the user has the required role
+   */
   hasRole(role: string) {
-    return this.isAuthenticated() && JSON.parse(localStorage.getItem('user')).role === role;
+    if(JSON.parse(localStorage.getItem('user'))?.role === null) {
+      return false
+    }
+    else {
+      return JSON.parse(localStorage.getItem('user'))?.role === role;
+    }
   }
-
-
-
 
 }

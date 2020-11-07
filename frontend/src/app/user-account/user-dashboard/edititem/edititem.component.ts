@@ -48,6 +48,7 @@ export class EdititemComponent implements OnInit {
   sub: any;
   product: Product;
 
+
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.productId = +params['id']; // (+) converts string 'id' to a number

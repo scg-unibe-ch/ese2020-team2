@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Ng5SliderModule } from 'ng5-slider';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,6 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
@@ -32,7 +35,6 @@ import {UserDirective} from "./directives/user.directive";
 import {UserRoleDirective} from "./directives/user-role.directive";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
 import { MatTableModule } from '@angular/material/table'
-import { DataSource } from '@angular/cdk/table';
 import { Catalog2Component } from './catalog2/catalog2.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { UserDashboardComponent } from './user-account/user-dashboard/user-dashboard.component';
@@ -40,16 +42,13 @@ import { PurchasedComponent } from './user-account/user-dashboard/purchased/purc
 import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
-import { ProductList } from './models/product-list.model';
 import { EdititemComponent } from './user-account/user-dashboard/edititem/edititem.component';
 import {AdminModule} from "./admin/admin.module";
 import { PostItemComponent } from './user-account/post-item/post-item.component';
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
-import { from } from 'rxjs';
-
-
-
+import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
+import {MatBadgeModule} from '@angular/material/badge'; 
 
 @NgModule({
   declarations: [
@@ -73,21 +72,24 @@ import { from } from 'rxjs';
     LendItemComponent,
     LentComponent,
     EdititemComponent,
-
+    DetailedProductComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatSliderModule,
     FormsModule,
     HttpClientModule,
     MatButtonModule,
     MatTableModule,
+    MatSlideToggleModule,
     FlexLayoutModule,
     MatListModule,
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
+    Ng5SliderModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
@@ -104,6 +106,7 @@ import { from } from 'rxjs';
     FormsModule,
     ReactiveFormsModule,
     AdminModule,
+    MatBadgeModule,
   ],
   providers: [
     [AuthGuardService],
@@ -114,7 +117,7 @@ import { from } from 'rxjs';
     }
   ],
   exports: [
-    
+
   ],
   bootstrap: [
     AppComponent

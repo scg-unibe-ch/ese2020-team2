@@ -60,7 +60,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 allowNull: false,
                 defaultValue: 1
             },
-            buyerUserId: {
+            buyingUserId: {
                 type: DataTypes.NUMBER,
                 allowNull: false,
                 // references: {

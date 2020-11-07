@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {Role} from "./models/role";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -8,24 +9,22 @@ import {Role} from "./models/role";
   styleUrls: ['./app.component.css'],
   providers:[AuthService]
 })
-export class AppComponent implements OnInit{
-  loggedIn$ = false;
-
+export class AppComponent {
+  numberOfNotification = 0;
+  loggedIn$: BehaviorSubject<boolean>;
+  hidden = false;
   constructor(private authService: AuthService) {
 
-    //Subscribes to the loggIn$ observable
-    authService.loggedIn$.subscribe((nextValue) => {
-      this.loggedIn$ = nextValue;  // this will happen on every change
-    })
+    //Gets the loggIn$ observable
+    this.loggedIn$ = authService.loggedIn$
   }
 
-  /**
-   * Checks if user is logged in and updates the login status of the user
-   */
-   ngOnInit() {
-    this.authService.login = !!(localStorage.getItem('userToken'));
-  }
    get isAdmin() {
-    return this.authService.hasRole(Role.Admin);
+    return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
+  }
+
+  toggleBadgeVisibility() {
+    if(!this.hidden)
+    this.hidden = !this.hidden;
   }
 }

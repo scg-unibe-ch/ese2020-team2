@@ -45,6 +45,9 @@
               <input matInput placeholder="Rejection message" [(ngModel)]="product.disapprovalMsg" name="name">
             </mat-form-field>
             <button class="btn btn-warning"(click)="onProductUpdate(product)" type="submit" style="color: black">Confirm</button>
+            <button mat-fab matTooltip = "Details"  [routerLink]="['/product', product.productId]">
+              Details
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
