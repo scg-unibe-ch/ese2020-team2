@@ -1,5 +1,5 @@
 import express from 'express';
-import { Router, Request, Response, RequestHandler } from 'express';
+import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
 
 const adminController: Router = express.Router();

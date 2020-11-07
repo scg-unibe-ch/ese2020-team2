@@ -1,6 +1,5 @@
 
-import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
-import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 export interface UserAttributes {
     userId: number;
@@ -17,6 +16,7 @@ export interface UserAttributes {
     country: string;
     moneyInWallet: number;
     role: string;
+    shoppingCart: number[];
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -36,6 +36,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     country!: string;
     moneyInWallet!: number;
     role!: string;
+    shoppingCart!: number[];
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -96,8 +97,13 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.STRING,
                 allowNull: false,
                 defaultValue: 'user'
+            },
+            shoppingCart: {
+                type: DataTypes.NUMBER,
+                allowNull: true,
+                defaultValue: 'empty'
             }
-        },
+            },
             {
                 sequelize,
                 tableName: 'users'

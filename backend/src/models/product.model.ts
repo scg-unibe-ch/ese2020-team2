@@ -1,11 +1,15 @@
 
-import { User, UserAttributes, UserCreationAttributes } from './user.model';
-import { Optional, Model, Sequelize, DataTypes, STRING } from 'sequelize';
+import {Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin} from 'sequelize';
+import {User} from './user.model';
+import {ProductImage} from './productImage.model';
 
 /*This is the Product model used to save the data about products*/
+
 export interface ProductAttributes {
     // Id of the product
     productId: number;
+    // If of the User which holds the products
+    userId: number;
     // Type of the product: Product or Service
     type: string;
     // Title of the product
@@ -19,11 +23,13 @@ export interface ProductAttributes {
     // Available location
     location: string;
     // Type of purchase of the product. Sell or lend
-    sellOrlend: string;
+    sellOrLend: string;
     // Number of items available
     piecesAvailable: number;
-    // Status if the product is available or lent or soldout
+    // Status if the product is available or lent or sold out
     status: string;
+    // Parameter for adding the Product Image
+    // productImages: object[];
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
     // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected
@@ -33,25 +39,30 @@ export interface ProductAttributes {
     disapprovalMsg: string;
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
+    // Needed to grade the seller behavior (review)
+    sellerReview: string[];
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
 
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
     productId!: number;
+    userId!: number;
     type!: string;
     title!: string;
     userName!: string;
     price!: number;
     description!: string;
     location!: string;
-    sellOrlend!: string;
+    sellOrLend!: string;
     piecesAvailable: number;
     status!: string;
     deliveryPossible!: boolean;
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
+    sellerReview!: string[];
+    public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -60,6 +71,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 autoIncrement: true,
                 primaryKey: true,
             },
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+                },
             type: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -84,7 +99,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            sellOrlend: {
+            sellOrLend: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -103,6 +118,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: true
             },
+            /*
+                productImages: {
+                type: DataTypes.OBJECT,
+            },
+             */
             adminApproval: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -116,6 +136,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: false
             },
+            sellerReview: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                defaultValue: 'empty'
+            }
         },
             {
                 sequelize,
@@ -123,5 +148,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             }
         );
     }
+    public static createAssociations() {
+        Product.belongsTo(User);
+        Product.hasMany(ProductImage);
+    }
+
 
 }
