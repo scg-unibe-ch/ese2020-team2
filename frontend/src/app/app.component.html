@@ -30,7 +30,10 @@
     <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn btn-success" routerLink="/login">
        <mat-icon>forward</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn btn-success" routerLink="/account" 
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Shopping Cart" *ngIf = "(loggedIn$ | async)" class="btn btn-success" routerLink="/shopping-cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn btn-success" routerLink="/account"
     matBadge="{{numberOfNotification}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="hidden || numberOfNotification===0" (click)="toggleBadgeVisibility()">
       <mat-icon>archive</mat-icon>
     </button>

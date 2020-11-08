@@ -48,7 +48,8 @@ import { PostItemComponent } from './user-account/post-item/post-item.component'
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
 import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
 import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
-import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatBadgeModule} from '@angular/material/badge';
+import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     LentComponent,
     EdititemComponent,
     DetailedProductComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

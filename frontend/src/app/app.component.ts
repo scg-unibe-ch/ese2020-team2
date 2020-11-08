@@ -15,7 +15,6 @@ export class AppComponent {
   hidden = false;
   constructor(private authService: AuthService) {
 
-    //Gets the loggIn$ observable
     this.loggedIn$ = authService.loggedIn$
   }
 

@@ -27,12 +27,12 @@ export class PurchasedComponent implements OnInit {
 
 }
 
-  ngOnInit(): void {
-    this.purchases$ = this.purchaseService.getPurchases().pipe(map(purchases =>
-      purchases.filter(purchase => purchase.paymentType === 'wallet points')
-    )
-  );
-    
+ngOnInit(): void {
+  this.purchases$ = this.purchaseService.getPurchases().pipe(map(purchases =>
+    purchases.filter(purchase => purchase.paymentType === 'wallet points')
+  )
+);
+
   }
 }
 
