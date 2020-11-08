@@ -10,6 +10,7 @@ import { CurrentUser } from '../services/current-user';
 import { Options, LabelType } from 'ng5-slider';
 import {Approval} from "../models/approval";
 
+
 @Component({
   selector: 'app-catalog2',
   templateUrl: './catalog2.component.html',
@@ -18,8 +19,10 @@ import {Approval} from "../models/approval";
 export class Catalog2Component implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   products$: Observable<Product[]>;
+  userId = 0;
   search: string = "";
   filtervalue: string = "";
+  quantity = 1;
   minValue: number = 0;
   maxValue: number = 50;
   options: Options = {
@@ -43,6 +46,9 @@ export class Catalog2Component implements OnInit {
               private productsService: ProductsService) {
 
     this.loggedIn$ = authService.loggedIn$;
+    if (this.loggedIn$.value == true){
+      this.userId = JSON.parse(localStorage.getItem('user')).userId;
+    }
   }
 
 
@@ -51,9 +57,21 @@ export class Catalog2Component implements OnInit {
     this.filtervalue = filtervalue;
   };
 
+  changeminValue(value: number){
+    this.minValue = value;
+  }
+  changemaxValue(value: number){
+    this.maxValue = value;
+  }
+  changesearch(search: string){
+    this.search = search;
+  }
+
+
   
   ngOnInit(): void {
     this.getAllProducts();
+    
   }
 
   filter(minValue: number, maxValue: number, filtervalue: string, search:string ) {
@@ -99,10 +117,10 @@ export class Catalog2Component implements OnInit {
 
   }
 
-  buy(product: Product): void {
+  buy(product: Product ): void {
     this.httpClient.post(environment.endpointURL + 'purchase/add/', {
       productId: product.productId,
-      quantity: 1,
+      quantity: this.quantity,
       buyerUserId: JSON.parse(localStorage.getItem('user')).userId,
       sellerUserId: product.userId,
       deliveryAddress: "kk"}).subscribe();
