@@ -1,7 +1,7 @@
 
-import {Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin} from 'sequelize';
-import {User} from './user.model';
-import {ProductImage} from './productImage.model';
+import { Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin } from 'sequelize';
+import { User } from './user.model';
+import { ProductImage } from './productImage.model';
 
 /*This is the Product model used to save the data about products*/
 
@@ -40,7 +40,7 @@ export interface ProductAttributes {
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
     // Needed to grade the seller behavior (review)
-    sellerReview: string[];
+    sellerReview: string;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -61,7 +61,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
-    sellerReview!: string[];
+    sellerReview!: string;
     public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
@@ -74,7 +74,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
-                },
+            },
             type: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -139,7 +139,12 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             sellerReview: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                defaultValue: 'empty'
+                get: function () {
+                    return JSON.parse(this.getDataValue('sellerReview'));
+                },
+                set: function (val) {
+                    return this.setDataValue('sellerReview', JSON.stringify(val));
+                }
             }
         },
             {

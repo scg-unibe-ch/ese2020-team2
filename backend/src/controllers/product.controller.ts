@@ -10,8 +10,8 @@ const productController: Router = express.Router();
 productController.post('/add',
     (req: Request, res: Response) => {
         Product.create(req.body)
-        .then(product_added => res.send(product_added))
-        .catch(err => res.status(500).send(err));
+            .then(product_added => res.send(product_added))
+            .catch(err => res.status(500).send(err));
     });
 
 
@@ -47,7 +47,7 @@ productController.put('/edit/:id', (req: Request, res: Response) => {
             }
         })
         .catch(err => res.status(500).send(err));
-    });
+});
 
 
 /**
@@ -79,4 +79,26 @@ productController.get('/get/:id',
             })
             .catch(err => res.status(500).send(err));
     });
+
+/**
+ * This method is to add new reviews in the  products model.
+ * Each time a new revies is added, it will be added to the existing Array of reviews.
+ */
+productController.put('/addNewReview/:id', (req: Request, res: Response) => {
+    Product.findByPk(req.params.id)
+        .then(found => {
+            if (found != null) {
+                found.update({
+                    sellerReview: found.sellerReview.concat(req.body.sellerReview)
+                }, { where: { productId: req.params.id } })
+                    .then(() => {
+                        res.status(200).send('Review added successfully.');
+                    })
+                    .catch(err => res.status(500).send(err));
+            } else {
+                res.status(404).send('Product not found.');
+            }
+        })
+        .catch(err => res.status(500).send(err));
+});
 export const ProductController: Router = productController;
