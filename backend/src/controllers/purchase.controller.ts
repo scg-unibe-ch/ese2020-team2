@@ -28,21 +28,23 @@ purchaseController.post('/add/',
                 // Create a new purchase.
                 const { purchaseId } = await Purchase.create(req.body);
                 if (purchaseId === undefined) {
-                    res.status(500);
-                    res.send('Purchase failed! Try again');
+                    res.status(500).send('Purchase failed! Try again');
                 } else {
                     await updateUserWallets(req, res);
                     await updateProductStatus(req, res);
                     res.json({ purchaseId });
                 }
             } else {
-                res.send('The product has only ' + product.piecesAvailable + ' pieces available.');
+                if (quantity <= 0) {
+                    res.status(500).send('Select a valid quantitiy');
+                }
+                res.status(500).send('The product has only ' + product.piecesAvailable + ' pieces available.');
             }
         } else {
             if (buyer.userId === product.userId) {
-                res.send('Seller cannot buy his own product.');
+                res.status(500).send('Seller cannot buy his own product.');
             } else {
-                res.send('Buyer doesnot have enough money. Update wallet before purchase.');
+                res.status(500).send('Buyer doesnot have enough money. Update wallet before purchase.');
             }
         }
     });
