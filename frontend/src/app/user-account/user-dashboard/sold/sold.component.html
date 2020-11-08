@@ -1,27 +1,23 @@
 <div class="outer">
   <div class="inner">
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
-            <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch" xFlex.sm="33%" *ngFor="let product of products$ | async">
+            <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch" xFlex.sm="33%" *ngFor="let sell of sells$ | async">
 
               <mat-card class="mat-elevation-z4">
-                  <mat-card-title>{{product.title}}</mat-card-title>
-                  <mat-card-subtitle>
-                    <mat-card-title *ngIf="product.sellOrlend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
-                    <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
-                  </mat-card-subtitle>
-                <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
-                <mat-card-content>
-                  <p>{{product.description}}</p>
-                  <p>Location: {{product.location}}; Delivery: {{product.deliveryPossible}}</p>
-                </mat-card-content>
-                <mat-card-actions>
-       <button mat-button (click)="removeitem()" >REMOVE</button>
-                  </mat-card-actions>
-              </mat-card>
-            </div>
-
+                <mat-card-title>{{sell.productId}}</mat-card-title>
+                <mat-card-subtitle>
+                  {{sell.quantity}}
+                </mat-card-subtitle>
+              <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+              <mat-card-content>
+              </mat-card-content>
+              <mat-card-actions>
+                  <button mat-button (click)="removeitem()" >REMOVE</button>
+                </mat-card-actions>
+            </mat-card>
           </div>
-</div>
-
-</div>
-
+  
+        </div>
+  </div>
+  
+  </div>

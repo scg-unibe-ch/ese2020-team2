@@ -18,10 +18,6 @@ export interface PiecesAvailable {
   value: number;
   display: number;
 }
-export interface PriceDur {
-  value: string;
-  display: string;
-}
 
 @Component({
   selector: 'app-sell-item',
@@ -41,22 +37,20 @@ export class SellItemComponent implements OnInit {
   formular = this.fb.group(
     {
 
-
-
       type: ["", Validators.required],
       title: ["", Validators.required],
       userName: [localStorage.getItem('userName')],
       price: [, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrlend: ["sell", Validators.required],
-      status: ["posted"],
+      sellOrLend: ["sell", Validators.required],
       deliveryPossible: [, Validators.required],
       piecesAvailable: [, Validators.required],
-      pricedur: ["",],
-
+      status: ["available"],
+      userId: [JSON.parse(localStorage.getItem('user')).userId],
+      visibleInMarket: [true,],
+      sellerReview: []
     });
-
 
   
    types: Type[] = [
@@ -90,27 +84,26 @@ export class SellItemComponent implements OnInit {
 
 ];
 
-prices: PriceDur[] = [
-  {value: 'hour', display: '/Hour'},
-  {value: 'day', display: '/Day'}
-];
-
   
 
   ngOnInit(): void {
   }
 
   
-  get typ() { return this.formular.get("type") };
+  
+  get type() { return this.formular.get("type") };
+  get userId() { return this.formular.get("userId") };
   get title() { return this.formular.get("title") };
+  get userName() { return this.formular.get("userName") };
   get price() { return this.formular.get("price") };
   get description() { return this.formular.get("description") };
-  get location() { return this.formular.get("location") };
-  get sellOrlend() { return this.formular.get("sellOrlend") };
   get status() { return this.formular.get("status") };
+  get location() { return this.formular.get("location") };
+  get sellOrLend() { return this.formular.get("sellOrLend") };
   get deliveryPossible() { return this.formular.get("deliveryPossible") };
   get piecesAvailable() { return this.formular.get("piecesAvailable") };
-
+  get visibleInMarket() { return this.formular.get("visibleInMarket ") };
+  get sellerReview() { return this.formular.get("sellerReview ") };
 
   post() {
     this.httpClient.post(environment.endpointURL + 'product/add',
@@ -123,7 +116,6 @@ prices: PriceDur[] = [
 clear() {
   this.formular.reset();
   this.formular.controls['userName'].setValue(localStorage.getItem('userName'));
-  this.formular.controls['status'].setValue("posted");
   //this.username.setValue("");
 }
 

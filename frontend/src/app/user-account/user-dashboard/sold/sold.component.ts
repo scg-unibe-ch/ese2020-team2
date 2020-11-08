@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductList } from 'src/app/models/product-list.model';
 import { Product } from 'src/app/models/product.model';
+import { SoldService } from 'src/app/services/sold.service';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
 import {map} from "rxjs/operators";
+import { Purchase } from 'src/app/models/purchase.model';
 
 @Component({
   selector: 'app-sold',
@@ -15,22 +17,20 @@ import {map} from "rxjs/operators";
 export class SoldComponent implements OnInit {
 
   productList: ProductList;
-  products$: Observable<Product[]>;
+  sells$: Observable<Purchase[]>;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
+    private soldService: SoldService,
     private users: CurrentUser) {
 
 }
 
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.status === "sold" && product.userName === localStorage.getItem('userName') )
-      )
-    );
+    this.sells$ = this.soldService.getSells().pipe(map(sells =>
+      sells.filter(purchase => purchase.paymentType === 'wallet points')
+    )
+  );
+    
   }
-
-
-
-
 }

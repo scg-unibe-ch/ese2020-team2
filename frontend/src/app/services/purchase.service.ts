@@ -10,11 +10,11 @@ import { Purchase } from '../models/purchase.model';
 export class PurchaseService {
 
   constructor(private httpClient: HttpClient) {}
-  buyingUserId = localStorage.getItem('user');
-userId = 5;
-UserId = parseInt(this.buyingUserId[10]);
+
+
+UserId = JSON.parse(localStorage.getItem('user')).userId;
 
   getPurchases() : Observable<Purchase[]> {
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllUserPurchases/' + this.UserId)
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' + this.UserId)
  }
 }

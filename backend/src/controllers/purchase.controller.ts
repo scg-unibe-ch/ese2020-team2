@@ -20,7 +20,6 @@ purchaseController.post('/add/',
     async (req: Request, res: Response) => {
         const { quantity }  = req.body;
         const product = await Product.findOne({ where: { productId: req.body.productId } });
-<<<<<<< HEAD
         const user = await User.findOne({ where: { userId: req.body.buyerUserId } });
 
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
@@ -42,15 +41,6 @@ purchaseController.post('/add/',
                     res.send('Product quantity exceeded (' + product.piecesAvailable  + ' available) ' +
                         'or the quantity entered is nonsense!\nPlease try again.');
                 }
-=======
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
-        // This condition is to allow purchase only if the buying has enough wallet points to buy the product.
-        if (user && product && user.moneyInWallet >= product.price * quantity && product.piecesAvailable >= quantity) {
-            const { purchaseId } = await Purchase.create(req.body);
-            if (purchaseId === undefined) {
-                res.status(500); // or some other bad code
-                res.send('Purchase failed! Try again');
->>>>>>> 0c9c6a5a16ac1f064da1508c241a5fd72a260178
             } else {
                 res.send('The product has run out of quantity!');
             }
@@ -60,7 +50,6 @@ purchaseController.post('/add/',
         }
     });
 
-<<<<<<< HEAD
     /**
      * This function updates the user wallets with (product price * quantity of purchase).
      * The wallet of the buyer os decremented and the wallet of the seller is incremented.
@@ -72,14 +61,6 @@ purchaseController.post('/add/',
 
         // Following code is to decrement the wallet points in buyer wallet.
 
-=======
-    /*This function updates the user wallets with (product price * qnatity of purchase).
-    The wallet of the buying os decremented and the wallet of the seller is incremented.*/
-    async function updateUserWallets (req: Request, res: Response) {
-        const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const user = await User.findOne({ where: { userId: req.body.buyingUserId } });
-        // Following code is to decrement the walletpoints in buying wallet.
->>>>>>> 0c9c6a5a16ac1f064da1508c241a5fd72a260178
         let walletPoints = (user.moneyInWallet) - (product.price * req.body.quantity);
         User.findByPk(req.body.buyerUserId)
             .then(found => {
@@ -147,9 +128,9 @@ purchaseController.post('/add/',
  * This method if called outputs all bought products of a precise user (buyer)
  */
 
-    purchaseController.get('/getAllbuyingPurchases/:id',
+    purchaseController.get('/getAllBuyerPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({where: {buyingUserId:  req.params.id}})
+        Purchase.findAll({where: {buyerUserId:  req.params.id}})
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
     });

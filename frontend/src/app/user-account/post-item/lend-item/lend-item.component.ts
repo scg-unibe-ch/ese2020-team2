@@ -43,18 +43,19 @@ export class LendItemComponent implements OnInit {
     {
 
 
-
       type: ["", Validators.required],
       title: ["", Validators.required],
       userName: [localStorage.getItem('userName')],
       price: [, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrlend: ["lend", Validators.required],
-      duration: ["", Validators.required],
-      status: ["posted"],
+      sellOrLend: ["lend", Validators.required],
       deliveryPossible: [, Validators.required],
-      piecesAvailable: [1, Validators.required],
+      status: ["available"],
+      userId: [JSON.parse(localStorage.getItem('user')).userId],
+      visibleInMarket: [true,],
+      sellerReview: [],
+      duration: ["", Validators.required],
 
     });
 
@@ -86,17 +87,19 @@ prices: PriceDur[] = [
   ngOnInit(): void {
   }
 
-  
-  get typ() { return this.lendformular.get("type") };
+  get userId() { return this.lendformular.get("userId") };
+  get type() { return this.lendformular.get("type") };
+  get userName() { return this.lendformular.get("userName") };
+  get visibleInMarket() { return this.lendformular.get("visibleInMarket ") };
+  get sellerReview() { return this.lendformular.get("sellerReview ") };
   get title() { return this.lendformular.get("title") };
   get price() { return this.lendformular.get("price") };
   get description() { return this.lendformular.get("description") };
   get location() { return this.lendformular.get("location") };
   get duration() { return this.lendformular.get("duration") };
-  get sellOrlend() { return this.lendformular.get("sellOrlend") };
+  get sellOrLend() { return this.lendformular.get("sellOrLend") };
   get status() { return this.lendformular.get("status") };
-  get deliveryPossible() { return this.lendformular.get("deliveryPossible") };
-  get piecesAvailable() { return this.lendformular.get("piecesAvailable") };
+  get deliveryPossible() { return this.lendformular.get("deliveryPossible") };  
 
 
   post() {

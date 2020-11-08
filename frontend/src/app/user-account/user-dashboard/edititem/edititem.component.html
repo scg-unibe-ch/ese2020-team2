@@ -37,7 +37,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="sellOrlend" placeholder="Sell/Lend" [ngModel]="product?.sellOrlend" (ngModelChange)="product.sellOrlend=$event">
+          <mat-select formControlName="sellOrLend" placeholder="Sell/Lend" [ngModel]="product?.sellOrLend" (ngModelChange)="product.sellOrLend=$event">
             <mat-option *ngFor="let contract of contracts" [value]="contract.value">
               {{contract.display}}
             </mat-option>

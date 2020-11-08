@@ -18,7 +18,8 @@ import {Approval} from "../models/approval";
 export class Catalog2Component implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   products$: Observable<Product[]>;
-  search: "";
+  search: string = "";
+  filtervalue: string = "";
   minValue: number = 0;
   maxValue: number = 50;
   options: Options = {
@@ -46,15 +47,44 @@ export class Catalog2Component implements OnInit {
 
 
 
+  changefiltervalue(filtervalue: string){
+    this.filtervalue = filtervalue;
+  };
+
+  
   ngOnInit(): void {
     this.getAllProducts();
   }
 
-  filterprice(minValue: number, maxValue: number) {
+  filter(minValue: number, maxValue: number, filtervalue: string, search:string ) {
+    if (search == "" && filtervalue == ""){
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "posted")
+      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" 
+       ))
       )
-    ));
+    );
+    }
+    else if (search == ""){
+      this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" && (product.sellOrLend === filtervalue || product.type === filtervalue)
+         ))
+        )
+      );
+    }
+    else if (filtervalue == ""){
+      this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" 
+        && (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) ))
+        )
+      );
+    }
+    else {
+      this.products$ = this.productsService.getProducts().pipe(map(products =>
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" && (product.sellOrLend === filtervalue || product.type === filtervalue)
+        && (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) ))
+        )
+      );
+    }
 
   }
 
@@ -65,35 +95,6 @@ export class Catalog2Component implements OnInit {
   }
 
 
-
-  filterlend() {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.sellOrlend === "lend" && product.status === "posted" && product.adminApproval === "approved")
-      )
-    );
-  }
-
-  filtersell() {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.sellOrlend === "sell" && product.status === "posted" && product.adminApproval === "approved")
-      )
-    );
-
-  }
-  filterproducts() {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.type === "product" && product.status === "posted" && product.adminApproval === "approved")
-      )
-    );
-
-  }
-  filterservices() {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => product.type === "service" && product.status === "posted" && product.adminApproval === "approved")
-      )
-    );
-  }
-
   wish() {
 
   }
@@ -102,23 +103,13 @@ export class Catalog2Component implements OnInit {
     this.httpClient.post(environment.endpointURL + 'purchase/add/', {
       productId: product.productId,
       quantity: 1,
-      buyingUserId: JSON.parse(localStorage.getItem('user')).userId,
-      sellerUserId: 1,
+      buyerUserId: JSON.parse(localStorage.getItem('user')).userId,
+      sellerUserId: product.userId,
       deliveryAddress: "kk"}).subscribe();
   }
   refresh(): void {
     window.location.reload();
   }
-
-
-  searchsite(search: string) {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => ( (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) && product.status === "posted"))
-      )
-    );
-
-  }
-
 
 
 

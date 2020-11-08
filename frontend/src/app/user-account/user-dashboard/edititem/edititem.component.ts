@@ -19,7 +19,7 @@ export interface DeliveryPossible {
   value: boolean;
   display: string;
 }
-export interface SellOrLend {
+export interface sellOrLend {
   value: string;
   display: string;
 }
@@ -75,7 +75,7 @@ export class EdititemComponent implements OnInit {
       price: [0, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
-      sellOrlend: ["", Validators.required],
+      sellOrLend: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [false, Validators.required],
     });
@@ -95,7 +95,7 @@ export class EdititemComponent implements OnInit {
   ];
 
 
-  contracts: SellOrLend[] = [
+  contracts: sellOrLend[] = [
     {value: 'sell', display: 'Sell'},
     {value: 'lend', display: 'Lend'}
   ];
@@ -115,7 +115,7 @@ export class EdititemComponent implements OnInit {
   get price() { return this.editformular.get("price") };
   get description() { return this.editformular.get("description") };
   get location() { return this.editformular.get("location") };
-  get sellOrlend() { return this.editformular.get("sellOrlend") };
+  get sellOrLend() { return this.editformular.get("sellOrLend") };
   get status() { return this.editformular.get("status") };
   get deliveryPossible() { return this.editformular.get("deliveryPossible") };
 
@@ -136,7 +136,7 @@ confirm(product: Product): void {
     price: product.price,
     description: product.description,
     location: product.location,
-    sellOrlend: product.sellOrlend,
+    sellOrLend: product.sellOrLend,
     deliveryPossible: product.deliveryPossible,
   }).subscribe();
 }

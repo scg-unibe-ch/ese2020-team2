@@ -26,8 +26,8 @@
           <mat-card-subtitle>
             <br>
 
-            <mat-card-title *ngIf="product.sellOrlend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
-            <mat-card-title *ngIf="product.sellOrlend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
           <mat-card-content>
             <div style="font-size: 200%;">Description:</div>
@@ -44,8 +44,8 @@
           <br>
           <mat-card-actions>
             <div style="text-align: center;">
-              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'sell'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;" >BUY</button>
-              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrlend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;">RENT</button>
+              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;" >BUY</button>
+              <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 35%; height: 20%; font-size: 200%;">RENT</button>
               <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 35%; height: 20%; font-size: 200%;">WISH</button>
             </div>
               <p *ngIf = "!(loggedIn$ | async)" style=" font-size: 120%;">Log in to buy item</p>
