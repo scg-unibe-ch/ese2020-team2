@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction, Router } from 'express';
 import {create} from 'domain';
-import multer from 'multer';
+// import multer from 'multer';
 
 const imageController = express.Router();
 /*
