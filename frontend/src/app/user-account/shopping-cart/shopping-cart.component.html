@@ -1,12 +1,60 @@
-<mat-card class="home-card">
-  <mat-card-content class="home-card-content">
-    <img mat-card-image
-      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-      alt="Photo of a Shiba Inu">
-    <div>
-      <div>Second</div>
-      <div>Third</div>
-      <div>Fourth</div>
-    </div>
-  </mat-card-content>
-</mat-card>
+
+
+<section class="container">
+  <div class="left-half">
+    <mat-card  class="card" *ngFor="let product of shoppingCart$ | async" >
+      <mat-card-content fxLayout.gt-sm="row">
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
+          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
+        </div>
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
+          <mat-card-title>{{product.title}}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-card-title *ngIf="product.sellOrLend =='sell'">Price: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product.sellOrLend =='lend'">Price: {{product.price}} Fr</mat-card-title>
+          </mat-card-subtitle>
+  
+            <p>{{product.piecesAvailable}}</p>
+            <p>Location: {{product.location}}</p>
+            <p>Delivery: {{product.deliveryPossible}}</p>
+            <br>
+            <button (click)="buy(product);refresh()" type="submit" style="width: 40%; vertical-align: bottom  ;">remove</button>
+           
+  
+  
+  
+        </div>
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
+
+            <mat-select [(value)]="quantity" style="width: 17%;margin-left: 80%;margin-top: 20%;">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+            </mat-select>
+            <br>
+            <br>
+            <p style="padding-left: 80%;">
+              CHF: 30
+            </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="right-half">
+    <mat-card>
+      <mat-card-content >
+        <mat-card-title>Total:</mat-card-title>
+        <br>
+        <p>total price (quantity*price of all items) </p>
+        <br>
+        <p>you have: tokens</p>
+        <br>
+        <br>
+
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;">buy</button>
+
+    </mat-card-content>
+    </mat-card>
+    
+  </div>
+</section>

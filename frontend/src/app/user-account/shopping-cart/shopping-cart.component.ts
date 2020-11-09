@@ -10,9 +10,10 @@ import {Product} from "../../models/product.model";
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  private shoppingCart = [2,1];
+  private shoppingCart = [2,1,3,4,5];
   shoppingCart$: Observable<Product[]>;
   private products: Product[];
+  quantity = 1;
 
   constructor(private httpClient: HttpClient,
               private productsService: ProductsService) { }

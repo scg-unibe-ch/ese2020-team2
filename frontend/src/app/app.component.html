@@ -4,7 +4,7 @@
 
   <!-- This is the picture on the top it takes 12% page-->
 
-    <img  src="https://images.wallpaperscraft.com/image/lines_shapes_stripes_blue_109653_3840x2160.jpg"
+    <img  src="https://iili.io/2hfKQV.jpg"
         style="
         height: 12%;
         width: 100%;
@@ -14,33 +14,33 @@
 <!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
 
 
-  <mat-toolbar color="primary" style="height: 8%;">
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Home" class="btn btn-success" btn btn-success routerLink="/home">
+  <mat-toolbar [style.backgroundColor]="'rgba(22, 23, 24, 0.816  )'" style="height: 8%;">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip="Home" class="btn" btn btn-success routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" User Registration" *ngIf = "!(loggedIn$ | async)" class="btn btn-success" routerLink="/register">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip=" User Registration" *ngIf = "!(loggedIn$ | async)" class="btn" routerLink="/register">
       <mat-icon>assignment</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip=" View Products" class="btn btn-success" routerLink="/catalog2">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip=" View Products" class="btn" routerLink="/catalog2">
       <mat-icon>credit_card</mat-icon>
     </button>
 
-    <span>ESE Project</span>
+    <span style="color: white;">ESE Project</span>
     <span class="example-spacer"></span>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn btn-success" routerLink="/login">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn" routerLink="/login">
        <mat-icon>forward</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip="Shopping Cart" *ngIf = "(loggedIn$ | async)" class="btn btn-success" routerLink="/shopping-cart">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip="Shopping Cart" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/shopping-cart">
       <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn btn-success" routerLink="/account"
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
     matBadge="{{numberOfNotification}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="hidden || numberOfNotification===0" (click)="toggleBadgeVisibility()">
       <mat-icon>archive</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn btn-success" routerLink="/login">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" routerLink="/login">
       <mat-icon>clear</mat-icon>
     </button>
-    <button style="color: black; background-color: rgba(48, 129, 129, 0.781);" matTooltip = "Administrator" *ngIf = "(isAdmin)"class="btn btn-success" routerLink="/admin/dashboard">
+    <button style="color: black; background-color: rgba(92, 106, 121, 0.616);" matTooltip = "Administrator" *ngIf = "(isAdmin)"class="btn" routerLink="/admin/dashboard">
       Administrator
     </button>
   </mat-toolbar>

@@ -1,48 +1,53 @@
-html {
-    min-height: 100%;
-}
 
+  
+  .mat-normal {
+      height: 40% !important; 
 
-body {
-    height: 100%;
-    margin: 0px;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+  }
 
+  .card {
+      max-height: 285px !important;
+  }
 
-.home-card {
-    border-radius: 4px;
-    max-width: 600px;
-    max-height: 1000px;
-    margin-top: 100px;
-    padding: 0;
+  img {
+    height: max-content; 
+    max-height: 270px !important; 
+    object-fit: cover !important;
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+  }
 
-    .mat-card-image {
-      margin: 0;
-      height: 100%;
-    }
+  .outer {
+    overflow:scroll;
+    height: 77%;
+  }
 
-    .home-card-content {
-      display: flex;
-      justify-content: space-between;
+  
 
-      & > * {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: auto;
-        max-width: 50%;
+  
+  section {
+    width: 100%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 2%;
+    overflow-y: scroll;
+    height: 80%;
+  }
+  
 
-        &:first-child {
-          border-top-left-radius: 4px;
-          border-bottom-left-radius: 4px;
-        }
+  
+  
+  
+  /* Pattern styles */
+  .left-half {
+    float: left;
+    width: 65%;
+  }
+  .right-half {
 
-        &:last-child {
-          flex-direction: column;
-          align-items: start;
-          padding: 8px;
-        }
-      }
-    }
-}
+    position: sticky;
+    top: 0%;
+    float: right;
+    width: 32%;
+  }
