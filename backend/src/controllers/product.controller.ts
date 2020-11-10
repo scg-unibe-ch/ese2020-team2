@@ -16,7 +16,6 @@ productController.post('/add', (req: Request, res: Response) => {
  */
 productController.delete('/delete/:id', async (req: Request, res: Response) => {
     // Setting all product attribute to null or 0 to hide user information
-    // problem is here -> const product = await Product.findOne({ where: { productId: req.body.productId } });
     const productUserId = 0;
     const productType = 'empty';
     const productTitle = 'empty';
@@ -36,9 +35,8 @@ productController.delete('/delete/:id', async (req: Request, res: Response) => {
     // deletes the product information
     Product.findByPk(req.params.id).then(found => {
             if (found != null) {
-                // if (product.userId !== 0) {
+                 if (found.userId !== 0) {
                     found.update({
-
                         userId: productUserId,
                         type: productType,
                         title: productTitle,
@@ -55,9 +53,9 @@ productController.delete('/delete/:id', async (req: Request, res: Response) => {
                         sellerReview: productSellerReview,
                         status: productStatus
                     }).then(() => res.status(200).send('Product is removed successfully.'));
-            //    } else {
-            //        res.status(500).send('Product already deleted');
-            //    }
+               } else {
+                   res.status(500).send('Product already deleted');
+               }
              } else {
                 res.status(404).send('Product not found.');
              }
