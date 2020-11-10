@@ -36,7 +36,7 @@ purchaseController.post('/add/',
                 }
             } else {
                 if (quantity <= 0) {
-                    res.status(500).send('Select a valid quantitiy');
+                    res.status(500).send('Select a valid quantity');
                 }
                 res.status(500).send('The product has only ' + product.piecesAvailable + ' pieces available.');
             }
@@ -44,7 +44,7 @@ purchaseController.post('/add/',
             if (buyer.userId === product.userId) {
                 res.status(500).send('Seller cannot buy his own product.');
             } else {
-                res.status(500).send('Buyer doesnot have enough money. Update wallet before purchase.');
+                res.status(500).send('Buyer does not have enough money. Update wallet before purchase.');
             }
         }
     });

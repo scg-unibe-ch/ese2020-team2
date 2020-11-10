@@ -70,6 +70,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
+                unique: true
             },
             userId: {
                 type: DataTypes.INTEGER,
