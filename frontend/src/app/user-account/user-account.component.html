@@ -1,10 +1,14 @@
 <!--The account of the user has 3 tabs containing the wallet, the history and the todolist-->
-<mat-card><div class="sitemessage">
+<mat-card *ngIf="(listOfNotification$ | async)?.length!=0">
+    <mat-card-title>You have the following notifications:</mat-card-title>
+  <div class="sitemessage">
   <div>
   <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch"fxFlex.sm="33%" *ngFor="let notfication of listOfNotification$ | async">
     <div>
-     You have sold {{notfication.quantity}} times product with Id {{notfication.productId}}. 
-    </div><div> </div>
+      <mat-card-subtitle>
+        You have sold {{notfication.quantity}} times product with Id {{notfication.productId}}.
+      </mat-card-subtitle>
+    </div>
   </div>
 </div>
 </div></mat-card>
