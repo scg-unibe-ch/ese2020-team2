@@ -1,6 +1,7 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
+import { User } from '../models/user.model';
 
 const productController: Router = express.Router();
 
@@ -86,7 +87,7 @@ productController.put('/edit/:id', (req: Request, res: Response) => {
  */
 productController.get('/getAll',
     (req: Request, res: Response) => {
-        Product.findAll()
+        Product.findAll({include: [Product.associations.user]})
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
@@ -96,11 +97,11 @@ productController.get('/getAll',
  */
 productController.get('/get/:id',
     (req: Request, res: Response) => {
-        Product.findByPk(req.params.id)
+        Product.findByPk(req.params.id )
             .then(found => {
                 if (found != null) {
                     Product.findOne({
-                        where: { productId: req.params.id }
+                        where: { productId: req.params.id }, include: [Product.associations.user]
                     })
                         .then(product => res.status(200).send(product))
                         .catch(err => res.status(500).send(err));
@@ -115,21 +116,21 @@ productController.get('/get/:id',
  * This method is to add new reviews in the  products model.
  * Each time a new review is added, it will be added to the existing Array of reviews.
  */
-productController.put('/addNewReview/:id', (req: Request, res: Response) => {
-    Product.findByPk(req.params.id)
-        .then(found => {
-            if (found != null) {
-                found.update({
-                    sellerReview: found.sellerReview.concat(req.body.sellerReview)
-                }, { where: { productId: req.params.id } })
-                    .then(() => {
-                        res.status(200).send('Review added successfully.');
-                    })
-                    .catch(err => res.status(500).send(err));
-            } else {
-                res.status(404).send('Product not found.');
-            }
-        })
-        .catch(err => res.status(500).send(err));
-});
+// productController.put('/addNewReview/:id', (req: Request, res: Response) => {
+//     Product.findByPk(req.params.id)
+//         .then(found => {
+//             if (found != null) {
+//                 found.update({
+//                     sellerReview: found.sellerReview.concat(req.body.sellerReview)
+//                 }, { where: { productId: req.params.id } })
+//                     .then(() => {
+//                         res.status(200).send('Review added successfully.');
+//                     })
+//                     .catch(err => res.status(500).send(err));
+//             } else {
+//                 res.status(404).send('Product not found.');
+//             }
+//         })
+//         .catch(err => res.status(500).send(err));
+// });
 export const ProductController: Router = productController;
