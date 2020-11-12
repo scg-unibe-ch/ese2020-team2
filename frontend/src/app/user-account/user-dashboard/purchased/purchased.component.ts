@@ -9,6 +9,7 @@ import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import { Purchase } from 'src/app/models/purchase.model';
 import { environment } from 'src/environments/environment';
+import {Approval} from "../../../models/approval";
 
 @Component({
   selector: 'app-purchased',
@@ -19,6 +20,7 @@ export class PurchasedComponent implements OnInit {
 
   productList: ProductList;
   purchases$: Observable<Purchase[]>;
+  review: any;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -32,7 +34,26 @@ ngOnInit(): void {
     purchases.filter(purchase => purchase.paymentType === 'wallet points')
   )
 );
+  }
+  addReview():void {
 
   }
+
+submitReview(productId: number): void {
+  this.httpClient.put(environment.endpointURL + 'product/edit/' + productId, {
+    adminApproval: Approval.pending,
+    typ: product.type,
+    title: product.title,
+    price: product.price,
+    description: product.description,
+    location: product.location,
+    sellOrLend: product.sellOrLend,
+    deliveryPossible: product.deliveryPossible,
+  });
+}
+
+removePurchase(): void{
+
+}
 }
 
