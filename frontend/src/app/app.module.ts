@@ -50,6 +50,7 @@ import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.
 import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-cart.component';
+import { ReviewComponent } from './user-account/user-dashboard/purchased/review/review.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-car
     EdititemComponent,
     DetailedProductComponent,
     ShoppingCartComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,3 +16,7 @@ button, input {
 .mat-form-field-wrapper {
   margin-right: 25px !important;
 }
+
+textarea {
+  resize: none;
+}

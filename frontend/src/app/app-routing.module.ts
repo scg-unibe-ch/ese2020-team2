@@ -15,6 +15,8 @@ import {UserDashboardComponent} from './user-account/user-dashboard/user-dashboa
 import {AdminComponent} from "./admin/admin.component";
 import {DetailedProductComponent} from "./catalog2/detailed-product/detailed-product.component";
 import {ShoppingCartComponent} from "./user-account/shopping-cart/shopping-cart.component";
+import {Review} from "../../../backend/src/models/review.model";
+import {ReviewComponent} from "./user-account/user-dashboard/purchased/review/review.component";
 
 
 const routes: Routes = [
@@ -33,6 +35,10 @@ const routes: Routes = [
   { path: 'catalog', component: CatalogComponent},
   { path: 'catalog2', component: Catalog2Component},
   { path: 'product/:id', component: DetailedProductComponent},
+  { path: 'review/:id/:buyerId/:purchaseId', component: ReviewComponent,
+    canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
+
+
 
   {
     path: 'admin',

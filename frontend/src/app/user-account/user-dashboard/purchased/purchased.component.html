@@ -1,7 +1,7 @@
 <div class="outer">
 <div class="inner">
     <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
-        <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch"fxFlex.sm="33%" *ngFor="let purchase of purchases$ | async">
+        <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch"fxFlex.sm="33%" *ngFor="let purchase of purchases$ | async; index as index">
 
           <mat-card class="mat-elevation-z4">
               <mat-card-title>{{purchase.productId}}</mat-card-title>
@@ -12,11 +12,8 @@
             <mat-card-content>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-button (click)="addReview()">Add review</button>
               <button mat-button (click)="removePurchase()">Remove</button>
-              <textarea [(ngModel)]="review" #ctrl="ngModel" required placeholder="Your Review" cols="40" rows="5"></textarea>
-              <button mat-button (click)="submitReview(purchase.productId)" >Submit review</button>
-
+              <button mat-button [routerLink]="['/review', purchase.productId, purchase.buyerUserId, purchase.purchaseId]" style="width: 20%;">Add Review</button>
             </mat-card-actions>
           </mat-card>
         </div>

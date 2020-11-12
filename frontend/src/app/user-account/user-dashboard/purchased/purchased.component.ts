@@ -20,7 +20,8 @@ export class PurchasedComponent implements OnInit {
 
   productList: ProductList;
   purchases$: Observable<Purchase[]>;
-  review: any;
+  review = "";
+  showReviewField: boolean;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -35,22 +36,6 @@ ngOnInit(): void {
   )
 );
   }
-  addReview():void {
-
-  }
-
-submitReview(productId: number): void {
-  this.httpClient.put(environment.endpointURL + 'product/edit/' + productId, {
-    adminApproval: Approval.pending,
-    typ: product.type,
-    title: product.title,
-    price: product.price,
-    description: product.description,
-    location: product.location,
-    sellOrLend: product.sellOrLend,
-    deliveryPossible: product.deliveryPossible,
-  });
-}
 
 removePurchase(): void{
 
