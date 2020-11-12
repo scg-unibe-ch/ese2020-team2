@@ -6,6 +6,7 @@ import { UserController } from './controllers/user.controller';
 import { ProductController } from './controllers/product.controller';
 import { SecuredController } from './controllers/secured.controller';
 import { PurchaseController } from './controllers/purchase.controller';
+import { ReviewController } from './controllers/review.controller';
 import { AdminController } from './controllers/admin.controller';
 import { ImageController } from './controllers/productImage.controller';
 
@@ -15,6 +16,7 @@ import { TodoItem } from './models/todoitem.model';
 import { User } from './models/user.model';
 import { Product } from './models/product.model';
 import { Purchase } from './models/purchase.model';
+import { Review } from './models/review.model';
 import { ProductImage } from './models/productImage.model';
 
 
@@ -35,13 +37,16 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         Purchase.initialize(this.sequelize);
+        Review.initialize(this.sequelize);
         ProductImage.initialize(this.sequelize);
 
         TodoItem.createAssociations();
         TodoList.createAssociations();
         ProductImage.createAssociations();
+        User.createAssociations();
         Product.createAssociations();
         Purchase.createAssociations();
+        Review.createAssociations();
 
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
@@ -77,6 +82,7 @@ export class Server {
             .use('/product', ProductController)
             .use('/admin', AdminController)
             .use('/purchase', PurchaseController)
+            .use('/review', ReviewController)
             .use('/secured', SecuredController)
             .use('/image', ImageController)
             .options('*', cors(options))

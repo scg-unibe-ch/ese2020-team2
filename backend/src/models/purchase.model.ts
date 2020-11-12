@@ -1,7 +1,9 @@
-import { Product } from './product.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { User } from './user.model';
+import { Product } from './product.model';
+import { Review } from './review.model';
 import {ProductImage} from './productImage.model';
+
 
 /*This is the Purchase model used to save the data about purchases*/
 
@@ -103,7 +105,17 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
         );
     }
     public static createAssociations() {
-        Purchase.belongsTo(User);
-        Purchase.belongsTo(Product);
+        Purchase.belongsTo(User, {
+            targetKey: 'userId',
+            as: 'user',
+            foreignKey: 'userId',
+            constraints: false
+        });
+        Purchase.belongsTo(Product, {
+            targetKey: 'productId',
+            as: 'product',
+            foreignKey: 'productId',
+            constraints: false
+        });
     }
 }

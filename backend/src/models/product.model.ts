@@ -1,7 +1,10 @@
 
-import {Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin} from 'sequelize';
-import {User} from './user.model';
-import {ProductImage} from './productImage.model';
+import { Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin } from 'sequelize';
+import { User } from './user.model';
+import { Purchase } from './purchase.model';
+import { Review } from './review.model';
+import { ProductImage } from './productImage.model';
+
 
 /*This is the Product model used to save the data about products*/
 
@@ -14,8 +17,6 @@ export interface ProductAttributes {
     type: string;
     // Title of the product
     title: string;
-    // Name of the user who created the product/service
-    userName: string;
     // Price in points
     price: number;
     // Product description
@@ -39,8 +40,8 @@ export interface ProductAttributes {
     disapprovalMsg: string;
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
-    // Needed to grade the seller behavior (review)
-    sellerReview: string[];
+    // // Needed to grade the seller behavior (review)
+    // sellerReview: string;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -50,7 +51,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     userId!: number;
     type!: string;
     title!: string;
-    userName!: string;
     price!: number;
     description!: string;
     location!: string;
@@ -61,7 +61,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
-    sellerReview!: string[];
+    // sellerReview!: string;
     public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
@@ -70,20 +70,17 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
+                unique: true
             },
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
-                },
+            },
             type: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
             title: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            userName: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -136,11 +133,16 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: false
             },
-            sellerReview: {
-                type: DataTypes.STRING,
-                allowNull: true,
-                defaultValue: 'empty'
-            }
+            // sellerReview: {
+            //     type: DataTypes.STRING,
+            //     allowNull: true,
+            //     get: function () {
+            //         return JSON.parse(this.getDataValue('sellerReview'));
+            //     },
+            //     set: function (val) {
+            //         return this.setDataValue('sellerReview', JSON.stringify(val));
+            //     }
+            // }
         },
             {
                 sequelize,
@@ -149,9 +151,21 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
         );
     }
     public static createAssociations() {
-        Product.belongsTo(User);
-        Product.hasMany(ProductImage);
+        Product.belongsTo(User, {
+            targetKey: 'userId',
+            as: 'user',
+            foreignKey: 'userId',
+            constraints: false
+        });
+        Product.hasMany(Purchase, {
+            as: 'purchase',
+            foreignKey: 'purchaseId',
+            constraints: false
+        });
+        Product.hasMany(Review, {
+            as: 'review',
+            foreignKey: 'reviewId',
+            constraints: false
+        });
     }
-
-
 }
