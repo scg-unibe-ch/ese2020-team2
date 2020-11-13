@@ -1,53 +1,59 @@
-
+.mat-normal {
+  height: 40% !important; 
   
-  .mat-normal {
-      height: 40% !important; 
-
   }
-
+  
   .card {
-      max-height: 285px !important;
+  max-height: 285px !important;
+  height: 285px !important;
   }
-
-  img {
-    height: max-content; 
-    max-height: 270px !important; 
-    object-fit: cover !important;
-    padding-left: 5%;
-    padding-top: 5%;
-    padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
-  }
-
-  .outer {
-    overflow:scroll;
-    height: 77%;
-  }
-
   
-
+  img {
+  height: max-content; 
+  max-height: 270px !important; 
+  object-fit: cover !important;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+  }
+  
+  .outer {
+  overflow:scroll;
+  height: 77%;
+  }
+  
+  .btn {
+  background-color: DodgerBlue; /* Blue background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  }
+  /* Darker background on mouse-over */
+  .btn:hover {
+  background-color: RoyalBlue;
+  }
   
   section {
-    width: 100%;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 2%;
-    overflow-y: scroll;
-    height: 80%;
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  overflow-y: scroll;
+  height: 80%;
   }
-  
-
-  
-  
   
   /* Pattern styles */
   .left-half {
-    float: left;
-    width: 65%;
+  float: left;
+  width: 65%;
   }
   .right-half {
-
-    position: sticky;
-    top: 0%;
-    float: right;
-    width: 32%;
+  
+  position: sticky;
+  top: 0%;
+  float: right;
+  width: 32%;
   }
+  
