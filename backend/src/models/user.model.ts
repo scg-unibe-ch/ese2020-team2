@@ -14,7 +14,7 @@ export interface UserAttributes {
     gender: string;
     telephone: string;
     street: string;
-    pinCode: number;
+    pinCode: string;
     city: string;
     country: string;
     moneyInWallet: number;
@@ -34,7 +34,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     gender!: string;
     telephone!: string;
     street!: string;
-    pinCode!: number;
+    pinCode!: string;
     city!: string;
     country!: string;
     moneyInWallet!: number;
@@ -80,7 +80,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 type: DataTypes.STRING,
             },
             pinCode: {
-                type: DataTypes.NUMBER,
+                type: DataTypes.STRING,
             },
             city: {
                 type: DataTypes.STRING,

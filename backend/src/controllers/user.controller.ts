@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { verifyToken } from '../middlewares/checkAuth';
-import { checkUniqueUserName, checkUniqueEmail } from '../middlewares/checkRegistration';
+import {User} from '../models/user.model';
 
 const userController: Router = express.Router();
 const userService = new UserService();
@@ -39,5 +39,19 @@ userController.get('/all', verifyToken, // you can add middleware on specific re
         userService.getAll().then(users => res.send(users)).catch(err => res.status(500).send(err));
     }
 );
+
+userController.put('/editUser/:id', (req: Request, res: Response) => {
+    User.findByPk(req.params.id)
+        .then(found => {
+            if (found != null) {
+                found.update(req.body).then(() => {
+                    res.status(200).send('User information updated successfully.');
+                });
+            } else {
+                res.status(404).send('User not found.');
+            }
+        })
+        .catch(err => res.status(500).send(err));
+});
 
 export const UserController: Router = userController;
