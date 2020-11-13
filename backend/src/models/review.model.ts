@@ -22,6 +22,8 @@ export interface ReviewAttributes {
     reviewText: string;
     // Numeric rating od the user to the product
     rating: number;
+    // True if the User saw the notification
+    notificationCheck: boolean;
 
 }
 
@@ -35,6 +37,7 @@ export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> im
     purchaseId!: number;
     reviewText!: string;
     rating!: number;
+    notificationCheck!: boolean;
 
 
     public static initialize(sequelize: Sequelize) {
@@ -72,6 +75,10 @@ export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> im
                     min: 1,
                     max: 5
                 }
+            },
+            notificationCheck: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
             }
         },
             {

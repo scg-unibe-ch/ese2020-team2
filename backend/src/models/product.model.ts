@@ -40,8 +40,10 @@ export interface ProductAttributes {
     disapprovalMsg: string;
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
-    // // Needed to grade the seller behavior (review)
+    // Needed to grade the seller behavior (review)
     // sellerReview: string;
+    // Average of rating given by the users whose bought the product.
+    productRating: number;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -62,6 +64,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
     // sellerReview!: string;
+    productRating!: number;
     public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
@@ -133,6 +136,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: true
             },
+            productRating: {
+                type: DataTypes.NUMBER,
+                allowNull: false,
+                defaultValue: 0
+            }
             // sellerReview: {
             //     type: DataTypes.STRING,
             //     allowNull: true,
