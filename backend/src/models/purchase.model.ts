@@ -2,7 +2,7 @@ import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { User } from './user.model';
 import { Product } from './product.model';
 import { Review } from './review.model';
-import {ProductImage} from './productImage.model';
+import { ProductImage } from './productImage.model';
 
 
 /*This is the Purchase model used to save the data about purchases*/
@@ -64,22 +64,12 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
             },
             buyerUserId: {
                 type: DataTypes.NUMBER,
-                allowNull: false,
-                // references: {
-                //     model: 'User',
-                //     key: 'userId'
-                // }
-
+                allowNull: false
             },
-                sellerUserId: {
-                    type: DataTypes.NUMBER,
-                    allowNull: false,
-                    // references: {
-                    //     model: 'User',
-                    //     key: 'userId'
-                    // }
-
-                },
+            sellerUserId: {
+                type: DataTypes.NUMBER,
+                allowNull: false
+            },
             deliveryAddress: {
                 type: DataTypes.STRING
             },
@@ -92,12 +82,11 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
             },
-
             notificationCheck: {
-            type: DataTypes.BOOLEAN,
+                type: DataTypes.BOOLEAN,
                 defaultValue: false
-             }
-             },
+            }
+        },
             {
                 sequelize,
                 tableName: 'purchases'
