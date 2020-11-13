@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import { Purchase } from 'src/app/models/purchase.model';
 import { environment } from 'src/environments/environment';
 import {Approval} from "../../../models/approval";
+import {Review} from "../../../models/review.model";
 
 @Component({
   selector: 'app-purchased',
@@ -22,6 +23,7 @@ export class PurchasedComponent implements OnInit {
   purchases$: Observable<Purchase[]>;
   review = "";
   showReviewField: boolean;
+  productsIds: number[];
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -31,14 +33,15 @@ export class PurchasedComponent implements OnInit {
 }
 
 ngOnInit(): void {
-  this.purchases$ = this.purchaseService.getPurchases().pipe(map(purchases =>
-    purchases.filter(purchase => purchase.paymentType === 'wallet points')
-  )
-);
+  this.purchases$ = this.purchaseService.getPurchases();
+  this.getReviewsOfUser();
   }
 
-removePurchase(): void{
+  getReviewsOfUser() {
+    this.httpClient.get<Review[]>(environment.endpointURL + 'review/getBuyerReviews/' + JSON.parse(localStorage.getItem('user')).userId)
+      .subscribe(reviews => {this.productsIds = reviews.map(review => review.productId)});
+  }
 
-}
+
 }
 

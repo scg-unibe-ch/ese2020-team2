@@ -34,7 +34,7 @@ export class ProductsService {
 
   /**
    * Gets all the products the user has
-   * @param Ids all the productIds that should be fetched from the backend
+   * @param productIds all the productIds that should be fetched from the backend
    */
   getProductsByMultipleIds(productIds: number[]) : Observable<Product[]> {
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/getAll').pipe(map(products =>

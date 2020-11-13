@@ -15,7 +15,7 @@ reviewController.use(express.json());
  * This method is to add a new review.
  */
 reviewController.post('/add/', async(req: Request, res: Response) => {
-    const review = await Review.findOne({ where: { purchaseId: req.body.purchaseId } });
+    const review = await Review.findOne({ where: { productId: req.body.productId, buyerUserId: req.body.buyerUserId } });
     if (review === null) {
     Review.create(req.body)
         .then(inserted => res.send(inserted))
@@ -50,7 +50,7 @@ reviewController.put('/edit/:id', (req: Request, res: Response) => {
  * This method is to get all the reviews of a particular product.
  */
 reviewController.get('/getReview/:id', (req: Request, res: Response) => {
-    Review.findByPk(req.params.id, { include: [Review.associations.product] })
+    Review.findAll({ where: { productId: req.params.id }, include: [Review.associations.product] })
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
 });

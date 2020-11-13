@@ -13,7 +13,6 @@ import {CurrentUser} from './services/current-user';
   providers:[AuthService]
 })
 export class AppComponent implements OnInit {
-  numberOfNotification = 0;
   loggedIn$: BehaviorSubject<boolean>;
   hidden = false;
   listOfNotification$:Observable<Purchase[]>;

@@ -16,7 +16,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {DetailedProductComponent} from "./catalog2/detailed-product/detailed-product.component";
 import {ShoppingCartComponent} from "./user-account/shopping-cart/shopping-cart.component";
 import {Review} from "../../../backend/src/models/review.model";
-import {ReviewComponent} from "./user-account/user-dashboard/purchased/review/review.component";
+import {ReviewComponent} from "./catalog2/review/review.component";
 
 
 const routes: Routes = [

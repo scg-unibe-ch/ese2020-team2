@@ -12,12 +12,12 @@ export interface ReviewAttributes {
     reviewId: number;
     // Id of the User who bought the reviewing product
     buyerUserId: number;
-    // Id of the User who slod the reviewing product
+    // Name of the User who bought the reviewing product
+    buyerUserName: string;
+    // Id of the User who sold the reviewing product
     sellerUserId: number;
     // Id of the product to which review is given
     productId: number;
-    // Id of the purchase to which review belongs to
-    purchaseId: number;
     // Review text
     reviewText: string;
     // Numeric rating od the user to the product
@@ -30,9 +30,9 @@ export interface ReviewCreationAttributes extends Optional<ReviewAttributes, 're
 export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> implements ReviewAttributes {
     reviewId!: number;
     buyerUserId!: number;
+    buyerUserName!: string;
     sellerUserId!: number;
     productId!: number;
-    purchaseId!: number;
     reviewText!: string;
     rating!: number;
 
@@ -49,15 +49,15 @@ export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> im
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
+            buyerUserName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             sellerUserId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
             productId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            purchaseId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -91,12 +91,6 @@ export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> im
             targetKey: 'productId',
             as: 'product',
             foreignKey: 'productId',
-            constraints: false
-        });
-        Review.belongsTo(Purchase, {
-            targetKey: 'purchaseId',
-            as: 'purchase',
-            foreignKey: 'purchaseId',
             constraints: false
         });
     }

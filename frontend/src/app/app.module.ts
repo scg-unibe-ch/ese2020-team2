@@ -50,7 +50,8 @@ import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.
 import { DetailedProductComponent } from './catalog2/detailed-product/detailed-product.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-cart.component';
-import { ReviewComponent } from './user-account/user-dashboard/purchased/review/review.component';
+import { ReviewComponent } from './catalog2/review/review.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { ReviewComponent } from './user-account/user-dashboard/purchased/review/
     ReactiveFormsModule,
     AdminModule,
     MatBadgeModule,
+    MatButtonToggleModule,
   ],
   providers: [
     [AuthGuardService],

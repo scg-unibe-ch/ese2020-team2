@@ -19,12 +19,12 @@ UserId = JSON.parse(localStorage.getItem('user')).userId;
  }
 
   /**
-   * Gets all the purchases of the provided usr from the backend
+   * Gets all the purchases of the provided user from the backend
    *
    * @param userId the user which purchases should be fetched from the backend
    */
   getPurchasesByUserId(userId: number) : Observable<Purchase[]> {
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllUserPurchases/' + userId)
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' + userId)
   }
 
 }

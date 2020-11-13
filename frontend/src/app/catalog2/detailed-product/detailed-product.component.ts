@@ -8,6 +8,7 @@ import {Approval} from "../../models/approval";
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { environment } from 'src/environments/environment';
+import {Review} from "../../models/review.model";
 
 @Component({
   selector: 'app-detailed-product',
@@ -20,6 +21,7 @@ export class DetailedProductComponent implements OnInit {
   product$: Observable<Product>;
   loggedIn$: BehaviorSubject<boolean>;
   product: Product;
+  reviews$: Observable<Review[]>;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -83,5 +85,7 @@ export class DetailedProductComponent implements OnInit {
   refresh(): void {
     window.location.reload();
 }
+
+
 
 }
