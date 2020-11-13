@@ -13,16 +13,16 @@
             <mat-card-title *ngIf="product.sellOrLend =='sell'">Price: {{product.price}} Fr</mat-card-title>
             <mat-card-title *ngIf="product.sellOrLend =='lend'">Price: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
-  
+
             <p>{{product.piecesAvailable}}</p>
             <p>Location: {{product.location}}</p>
             <p>Delivery: {{product.deliveryPossible}}</p>
             <br>
             <button (click)="buy(product);refresh()" type="submit" style="width: 40%; vertical-align: bottom  ;">remove</button>
-           
-  
-  
-  
+
+
+
+
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
 
@@ -43,18 +43,19 @@
   <div class="right-half">
     <mat-card>
       <mat-card-content >
-        <mat-card-title>Total:</mat-card-title>
+        <mat-card-title>Your purchase</mat-card-title>
         <br>
-        <p>total price (quantity*price of all items) </p>
+        <p>You have <b>{{points$ | async}}</b> tokens </p>
         <br>
-        <p>you have: tokens</p>
+        <p>Your purchase will cost you <b>(quantity*price of all items)</b> </p>
         <br>
+        <p>After the purchase you have <b>{{(points$ | async) - 10}}</b> tokens </p>
         <br>
 
         <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;">buy</button>
 
     </mat-card-content>
     </mat-card>
-    
+
   </div>
 </section>
