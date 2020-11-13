@@ -99,7 +99,7 @@ reviewController.delete('/delete/:id', (req: Request, res: Response) => {
         .catch(err => res.status(500).send(err));
 });
 /**
- * Edits a notificationCheck to Ture, if the user has viewed the notofication.
+ * Edits a notificationCheck to Ture, if the user has viewed the notification.
  */
 reviewController.put('/NotificationViewed/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id)
@@ -107,7 +107,7 @@ reviewController.put('/NotificationViewed/:id', (req: Request, res: Response) =>
             if (found != null) {
                 found.update({ notificationCheck: true, where: { sellerUserId: req.body.sellerUserId, reviewId: req.params.id } })
                 .then(() => {
-                    res.status(200).send('Notifcation status changed');
+                    res.status(200).send('Notification status changed');
                 });
             } else {
                 res.status(404).send('Review not found.');
@@ -120,11 +120,11 @@ reviewController.put('/NotificationViewed/:id', (req: Request, res: Response) =>
 async function updateProductRating(req: Request, res: Response) {
     const ratings = await Review.findAll({ where: { productId: req.body.productId } });
     if (ratings) {
-        const prductRating = (await Review.sum('rating')) / (ratings.length);
+        const productRating = (await Review.sum('rating')) / (ratings.length);
         await Product.findByPk(req.body.productId)
             .then(found => {
                 if (found != null) {
-                    found.update({ productRating: prductRating })
+                    found.update({ productRating: productRating })
                         .catch(err => res.status(500).send(err));
                 }
             });
