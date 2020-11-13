@@ -16,10 +16,10 @@
   </button>
   <br>
   <textarea [ngModel]="reviewText" (ngModelChange)="reviewText=$event" required placeholder="Your review (max 1000 characters)"
-            cols="50" rows="10" maxlength="100" style=" white-space: pre-wrap"></textarea>
+            cols="50" rows="10" maxlength="1000" style=" white-space: pre-wrap"></textarea>
   <br>
   <button mat-button (click)="deleteReview()">Delete</button>
-  <button mat-button (click)="cancelReview()">Cancel</button>
+  <button mat-button (click)="toggleReview()">Cancel</button>
   <button mat-button *ngIf="!reviewExists" (click)="submitReview()" >Submit</button>
   <button mat-button *ngIf="reviewExists" (click)="editReview()" >Edit</button>
 </mat-card>

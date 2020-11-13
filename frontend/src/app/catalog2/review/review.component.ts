@@ -164,9 +164,6 @@ export class ReviewComponent implements OnInit {
     window.location.reload();
   }
 
-  cancelReview() {
-    this.router.navigate(['account'])
-  }
 
   loadAllReviewsOfProduct(productId): void {
     this.reviews$ = this.httpClient.get<Review[]>(environment.endpointURL + 'review/getProductReviews/' + productId)
