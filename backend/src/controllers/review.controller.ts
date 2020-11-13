@@ -54,7 +54,7 @@ reviewController.put('/edit/:id', (req: Request, res: Response) => {
  * Gets all the reviews of a particular product.
  */
 reviewController.get('/getReview/:id', (req: Request, res: Response) => {
-    Review.findByPk(req.params.id, { include: [Review.associations.product] })
+    Review.findAll({ where: { productId: req.params.id }, include: [Review.associations.product] })
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
 });
