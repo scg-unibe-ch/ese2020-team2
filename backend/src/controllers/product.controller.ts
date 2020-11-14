@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 const productController: Router = express.Router();
 
 /**
- * This method is to add new products/services to the products model.
+ * This method is to add new products/services to the user product list.
  */
 productController.post('/add', (req: Request, res: Response) => {
         Product.create(req.body).then(product_added => res.send(product_added)).catch(err => res.status(500).send(err));

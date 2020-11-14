@@ -12,7 +12,7 @@ export interface ReviewAttributes {
     reviewId: number;
     // Id of the User who bought the reviewing product
     buyerUserId: number;
-    // Id of the User who slod the reviewing product
+    // Id of the User who sold the reviewing product
     sellerUserId: number;
     // Id of the product to which review is given
     productId: number;
