@@ -22,6 +22,10 @@ export class DetailedProductComponent implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   product: Product;
   reviews$: Observable<Review[]>;
+  ratingArray = [];
+  starCount = 5;
+
+
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -30,6 +34,10 @@ export class DetailedProductComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
 
     this.loggedIn$ = authService.loggedIn$;
+
+    for (let index = 0; index < this.starCount; index++) {
+      this.ratingArray.push(index);
+    }
   }
 
 
@@ -85,6 +93,14 @@ export class DetailedProductComponent implements OnInit {
   refresh(): void {
     window.location.reload();
 }
+
+  showIcon(index: number, rating: number) {
+    if (rating >= index + 1) {
+      return 'star';
+    } else {
+      return 'star_border';
+    }
+  }
 
 
 

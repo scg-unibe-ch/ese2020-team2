@@ -39,6 +39,14 @@
             <br>
 
             <p style="font-size: 200%;">Delivery: {{product.deliveryPossible}}</p>
+            <span style="font-size: 200%">{{product.productRating.toFixed(1)}} </span>
+
+            <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+              <mat-icon>
+                {{showIcon(i, product.productRating)}}
+              </mat-icon>
+            </mat-icon>
+
           </mat-card-content>
           <br>
           <br>
