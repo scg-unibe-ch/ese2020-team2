@@ -44,6 +44,9 @@ export class ReviewComponent implements OnInit {
               public purchaseService: PurchaseService) {
 
     this.loggedIn$ = authService.loggedIn$;
+    for (let index = 0; index < this.starCount; index++) {
+      this.ratingArray.push(index);
+    }
   }
 
   /**
@@ -59,11 +62,6 @@ export class ReviewComponent implements OnInit {
     this.purchaseService.getPurchasesByUserId(JSON.parse(localStorage.getItem('user')).userId)
       .subscribe(purchases => {this.purchasedProducts = purchases.map(purchase => purchase.productId)});
 
-
-
-    for (let index = 0; index < this.starCount; index++) {
-      this.ratingArray.push(index);
-    }
   }
 
   openSnackBar(message: string, action: string) {
@@ -115,7 +113,6 @@ export class ReviewComponent implements OnInit {
         this.rating = review.rating;
         this.reviewId = review.reviewId;
         this.reviewExists = true;
-        this.openSnackBar("You already posted a review, but you can edit it.", '')
       }
     })
   }
@@ -135,7 +132,7 @@ export class ReviewComponent implements OnInit {
     }, (error: any) => {
       this.openSnackBar(error.error, '');
     });
-    //window.location.reload();
+    this.ngOnInit();
 
   }
 
@@ -151,7 +148,7 @@ export class ReviewComponent implements OnInit {
     }, (error: any) => {
       this.openSnackBar(error.error.text, '');
     });
-    //window.location.reload();
+    this.ngOnInit();
 
   }
 
@@ -161,7 +158,7 @@ export class ReviewComponent implements OnInit {
     }, (error: any) => {
       this.openSnackBar(error.error.text, '');
     })
-    window.location.reload();
+    this.ngOnInit();
   }
 
 

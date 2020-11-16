@@ -1,7 +1,8 @@
-
+<div style = "margin: auto; text-align: center">
 <mat-button-toggle (click) ="toggleReview()" *ngIf="(!reviewExists) && purchasedProducts.includes(productId) && !showReview"> Add Review </mat-button-toggle>
 <mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts.includes(productId) && !showReview"> Edit Review </mat-button-toggle>
 <mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts.includes(productId) && showReview"> Close Review </mat-button-toggle>
+</div>
 
 <mat-card class="mat-elevation-z4" style="width: 50%; margin: auto; text-align: center" *ngIf = showReview>
   <mat-card-title>You can add your review here</mat-card-title>
@@ -23,9 +24,6 @@
   <button mat-button *ngIf="!reviewExists" (click)="submitReview()" >Submit</button>
   <button mat-button *ngIf="reviewExists" (click)="editReview()" >Edit</button>
 </mat-card>
-
-
-
 
 <mat-card class="mat-elevation-z4" style="width: 50%; margin: auto; text-align: left; margin-top: 10px"
           *ngFor="let review of reviews$ | async">
