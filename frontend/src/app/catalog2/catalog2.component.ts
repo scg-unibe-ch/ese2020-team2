@@ -19,7 +19,9 @@ import {Approval} from "../models/approval";
 export class Catalog2Component implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   products$: Observable<Product[]>;
-  userId = 0;
+  ratingArray = [];
+  starCount = 5;
+  userId: number;
   search: string = "";
   filtervalue: string = "";
   quantity = 1;
@@ -46,8 +48,13 @@ export class Catalog2Component implements OnInit {
               private productsService: ProductsService) {
 
     this.loggedIn$ = authService.loggedIn$;
+
     if (this.loggedIn$.value == true){
       this.userId = JSON.parse(localStorage.getItem('user')).userId;
+    }
+
+    for (let index = 0; index < this.starCount; index++) {
+      this.ratingArray.push(index);
     }
   }
 
@@ -68,16 +75,16 @@ export class Catalog2Component implements OnInit {
   }
 
 
-  
+
   ngOnInit(): void {
     this.getAllProducts();
-    
+
   }
 
   filter(minValue: number, maxValue: number, filtervalue: string, search:string ) {
     if (search == "" && filtervalue == ""){
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" 
+      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available"
        ))
       )
     );
@@ -91,7 +98,7 @@ export class Catalog2Component implements OnInit {
     }
     else if (filtervalue == ""){
       this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" 
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available"
         && (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) ))
         )
       );
@@ -109,7 +116,7 @@ export class Catalog2Component implements OnInit {
 
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true)));
+      products.filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true )));
   }
 
 
@@ -129,6 +136,13 @@ export class Catalog2Component implements OnInit {
     window.location.reload();
   }
 
+  showIcon(index: number, rating: number) {
+    if (rating >= index + 1) {
+      return 'star';
+    } else {
+      return 'star_border';
+    }
+  }
 
 
 
