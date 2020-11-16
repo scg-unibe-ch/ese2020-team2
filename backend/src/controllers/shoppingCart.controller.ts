@@ -5,9 +5,9 @@ import { Cart } from '../models/shoppingCart.model';
 
 const shoppingCartController: Router = express.Router();
 
-    /**
-     * Adds a new product in the shopping cart list
-     */
+/**
+ * Adds a new product in the shopping cart list
+ */
 shoppingCartController.post('/add',
     async (req: Request, res: Response) => {
         const { quantity } = req.body;
@@ -68,6 +68,23 @@ shoppingCartController.delete('/delete/:id', (req: Request, res: Response) => {
 shoppingCartController.get('/getProduct/:id', (req: Request, res: Response) => {
     Cart.findByPk(req.params.id)
         .then(list => res.status(200).send(list))
+        .catch(err => res.status(500).send(err));
+});
+
+/**
+ * This method is to edit a product in the shopping cart.
+ */
+shoppingCartController.put('/edit/:id', (req: Request, res: Response) => {
+    Cart.findByPk(req.params.id)
+        .then(found => {
+            if (found != null) {
+                found.update(req.body).then(() => {
+                    res.status(200).send('Product in shopping Cart updated successfully.');
+                });
+            } else {
+                res.status(404).send('No such product in the shopping cart.');
+            }
+        })
         .catch(err => res.status(500).send(err));
 });
 

@@ -13,45 +13,16 @@ productController.post('/add', (req: Request, res: Response) => {
     });
 
 /**
- * This Method enables to delete a product by setting all his information to null or 0.
+ * This Method enables to delete a product by setting its status to deleted.
  */
 productController.delete('/delete/:id', async (req: Request, res: Response) => {
     // Setting all product attribute to null or 0 to hide user information
-    const productUserId = 0;
-    const productType = 'empty';
-    const productTitle = 'empty';
-    const productUserName = 'empty';
-    const productPrice = 0;
-    const productDescription = 'empty';
-    const productLocation = 'empty';
-    const productSellOrLend = 0;
-    const productPiecesAvailable = 0;
     const productStatus = 'deleted';
-    const productDeliveryPossible = 'empty';
-    const productAdminApproval = 0;
-    const productDisapprovalMsg = 'empty';
-    const productVisibleInMarket = 0;
-    const productSellerReview = 'empty';
-
     // deletes the product information
     Product.findByPk(req.params.id).then(found => {
             if (found != null) {
                  if (found.userId !== 0) {
                     found.update({
-                        userId: productUserId,
-                        type: productType,
-                        title: productTitle,
-                        userName: productUserName,
-                        price: productPrice,
-                        description: productDescription,
-                        location: productLocation,
-                        sellOrLend: productSellOrLend,
-                        piecesAvailable: productPiecesAvailable,
-                        deliveryPossible: productDeliveryPossible,
-                        adminApproval: productAdminApproval,
-                        disapprovalMsg: productDisapprovalMsg,
-                        visibleInMarket: productVisibleInMarket,
-                        sellerReview: productSellerReview,
                         status: productStatus
                     }).then(() => res.status(200).send('Product is removed successfully.'));
                } else {
