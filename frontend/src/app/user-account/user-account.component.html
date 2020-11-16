@@ -3,13 +3,9 @@
     <mat-card-title>You have the following notifications:</mat-card-title>
   <div class="sitemessage">
   <div>
-  <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch"fxFlex.sm="33%" *ngFor="let notfication of listOfNotification$ | async">
-    <div>
-      <mat-card-subtitle>
-        You have sold {{notfication.quantity}} times product with Id {{notfication.productId}}.
-      </mat-card-subtitle>
-    </div>
-  </div>
+  <span *ngFor="let notfication of listOfNotification$ | async" class="group">
+      <span>You have sold {{notfication.quantity}} times product with Id {{notfication.productId}}. </span>
+  </span>
 </div>
 </div></mat-card>
 <mat-tab-group animationDuration="1ms">

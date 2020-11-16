@@ -35,15 +35,24 @@
                   <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
                 </mat-card-subtitle>
 
+                <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+                  <mat-icon>
+                    {{showIcon(i, product.productRating)}}
+                  </mat-icon>
+                </mat-icon>
+                <span style="font-size: 150%; vert-align: middle"> {{product.productRating.toFixed(1)}} </span>
+
+
                 <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
                 <mat-card-content>
                   <p>{{product.piecesAvailable}}</p>
                   <p>Location: {{product.location}}</p>
                   <p>Delivery: {{product.deliveryPossible}}</p>
-                  <p>buabua
+                  <p>
                   </p>
                   <p>{{product.userId}}</p>
                   <p>{{userId}}</p>
+
                 </mat-card-content>
                 <mat-card-actions>
                   <div style="text-align: center;">
@@ -65,13 +74,19 @@
                 <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
                 <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
               </mat-card-subtitle>
+                <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+                  <mat-icon>
+                    {{showIcon(i, product.productRating)}}
+                  </mat-icon>
+                </mat-icon>
+                <span style="font-size: 150%; vert-align: middle"> {{product.productRating.toFixed(1)}} </span>
 
-              <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+                <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
               <mat-card-content>
                 <p>{{product.piecesAvailable}}</p>
                 <p>Location: {{product.location}}</p>
                 <p>Delivery: {{product.deliveryPossible}}</p>
-                <p>buabua
+                <p>
                 </p>
                 <p>{{product.userId}}</p>
                 <p>{{userId}}</p>
@@ -89,7 +104,7 @@
                 </mat-form-field>
                <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="buy(product);refresh()" type="submit" style="width: 20%;">BUY</button>
                   <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">RENT</button>
-   
+
                   <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 20%;">WISH</button>
                 </div>
                   <p *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>

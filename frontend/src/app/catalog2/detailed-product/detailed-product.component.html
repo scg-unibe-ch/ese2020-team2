@@ -30,6 +30,13 @@
             <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
           <mat-card-content>
+            <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+              <mat-icon>
+                {{showIcon(i, product.productRating)}}
+              </mat-icon>
+            </mat-icon>
+            <span style="font-size: 200%"> {{product.productRating.toFixed(1)}}</span>
+
             <div style="font-size: 200%;">Description:</div>
             <p style="font-size: 130%;">{{product.description}}</p>
 <br>
@@ -39,6 +46,8 @@
             <br>
 
             <p style="font-size: 200%;">Delivery: {{product.deliveryPossible}}</p>
+
+
           </mat-card-content>
           <br>
           <br>

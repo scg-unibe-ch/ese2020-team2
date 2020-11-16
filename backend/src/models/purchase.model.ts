@@ -18,7 +18,7 @@ export interface PurchaseAttributes {
     buyerUserId: number;
     // Name of the user who is selling the product.
     sellerUserId: number;
-    // Price in points
+    // Holds the delivery address
     deliveryAddress: string;
     // Type of payment. Allows 'Cash on Delivery' and 'wallet  points'.
     paymentType: string;

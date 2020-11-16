@@ -22,5 +22,6 @@ export class Product {
     public disapprovalMsg: string,
     public piecesAvailable: number,
     public visibleInMarket: boolean,
-  ) {}
+    public productRating: number,
+) {}
 }
