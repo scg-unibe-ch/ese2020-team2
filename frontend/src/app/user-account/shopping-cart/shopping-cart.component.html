@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <section class="container">
@@ -55,6 +56,65 @@
         <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;">buy</button>
 
     </mat-card-content>
+    </mat-card>
+
+
+
+    <mat-card>
+      <div fxLayout.gt-sm="column" fxFlex.gt-sm="80%">
+      <mat-card-content >
+        <mat-card-title>Shipping address</mat-card-title>
+        
+        <p>city:{{ userForm.get('city').value }} Pincode: {{ userForm.get('pinCode').value }}</p>
+        <p>Country: {{ userForm.get('country').value }} street: {{ userForm.get('street').value }}</p>
+        <mat-card-subtitle>Ddit</mat-card-subtitle>
+
+        <form [formGroup]="userForm">
+        <mat-form-field style="width: 50%;">
+      <mat-select formControlName="country" placeholder="Country">
+        <mat-option *ngFor="let country of countrys" [value]="country.value" >
+          {{country.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+    <mat-form-field style="width: 50%;">
+      <input matInput placeholder="City" type="text" formControlName="city" id="inputCity">
+    </mat-form-field>
+
+  
+
+    <mat-form-field style="width: 50%;">
+      <input matInput placeholder="Pincode" type="text" formControlName="pinCode" id="inputZip">
+    </mat-form-field>
+
+
+    <mat-form-field style="width: 50%;">
+      <mat-label>Street</mat-label>
+      <input matInput placeholder="Street" type="text" formControlName="street" id="inputStreet">
+    </mat-form-field>
+  </form>
+
+
+       
+    </mat-card-content>
+  </div>
+  <div fxLayout.gt-sm="column" fxFlex.gt-sm="20%">
+<br>
+<br>
+<br>
+<button class="btn"><i class="fa fa-check-square-o  " ></i></button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <button class="btn"><i class="fa fa-check-square-o  " (click)="updateaddress()"></i></button>
+
+
+  </div>
     </mat-card>
 
   </div>
