@@ -9,6 +9,7 @@ import { PurchaseController } from './controllers/purchase.controller';
 import { ReviewController } from './controllers/review.controller';
 import { AdminController } from './controllers/admin.controller';
 import { ImageController } from './controllers/productImage.controller';
+import { CartController } from './controllers/shoppingCart.controller';
 
 import { Sequelize } from 'sequelize';
 import { TodoList } from './models/todolist.model';
@@ -18,6 +19,7 @@ import { Product } from './models/product.model';
 import { Purchase } from './models/purchase.model';
 import { Review } from './models/review.model';
 import { ProductImage } from './models/productImage.model';
+import { Cart } from './models/shoppingCart.model';
 
 
 
@@ -39,6 +41,7 @@ export class Server {
         Purchase.initialize(this.sequelize);
         Review.initialize(this.sequelize);
         ProductImage.initialize(this.sequelize);
+        Cart.initialize(this.sequelize);
 
         TodoItem.createAssociations();
         TodoList.createAssociations();
@@ -47,6 +50,7 @@ export class Server {
         Product.createAssociations();
         Purchase.createAssociations();
         Review.createAssociations();
+        Cart.createAssociations();
 
 
         this.sequelize.sync({alter: true}).then(() => {                           // create connection to the database
@@ -85,6 +89,7 @@ export class Server {
             .use('/review', ReviewController)
             .use('/secured', SecuredController)
             .use('/image', ImageController)
+            .use('/cart', CartController)
             .options('*', cors(options))
             .use(express.static('./src/public'))
             // this is the message you get if you open http://localhost:3000/ when the server is running
