@@ -2,7 +2,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Injectable, OnInit} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {filter, skipWhile} from "rxjs/operators";
+import {skipWhile} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 
@@ -13,7 +13,6 @@ export class AuthService implements OnInit{
 
   loggedIn$ = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
   loggedIn: boolean;
-  firstConnection: boolean;
 
   constructor(private httpClient: HttpClient) {
       this.CheckAccessToSecuredEndpoint();

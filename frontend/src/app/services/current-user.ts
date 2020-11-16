@@ -11,7 +11,7 @@ import {Purchase} from '../../../../backend/src/models/purchase.model';
   providedIn: 'root'
 })
 export class CurrentUser {
-  UserId = JSON.parse(localStorage.getItem('user')).userId;
+  UserId = JSON.parse(localStorage.getItem('user'))?.userId;
   currentUser: User;
   constructor(private httpClient: HttpClient) {}
 
