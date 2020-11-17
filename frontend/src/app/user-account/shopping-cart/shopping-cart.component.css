@@ -43,7 +43,19 @@
   overflow-y: scroll;
   height: 80%;
   }
-  
+  .class1 {
+    width: 100%;
+}
+.class2 {
+    width: 50%;
+    float: left;
+}
+
+.class3 {
+    width: 50%;
+    float: right;
+}
+
   /* Pattern styles */
   .left-half {
   float: left;
@@ -57,3 +69,6 @@
   width: 32%;
   }
   
+  .flexExpand {
+    flex: 1 1 auto;
+  }

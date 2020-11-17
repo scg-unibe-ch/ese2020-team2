@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {Product} from "../../models/product.model";
 import {CurrentUser} from "../../services/current-user";
 import { AuthService } from 'src/app/auth/auth.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 export interface Country {
   value: string;
@@ -27,10 +27,10 @@ export class ShoppingCartComponent implements OnInit {
   
   userForm = this.fb.group(
     {
-      country: [""],
-      street: [""],
-      city: [""],
-      pinCode: [""],
+      country: ["", Validators.required],
+      street: ["", Validators.required],
+      city: ["", Validators.required],
+      pinCode: ["", Validators.required],
     }
   );
 

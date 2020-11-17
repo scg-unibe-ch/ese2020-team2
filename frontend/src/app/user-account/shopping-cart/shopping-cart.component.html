@@ -64,12 +64,26 @@
       <div fxLayout.gt-sm="column" fxFlex.gt-sm="80%">
       <mat-card-content >
         <mat-card-title>Shipping address</mat-card-title>
-        
-        <p>city:{{  (city$ | async)  }} Pincode: {{  (pinCode$ | async)  }}</p>
-        <p>Country: {{  (country$ | async)  }} street: {{  (street$ | async)  }}</p>
+        <div class="class1">
+          <div class="class2">
+            city:{{  (city$ | async)  }}
+            
+          </div>
+              <div class="class3">
+                Pincode: {{  (pinCode$ | async)  }}      
+            </div>
+        </div>
+        <div class="class1">
+          <div class="class2">
+            Country: {{  (country$ | async)  }}
+            
+          </div>
+              <div class="class3">
+                street: {{  (street$ | async)  }}
+            </div>
+        </div>
         <br>
-        <mat-card-subtitle>Edit</mat-card-subtitle>
-
+        <mat-card-title style="margin-top: 5%;">Edit</mat-card-title>
         <form [formGroup]="userForm">
         <mat-form-field style="width: 50%;">
       <mat-select formControlName="country" placeholder="Country">
@@ -112,9 +126,7 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <button class="btn" (click)="updateaddress();refresh()"><i class="fa fa-check-square-o  "  ></i></button>
+    <button class="btn"  [disabled]="userForm.invalid" (click)="updateaddress();refresh()"><i class="fa fa-check-square-o  "  ></i></button>
 
 
   </div>
