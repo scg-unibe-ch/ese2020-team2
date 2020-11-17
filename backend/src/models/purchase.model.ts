@@ -1,12 +1,15 @@
-import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import {
+    Optional,
+    Model,
+    Sequelize,
+    DataTypes,
+    Association,
+    BelongsToSetAssociationMixin, BelongsToGetAssociationMixin
+} from 'sequelize';
 import { User } from './user.model';
 import { Product } from './product.model';
-import { Review } from './review.model';
-import { ProductImage } from './productImage.model';
 
-
-/*This is the Purchase model used to save the data about purchases*/
-
+// This is the Purchase model used to save the data about purchases
 export interface PurchaseAttributes {
     // Id of the purchase
     purchaseId: number;
@@ -24,13 +27,28 @@ export interface PurchaseAttributes {
     paymentType: string;
     // True if the payment is done with wallet points.
     walletPayment: boolean;
-    // True if the User saw the Notification
+    // True if the User saw the Notification.
     notificationCheck: boolean;
 }
 
 export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes, 'purchaseId'> { }
 
 export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttributes> implements PurchaseAttributes {
+
+    public static associations: {
+        user: Association <Purchase, User>;
+        product: Association <Purchase, Product>;
+    };
+
+    public getUser!: BelongsToGetAssociationMixin<User>;
+    public addUser!: BelongsToSetAssociationMixin<User, number>;
+    public getProduct!: BelongsToGetAssociationMixin<Product>;
+    public addProduct!: BelongsToSetAssociationMixin<Product, number>;
+
+
+    public readonly user?: User;
+    public readonly product?: Product;
+
     purchaseId!: number;
     productId!: number;
     quantity!: number;
@@ -97,7 +115,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
         Purchase.belongsTo(User, {
             targetKey: 'userId',
             as: 'user',
-            foreignKey: 'userId',
+            foreignKey: 'buyerUserId',
             constraints: false
         });
         Purchase.belongsTo(Product, {

@@ -113,12 +113,29 @@ purchaseController.get('/getAllBuyerPurchases/:id',
 /**
  * This method if called outputs all sold products of a precise user (seller)
  */
-
 purchaseController.get('/getAllSellerSold/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { sellerUserId: req.params.id } })
+        Purchase.findAll({ where: { sellerUserId: req.params.id }, include: [Purchase.associations.user, Purchase.associations.product] })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
+
+/**
+ * This method is to edit a purchase.
+ */
+
+purchaseController.put('/edit/:id', (req: Request, res: Response) => {
+    Purchase.findByPk(req.params.id)
+        .then(found => {
+            if (found != null) {
+                found.update(req.body).then(() => {
+                    res.status(200).send('Purchase updated successfully.');
+                });
+            } else {
+                res.status(404).send('No such purchase found');
+            }
+        })
+        .catch(err => res.status(500).send(err));
+});
 
 export const PurchaseController: Router = purchaseController;
