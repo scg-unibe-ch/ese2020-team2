@@ -29,15 +29,17 @@ reviewController.post('/add/', async (req: Request, res: Response) => {
     }
 });
 /**
- * Edits a review given by the user. IF successful returns 200 or gives 500 error.
+ * Edits a review given by the user. If successful returns 200 or gives 500 error.
  */
 reviewController.put('/edit/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
                 found.update(req.body).then(() => {
+                    updateProductRating(req, res).then(() => {
                     res.status(200).send('Review updated successfully.');
                 });
+            });
             } else {
                 res.status(404).send('Review not found.');
             }
@@ -77,21 +79,16 @@ reviewController.get('/getProductReviews/:id', (req: Request, res: Response) => 
         .catch(err => res.status(500).send(err));
 });
 /**
- * Get all the reviews of a particular product.
- */
-reviewController.get('/getSellerReviews/:id', (req: Request, res: Response) => {
-    Review.findAll({ where: { productId: req.params.id }, include: [Review.associations.user] })
-        .then(list => res.status(200).send(list))
-        .catch(err => res.status(500).send(err));
-});
-/**
  *  Deletes a review.
  */
 reviewController.delete('/delete/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
-                found.destroy().then(() => res.status(200).send());
+                found.destroy().then(() => {
+                updateProductRating(req, res).then(() => {
+                res.status(200).send(); });
+                });
             } else {
                 res.status(404).send('Review not found');
             }
@@ -119,8 +116,7 @@ reviewController.put('/NotificationViewed/:id', (req: Request, res: Response) =>
 // Updates the average product rating.
 async function updateProductRating(req: Request, res: Response) {
     const ratings = await Review.findAll({ where: { productId: req.body.productId } });
-    if (ratings) {
-        const productRating = (await Review.sum('rating')) / (ratings.length);
+    const productRating = (await Review.sum('rating')) / (ratings.length);
         await Product.findByPk(req.body.productId)
             .then(found => {
                 if (found != null) {
@@ -128,6 +124,5 @@ async function updateProductRating(req: Request, res: Response) {
                         .catch(err => res.status(500).send(err));
                 }
             });
-    }
 }
 export const ReviewController: Router = reviewController;
