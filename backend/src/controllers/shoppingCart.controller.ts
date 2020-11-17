@@ -5,17 +5,20 @@ import { Cart } from '../models/shoppingCart.model';
 
 const shoppingCartController: Router = express.Router();
 
+// Add a way to sum together the same products about quantity
+
 /**
  * Adds a new product in the shopping cart list
  */
 shoppingCartController.post('/add',
     async (req: Request, res: Response) => {
         const { quantity } = req.body;
+        // const { actualProduct } = req.body;
         const product = await Product.findOne({ where: { productId: req.body.productId } });
+        // const prodQuantity = await Product.findOne({ where: { productId: req.body.piecesAvailable } });
         const buyer = await User.findOne({ where: { userId: req.body.buyerUserId } });
         const seller = await User.findOne({ where: { userId: req.body.sellerUserId } });
 
-        // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
         if (buyer && seller && product && buyer.userId !== product.userId) {
             if (product.piecesAvailable >= quantity && quantity > 0) {
                 // Adds a new product in the shopping cart.

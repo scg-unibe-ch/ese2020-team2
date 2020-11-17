@@ -46,7 +46,8 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
                 },
                 quantity: {
                     type: DataTypes.NUMBER,
-                    allowNull: false
+                    allowNull: false,
+                    defaultValue: 1
                 },
                 buyerUserId: {
                     type: DataTypes.NUMBER,
