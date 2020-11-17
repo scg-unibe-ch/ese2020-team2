@@ -11,7 +11,7 @@ export class User {
     public gender: string,
     public telephone: string,
     public street: string,
-    public pinCode: number,
+    public pinCode: string,
     public city: string,
     public country: string,
     public moneyInWallet: number,

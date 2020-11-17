@@ -65,7 +65,7 @@ export class TestsignupComponent implements OnInit {
       street: [""],
       city: [""],
       role: ["admin"],
-      zip: [""],
+      pinCode: [""],
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -93,7 +93,7 @@ export class TestsignupComponent implements OnInit {
   get email() { return this.userForm.get("email") };
   get userName() { return this.userForm.get("userName") };
   get street() { return this.userForm.get("street") };
-  get pinCode() { return this.userForm.get("zip") };
+  get pinCode() { return this.userForm.get("pinCode") };
   get role() {return this.userForm.get("role")};
   get confirmPassword() { return this.userForm.get("confirmPassword") };
   get city() { return this.userForm.get("city") };

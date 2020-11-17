@@ -22,9 +22,12 @@ export class Catalog2Component implements OnInit {
   ratingArray = [];
   starCount = 5;
   userId: number;
+  sortby: string = "";
   search: string = "";
-  filtervalue: string = "";
+  filterps: string = "";
+  filtersl : string = "";
   quantity = 1;
+  loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
   options: Options = {
@@ -41,6 +44,7 @@ export class Catalog2Component implements OnInit {
       }
     }
   };
+
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
@@ -60,8 +64,12 @@ export class Catalog2Component implements OnInit {
 
 
 
-  changefiltervalue(filtervalue: string){
-    this.filtervalue = filtervalue;
+  changefiltersl(filtervalue: string){
+    this.filtersl = filtervalue;
+  };
+
+  changefilterps(filtervalue: string){
+    this.filterps = filtervalue;
   };
 
   changeminValue(value: number){
@@ -73,42 +81,68 @@ export class Catalog2Component implements OnInit {
   changesearch(search: string){
     this.search = search;
   }
-
+  changesortby(sortby: string){
+    this.sortby = sortby;
+  }
 
 
   ngOnInit(): void {
     this.getAllProducts();
 
   }
-
-  filter(minValue: number, maxValue: number, filtervalue: string, search:string ) {
-    if (search == "" && filtervalue == ""){
+  sortbyprice(){
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available"
-       ))
+      products.sort((a,b) => a.price > b.price ? -1 : 1)
+       
       )
     );
-    }
-    else if (search == ""){
+    
+  }
+
+  filter(minValue: number, maxValue: number, filtersl: string,filterps: string,  sortby: string, search:string) {
+    if (search == "" && sortby == ""){
       this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" && (product.sellOrLend === filtervalue || product.type === filtervalue)
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl  && product.type !== filterps 
          ))
         )
-      );
+      )
+      }
+   else if (search == "" && sortby == "maxprice"){
+    this.products$ = this.productsService.getProducts().pipe(map(products =>
+      products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl  && product.type !== filterps 
+       )).sort((a,b) => a.price < b.price ? 1 : -1)
+      )
+    )
     }
-    else if (filtervalue == ""){
+   
+    else if (search == "" && sortby == "lowestprice"){
       this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available"
-        && (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) ))
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl  && product.type !== filterps 
+         )).sort((a,b) => a.price > b.price ? 1 : -1)
         )
-      );
-    }
+      )
+      }
+      else if (sortby == "lowestprice"){
+        this.products$ = this.productsService.getProducts().pipe(map(products =>
+          products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl  && product.type !== filterps 
+           )).sort((a,b) => a.price > b.price ? 1 : -1)
+          )
+        )
+        }
+        else if (sortby == "maxprice"){
+          this.products$ = this.productsService.getProducts().pipe(map(products =>
+            products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl  && product.type !== filterps 
+             )).sort((a,b) => a.price > b.price ? 1 : -1)
+            )
+          )
+          }
     else {
       this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status === "available" && (product.sellOrLend === filtervalue || product.type === filtervalue)
-        && (product.title.includes(search) || product.description.includes(search) || product.price === parseInt(search)) ))
+        products.filter( product => ( product.price >= minValue && product.price <= maxValue && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
+        && (product.title.includes(search) || product.description.includes(search) || product.price == parseInt(search)) ))
+        .sort((a,b) => a.price < b.price ? 1 : -1)
         )
-      );
+      )
     }
 
   }
