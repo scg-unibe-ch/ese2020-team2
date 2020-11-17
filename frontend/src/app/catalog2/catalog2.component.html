@@ -2,7 +2,7 @@
 
 <mat-toolbar style=" background-color: rgba(92, 106, 121, 0.616 ); height: 7%;" >
   <span>FILTER: </span>
-  <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616); width: 5%; font-size: 10%;">FOR SALE</button>
+  <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616);width: 5%;">FOR SALE</button>
   <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,search)"  class="btn" style="background-color:rgba(42, 49, 56, 0.616);width: 5%;">FOR SALE</button>
   <button *ngIf="filtersl == 'sell'" mat-button (click)="changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(49, 66, 141, 0.616);width: 5%;">TO RENT</button>
   <button *ngIf="filtersl !== 'sell'"mat-button (click)="changefiltersl('sell');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">TO RENT</button>
@@ -10,10 +10,10 @@
   <button *ngIf="filterps !== 'service'" mat-button (click)="changefilterps('service');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">PRODUCTS</button>
   <button *ngIf="filterps == 'product'" mat-button (click)="changefilterps('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color:rgba(49, 66, 141, 0.616);width: 5%;">SERVICES</button>
   <button *ngIf="filterps !== 'product'" mat-button (click)="changefilterps('product');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">SERVICES</button>
-  <button *ngIf="sortby == 'maxprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);"><i class="fa fa-arrow-up  " (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" ></i></button>
-  <button *ngIf="sortby !== 'maxprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);"><i class="fa fa-arrow-up  " (click)="changesortby('maxprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)" ></i></button>
-  <button *ngIf="sortby == 'lowestprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);"><i class="fa fa-arrow-down  " (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" ></i></button>
-  <button *ngIf="sortby !== 'lowestprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);"><i class="fa fa-arrow-down  " (click)="changesortby('lowestprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)" ></i></button>
+  <button *ngIf="sortby == 'maxprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-up  "  ></i></button>
+  <button *ngIf="sortby !== 'maxprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);" (click)="changesortby('maxprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-up  "  ></i></button>
+  <button *ngIf="sortby == 'lowestprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-down  "  ></i></button>
+  <button *ngIf="sortby !== 'lowestprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);" (click)="changesortby('lowestprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-down  "  ></i></button>
 
   <button mat-button (click)="changefilterps('');changefiltersl('');changesortby('');changeminValue(0);changemaxValue(50);changesearch('');
   
