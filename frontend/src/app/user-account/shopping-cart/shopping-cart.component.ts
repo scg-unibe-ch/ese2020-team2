@@ -41,6 +41,10 @@ export class ShoppingCartComponent implements OnInit {
  ];
   userId: number;
   userToken: any;
+  city$: Observable<any>;
+  street$: Observable<any>;
+  pinCode$: Observable<any>;
+  country$: Observable<any>;
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
@@ -62,19 +66,11 @@ export class ShoppingCartComponent implements OnInit {
     this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
     if (this.loggedIn$.value == true){
       this.userId = JSON.parse(localStorage.getItem('user')).userId;
-      this.userToken = JSON.parse(localStorage.getItem('user')).userToken;
-      this.userForm.controls.street.setValue(
-      (JSON.parse(localStorage.getItem('user')).street));
-      this.userForm.controls.city.setValue(
-        (JSON.parse(localStorage.getItem('user')).city));
-        this.userForm.controls.pinCode.setValue(
-          (JSON.parse(localStorage.getItem('user')).pinCode));
-          this.userForm.controls.country.setValue(
-            (JSON.parse(localStorage.getItem('user')).country));
-
-    
+      this.city$ = this.users.getCurrentUserProperty('city');
+      this.street$ = this.users.getCurrentUserProperty('street');
+      this.pinCode$ = this.users.getCurrentUserProperty('pinCode');
+      this.country$ = this.users.getCurrentUserProperty('country');
   }
-
   }
 
   getShoppingCart(): void {
@@ -87,7 +83,6 @@ export class ShoppingCartComponent implements OnInit {
     this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.userId,
       this.userForm.value).subscribe();
 
-      localStorage.setItem('user', JSON.stringify(this.users.getCurrentUser()));
 
   };
 

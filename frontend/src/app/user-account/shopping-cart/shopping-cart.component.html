@@ -65,9 +65,10 @@
       <mat-card-content >
         <mat-card-title>Shipping address</mat-card-title>
         
-        <p>city:{{ userForm.get('city').value }} Pincode: {{ userForm.get('pinCode').value }}</p>
-        <p>Country: {{ userForm.get('country').value }} street: {{ userForm.get('street').value }}</p>
-        <mat-card-subtitle>Ddit</mat-card-subtitle>
+        <p>city:{{  (city$ | async)  }} Pincode: {{  (pinCode$ | async)  }}</p>
+        <p>Country: {{  (country$ | async)  }} street: {{  (street$ | async)  }}</p>
+        <br>
+        <mat-card-subtitle>Edit</mat-card-subtitle>
 
         <form [formGroup]="userForm">
         <mat-form-field style="width: 50%;">
@@ -105,13 +106,15 @@
 <br>
 <br>
 <br>
-<button class="btn"><i class="fa fa-check-square-o  " ></i></button>
 
     <br>
     <br>
     <br>
     <br>
-    <button class="btn"><i class="fa fa-check-square-o  " (click)="updateaddress()" ></i></button>
+    <br>
+    <br>
+    <br>
+    <button class="btn" (click)="updateaddress();refresh()"><i class="fa fa-check-square-o  "  ></i></button>
 
 
   </div>

@@ -16,13 +16,17 @@
   }
 
   .btn {
-    background-color:  rgba(49, 66, 141, 0.616); /* Blue background */
-    border: none; /* Remove borders */
+    background-color: rgba(42, 49, 56, 0.616); /* Blue background */
     text-align: center;
     height: 50%;
-    margin: auto;
-    display: inline-block;
-    color: white; /* White text */; /* Some padding */
-    font-size: 63%; /* Set a font size */
+    width: 6%;
+    color: white; 
     cursor: pointer; /* Mouse pointer on hover */
     }
+
+    .btn span {
+      display: block;
+      text-align: center;
+
+      font-size: 95%;
+  }

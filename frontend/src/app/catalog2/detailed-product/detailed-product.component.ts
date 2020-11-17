@@ -24,6 +24,7 @@ export class DetailedProductComponent implements OnInit {
   reviews$: Observable<Review[]>;
   ratingArray = [];
   starCount = 5;
+  quantity = 1;
 
 
 

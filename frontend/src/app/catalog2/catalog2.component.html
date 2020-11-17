@@ -2,31 +2,46 @@
 
 <mat-toolbar style=" background-color: rgba(92, 106, 121, 0.616 ); height: 7%;" >
   <span>FILTER: </span>
-  <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616);width: 5%;">FOR SALE</button>
-  <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,search)"  class="btn" style="background-color:rgba(42, 49, 56, 0.616);width: 5%;">FOR SALE</button>
-  <button *ngIf="filtersl == 'sell'" mat-button (click)="changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(49, 66, 141, 0.616);width: 5%;">TO RENT</button>
-  <button *ngIf="filtersl !== 'sell'"mat-button (click)="changefiltersl('sell');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">TO RENT</button>
-  <button *ngIf="filterps == 'service'" mat-button (click)="changefilterps('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color:  rgba(49, 66, 141, 0.616);width: 5%;">PRODUCTS</button>
-  <button *ngIf="filterps !== 'service'" mat-button (click)="changefilterps('service');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">PRODUCTS</button>
-  <button *ngIf="filterps == 'product'" mat-button (click)="changefilterps('');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color:rgba(49, 66, 141, 0.616);width: 5%;">SERVICES</button>
-  <button *ngIf="filterps !== 'product'" mat-button (click)="changefilterps('product');filter(minValue,maxValue,filtersl,filterps,sortby,search)" class="btn" style="background-color: rgba(42, 49, 56, 0.616);width: 5%;">SERVICES</button>
-  <button *ngIf="sortby == 'maxprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-up  "  ></i></button>
-  <button *ngIf="sortby !== 'maxprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);" (click)="changesortby('maxprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-up  "  ></i></button>
-  <button *ngIf="sortby == 'lowestprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616);" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-down  "  ></i></button>
-  <button *ngIf="sortby !== 'lowestprice'" class="btn" style="background-color: rgba(42, 49, 56, 0.616);" (click)="changesortby('lowestprice');filter(minValue,maxValue,filtersl,filterps,sortby,search)"><i class="fa fa-arrow-down  "  ></i></button>
+  <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616); "><span>FOR SALE</span> </button>
+  <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" ><span>FOR SALE</span></button>
+  <button *ngIf="filtersl == 'sell'" mat-button (click)="changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn" style="background-color: rgba(49, 66, 141, 0.616);">TO RENT</button>
+  <button *ngIf="filtersl !== 'sell'"mat-button (click)="changefiltersl('sell');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn">TO RENT</button>
+  <button *ngIf="filterps == 'service'" mat-button (click)="changefilterps('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn" style="background-color:  rgba(49, 66, 141, 0.616);">PRODUCTS</button>
+  <button *ngIf="filterps !== 'service'" mat-button (click)="changefilterps('service');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn" >PRODUCTS</button>
+  <button *ngIf="filterps == 'product'" mat-button (click)="changefilterps('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn" style="background-color:rgba(49, 66, 141, 0.616);">SERVICES</button>
+  <button *ngIf="filterps !== 'product'" mat-button (click)="changefilterps('product');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" class="btn" >SERVICES</button>
+  <button *ngIf="sortby == 'maxprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616); width: 2.5%;" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"><i class="fa fa-arrow-up  "  ></i></button>
+  <button *ngIf="sortby !== 'maxprice'" class="btn" style=" width:2.5%;" (click)="changesortby('maxprice');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"><i class="fa fa-arrow-up  "  ></i></button>
+  <button *ngIf="sortby == 'lowestprice'" class="btn" style="background-color: rgba(49, 66, 141, 0.616); width: 2.5%;" (click)="changesortby('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"><i class="fa fa-arrow-down  "  ></i></button>
+  <button *ngIf="sortby !== 'lowestprice'" class="btn" style=" width: 2.5%;" (click)="changesortby('lowestprice');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"><i class="fa fa-arrow-down  "  ></i></button>
 
-  <button mat-button (click)="changefilterps('');changefiltersl('');changesortby('');changeminValue(0);changemaxValue(50);changesearch('');
+  <select  *ngIf="location !== ''" style="background-color: rgba(49, 66, 141, 0.616);" [(ngModel)]="location" class="btn" (ngModelChange)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)">
+    <option value="bern">Bern</option>
+    <option value="zürich">Zürich</option>
+    <option value="basel">Basel</option>
+    <option value="genf">Genf</option>
+    <option value="">All</option>
+</select>
+<select  *ngIf="location == ''"  [(ngModel)]="location" class="btn" (ngModelChange)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)">
+  <option value="bern">Bern</option>
+  <option value="zürich">Zürich</option>
+  <option value="basel">Basel</option>
+  <option value="genf">Genf</option>
+  <option value="">All</option>
+</select>
+  <button mat-button (click)="changefilterps('');changelocation('');changefiltersl('');changesortby('');changeminValue(0);changemaxValue(50);changesearch('');
   
-  filter(minValue,maxValue,filtersl,filterps,sortby,search)"class="btn"  style="background-color: rgba(42, 49, 56, 0.616);width: 10%;">RESET FILTERS</button>
+  filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"class="btn"  style="background-color: rgba(42, 49, 56, 0.616);width: 7.5%;">RESET FILTERS</button>
 <span class="flexExpand"></span>
 
 
-<ng5-slider style="width: 20%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filter(minValue,maxValue,filtersl,filterps,sortby,search)" [options]="options"></ng5-slider>
+<ng5-slider style="width: 17%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" [options]="options"></ng5-slider>
 <span class="flexExpand"></span>
-<span style="width: 15%;">
+<span style="width: 10%;">
   <input type="text" [(ngModel)]="search">
 </span>
-<button [disabled]="search == ''" (click)="filter(minValue,maxValue,filtersl,filterps,sortby,search)">Search</button>
+<span class="flexExpand"></span>
+<button [disabled]="search == ''" (click)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)">Search</button>
 </mat-toolbar>
 
 <div class="outer">

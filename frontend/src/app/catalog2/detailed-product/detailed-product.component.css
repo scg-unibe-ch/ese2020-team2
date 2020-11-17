@@ -3,3 +3,17 @@
   height: 77%;
   overflow-x: hidden;
 }
+
+.inner {
+  padding-top: 5%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+img {
+  height: max-content; 
+  object-fit: cover !important;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+  }
