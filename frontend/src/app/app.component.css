@@ -15,6 +15,17 @@
   flex: 1 1 auto;
 }
 
+.btn {
+  background-color: rgba(92, 106, 121, 0.616); /* Blue background */
+  color: black; 
+  cursor: pointer; /* Mouse pointer on hover */
+  }
+
+.btn:hover {
+  background-color: rgba(115, 137, 160, 0.781); /* Green */
+  color: rgb(148, 144, 144);
+}
+
 .outer {
   overflow:scroll;
   height: 80%;

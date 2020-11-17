@@ -37,7 +37,7 @@
 
 <ng5-slider style="width: 17%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" [options]="options"></ng5-slider>
 <span class="flexExpand"></span>
-<span style="width: 10%;">
+<span style="width: 14%;">
   <input type="text" [(ngModel)]="search">
 </span>
 <span class="flexExpand"></span>
@@ -74,8 +74,6 @@
                   <p>Delivery: {{product.deliveryPossible}}</p>
                   <p>
                   </p>
-                  <p>{{product.userId}}</p>
-                  <p>{{userId}}</p>
 
                 </mat-card-content>
                 <mat-card-actions>
@@ -111,30 +109,28 @@
                 <p>Location: {{product.location}}</p>
                 <p>Delivery: {{product.deliveryPossible}}</p>
                 <p>
-                </p>
-                <p>{{product.userId}}</p>
-                <p>{{userId}}</p>
               </mat-card-content>
               <mat-card-actions>
                 <div style="text-align: center;">
                 <button mat-button [routerLink]="['/product', product.productId]" style="width: 20%;">VIEW</button>
 
-                <mat-form-field *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" style="width: 25%;">
+                <mat-form-field *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" style="width: 20%;">
                   <mat-select [(value)]="quantity">
                     <mat-option value="1">1</mat-option>
                     <mat-option value="2">2</mat-option>
                     <mat-option value="3">3</mat-option>
                   </mat-select>
                 </mat-form-field>
-               <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="buy(product);refresh()" type="submit" style="width: 20%;">BUY</button>
-                  <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 20%;">RENT</button>
+               <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="buy(product);refresh()" type="submit" style="width: 15%;">BUY</button>
+                  <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend'" (click)="buy(product);refresh()" type="submit" style="width: 15%;">RENT</button>
 
-                  <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 20%;">WISH</button>
-                </div>
+                  <button mat-button *ngIf = "(loggedIn$ | async)" style="width: 15%;">WISH</button>
+                
                   <p *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
 
                   <button mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
                    <button mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
+                  </div>
                 </mat-card-actions>
             </mat-card>
             </div>

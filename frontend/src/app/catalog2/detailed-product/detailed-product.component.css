@@ -17,3 +17,23 @@ img {
   padding-top: 5%;
   padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
   }
+  .size{
+    font-size: 120%;
+  }
+
+  .subtitle{
+    font-size: 120%;
+    font-weight: 500;
+  }
+
+  .btn {
+    background-color: rgba(42, 49, 56, 0.616); /* Blue background */
+    color: white; 
+    width: 17%;
+    margin-left: 80% !important;
+    cursor: pointer; /* Mouse pointer on hover */
+    }
+    .btn:hover {
+      background-color: rgb(42, 49, 56); /* Green */
+      color: white;
+    }
