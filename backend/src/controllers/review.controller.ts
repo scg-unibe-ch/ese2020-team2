@@ -34,15 +34,17 @@ reviewController.post('/add/', async(req: Request, res: Response) => {
 });
 
 /**
- * Edits a review given by the user. IF successful returns 200 or gives 500 error.
+ * Edits a review given by the user. If successful returns 200 or gives 500 error.
  */
 reviewController.put('/edit/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
                 found.update(req.body).then(() => {
+                    updateProductRating(req, res).then(() => {
                     res.status(200).send('Review updated successfully.');
                 });
+            });
             } else {
                 res.status(404).send('Review not found.');
             }
@@ -102,7 +104,10 @@ reviewController.delete('/delete/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id)
         .then(found => {
             if (found != null) {
-                found.destroy().then(() => res.status(200).send());
+                found.destroy().then(() => {
+                updateProductRating(req, res).then(() => {
+                res.status(200).send(); });
+                });
             } else {
                 res.status(404).send('Review not found');
             }
@@ -139,6 +144,5 @@ async function updateProductRating(req: Request, res: Response) {
                         .catch(err => res.status(500).send(err));
                 }
             });
-    }
 }
 export const ReviewController: Router = reviewController;
