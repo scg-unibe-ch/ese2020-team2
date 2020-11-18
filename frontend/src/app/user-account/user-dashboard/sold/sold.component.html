@@ -1,17 +1,18 @@
 <div class="outer">
   <div class="inner">
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
-            <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch" xFlex.sm="33%" *ngFor="let sell of sells$ | async">
+            <div fxFlex="23%" fxFlex.xs="100%" fxLayoutAlign=" stretch" xFlex.sm="33%" *ngFor="let sell of listOfProduct">
 
               <mat-card class="mat-elevation-z4">
-                <mat-card-title>{{sell.productId}}</mat-card-title>
+                <mat-card-title>{{sell.product.title}}</mat-card-title>
                 <mat-card-subtitle>
-                  {{sell.quantity}}
+                  You sold {{sell.quantity}} to {{sell.user.userName}}. Write him an email at {{sell.user.email}}
                 </mat-card-subtitle>
               <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
               <mat-card-content>
               </mat-card-content>
               <mat-card-subtitle style="color: rgb(255, 0, 0);" *ngIf='!(sell.notificationCheck)'>You have just sold this!</mat-card-subtitle>
+              <mat-card-subtitle *ngIf="sell.deliveryAddress">You have to deliver the product to {{sell.user.firstName}} {{sell.user.lastName}} at the adress {{sell.deliveryAddress}}</mat-card-subtitle>
               <mat-card-actions>
                   <button mat-button (click)="removeitem()" >REMOVE</button>
                 </mat-card-actions>
