@@ -14,16 +14,39 @@
   .flexExpand {
     flex: 1 1 auto;
   }
+  .size{
+    font-size: 120%;
+  }
 
+  .subtitle{
+    font-size: 120%;
+    font-weight: 500;
+  }
   .btn {
     background-color: rgba(42, 49, 56, 0.616); /* Blue background */
     text-align: center;
-    height: 50%;
+    height: 35px;
     width: 6%;
     color: white; 
     cursor: pointer; /* Mouse pointer on hover */
     }
+    .btn:hover {
+      background-color: rgba(115, 137, 160, 0.781); /* Green */
+      color:black;
+    }
 
+    .btnitem {
+      background-color: rgba(184, 195, 206, 0.616); /* Blue background */
+      text-align: center;
+      height: 35px;
+      width: 6%;
+      color: black; 
+      cursor: pointer; /* Mouse pointer on hover */
+      }
+      .btnitem:hover {
+        background-color: rgba(115, 137, 160, 0.781); /* Green */
+        color:black;
+      }
     .btn span {
       display: block;
       text-align: center;
