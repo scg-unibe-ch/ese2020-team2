@@ -46,8 +46,8 @@ shoppingCartController.post('/add',
 /**
  * Get all the products of the shopping cart.
  */
-shoppingCartController.get('/getAll/:userId', (req: Request, res: Response) => {
-    Cart.findAll({where: { userId: req.params.userId }, include: [Cart.associations.product]} )
+shoppingCartController.get('/getAll', (req: Request, res: Response) => {
+        Cart.findAll({ include: [Cart.associations.user, Cart.associations.product]})
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
 });
