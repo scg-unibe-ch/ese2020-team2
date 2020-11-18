@@ -16,10 +16,12 @@ import {CurrentUser} from '../services/current-user';
 export class UserAccountComponent implements OnInit{
 
   listOfNotification$:Observable<Purchase[]>;
+  listOfNot:Purchase[];
   constructor(private currentUser:CurrentUser) {}
 
   ngOnInit(){
     this.getNoftification()
+    this.listOfNotification$.subscribe(list => this.listOfNot=list)
   }
 
   getNoftification(){

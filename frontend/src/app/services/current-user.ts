@@ -32,4 +32,7 @@ export class CurrentUser {
   getNumberOfnotification(){
     return this.getNotification().subscribe(value =>value.length);
   }
+  checkNotification(purchaseId:number){
+    this.httpClient.put(environment.endpointURL + 'purchase/edit/' + purchaseId, {notificationCheck:true})
+  }
 }
