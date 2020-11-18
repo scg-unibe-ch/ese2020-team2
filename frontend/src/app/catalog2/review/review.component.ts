@@ -66,7 +66,7 @@ export class ReviewComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 8000,
+      duration: 4000,
     })
   }
 

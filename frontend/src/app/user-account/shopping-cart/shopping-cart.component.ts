@@ -8,6 +8,9 @@ import {CurrentUser} from "../../services/current-user";
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import {Review} from "../../models/review.model";
+import {map} from "rxjs/operators";
+import {ShoppingCart} from "../../models/shoppingCart.model";
 export interface Country {
   value: string;
   display: string;
@@ -19,12 +22,12 @@ export interface Country {
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  private shoppingCart = [2,1,3,4,5];
-  shoppingCart$: Observable<Product[]>;
+  //private shoppingCart = [2,1,3,4,5];
+  shoppingCart$: Observable<ShoppingCart[]>;
   quantity = 1;
   points$: Observable<number>;
   loggedIn$: BehaviorSubject<boolean>;
-  
+
   userForm = this.fb.group(
     {
       country: ["", Validators.required],
@@ -54,11 +57,11 @@ export class ShoppingCartComponent implements OnInit {
                 this.loggedIn$ = authService.loggedIn$;
                 };
 
-  
+
   refresh(): void {
     window.location.reload();
   }
-  
+
 
   ngOnInit(): void {
 
@@ -74,11 +77,15 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getShoppingCart(): void {
-    this.shoppingCart$ = this.productsService.getProductsByMultipleIds(this.shoppingCart);
+    this.shoppingCart$ = this.httpClient.get<ShoppingCart[]>(environment.endpointURL + 'cart/getAll/' + JSON.parse(localStorage.getItem('user')).userId);
   }
-  
 
-  
+
+
+
+
+
+
   updateaddress() {
     this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.userId,
       this.userForm.value).subscribe();
@@ -87,7 +94,7 @@ export class ShoppingCartComponent implements OnInit {
   };
 
   setaddress(){
-    
+
 
   }
 

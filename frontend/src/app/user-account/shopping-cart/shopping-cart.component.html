@@ -3,23 +3,23 @@
 
 <section class="container">
   <div class="left-half">
-    <mat-card  class="card" *ngFor="let product of shoppingCart$ | async" >
+    <mat-card  class="card" *ngFor="let shoppingCart of shoppingCart$ | async" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
           <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
-          <mat-card-title>{{product.title}}</mat-card-title>
+          <mat-card-title>{{shoppingCart.product.title}}</mat-card-title>
           <mat-card-subtitle>
-            <mat-card-title *ngIf="product.sellOrLend =='sell'">Price: {{product.price}} Fr</mat-card-title>
-            <mat-card-title *ngIf="product.sellOrLend =='lend'">Price: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='sell'">Price: {{shoppingCart.product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='lend'">Price: {{shoppingCart.product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
 
-            <p>{{product.piecesAvailable}}</p>
-            <p>Location: {{product.location}}</p>
-            <p>Delivery: {{product.deliveryPossible}}</p>
+            <p>{{shoppingCart.product.piecesAvailable}}</p>
+            <p>Location: {{shoppingCart.product.location}}</p>
+            <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
             <br>
-            <button (click)="buy(product);refresh()" type="submit" style="width: 40%; vertical-align: bottom  ;">remove</button>
+            <button type="submit" style="width: 40%; vertical-align: bottom  ;">remove</button>
 
 
 
@@ -67,16 +67,16 @@
         <div class="class1">
           <div class="class2">
             city:{{  (city$ | async)  }}
-            
+
           </div>
               <div class="class3">
-                Pincode: {{  (pinCode$ | async)  }}      
+                Pincode: {{  (pinCode$ | async)  }}
             </div>
         </div>
         <div class="class1">
           <div class="class2">
             Country: {{  (country$ | async)  }}
-            
+
           </div>
               <div class="class3">
                 street: {{  (street$ | async)  }}
@@ -99,7 +99,7 @@
       <input matInput placeholder="City" type="text" formControlName="city" id="inputCity">
     </mat-form-field>
 
-  
+
 
     <mat-form-field style="width: 50%;">
       <input matInput placeholder="Pincode" type="text" formControlName="pinCode" id="inputPinCode">
@@ -113,7 +113,7 @@
   </form>
 
 
-       
+
     </mat-card-content>
   </div>
   <div fxLayout.gt-sm="column" fxFlex.gt-sm="20%">

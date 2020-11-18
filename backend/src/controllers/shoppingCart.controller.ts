@@ -5,6 +5,7 @@ import { Cart } from '../models/shoppingCart.model';
 import {Review} from '../models/review.model';
 
 const shoppingCartController: Router = express.Router();
+shoppingCartController.use(express.json());
 
 // Add a way to sum together the same products about quantity
 
@@ -13,7 +14,7 @@ const shoppingCartController: Router = express.Router();
  */
 shoppingCartController.post('/add',
     async (req: Request, res: Response) => {
-        const { quantity } = req.body;
+        const quantity = req.body.quantity;
         // const { actualProduct } = req.body;
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         // const prodQuantity = await Product.findOne({ where: { productId: req.body.piecesAvailable } });
@@ -46,7 +47,7 @@ shoppingCartController.post('/add',
  * Get all the products of the shopping cart.
  */
 shoppingCartController.get('/getAll/:userId', (req: Request, res: Response) => {
-    Cart.findAll({where: { userId: req.params.id }, include: [Cart.associations.product]})
+    Cart.findAll({where: { userId: req.params.userId }, include: [Cart.associations.product]} )
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
 });

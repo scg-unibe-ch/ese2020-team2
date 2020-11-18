@@ -2,8 +2,8 @@
 <div class="outer">
 
   <div class="inner">
-  
-  
+
+
     <mat-card  class="card"  >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%">
@@ -15,7 +15,15 @@
             <mat-card-title *ngIf="product.sellOrLend =='sell'">Price: {{product.price}} Fr</mat-card-title>
             <mat-card-title *ngIf="product.sellOrLend =='lend'">Price: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
-
+          <span>
+          <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+            <mat-icon>
+              {{showIcon(i, product.productRating)}}
+            </mat-icon>
+          </mat-icon>
+          <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
+          </span>
+          <br>
           <div style="float:left;">
             <span class="subtitle" style="display:contents; ">Pieces available: </span>
             <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
@@ -34,9 +42,6 @@
             <span *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
         </div>
             <br>
-
-
-
 
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" >
@@ -57,19 +62,13 @@
             <p class="subtitle" style="padding-left: 65%;">
               Total Price: {{quantity*product.price }} Fr
             </p>
-            <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
-              <mat-icon>
-                {{showIcon(i, product.productRating)}}
-              </mat-icon>
-            </mat-icon>
-            <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
         </div>
-       
+
       </mat-card-content>
     </mat-card>
-  
+    <app-review></app-review>
+
   </div>
-  
+
   </div>
-  
-  
+
