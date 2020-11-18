@@ -131,7 +131,7 @@ reviewController.put('/NotificationViewed/:id', (req: Request, res: Response) =>
 async function updateProductRating(req: Request, res: Response) {
     const ratings = await Review.findAll({ where: { productId: req.body.productId } });
     if (ratings) {
-        const productRating = (await Review.sum('rating')) / (ratings.length);
+        const productRating = (await ratings.reduce((sum, current) => sum + current.rating, 0) / (ratings.length));
         await Product.findByPk(req.body.productId)
             .then(found => {
                 if (found != null) {

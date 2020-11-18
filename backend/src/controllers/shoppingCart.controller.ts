@@ -2,6 +2,7 @@ import express, {Request, Response, Router} from 'express';
 import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
 import { Cart } from '../models/shoppingCart.model';
+import {Review} from '../models/review.model';
 
 const shoppingCartController: Router = express.Router();
 
@@ -44,8 +45,8 @@ shoppingCartController.post('/add',
 /**
  * Get all the products of the shopping cart.
  */
-shoppingCartController.get('/getAll', (req: Request, res: Response) => {
-        Cart.findAll({include: [Cart.associations.user]})
+shoppingCartController.get('/getAll/:userId', (req: Request, res: Response) => {
+    Cart.findAll({where: { userId: req.params.id }, include: [Cart.associations.product]})
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
 });
@@ -53,8 +54,8 @@ shoppingCartController.get('/getAll', (req: Request, res: Response) => {
 /**
  *  Deletes a product from the shopping cart list.
  */
-shoppingCartController.delete('/delete/:id', (req: Request, res: Response) => {
-    Cart.findByPk(req.params.id)
+shoppingCartController.delete('/delete/:userId/:productId', (req: Request, res: Response) => {
+    Cart.findOne({where: { userId: req.params.userId, productId: req.params.productId }})
         .then(found => {
             if (found != null) {
                 found.destroy().then(() => res.status(200).send('Product deleted from shopping cart'));
@@ -77,8 +78,8 @@ shoppingCartController.get('/getProduct/:id', (req: Request, res: Response) => {
 /**
  * This method is to edit a product in the shopping cart.
  */
-shoppingCartController.put('/edit/:id', (req: Request, res: Response) => {
-    Cart.findByPk(req.params.id)
+shoppingCartController.put('/edit/:userId/:productId', (req: Request, res: Response) => {
+    Cart.findOne({where: { userId: req.params.userId, productId: req.params.productId }, include: [Cart.associations.product]})
         .then(found => {
             if (found != null) {
                 found.update(req.body).then(() => {

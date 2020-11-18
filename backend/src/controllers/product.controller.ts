@@ -1,7 +1,6 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
-import { User } from '../models/user.model';
 
 const productController: Router = express.Router();
 
@@ -104,4 +103,5 @@ productController.get('/get/:id',
 //         })
 //         .catch(err => res.status(500).send(err));
 // });
+
 export const ProductController: Router = productController;
