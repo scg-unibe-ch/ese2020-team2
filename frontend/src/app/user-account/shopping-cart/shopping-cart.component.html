@@ -3,7 +3,7 @@
 
 <section class="container">
   <div class="left-half">
-    <mat-card  class="card" *ngFor="let shoppingCart of shoppingCart$ | async" >
+    <mat-card  class="card" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
           <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
@@ -19,23 +19,21 @@
             <p>Location: {{shoppingCart.product.location}}</p>
             <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
             <br>
-            <button type="submit" style="width: 40%; vertical-align: bottom  ;">remove</button>
-
-
-
+            <button type="submit" style="width: 40%; vertical-align: bottom" (click)="deleteShoppingCartProduct(shoppingCart.product)">remove</button>
 
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
 
-            <mat-select [(value)]="quantity" style="width: 17%;margin-left: 80%;margin-top: 20%;">
-              <mat-option value="1">1</mat-option>
-              <mat-option value="2">2</mat-option>
-              <mat-option value="3">3</mat-option>
+            <mat-select   style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]" [placeholder] = "shoppingCart.quantity" (selectionChange)= "editShoppingCartProduct(shoppingCart.product, quantity[index]); refresh()">
+              <mat-option value="shoppingCart.quantity">{{shoppingCart.quantity}}</mat-option>
+              <mat-option value=1>1</mat-option>
+              <mat-option value=2>2</mat-option>
+              <mat-option value=3>3</mat-option>
             </mat-select>
             <br>
             <br>
             <p style="padding-left: 80%;">
-              CHF: 30
+              CHF: {{shoppingCart.quantity * shoppingCart.product.price}}
             </p>
         </div>
       </mat-card-content>
@@ -48,12 +46,12 @@
         <br>
         <p>You have <b>{{points$ | async}}</b> tokens </p>
         <br>
-        <p>Your purchase will cost you <b>(quantity*price of all items)</b> </p>
+        <p>Your purchase will cost you <b>{{totalPrice}}</b> </p>
         <br>
-        <p>After the purchase you have <b>{{(points$ | async) - 10}}</b> tokens </p>
+        <p>After the purchase you have <b>{{(points$ | async) - totalPrice}}</b> tokens </p>
         <br>
 
-        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;">buy</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" (click)="buyShoppingCartProducts()">buy</button>
 
     </mat-card-content>
     </mat-card>

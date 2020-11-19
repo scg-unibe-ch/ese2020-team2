@@ -10,7 +10,7 @@ import {CurrentUser} from '../services/current-user';
 import {Options, LabelType} from 'ng5-slider';
 import {Approval} from "../models/approval";
 import {MatSnackBar} from "@angular/material/snack-bar";
-
+import {Type} from "../user-account/user-dashboard/edititem/edititem.component";
 
 @Component({
   selector: 'app-catalog2',
@@ -96,6 +96,7 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+
 
   }
 

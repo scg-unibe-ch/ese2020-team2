@@ -1,9 +1,9 @@
-import {Approval} from "./approval";
-import {Product} from "./product.model";
+import {Approval} from './approval';
+import {Product} from './product.model';
 
 export class ShoppingCart {
 
-//Has to be extended
+// Has to be extended
   constructor(
 
     public sellerReview: string[],

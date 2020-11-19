@@ -1,8 +1,8 @@
-import {Approval} from "./approval";
+import {Approval} from './approval';
 
 export class Product {
 
-//Has to be extended
+// Has to be extended
   constructor(
 
     public sellerReview: string[],

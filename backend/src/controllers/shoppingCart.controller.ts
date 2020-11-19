@@ -3,6 +3,7 @@ import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
 import { Cart } from '../models/shoppingCart.model';
 import {Review} from '../models/review.model';
+import {ShoppingCart} from '../../../frontend/src/app/models/shoppingCart.model';
 
 const shoppingCartController: Router = express.Router();
 shoppingCartController.use(express.json());
@@ -20,8 +21,13 @@ shoppingCartController.post('/add',
         // const prodQuantity = await Product.findOne({ where: { productId: req.body.piecesAvailable } });
         const buyer = await User.findOne({ where: { userId: req.body.buyerUserId } });
         const seller = await User.findOne({ where: { userId: req.body.sellerUserId } });
+        const shoppingCart = await Cart.findAll({ where: { userId: req.body.userId } });
+        const b = shoppingCart.map((a => a.productId));
+        if (!b.includes(100)) {
+            res.status(500).send('You cannot add a product twice.');
+        }
 
-        if (buyer && seller && product && buyer.userId !== product.userId) {
+        if (false && buyer && seller && product && buyer.userId !== product.userId) {
             if (product.piecesAvailable >= quantity && quantity > 0) {
                 // Adds a new product in the shopping cart.
                 const { cartId } = await Cart.create(req.body);
@@ -43,14 +49,8 @@ shoppingCartController.post('/add',
         }
     });
 
-/**
- * Get all the products of the shopping cart.
- */
-shoppingCartController.get('/getAll/:userId', (req: Request, res: Response) => {
-    Cart.findAll({where: { userId: req.params.userId }, include: [Cart.associations.product]} )
-            .then(list => res.status(200).send(list))
-            .catch(err => res.status(500).send(err));
-});
+
+
 
 /**
  *  Deletes a product from the shopping cart list.

@@ -71,7 +71,8 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
             foreignKey: 'userId',
             constraints: false
         });
-        Cart.hasMany(Product, {
+        Cart.belongsTo(Product, {
+            targetKey: 'productId',
             as: 'product',
             foreignKey: 'productId',
             constraints: false
