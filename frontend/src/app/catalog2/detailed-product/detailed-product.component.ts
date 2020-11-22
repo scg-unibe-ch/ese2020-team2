@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { environment } from 'src/environments/environment';
 import {Review} from "../../models/review.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-detailed-product',
@@ -25,6 +27,8 @@ export class DetailedProductComponent implements OnInit {
   ratingArray = [];
   starCount = 5;
   quantity = 1;
+  userId: number;
+
 
 
 
@@ -32,13 +36,23 @@ export class DetailedProductComponent implements OnInit {
     private productsService: ProductsService,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+              private snackBar: MatSnackBar,
+              private location: Location) {
 
     this.loggedIn$ = authService.loggedIn$;
 
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);
     }
+
+    if (this.loggedIn$.value == true) {
+      this.userId = JSON.parse(localStorage.getItem('user')).userId;
+    }
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
 
@@ -51,6 +65,12 @@ export class DetailedProductComponent implements OnInit {
     });
 
     this.loadProductDetails(this.productId);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    })
   }
 
   /**
@@ -83,14 +103,6 @@ export class DetailedProductComponent implements OnInit {
 
   }
 
-  buy(product: Product): void {
-    this.httpClient.post(environment.endpointURL + 'purchase/add/', {
-      productId: product.productId,
-      quantity: 1,
-      buyingUserId: JSON.parse(localStorage.getItem('user')).userId,
-      deliveryAddress: "kk"});
-  }
-
   refresh(): void {
     window.location.reload();
 }
@@ -103,6 +115,42 @@ export class DetailedProductComponent implements OnInit {
     }
   }
 
+  addProductToShoppingCart(product: Product, quantity: number): void {
+    this.httpClient.post(environment.endpointURL + 'cart/add',
+      {
+        "productId": product.productId,
+        "userId": JSON.parse(localStorage.getItem("user")).userId,
+        "quantity": quantity,
+        "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
+        "sellerUserId": product.userId,
+        "shoppingCart": true,
+        "wishList": false
+      }
+    ).subscribe((res: any) => {
+      this.openSnackBar("Product was added to the shopping cart", '');
+    }, (error: any) => {
+      this.openSnackBar(error.error, '');
+    });
+  }
+
+
+  addProductToWishList(product: Product, quantity: number) {
+    this.httpClient.post(environment.endpointURL + 'cart/add',
+      {
+        "productId": product.productId,
+        "userId": JSON.parse(localStorage.getItem("user")).userId,
+        "quantity": quantity,
+        "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
+        "sellerUserId": product.userId,
+        "wishList": true,
+        "shoppingCart": false
+      }
+    ).subscribe((res: any) => {
+      this.openSnackBar("Product was added to the wish list", '');
+    }, (error: any) => {
+      this.openSnackBar(error.error, '');
+    });
+  }
 
 
 }

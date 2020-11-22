@@ -22,5 +22,9 @@ export class ShoppingCart {
   public sellerUserId: number,
     // The product itself
     public product: Product,
+    // True if product in wish list
+    public shoppingCart: boolean,
+  // True if product is in the wish list
+  public wishList: boolean,
 ) {}
 }

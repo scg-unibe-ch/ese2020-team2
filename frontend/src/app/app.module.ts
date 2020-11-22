@@ -52,6 +52,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-cart.component';
 import { ReviewComponent } from './catalog2/review/review.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { WishListComponent } from './user-account/wish-list/wish-list.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     DetailedProductComponent,
     ShoppingCartComponent,
     ReviewComponent,
+    WishListComponent,
   ],
   imports: [
     BrowserModule,

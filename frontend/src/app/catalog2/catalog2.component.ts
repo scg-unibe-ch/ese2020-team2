@@ -28,7 +28,7 @@ export class Catalog2Component implements OnInit {
   location: string = "";
   filterps: string = "";
   filtersl: string = "";
-  quantity = [];
+  quantity: number[];
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
@@ -46,6 +46,7 @@ export class Catalog2Component implements OnInit {
       }
     }
   };
+  a: number;
 
 
   constructor(private httpClient: HttpClient,
@@ -198,6 +199,7 @@ export class Catalog2Component implements OnInit {
   getAllProducts(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
       products.filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true)));
+    this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
   }
 
 
@@ -229,7 +231,7 @@ export class Catalog2Component implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     })
   }
 
@@ -240,7 +242,9 @@ export class Catalog2Component implements OnInit {
         "userId": JSON.parse(localStorage.getItem("user")).userId,
         "quantity": quantity,
         "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
-        "sellerUserId": product.userId
+        "sellerUserId": product.userId,
+        "shoppingCart": true,
+        "wishList": false
       }
     ).subscribe((res: any) => {
       this.openSnackBar("Product was added to the shopping cart", '');
@@ -250,4 +254,21 @@ export class Catalog2Component implements OnInit {
   }
 
 
+  addProductToWishList(product: Product, quantity: number) {
+    this.httpClient.post(environment.endpointURL + 'cart/add',
+      {
+        "productId": product.productId,
+        "userId": JSON.parse(localStorage.getItem("user")).userId,
+        "quantity": quantity,
+        "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
+        "sellerUserId": product.userId,
+        "wishList": true,
+        "shoppingCart": false
+      }
+    ).subscribe((res: any) => {
+      this.openSnackBar("Product was added to the wish list", '');
+    }, (error: any) => {
+      this.openSnackBar(error.error, '');
+    });
+  }
 }

@@ -45,14 +45,14 @@
 
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" >
-          <button class="btn" matTooltip="back to catalog"   routerLink="/catalog2">
+          <button class="btn" matTooltip="back to catalog" (click)="backClicked()">
             <mat-icon >settings_backup_restore
             </mat-icon>
             </button>
             <p class="subtitle" style="padding-left: 70%; margin-top: 20%;">
               Quantity:
             </p>
-            <mat-select [(value)]="quantity" placeholder="1"style="width: 25%;margin-left: 70%;">
+            <mat-select [(ngModel)]="quantity" placeholder="{{quantity}}" style="width: 25%;margin-left: 70%;">
               <mat-option value=1>1</mat-option>
               <mat-option value=2>2</mat-option>
               <mat-option value=3>3</mat-option>
@@ -62,6 +62,16 @@
             <p class="subtitle" style="padding-left: 65%;">
               Total Price: {{quantity*product.price }} Fr
             </p>
+
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">BUY</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend' && !(product.userId == userId)" (click)="addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">RENT</button>
+
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="addProductToWishList(product, quantity)" style="width: 15%;">WISH</button>
+
+          <p class="btnitem" *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
+
+          <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
+          <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
         </div>
 
       </mat-card-content>

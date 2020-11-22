@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<section class="container">
+  <div class="left-half">
+    <mat-card  class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
+      <mat-card-content fxLayout.gt-sm="row">
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
+          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
+        </div>
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
+          <mat-card-title>{{wishList.product.title}}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-card-title *ngIf="wishList.product.sellOrLend =='sell'">Price: {{wishList.product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="wishList.product.sellOrLend =='lend'">Price: {{wishList.product.price}} Fr</mat-card-title>
+          </mat-card-subtitle>
+
+          <p>{{wishList.product.piecesAvailable}}</p>
+          <p>Location: {{wishList.product.location}}</p>
+          <p>Delivery: {{wishList.product.deliveryPossible}}</p>
+          <br>
+          <button type="submit" style="width: 40%; vertical-align: bottom" (click)="removeShoppingCartProduct(wishList)">Remove</button>
+          <button type="submit" style="width: 40%; vertical-align: bottom" (click)="moveWishListProductToShoppingCart(wishList)">To Shopping Cart</button>
+          <button type="submit" style="width: 40%; vertical-align: bottom" [routerLink]="['/product', wishList.productId]">View</button>
+
+        </div>
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
+
+          <mat-select   style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]" placeholder="{{wishList.quantity}}" (selectionChange)= "editWishListProduct(wishList, quantity[index])">
+            <mat-option value="{{wishList.quantity}}">{{wishList.quantity}}</mat-option>
+            <mat-option value=1>1</mat-option>
+            <mat-option value=2>2</mat-option>
+            <mat-option value=3>3</mat-option>
+          </mat-select>
+          <br>
+          <br>
+          <p style="padding-left: 80%;">
+            CHF: {{wishList.quantity * wishList.product.price}}
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+

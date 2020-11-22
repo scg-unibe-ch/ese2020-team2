@@ -16,6 +16,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {DetailedProductComponent} from "./catalog2/detailed-product/detailed-product.component";
 import {ShoppingCartComponent} from "./user-account/shopping-cart/shopping-cart.component";
 import {ReviewComponent} from "./catalog2/review/review.component";
+import {WishListComponent} from "./user-account/wish-list/wish-list.component";
 
 
 const routes: Routes = [
@@ -30,6 +31,8 @@ const routes: Routes = [
   { path: 'dashboard', component: UserDashboardComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
   { path: 'shopping-cart', component: ShoppingCartComponent,
+    canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
+  { path: 'wish-list', component: WishListComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
   { path: 'catalog', component: CatalogComponent},
   { path: 'catalog2', component: Catalog2Component},

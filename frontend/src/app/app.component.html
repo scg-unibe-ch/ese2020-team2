@@ -33,6 +33,9 @@
     <button  matTooltip="Shopping Cart" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/shopping-cart">
       <mat-icon>shopping_cart</mat-icon>
     </button>
+    <button  matTooltip="Wish List" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/wish-list">
+      <mat-icon>favorite</mat-icon>
+    </button>
     <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
     matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="hidden || (listOfNotification$ | async)?.length===0" (click)="toggleBadgeVisibility()">
       <mat-icon>archive</mat-icon>

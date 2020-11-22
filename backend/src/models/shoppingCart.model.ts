@@ -17,6 +17,10 @@ export interface CartAttributes {
     buyerUserId: number;
     // Name of the user who is selling the product.
     sellerUserId: number;
+    // True if product in wish list
+    shoppingCart: boolean;
+    // True if product is in the wish list
+    wishList: boolean;
 }
 
 export interface CartCreationAttributes extends Optional<CartAttributes, 'cartId'> { }
@@ -28,6 +32,8 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
     quantity!: number;
     buyerUserId!: number;
     sellerUserId!: number;
+    shoppingCart!: boolean;
+    wishList!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         Cart.init({
@@ -57,6 +63,17 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
                     type: DataTypes.INTEGER,
                     allowNull: false
                 },
+                shoppingCart: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: false
+                },
+                wishList: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: false
+                },
+
         },
             {
                 sequelize,
