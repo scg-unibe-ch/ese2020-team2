@@ -75,7 +75,7 @@ export class WishListComponent implements OnInit {
       this.deleteShoppingCartProduct(wishList)
     } else {
       this.httpClient.put(environment.endpointURL + 'cart/edit/' + wishList.cartId , {
-        shoppingCart: false
+        wishList: false
       }).subscribe((res: any) => {},
         (error: any) => {
           if(error.status === 200) {
