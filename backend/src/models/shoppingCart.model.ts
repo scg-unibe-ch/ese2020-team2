@@ -1,4 +1,12 @@
-import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import {
+    Optional,
+    Model,
+    Sequelize,
+    DataTypes,
+    Association,
+    BelongsToGetAssociationMixin,
+    BelongsToSetAssociationMixin
+} from 'sequelize';
 import { User } from './user.model';
 import { Product } from './product.model';
 
@@ -26,6 +34,20 @@ export interface CartAttributes {
 export interface CartCreationAttributes extends Optional<CartAttributes, 'cartId'> { }
 
 export class Cart extends Model<CartAttributes, CartCreationAttributes> implements CartAttributes {
+
+    public static associations: {
+        user: Association <Cart, User>;
+        product: Association <Cart, Product>;
+    };
+
+    public getUser!: BelongsToGetAssociationMixin<User>;
+    public addUser!: BelongsToSetAssociationMixin<User, number>;
+    public getProduct!: BelongsToGetAssociationMixin<Product>;
+    public addProduct!: BelongsToSetAssociationMixin<Product, number>;
+
+    public readonly user?: User;
+    public readonly product?: Product;
+
     cartId!: number;
     productId!: number;
     userId!: number;
