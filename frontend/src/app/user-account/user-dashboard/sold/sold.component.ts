@@ -8,7 +8,9 @@ import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
 import {map} from "rxjs/operators";
 import { Purchase } from 'src/app/models/purchase.model';
+import {environment} from '../../../../environments/environment';
 import { async } from 'rxjs/internal/scheduler/async';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sold',
@@ -24,6 +26,7 @@ export class SoldComponent implements OnInit {
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private soldService: SoldService,
+    private snackBar: MatSnackBar,
     private users: CurrentUser) {
 
 }
@@ -32,12 +35,31 @@ export class SoldComponent implements OnInit {
     this.sells$ = this.soldService.getSells().pipe(map(sells =>
       sells.filter(purchase => purchase.paymentType === 'wallet points')
     ));
-    this.sells$.subscribe(list => list.forEach(element => {
-      this.checkNotification(element.purchaseId)
-    }));
-    this.sells$.subscribe(list =>this.listOfProduct=list);
+    this.sells$.subscribe(list => this.listOfProduct = list);
   }
-  checkNotification(purchaseId:number){
-    this.users.checkNotification(purchaseId)
+ /* ngOnDestroy(){
+    this.updateLists()
+  }
+  private updateLists() {
+    this.sells$.subscribe(list => list.forEach(element => {
+      this.checkNotification(element);
+    }));
+  }
+*/
+  checkNotification(sell:Purchase){
+    this.httpClient.put(environment.endpointURL + 'purchase/edit/'+ sell.purchaseId,
+      {
+        "notificationCheck": true,
+      }
+    ).subscribe((res: any) => {
+      this.openSnackBar("Product was marked as ", '');
+    }, (error: any) => {
+      this.openSnackBar(error.error, '');
+    });
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    })
   }
 }

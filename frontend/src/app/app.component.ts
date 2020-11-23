@@ -3,7 +3,7 @@ import {AuthService} from "./auth/auth.service";
 import {Role} from "./models/role";
 import {BehaviorSubject} from "rxjs";
 import { Observable } from 'rxjs';
-import { Purchase } from '../../../backend/src/models/purchase.model';
+import { Purchase } from './models/purchase.model';
 import {CurrentUser} from './services/current-user';
 
 @Component({
@@ -14,7 +14,6 @@ import {CurrentUser} from './services/current-user';
 })
 export class AppComponent implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
-  hidden = false;
   listOfNotification$:Observable<Purchase[]>;
   constructor(private authService: AuthService, private currentUser:CurrentUser) {
 
@@ -27,10 +26,7 @@ export class AppComponent implements OnInit {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
   }
 
-  toggleBadgeVisibility() {
-    if(!this.hidden)
-    this.hidden = !this.hidden;
-  }
+
   getNoftification(){
     this.listOfNotification$ = this.currentUser.getNotification()
   }

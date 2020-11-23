@@ -5,7 +5,7 @@ import {find, map, pluck} from 'rxjs/operators';
 import {from, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {User} from '../../../../backend/src/models/user.model';
-import {Purchase} from '../../../../backend/src/models/purchase.model';
+import {Purchase} from '../models/purchase.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class CurrentUser {
   getNumberOfnotification(){
     return this.getNotification().subscribe(value =>value.length);
   }
-  checkNotification(purchaseId:number){
-    this.httpClient.put(environment.endpointURL + 'purchase/edit/' + purchaseId, {notificationCheck:true})
+  checkNotification(purchase:Purchase){
+    this.httpClient.put(environment.endpointURL + 'purchase/edit/' + purchase.getPurchaseId(), {"notificationCheck":true})
   }
 }

@@ -20,4 +20,5 @@ export class Purchase {
         public notificationCheck: boolean,
 
       ) {}
+      getPurchaseId(){return this.purchaseId}
     }

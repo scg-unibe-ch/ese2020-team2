@@ -14,7 +14,7 @@
               <mat-card-subtitle style="color: rgb(255, 0, 0);" *ngIf='!(sell.notificationCheck)'>You have just sold this!</mat-card-subtitle>
               <mat-card-subtitle *ngIf="sell.deliveryAddress">You have to deliver the product to {{sell.user.firstName}} {{sell.user.lastName}} at the adress {{sell.deliveryAddress}}</mat-card-subtitle>
               <mat-card-actions>
-                  <button mat-button (click)="removeitem()" >REMOVE</button>
+                  <button *ngIf="!(sell.notificationCheck)" mat-button (click)="checkNotification(sell)" >MARK AS CHECKED</button>
                 </mat-card-actions>
             </mat-card>
           </div>

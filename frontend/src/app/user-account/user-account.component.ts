@@ -5,7 +5,7 @@ import {TodoList} from "../models/todo-list.model";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../../backend/src/models/user.model";
 import { Observable } from 'rxjs';
-import { Purchase } from '../../../../backend/src/models/purchase.model';
+import { Purchase } from '../models/purchase.model';
 import {CurrentUser} from '../services/current-user';
 
 @Component({
