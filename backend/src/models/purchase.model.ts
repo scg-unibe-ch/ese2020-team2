@@ -29,6 +29,8 @@ export interface PurchaseAttributes {
     walletPayment: boolean;
     // True if the User saw the Notification.
     notificationCheck: boolean;
+    // Type of purchase. Sell or Lent. true for 'sell' and false for 'lend'
+    isSold: boolean;
 }
 
 export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes, 'purchaseId'> { }
@@ -58,6 +60,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     paymentType!: string;
     walletPayment!: boolean;
     notificationCheck!: boolean;
+    isSold!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         Purchase.init({
@@ -103,7 +106,11 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
             notificationCheck: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
-            }
+            },
+            isSold: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false
+            },
         },
             {
                 sequelize,

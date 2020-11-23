@@ -40,10 +40,10 @@ export interface ProductAttributes {
     disapprovalMsg: string;
     // Product visibility in market place. True by default
     visibleInMarket: boolean;
-    // Needed to grade the seller behavior (review)
-    // sellerReview: string;
     // Average of rating given by the users whose bought the product.
     productRating: number;
+    // True if the product is premier.
+    isPremier: boolean;
 }
 
 export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
@@ -63,8 +63,8 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     adminApproval!: string;
     disapprovalMsg!: string;
     visibleInMarket!: boolean;
-    // sellerReview!: string;
     productRating!: number;
+    isPremier!: boolean;
     public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
@@ -140,17 +140,13 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 type: DataTypes.NUMBER,
                 allowNull: false,
                 defaultValue: 0
+            },
+            isPremier: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
             }
-            // sellerReview: {
-            //     type: DataTypes.STRING,
-            //     allowNull: true,
-            //     get: function () {
-            //         return JSON.parse(this.getDataValue('sellerReview'));
-            //     },
-            //     set: function (val) {
-            //         return this.setDataValue('sellerReview', JSON.stringify(val));
-            //     }
-            // }
+
         },
             {
                 sequelize,
