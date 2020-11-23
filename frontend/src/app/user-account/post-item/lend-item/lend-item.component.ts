@@ -10,6 +10,10 @@ export interface Type {
   value: string;
   display: string;
 }
+export interface Location {
+  value: string;
+  display: string;
+}
 export interface DeliveryPossible {
   value: boolean;
   display: string;
@@ -65,6 +69,15 @@ export class LendItemComponent implements OnInit {
       {value: 'product', display: 'Product'},
       {value: 'service', display: 'Service'}
    ];
+
+   locations: Location[] = [
+    {value: 'bern', display: 'Bern'},
+    {value: 'zürich', display: 'Zürich'},
+    {value: 'lugano', display: 'Lugano'},
+    {value: 'basel', display: 'Basel'},
+    {value: 'genf', display: 'Genf'},
+    {value: 'chur', display: 'Chur'}
+ ];
 
    deliverys: DeliveryPossible[] = [
     {value: true, display: 'YES'},

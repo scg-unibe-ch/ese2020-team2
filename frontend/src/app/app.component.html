@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!doctype html>
 <html>
 <body>
@@ -22,7 +23,8 @@
       <mat-icon>assignment</mat-icon>
     </button>
     <button  matTooltip=" View Products" class="btn" routerLink="/catalog2">
-      <mat-icon>credit_card</mat-icon>
+      <mat-icon><i class="fa fa-product-hunt" aria-hidden="true"></i>
+      </mat-icon>
     </button>
 
     <span style="color: white;">ESE Project</span>
@@ -38,7 +40,7 @@
     </button>
     <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
     matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="hidden || (listOfNotification$ | async)?.length===0" (click)="toggleBadgeVisibility()">
-      <mat-icon>archive</mat-icon>
+      <mat-icon><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
     </button>
     <button  matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" routerLink="/login">
       <mat-icon>clear</mat-icon>

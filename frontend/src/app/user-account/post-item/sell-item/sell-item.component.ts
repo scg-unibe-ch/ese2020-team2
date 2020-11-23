@@ -18,6 +18,10 @@ export interface PiecesAvailable {
   value: number;
   display: number;
 }
+export interface Location {
+  value: string;
+  display: string;
+}
 
 @Component({
   selector: 'app-sell-item',
@@ -63,6 +67,14 @@ export class SellItemComponent implements OnInit {
     {value: false, display: 'NO'}
  ];
 
+ locations: Location[] = [
+  {value: 'bern', display: 'Bern'},
+  {value: 'zürich', display: 'Zürich'},
+  {value: 'lugano', display: 'Lugano'},
+  {value: 'basel', display: 'Basel'},
+  {value: 'genf', display: 'Genf'},
+  {value: 'chur', display: 'Chur'}
+];
 
  piecesAvailables: PiecesAvailable[] = [
   {value: 1, display: 1},

@@ -19,15 +19,19 @@
     <option value="bern">Bern</option>
     <option value="zürich">Zürich</option>
     <option value="basel">Basel</option>
+    <option value="chur">Chur</option>
     <option value="genf">Genf</option>
-    <option value="">All</option>
+    <option value="lugano">Lugano</option>
+    <option value="">Location</option>
 </select>
 <select  *ngIf="location == ''"  [(ngModel)]="location" class="btn" (ngModelChange)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)">
   <option value="bern">Bern</option>
   <option value="zürich">Zürich</option>
   <option value="basel">Basel</option>
+  <option value="chur">Chur</option>
   <option value="genf">Genf</option>
-  <option value="">All</option>
+  <option value="lugano">Lugano</option>
+  <option value="">Location</option>
 </select>
   <button mat-button (click)="changefilterps('');changelocation('');changefiltersl('');changesortby('');changeminValue(0);changemaxValue(50);changesearch('');
 

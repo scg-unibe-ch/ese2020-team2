@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SoldComponent implements OnInit {
 
-  productList: ProductList;
+  
   sells$: Observable<Purchase[]>;
   listOfProduct:Purchase[];
 
