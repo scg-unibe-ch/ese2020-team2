@@ -22,6 +22,11 @@ purchaseController.post('/add/',
         const product = await Product.findOne({ where: { productId: req.body.productId } });
         const buyer = await User.findOne({ where: { userId: req.body.buyerUserId } });
         const seller = await User.findOne({ where: { userId: req.body.sellerUserId } });
+        if (product.sellOrLend === 'sell') {
+            req.body.isSold = true;
+        } else {
+            req.body.isSold = false;
+        }
 
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
         if (buyer && seller && product && buyer.moneyInWallet >= product.price * quantity && buyer.userId !== product.userId) {
@@ -61,11 +66,37 @@ purchaseController.get('/getAllBuyerPurchases/:id',
     });
 
 /**
- * This method if called outputs all sold products of a precise user (seller)
+ * Outputs all the products that are both sold and lend by a user
  */
 purchaseController.get('/getAllSellerSold/:id',
     (req: Request, res: Response) => {
         Purchase.findAll({ where: { sellerUserId: req.params.id }, include: [Purchase.associations.user, Purchase.associations.product] })
+            .then(list => res.status(200).send(list))
+            .catch(err => res.status(500).send(err));
+    });
+
+/**
+ * Outputs all the products that are only sold by a user
+ */
+purchaseController.get('/getAllSellerSoldProducts/:id',
+    (req: Request, res: Response) => {
+        Purchase.findAll({
+            where: { sellerUserId: req.params.id, isSold: true },
+            include: [Purchase.associations.user, Purchase.associations.product]
+        })
+            .then(list => res.status(200).send(list))
+            .catch(err => res.status(500).send(err));
+    });
+
+    /**
+ * Outputs all the products that are only lend by a user
+ */
+purchaseController.get('/getAllSellerLendServices/:id',
+    (req: Request, res: Response) => {
+        Purchase.findAll({
+            where: { sellerUserId: req.params.id, isSold: false },
+            include: [Purchase.associations.user, Purchase.associations.product]
+        })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });

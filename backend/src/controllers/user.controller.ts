@@ -1,8 +1,7 @@
 import express, { Router, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { verifyToken } from '../middlewares/checkAuth';
-import { checkUniqueEmail } from '../middlewares/checkRegistration';
-import { checkUniqueUserName } from '../middlewares/checkRegistration';
+import { checkUniqueEmail, checkUniqueUserName, ownerExist } from '../middlewares/checkRegistration';
 import { User } from '../models/user.model';
 
 const userController: Router = express.Router();
@@ -16,13 +15,23 @@ const userService = new UserService();
 
 userController.post('/register',
     async (req: Request, res: Response) => {
+        let isOwnerExist = false;
+        // Check if there exists a owner already.
+        if (req.body.role === 'owner') {
+            if (await ownerExist(req, res)) {
+                isOwnerExist = true;
+                res.status(333).send('The application can have only one owner.');
+            }
+        }
         // Check if the email id entered by the new user and make sure it does not exist in the database.
         if (!await checkUniqueEmail(req, res)) {
             // Once the email id is true, check for the unique username.
             if (!await checkUniqueUserName(req, res)) {
+                if (!isOwnerExist) {
                 await userService.register(req.body)
                     .then(registered => res.send(registered))
                     .catch(err => res.status(500).send(err));
+                }
             }
             // If the userName already exits, prompt the user.
             res.status(333).send('User name already exist. Try a different one.');
