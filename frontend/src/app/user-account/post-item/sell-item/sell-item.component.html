@@ -1,3 +1,6 @@
+<section class="container">
+  <div class="left-half">
+
 <form [formGroup]="formular">
 
     <!-- first mat card with required inputs-->
@@ -5,6 +8,7 @@
   
     <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(92, 106, 121, 0.816)'">
       <mat-card-title>Required Fields</mat-card-title>
+      <br>
       <div class="form-group">
   
          <!-- first row of required inputs-->
@@ -15,30 +19,37 @@
           <mat-error *ngIf="title.invalid"> title is required</mat-error>
         </mat-form-field>
   
-        <mat-form-field>
-          <input required matInput placeholder="Description" type="text" formControlName="description" id="description">
-          <mat-error *ngIf="description.invalid">Description is required</mat-error>
-        </mat-form-field>
+      
+        
   
     
         <mat-form-field>
-          <mat-select formControlName="location" type="text" placeholder="Location">
+          <mat-select style="font-size: large;" formControlName="location" type="text" placeholder="Location">
             <mat-option *ngFor="let location of locations" [value]="location.value">
               {{location.display}}
             </mat-option>
           </mat-select> 
         </mat-form-field>
+
+        
         
         <mat-form-field>
-          <mat-select formControlName="type" type="text" placeholder="Type">
+          <mat-select style="font-size: large;" formControlName="type" type="text" placeholder="Type">
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{type.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <br>
+        <br>
 
         <mat-form-field>
-          <mat-select formControlName="piecesAvailable" type="text" placeholder="Products available">
+          <input style="font-size: large;" required matInput placeholder="Description" type="text" formControlName="description" id="description">
+          <mat-error *ngIf="description.invalid">Description is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select style="font-size: large;" formControlName="piecesAvailable" type="text" placeholder="Products available">
             <mat-option *ngFor="let piecesAvailable of piecesAvailables" [value]="piecesAvailable.value">
               {{piecesAvailable.display}}
             </mat-option>
@@ -46,15 +57,22 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select formControlName="deliveryPossible" type="boolean" placeholder="Delivery">
+          <mat-select style="font-size: large;" formControlName="deliveryPossible" type="boolean" placeholder="Delivery">
             <mat-option *ngFor="let delivery of deliverys" [value]="delivery.value">
               {{delivery.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <br>
+        <br>
 
         <mat-form-field>
-          <mat-select formControlName="isPremier" type="boolean" placeholder="Upgrade">
+          <input style="font-size: large;" required matInput placeholder="Price" type="number" formControlName="price" id="price">
+          <mat-error *ngIf="price.invalid">Price is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select style="font-size: large;" formControlName="isPremier" type="boolean" placeholder="Upgrade">
             <mat-option *ngFor="let premier of premiers" [value]="premier.value">
               {{premier.display}}
             </mat-option>
@@ -62,20 +80,33 @@
         </mat-form-field>
 
 
-        <mat-form-field>
-          <input required matInput placeholder="Price" type="number" formControlName="price" id="price">
-          <mat-error *ngIf="price.invalid">Price is required</mat-error>
-        </mat-form-field>
+    
 
        
 
 
 
         
-
+        <button class="btn" (click)="post(); clear()" [disabled]="formular.invalid" type="submit" style="width: 23%;">Post</button>
       </div>
     </mat-card>
 
-    <button class="btn btn-warning" (click)="post(); clear()" [disabled]="formular.invalid" type="submit" style="background-color: rgb(51, 180, 51);">Post</button>
+   
     
   </form>
+  </div>
+  <div class="right-half">
+
+
+
+    <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(92, 106, 121, 0.816)'">
+      <p class="bigger">to sell an item you have to specify all of the fields, if you select the upgrade option, your item will get highlighted</p>
+      <p class="bigger">Highlighted items have a higher chance to sell because they always appear on top of search results and al
+        so have a stronger coloring to capture the potential buyers interest</p>
+      <p class="bigger">  This feature costs 5 wallet points</p>
+      <p class="bigger"> If you decide to not upgrade your post you can still do it later; 
+        just press the edit posted item button and you will have the option to highlight it</p>
+      <p class="bigger" >Best of luck with selling your Product.</p>
+      </mat-card>
+  </div>
+</section>
