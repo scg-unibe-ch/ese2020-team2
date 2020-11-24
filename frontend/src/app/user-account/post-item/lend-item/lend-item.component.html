@@ -49,6 +49,14 @@
         </mat-form-field>
 
         <mat-form-field>
+          <mat-select formControlName="isPremier" type="boolean" placeholder="Upgrade">
+            <mat-option *ngFor="let premier of premiers" [value]="premier.value">
+              {{premier.display}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
           <input required matInput placeholder="Price" type="number" formControlName="price" id="price">
           <mat-error *ngIf="price.invalid">Price is required</mat-error>
         </mat-form-field>

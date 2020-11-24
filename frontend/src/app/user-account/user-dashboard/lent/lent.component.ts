@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LentComponent implements OnInit {
 
   listOfProduct:Purchase[];
-  products$: Observable<Purchase[]>;
+  lent$: Observable<Purchase[]>;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -31,10 +31,10 @@ export class LentComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.products$ = this.soldService.getSells().pipe(map(sells =>
+    this.lent$ = this.soldService.getlends().pipe(map(sells =>
       sells.filter(purchase => purchase.paymentType === 'wallet points')
     ));
-    this.products$.subscribe(list => this.listOfProduct = list);
+    this.lent$.subscribe(list => this.listOfProduct = list);
   
   }
 

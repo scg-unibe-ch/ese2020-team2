@@ -12,6 +12,7 @@ export class Product {
     public title: string,
     public userName: string,
     public price: number,
+    public isPremier: boolean,
     public description: string,
     public userId: number,
     public location: string,

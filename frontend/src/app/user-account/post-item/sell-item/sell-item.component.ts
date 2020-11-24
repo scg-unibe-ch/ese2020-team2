@@ -14,6 +14,10 @@ export interface DeliveryPossible {
   value: boolean;
   display: string;
 }
+export interface IsPremier {
+  value: boolean;
+  display: string;
+}
 export interface PiecesAvailable {
   value: number;
   display: number;
@@ -29,6 +33,9 @@ export interface Location {
   styleUrls: ['./sell-item.component.css']
 })
 export class SellItemComponent implements OnInit {
+  id: number;
+  points$: number;
+  pointsSub: any;
 
   constructor(
     private router: Router,
@@ -49,6 +56,7 @@ export class SellItemComponent implements OnInit {
       location: ["", Validators.required],
       sellOrLend: ["sell", Validators.required],
       deliveryPossible: [, Validators.required],
+      isPremier: [, Validators.required],
       piecesAvailable: [, Validators.required],
       status: ["available"],
       userId: [JSON.parse(localStorage.getItem('user')).userId],
@@ -66,6 +74,11 @@ export class SellItemComponent implements OnInit {
     {value: true, display: 'YES'},
     {value: false, display: 'NO'}
  ];
+
+ premiers: IsPremier[] = [
+  {value: true, display: 'YES'},
+  {value: false, display: 'NO'}
+];
 
  locations: Location[] = [
   {value: 'bern', display: 'Bern'},
@@ -98,11 +111,15 @@ export class SellItemComponent implements OnInit {
 
   
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.checkWallet();
+    this.id = JSON.parse(localStorage.getItem('user')).userId;
+
+    
   }
 
   
-  
+  get isPremier() { return this.formular.get("isPremier")};
   get type() { return this.formular.get("type") };
   get userId() { return this.formular.get("userId") };
   get title() { return this.formular.get("title") };
@@ -118,13 +135,39 @@ export class SellItemComponent implements OnInit {
   get sellerReview() { return this.formular.get("sellerReview ") };
 
   post() {
+    if (this.isPremier.value == true) {
+      this.updatewallet();
+    }
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.formular.value).subscribe((res: any) => {
       this.openSnackBar('You successfully posted!', '');
     }, (error: any) => {
       this.openSnackBar('Posting was not possible, please try again', '');
-    }); 
+    }); this.refresh;
+    
 }
+
+updatewallet() {
+  this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.id,{
+    moneyInWallet: this.points$ -5
+  }
+  ).subscribe();
+};
+
+refresh(): void {
+  window.location.reload();
+}
+
+checkWallet(): void {
+  this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
+    (moneyInWallet: number) => {
+      this.points$=moneyInWallet;
+  }
+  );
+
+
+}
+
 clear() {
   this.formular.reset();
   this.formular.controls['userName'].setValue(localStorage.getItem('userName'));

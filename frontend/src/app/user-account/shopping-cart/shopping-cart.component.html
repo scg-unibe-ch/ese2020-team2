@@ -19,9 +19,21 @@
             <p>Location: {{shoppingCart.product.location}}</p>
             <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
             <br>
-            <button type="submit" style="width: 40%; vertical-align: bottom" (click)="removeShoppingCartProduct(shoppingCart)">Remove</button>
-            <button type="submit" style="width: 40%; vertical-align: bottom" (click)="moveShoppingCartProductToWishList(shoppingCart)">To Wish List</button>
-            <button type="submit" style="width: 40%; vertical-align: bottom" [routerLink]="['/product', shoppingCart.productId]">View</button>
+            <mat-card-content fxLayout.gt-sm="row">
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
+
+            <button class="btn" type="submit"  (click)="removeShoppingCartProduct(shoppingCart)"><i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+             <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
+            <button class="btn" type="submit"   (click)="moveShoppingCartProductToWishList(shoppingCart)"><i class="fa fa-heart" aria-hidden="true"></i>
+            </button>
+          </div>
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter">
+            <button class="btn" type="submit"  [routerLink]="['/product', shoppingCart.productId]"><i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+          </div>
+        </mat-card-content>
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
 

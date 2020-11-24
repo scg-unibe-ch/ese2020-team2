@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CurrentUser} from '../../services/current-user';
 import {Observable} from 'rxjs';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-wallet',
@@ -21,8 +22,8 @@ export class WalletComponent implements OnInit {
 
     ngOnInit() {
      this.checkWallet();
+      
  }
-
 
   /**
    * Checks the database for the current points the user has

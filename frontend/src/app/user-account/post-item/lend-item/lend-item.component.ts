@@ -18,6 +18,10 @@ export interface DeliveryPossible {
   value: boolean;
   display: string;
 }
+export interface IsPremier {
+  value: boolean;
+  display: string;
+}
 export interface Duration {
   value: string;
   display: string;
@@ -34,6 +38,9 @@ export interface PriceDur {
   styleUrls: ['./lend-item.component.css']
 })
 export class LendItemComponent implements OnInit {
+  id: number;
+  points$: number;
+  pointsSub: any;
 
   constructor(
     private router: Router,
@@ -54,6 +61,7 @@ export class LendItemComponent implements OnInit {
       description: ["", Validators.required],
       location: ["", Validators.required],
       sellOrLend: ["lend", Validators.required],
+      isPremier: [, Validators.required],
       deliveryPossible: [, Validators.required],
       status: ["available"],
       userId: [JSON.parse(localStorage.getItem('user')).userId],
@@ -95,11 +103,37 @@ prices: PriceDur[] = [
   {value: 'day', display: '/Day'}
 ];
 
+premiers: IsPremier[] = [
+  {value: true, display: 'YES'},
+  {value: false, display: 'NO'}
+];
+
+
   
 
-  ngOnInit(): void {
-  }
+ngOnInit(): void { 
+  this.checkWallet();
+  this.id = JSON.parse(localStorage.getItem('user')).userId;
+}
 
+updatewallet() {
+  this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.id,{
+    moneyInWallet: this.points$ -5
+  }
+  ).subscribe();
+};
+
+checkWallet(): void {
+  this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
+    (moneyInWallet: number) => {
+      this.points$=moneyInWallet;
+  }
+  );
+
+
+}
+
+  get isPremier() { return this.lendformular.get("isPremier") };
   get userId() { return this.lendformular.get("userId") };
   get type() { return this.lendformular.get("type") };
   get userName() { return this.lendformular.get("userName") };
@@ -116,6 +150,9 @@ prices: PriceDur[] = [
 
 
   post() {
+    if (this.isPremier.value == true) {
+      this.updatewallet();
+    }
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.lendformular.value).subscribe((res: any) => {
       this.openSnackBar('You successfully posted!', '');

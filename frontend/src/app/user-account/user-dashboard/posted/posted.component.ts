@@ -47,6 +47,7 @@ export class PostedComponent implements OnInit {
    *
    * @param product, that will be deleted
    */
+
   onProductDelete(product: Product): void{
     this.httpClient.delete(environment.endpointURL + 'product/delete/' + product.productId).pipe(
       finalize(() => this.getAllProducts())).subscribe()
