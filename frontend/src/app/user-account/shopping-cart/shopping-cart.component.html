@@ -2,11 +2,11 @@
 
 
 <section class="container">
-  <div class="left-half">
+  <div *ngIf="totalPrice != 0" class="left-half">
     <mat-card  class="card" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
-          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
+          <img class="imgcard" mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{shoppingCart.product.title}}</mat-card-title>
@@ -22,15 +22,15 @@
             <mat-card-content fxLayout.gt-sm="row">
             <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
 
-            <button class="btn" type="submit"  (click)="removeShoppingCartProduct(shoppingCart)"><i class="fa fa-times" aria-hidden="true"></i>
+            <button class="btn" type="submit"  (click)="removeShoppingCartProduct(shoppingCart)"><i class="fa fa-times fa-lg" aria-hidden="true"></i>
             </button>
           </div>
              <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
-            <button class="btn" type="submit"   (click)="moveShoppingCartProductToWishList(shoppingCart)"><i class="fa fa-heart" aria-hidden="true"></i>
+            <button class="btn" type="submit"   (click)="moveShoppingCartProductToWishList(shoppingCart)"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>
             </button>
           </div>
             <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter">
-            <button class="btn" type="submit"  [routerLink]="['/product', shoppingCart.productId]"><i class="fa fa-eye" aria-hidden="true"></i>
+            <button class="btn" type="submit"  [routerLink]="['/product', shoppingCart.productId]"><i class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
             </button>
           </div>
         </mat-card-content>
@@ -51,6 +51,10 @@
         </div>
       </mat-card-content>
     </mat-card>
+  </div>
+  <div *ngIf="totalPrice == 0" class="left-halfimage">
+    <img  style="opacity: 90%; border: 5px; border-color: black; border-style: solid;" src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-cute-disappointed-shopping-bag-flat-thin-line-vector-id841884438?k=6&m=841884438&s=612x612&w=0&h=bjPqjzm_fAOcZOO5ug9ILjffPkKH09fL_REAaRA0VVM=" alt="">
+
   </div>
   <div class="right-half">
     <mat-card>

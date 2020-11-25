@@ -8,7 +8,7 @@
   height: 285px !important;
   }
   
-  img {
+  .imgcard {
   height: max-content; 
   max-height: 270px !important; 
   object-fit: cover !important;
@@ -61,6 +61,13 @@
   float: left;
   width: 65%;
   }
+  .left-halfimage {
+    float: left;
+    padding-top: 1%;
+    position: sticky;
+    padding-left: 15%;
+    width: 65%;
+    }
   .right-half {
   
   position: sticky;
