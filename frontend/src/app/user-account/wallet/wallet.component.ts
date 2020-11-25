@@ -12,24 +12,24 @@ import { timeStamp } from 'console';
 })
 export class WalletComponent implements OnInit {
 
-  points$: Observable<any>;
+  currentUser$: Observable<any>;
 
 
   constructor(private httpClient: HttpClient,
               private users: CurrentUser) {
-    this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
+    this.currentUser$ = this.users.getCurrentUser();
   }
 
     ngOnInit() {
-     this.checkWallet();
+     this.checkCurrentUser();
       
  }
 
   /**
-   * Checks the database for the current points the user has
+   * Checks the database for the current user
    */
-  checkWallet(): void {
-     this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
+  checkCurrentUser(): void {
+     this.currentUser$ = this.users.getCurrentUser();
 
 
   }

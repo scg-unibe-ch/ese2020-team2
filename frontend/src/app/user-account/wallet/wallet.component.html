@@ -2,6 +2,5 @@
 
 <br>
 <h1>
-  You currently have {{ (points$ | async) }} points in your wallet.
+  You currently have {{ (currentUser$ | async)?.moneyInWallet  }} points in your wallet.
 </h1>
-

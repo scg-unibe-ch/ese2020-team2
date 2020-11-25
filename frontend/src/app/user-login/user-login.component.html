@@ -1,16 +1,24 @@
 <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
   <span *ngIf="infoMessage.length > 0">{{ infoMessage }}</span>
-  <div *ngIf="!(loggedIn$ | async)">
+  <div *ngIf="!(loggedIn$ | async) && !(resetPassword)">
+      <mat-form-field>
+        <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" >
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
+      </mat-form-field>
+      <button mat-flat-button color="primary" (click)="login()">Login</button>  
+      <button mat-flat-button style="background-color:rgba(228, 62, 62, 0.858)" (click)="toForgotPassword()">Reset Password</button>
+  </div>
 
+  <div *ngIf="!(loggedIn$ | async) && (resetPassword)">
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" >
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-      </mat-icon>
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="login()">Login</button>
+    <button mat-flat-button color="primary" (click)="getQuestions()">Get the question to reset Password</button>  
+    <button mat-flat-button style="background-color:rgba(228, 62, 62, 0.858)" (click)="toForgotPassword()">Go Back To LogIn</button>
   </div>
 
   <div *ngIf="(loggedIn$ | async)">

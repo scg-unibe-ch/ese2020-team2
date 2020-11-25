@@ -16,6 +16,9 @@ export class UserLoginComponent implements OnInit {
   password = '';
   infoMessage = '';
   userToken: string;
+  resetPassword = false;
+  question = '';
+  anwer = '';
 
   secureEndpointResponse = '';
   hide= true;
@@ -89,7 +92,11 @@ export class UserLoginComponent implements OnInit {
     this.checkUserStatus();
     this.openSnackBar('You successfully logged out!', '')
   }
+changeResetPasword(){
+  this.resetPassword=!(this.resetPassword)
+}
+getQuestions(){}
 
-  toForgotPassword(){}
-
+toForgotPassword(){this.changeResetPasword()}
+toLogIn(){this.changeResetPasword()}
 }

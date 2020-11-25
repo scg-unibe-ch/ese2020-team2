@@ -37,6 +37,10 @@
           Password must have 7 chars.
         </mat-error>
       </mat-form-field>
+      <mat-form-field>
+        <input required matInput placeholder="Question resetting password" type="text" formControlName="passwordQuestion" id="passwordQuestion">
+        <mat-error *ngIf="passwordQuestion.invalid">Question to reset the password is required</mat-error>
+      </mat-form-field>
       <br>
     </div>
 
@@ -67,6 +71,10 @@
         <mat-error class="invalid-feedback" *ngIf="confirmPassword.hasError('required')">
           Confirm password is required
         </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input required matInput placeholder="Answer resetting password" type="text" formControlName="passwordAnswer" id="passwordAnswer">
+        <mat-error *ngIf="passwordAnswer.invalid">Answer to reset the password is required</mat-error>
       </mat-form-field>
     </div>
 

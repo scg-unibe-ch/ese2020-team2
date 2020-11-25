@@ -64,8 +64,10 @@ export class TestsignupComponent implements OnInit {
       telNumber: [""],
       street: [""],
       city: [""],
-      role: ["admin"],
+      role: ["user"],
       pinCode: [""],
+      passwordQuestion: ["", Validators.required],
+      passwordAnswer: ["", Validators.required],
     },
     {
       validator: this.customValidator.passwordMatchValidator(
@@ -110,8 +112,8 @@ export class TestsignupComponent implements OnInit {
   get password() {
     return this.userForm.get("password");
   }
-
-
+  get passwordQuestion(){ return this.userForm.get("passwordQuestion")}
+  get passwordAnswer(){ return this.userForm.get("passwordAnswer")}
 
 
 
