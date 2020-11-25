@@ -49,7 +49,7 @@ reviewController.put('/edit/:id', (req: Request, res: Response) => {
         .catch(err => res.status(500).send(err));
 });
 /**
- * Gets all the reviews of a particular product.
+ * Gets a particular product with the review id.
  */
 reviewController.get('/getReview/:id', (req: Request, res: Response) => {
     Review.findByPk(req.params.id, { include: [Review.associations.product] })
