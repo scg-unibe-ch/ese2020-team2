@@ -100,7 +100,7 @@ export class ReviewComponent implements OnInit {
 
   loadReview(productId: number) {
 
-    this.review$ = this.httpClient.get<Review[]>(environment.endpointURL + 'review/getReview/' + productId).pipe(map(reviews =>
+    this.review$ = this.httpClient.get<Review[]>(environment.endpointURL + 'review/getProductReviews/' + productId).pipe(map(reviews =>
       reviews.filter(review => review.buyerUserId == JSON.parse(localStorage.getItem('user')).userId)));
 
     this.review$.pipe(map(reviews => reviews[0])).subscribe(review => {
@@ -140,6 +140,7 @@ export class ReviewComponent implements OnInit {
   editReview() {
     this.httpClient.put(environment.endpointURL + 'review/edit/' + this.reviewId,
       {
+        "productId": this.productId,
         "reviewText": this.reviewText,
         "rating": this.rating,
       }
@@ -153,7 +154,10 @@ export class ReviewComponent implements OnInit {
   }
 
   deleteReview(): void {
-    this.httpClient.delete(environment.endpointURL + 'review/delete/' + this.reviewId).subscribe((res: any) => {
+    this.httpClient.request('DELETE', environment.endpointURL + 'review/delete/' + this.reviewId, {
+      body: {
+        productId: this.productId
+      }}).subscribe((res: any) => {
       this.openSnackBar("The deletion of the review was successful", '');
     }, (error: any) => {
       this.openSnackBar(error.error.text, '');
