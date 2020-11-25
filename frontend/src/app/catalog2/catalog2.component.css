@@ -11,12 +11,35 @@
     
   }
 
+ 
+
   .flexExpand {
     flex: 1 1 auto;
   }
   .size{
     font-size: 120%;
   }
+
+  .left-half {
+    float: left;
+    width: 42%;
+
+    }
+    .right-half {
+      
+    width: 52%;
+    }
+
+  .leftup-half {
+      float: left;
+      width: 60%;
+  
+      }
+  .rightup-half {
+      
+      float: right;
+      width: 37%;
+      }
 
   .subtitle{
     font-size: 120%;

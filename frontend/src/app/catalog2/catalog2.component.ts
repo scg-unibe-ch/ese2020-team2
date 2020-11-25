@@ -106,13 +106,13 @@ export class Catalog2Component implements OnInit {
     if (search == "" && sortby == "") {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
             )).sort(x => x.isPremier ? -1 : 1)   
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
               && product.location.toLowerCase().includes(location.toLowerCase())
             )).sort(x => x.isPremier ? -1 : 1)   
           )
@@ -121,13 +121,13 @@ export class Catalog2Component implements OnInit {
     } else if (search == "" && sortby == "maxprice") {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
             )).sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-            product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
+            product.price <= maxValue && product.status == "available" && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
           )).sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
@@ -135,13 +135,13 @@ export class Catalog2Component implements OnInit {
     } else if (search == "" && sortby == "lowestprice") {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-            product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
           )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-            product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
+            product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
           )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
@@ -149,13 +149,13 @@ export class Catalog2Component implements OnInit {
     } else if (sortby == "lowestprice") {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
             )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1) 
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue && product.price <= maxValue
-            && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
+            && product.status == "available" && product.sellOrLend !== filtersl && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
           )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1) 
           )
         )
@@ -163,13 +163,13 @@ export class Catalog2Component implements OnInit {
     } else if (sortby == "maxprice") {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
+            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
             )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue && product.price
-            <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
+            <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
           )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
@@ -178,14 +178,14 @@ export class Catalog2Component implements OnInit {
     } else {
       if (location == "") {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
+            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
               && (product.title.includes(search) || product.description.includes(search) || product.price == parseInt(search))))
               .sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
         )
       } else {
         this.products$ = this.productsService.getProducts().pipe(map(products =>
-            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
+            products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
               && (product.title.includes(search) || product.description.includes(search) || product.price == parseInt(search)) && product.location.toLowerCase().includes(location.toLowerCase())))
               .sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)  
           )
@@ -197,8 +197,6 @@ export class Catalog2Component implements OnInit {
 
 
   getAllProducts(): void {
-    this.products$ = this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true)));
       this.filter(this.minValue, this.maxValue, this.filtersl, this.filterps, this.sortby, this.location, this.search);
     this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
   }

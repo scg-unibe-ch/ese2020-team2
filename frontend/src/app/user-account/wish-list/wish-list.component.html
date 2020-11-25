@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<section class="container">
-  <div class="left-half">
-    <mat-card  class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
+<section class="container" *ngIf="totalPrice != 0">
+    <mat-card class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
           <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
@@ -40,5 +39,9 @@
         </div>
       </mat-card-content>
     </mat-card>
-  </div>
+    </section>
+    <section class="container" *ngIf="totalPrice == 0">
+
+      <img  style="opacity: 90%; border: 5px; border-color: black; border-style: solid;" src="https://i.ibb.co/VgdV1LJ/IMG-20201125-003514.jpg" alt="">
+    </section>
 

@@ -28,16 +28,25 @@ export interface PriceDur {
   display: string;
 }
 
+export interface IsPremier {
+  value: boolean;
+  display: string;
+}
+
 @Component({
   selector: 'app-edititem',
   templateUrl: './edititem.component.html',
   styleUrls: ['./edititem.component.css']
 })
 export class EdititemComponent implements OnInit {
+  id: any;
+  points$: number;
+  pointsSub: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,
     private router: Router,
+    private users: CurrentUser,
     private httpClient: HttpClient,
     private fb: FormBuilder,
     private productsService: ProductsService,
@@ -49,7 +58,10 @@ export class EdititemComponent implements OnInit {
   product: Product;
 
 
+
   ngOnInit() {
+    this.checkWallet();
+    this.id = JSON.parse(localStorage.getItem('user')).userId;
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.productId = +params['id']; // (+) converts string 'id' to a number
     });
@@ -59,8 +71,24 @@ export class EdititemComponent implements OnInit {
     })
   }
 
-
-
+  updatewallet() {
+    this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.id,{
+      moneyInWallet: this.points$ -5
+    }
+    ).subscribe();
+  };
+  
+  refresh(): void {
+    window.location.reload();
+  }
+  
+  checkWallet(): void {
+    this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
+      (moneyInWallet: number) => {
+        this.points$=moneyInWallet;
+    }
+    );
+  }
 
 
   ngOnDestroy() {
@@ -78,11 +106,17 @@ export class EdititemComponent implements OnInit {
       sellOrLend: ["", Validators.required],
       status: ["posted"],
       deliveryPossible: [false, Validators.required],
+      isPremier: [, Validators.required]
     });
 
 
 
 
+
+  premiers: IsPremier[] = [
+      {value: true, display: 'YES'},
+      {value: false, display: 'NO'}
+    ];
 
   types: Type[] = [
     {value: 'product', display: 'Product'},
@@ -129,11 +163,15 @@ export class EdititemComponent implements OnInit {
    */
 
 confirm(product: Product): void {
+  if (product.isPremier == true) {
+    this.updatewallet();
+  }
   this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
     adminApproval: Approval.pending,
     typ: product.type,
     title: product.title,
     price: product.price,
+    isPremier: product.isPremier,
     description: product.description,
     location: product.location,
     sellOrLend: product.sellOrLend,
