@@ -1,6 +1,8 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
+import { Purchase } from '../models/purchase.model';
+import { User } from '../models/user.model';
 import { Review } from '../models/review.model';
 /**
  * This controller is to add the reviews to the review model.
@@ -11,7 +13,7 @@ reviewController.use(express.json());
  * Adds a new review  and gives the data if successful or returns 500 error.
  */
 reviewController.post('/add/', async (req: Request, res: Response) => {
-    const review = await Review.findOne({ where: { purchaseId: req.body.purchaseId } });
+    const review = await Review.findOne({ where: { productId: req.body.productId, buyerUserId: req.body.buyerUserId } });
     if (review === null) {
         const { reviewId } =  await Review.create(req.body);
         if (reviewId === undefined) {
@@ -74,7 +76,7 @@ reviewController.get('/getSellerReviews/:id', (req: Request, res: Response) => {
  * Get all the reviews of a particular product.
  */
 reviewController.get('/getProductReviews/:id', (req: Request, res: Response) => {
-    Review.findAll({ where: { productId: req.params.id }, include: [Review.associations.product] })
+    Review.findAll({ where: { productId: req.params.id }, include: [Review.associations.user] })
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
 });
