@@ -1,17 +1,25 @@
 import { Router, Request, Response } from 'express';
 import { User } from '../models/user.model';
 import { Product } from '../models/product.model';
+import { Json } from 'sequelize/types/lib/utils';
 
+interface SingleProduct {
+    productId: number;
+    quantity: number;
+    buyerUserId: number;
+    sellerUserId: number;
+    deliveryAddress: string;
+}
 export class PurchaseService {
     /**
     * This function updates the user wallets with (product price * quantity of purchase).
     * The wallet of the buyer os decremented and the wallet of the seller is incremented.
     */
-    public async updateUserWallets(req: Request, res: Response) {
-        const { quantity } = req.body;
-        const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const buyer = await User.findOne({ where: { userId: req.body.buyerUserId } });
-        const seller = await User.findOne({ where: { userId: req.body.sellerUserId } });
+    public async updateUserWallets(req: SingleProduct, res: Response) {
+        const quantity  = req.quantity;
+        const product = await Product.findOne({ where: { productId: req.productId } });
+        const buyer = await User.findOne({ where: { userId: req.buyerUserId } });
+        const seller = await User.findOne({ where: { userId: req.sellerUserId } });
         // Decrement the wallet points in buyer wallet.
         await User.findByPk(buyer.userId)
             .then(found => {
@@ -31,9 +39,9 @@ export class PurchaseService {
      * This function updates the number of pieces of the product available after a purchase is made.
      * It decrements the number of pieces available with the quantity of purchase.
      */
-    public async updateProductStatus(req: Request, res: Response) {
-        const product = await Product.findOne({ where: { productId: req.body.productId } });
-        const availableProducts = product.piecesAvailable - req.body.quantity;
+    public async updateProductStatus(req: SingleProduct, res: Response) {
+        const product = await Product.findOne({ where: { productId: req.productId } });
+        const availableProducts = product.piecesAvailable - req.quantity;
         let availabilityStatus = '';
         // Manages the Status of the product or service
         if (availableProducts > 0) {
@@ -44,7 +52,7 @@ export class PurchaseService {
             availabilityStatus = 'lent';
         }
         // The Product quantity and its status are updated
-        Product.findByPk(req.body.productId)
+        await Product.findByPk(req.productId)
             .then(found => {
                 if (found != null) {
                     found.update({ piecesAvailable: availableProducts, status: availabilityStatus });

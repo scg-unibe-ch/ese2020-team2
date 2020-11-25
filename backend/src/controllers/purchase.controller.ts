@@ -16,6 +16,59 @@ const purchaseService = new PurchaseService();
  * This method creates a new purchase in the purchase model only if the
  * user has more wallet points than the price of the product multiplied by the quantity purchased.
  */
+purchaseController.post('/addCart/',
+    async (req: Request, res: Response) => {
+        for (let eachProduct = 0; eachProduct < req.body.length; eachProduct++) {
+            const currentProduct = req.body[eachProduct];
+            const quantity = currentProduct.quantity;
+            const product = await Product.findOne({ where: { productId: currentProduct.productId } });
+            const buyer = await User.findOne({ where: { userId: currentProduct.buyerUserId } });
+            const seller = await User.findOne({ where: { userId: currentProduct.sellerUserId } });
+            if (product.sellOrLend === 'sell') {
+                currentProduct.isSold = true;
+            } else {
+                currentProduct.isSold = false;
+            }
+
+            // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
+            if (buyer && seller && product && buyer.moneyInWallet >= product.price * quantity &&
+                buyer.userId !== product.userId && seller.userId === product.userId) {
+                if (!(product.piecesAvailable <= 0) && product.piecesAvailable >= quantity && quantity > 0) {
+                    // Create a new purchase.
+                    const { purchaseId } = await Purchase.create(currentProduct);
+                    if (purchaseId === undefined) {
+                        res.status(500).send('Purchase failed! Try again. \nFailed when adding product ' + product.title);
+                    } else {
+                        await purchaseService.updateUserWallets(currentProduct, res);
+                        await purchaseService.updateProductStatus(currentProduct, res);
+                        // res.json({ purchaseId });
+                    }
+                } else {
+                    if (quantity <= 0) {
+                        res.status(500).send('Select a valid quantity. \nFailed when adding product ' + product.title);
+                    }
+                    res.status(500).send('The product has only ' + product.piecesAvailable + ' pieces available.'
+                        + '\nFailed when adding product ' + product.title);
+                }
+            } else {
+                if (buyer.userId === product.userId) {
+                    res.status(500).send('Seller cannot buy his own product. \nFailed when adding product ' + product.title);
+                } else if (seller.userId !== product.userId) {
+                    res.status(500).send('The seller is not the owner of the product. \nFailed when adding product ' + product.title);
+                } else {
+                    res.status(500).send('Buyer does not have enough money. Update wallet before purchase.'
+                        + '\nFailed when adding product ' + product.title);
+                }
+            }
+        }
+        res.status(200).send('Purchase successful');
+    });
+
+
+/**
+* This method creates a new purchase in the purchase model only if the
+* user has more wallet points than the price of the product multiplied by the quantity purchased.
+*/
 purchaseController.post('/add/',
     async (req: Request, res: Response) => {
         const { quantity } = req.body;
@@ -29,15 +82,16 @@ purchaseController.post('/add/',
         }
 
         // This condition is to allow purchase only if the buyer has enough wallet points to buy the product.
-        if (buyer && seller && product && buyer.moneyInWallet >= product.price * quantity && buyer.userId !== product.userId) {
+        if (buyer && seller && product && buyer.moneyInWallet >= product.price * quantity &&
+            buyer.userId !== product.userId && seller.userId === product.userId) {
             if (product.piecesAvailable >= quantity && quantity > 0) {
                 // Create a new purchase.
                 const { purchaseId } = await Purchase.create(req.body);
                 if (purchaseId === undefined) {
                     res.status(500).send('Purchase failed! Try again');
                 } else {
-                    await purchaseService.updateUserWallets(req, res);
-                    await purchaseService.updateProductStatus(req, res);
+                    await purchaseService.updateUserWallets(req.body, res);
+                    await purchaseService.updateProductStatus(req.body, res);
                     res.json({ purchaseId });
                 }
             } else {
@@ -49,6 +103,8 @@ purchaseController.post('/add/',
         } else {
             if (buyer.userId === product.userId) {
                 res.status(500).send('Seller cannot buy his own product.');
+            } else if (seller.userId !== product.userId) {
+                res.status(500).send('The seller is not the owner of the product. \nFailed when adding product ' + product.title);
             } else {
                 res.status(500).send('Buyer does not have enough money. Update wallet before purchase.');
             }
@@ -88,9 +144,9 @@ purchaseController.get('/getAllSellerSoldProducts/:id',
             .catch(err => res.status(500).send(err));
     });
 
-    /**
- * Outputs all the products that are only lend by a user
- */
+/**
+* Outputs all the products that are only lend by a user
+*/
 purchaseController.get('/getAllSellerLendServices/:id',
     (req: Request, res: Response) => {
         Purchase.findAll({
