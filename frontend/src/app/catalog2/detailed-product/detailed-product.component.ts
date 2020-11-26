@@ -29,9 +29,6 @@ export class DetailedProductComponent implements OnInit {
   quantity = 1;
   userId: number;
 
-
-
-
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private authService: AuthService,
@@ -74,18 +71,21 @@ export class DetailedProductComponent implements OnInit {
   }
 
   /**
-   * Gets the product, but only if it is approved and set to visible in the market
+   * Gets the product, but only if you are the admin or it is approved and simultaneously set to visible in the market
    *
    * If the product is not approved or visibleInMarket the user gets rerouted to an error page.
-   * The rerouting also happens if the product does not exist (error 404).
+   * The rerouting also happens if the product does not exist (error 404) for users and admins.
    *
    * @param productId the id of the product that should be displayed in detail
    */
   loadProductDetails(productId){
-    this.product$ = this.productsService.getProductById(productId).pipe(
-      filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true),
-      defaultIfEmpty(null))
-
+    if(JSON.parse(localStorage.getItem('user')).role === 'user') {
+      this.product$ = this.productsService.getProductById(productId).pipe(
+        filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true),
+        defaultIfEmpty(null))
+    } else {
+      this.product$ = this.productsService.getProductById(productId).pipe(defaultIfEmpty(null))
+    }
     this.product$.subscribe(result => {
       if(result === null) {
         this.router.navigate(['/error/not-found'])
@@ -98,14 +98,6 @@ export class DetailedProductComponent implements OnInit {
         this.router.navigate(['/error/not-found'])
       }})
   }
-
-  wish() {
-
-  }
-
-  refresh(): void {
-    window.location.reload();
-}
 
   showIcon(index: number, rating: number) {
     if (rating >= index + 1) {

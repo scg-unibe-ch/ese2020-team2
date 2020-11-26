@@ -15,7 +15,7 @@ export class CurrentUser {
   currentUser: User;
   constructor(private httpClient: HttpClient) {}
 
-    getCurrentUser(): Observable<User> {
+  getCurrentUser(): Observable<User> {
       return this.httpClient.get<User[]>(environment.endpointURL + 'user/all').pipe(map(
         (users: User[]) => users.find(user => user.userName === localStorage.getItem('userName'))));
     }
