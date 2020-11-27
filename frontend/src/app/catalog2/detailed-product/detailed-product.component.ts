@@ -9,8 +9,10 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { environment } from 'src/environments/environment';
 import {Review} from "../../models/review.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from '@angular/common';
+import {SnackBarService} from "../../services/snackBar.service";
+import {WishListService} from "../../services/wish-list.service";
+import {ShoppingCartService} from "../../services/shopping-cart.service";
 
 @Component({
   selector: 'app-detailed-product',
@@ -34,8 +36,10 @@ export class DetailedProductComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-              private snackBar: MatSnackBar,
-              private location: Location) {
+              private snackBar: SnackBarService,
+              private location: Location,
+              public wishListService: WishListService,
+              public shoppingCartService: ShoppingCartService) {
 
     this.loggedIn$ = authService.loggedIn$;
 
@@ -46,10 +50,6 @@ export class DetailedProductComponent implements OnInit {
     if (this.loggedIn$.value == true) {
       this.userId = JSON.parse(localStorage.getItem('user')).userId;
     }
-  }
-
-  backClicked() {
-    this.location.back();
   }
 
 
@@ -64,11 +64,12 @@ export class DetailedProductComponent implements OnInit {
     this.loadProductDetails(this.productId);
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    })
+  backClicked() {
+    this.location.back();
   }
+
+
+
 
   /**
    * Gets the product, but only if you are the admin or it is approved and simultaneously set to visible in the market
@@ -106,43 +107,5 @@ export class DetailedProductComponent implements OnInit {
       return 'star_border';
     }
   }
-
-  addProductToShoppingCart(product: Product, quantity: number): void {
-    this.httpClient.post(environment.endpointURL + 'cart/add',
-      {
-        "productId": product.productId,
-        "userId": JSON.parse(localStorage.getItem("user")).userId,
-        "quantity": quantity,
-        "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
-        "sellerUserId": product.userId,
-        "shoppingCart": true,
-        "wishList": false
-      }
-    ).subscribe((res: any) => {
-      this.openSnackBar("Product was added to the shopping cart", '');
-    }, (error: any) => {
-      this.openSnackBar(error.error, '');
-    });
-  }
-
-
-  addProductToWishList(product: Product, quantity: number) {
-    this.httpClient.post(environment.endpointURL + 'cart/add',
-      {
-        "productId": product.productId,
-        "userId": JSON.parse(localStorage.getItem("user")).userId,
-        "quantity": quantity,
-        "buyerUserId": JSON.parse(localStorage.getItem("user")).userId,
-        "sellerUserId": product.userId,
-        "wishList": true,
-        "shoppingCart": false
-      }
-    ).subscribe((res: any) => {
-      this.openSnackBar("Product was added to the wish list", '');
-    }, (error: any) => {
-      this.openSnackBar(error.error, '');
-    });
-  }
-
 
 }

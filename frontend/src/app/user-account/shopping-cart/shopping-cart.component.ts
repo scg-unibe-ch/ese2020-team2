@@ -10,6 +10,8 @@ import {finalize, map} from "rxjs/operators";
 import {ShoppingCart} from "../../models/shoppingCart.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ShoppingCartPurchase} from "../../models/shoppingCartPurchase.model";
+import {SnackBarService} from "../../services/snackBar.service";
+import {ShoppingCartService} from "../../services/shopping-cart.service";
 
 export interface Country {
   value: string;
@@ -59,7 +61,8 @@ export class ShoppingCartComponent implements OnInit {
               private fb: FormBuilder,
               private productsService: ProductsService,
               private users: CurrentUser,
-              private snackBar: MatSnackBar) {
+              private snackBar: SnackBarService,
+              private shoppingCartService: ShoppingCartService) {
 
     this.loggedIn$ = authService.loggedIn$;
   }
@@ -68,12 +71,9 @@ export class ShoppingCartComponent implements OnInit {
     this.getShoppingCart();
     this.calculatePrices();
     this.CreateShoppingCartPurchases();
-    this.users.getCurrentUser().subscribe(user => {
-      this.userAddress = [user.firstName, user.lastName, user.street, user.pinCode, user.city, user.country]
-        .filter(Boolean).join(", ")})
+    this.getAddressAsString();
+    this.getUserMoney();
 
-
-    this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
     if (this.loggedIn$.value == true) {
       this.userId = JSON.parse(localStorage.getItem('user')).userId;
       this.city$ = this.users.getCurrentUserProperty('city');
@@ -83,6 +83,17 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  private getUserMoney() {
+    this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
+  }
+
+  private getAddressAsString() {
+    this.users.getCurrentUser().subscribe(user => {
+      this.userAddress = [user.firstName, user.lastName, user.street, user.pinCode, user.city, user.country]
+        .filter(Boolean).join(", ")
+    })
+  }
+
   calculatePrices(): void {
     this.shoppingCart$.subscribe(shoppingCart => this.totalPrice = shoppingCart.reduce(
       (sum, current) => sum + current.product.price * current.quantity, 0))
@@ -90,16 +101,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getShoppingCart(): void {
-    this.shoppingCart$ = this.httpClient.get<ShoppingCart[]>(environment.endpointURL + 'cart/getAll/' + JSON.parse(localStorage.getItem('user')).userId).pipe(map(shoppingCarts => shoppingCarts.filter(shoppingCart => shoppingCart.shoppingCart === true)));
-    this.shoppingCart$.subscribe(shoppingCart => {
-      this.shoppingCart = shoppingCart
-    })
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    })
+    this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
+    this.shoppingCart$.subscribe(shoppingCart => {this.shoppingCart = shoppingCart})
   }
 
   removeShoppingCartProduct(shoppingCartProduct: ShoppingCart): void {
@@ -112,9 +115,9 @@ export class ShoppingCartComponent implements OnInit {
         },
         (error: any) => {
           if (error.status === 200) {
-            this.openSnackBar("Removed product from shopping cart", '');
+            this.snackBar.open("Removed product from shopping cart", '', 2000);
           } else {
-            this.openSnackBar(error.error.text, '');
+            this.snackBar.open(error.error.text, '', 2000);
           }})
     }
     this.ngOnInit();
@@ -125,9 +128,9 @@ export class ShoppingCartComponent implements OnInit {
       },
       (error: any) => {
         if (error.status === 200) {
-          this.openSnackBar("Removed product from shopping cart", '');
+          this.snackBar.open("Removed product from shopping cart", '', 2000);
         } else {
-          this.openSnackBar(error.error.text, '');
+          this.snackBar.open(error.error.text, '', 2000);
         }})
     this.ngOnInit();
   }
@@ -141,9 +144,9 @@ export class ShoppingCartComponent implements OnInit {
       },
       (error: any) => {
         if (error.status === 200) {
-          this.openSnackBar("Product moved to wish list", '');
+          this.snackBar.open("Product moved to wish list", '', 2000);
         } else {
-          this.openSnackBar(error.error.text, '');
+          this.snackBar.open(error.error.text, '',2000);
         }})
     this.ngOnInit();
   }
@@ -154,9 +157,9 @@ export class ShoppingCartComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if (error.status === 200) {
-          this.openSnackBar("Quantity updated", '');
+          this.snackBar.open("Quantity updated", '', 2000);
         } else {
-          this.openSnackBar(error.error.text, '');
+          this.snackBar.open(error.error.text, '', 2000);
         }})
     this.ngOnInit();
   }
@@ -169,13 +172,14 @@ export class ShoppingCartComponent implements OnInit {
         (res: any) => {},
         (error: any) => {
           if (error.status === 200) {
-            this.openSnackBar("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '');
+            this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000);
           } else {
-            this.openSnackBar(error.error.text, '');
+            this.snackBar.open(error.error.text, '', 2000);
           }})
       this.shoppingCart.forEach(shoppingCartProduct => {
         this.removeShoppingCartProduct(shoppingCartProduct)
       })})
+    this.ngOnInit();
   }
 
   private CreateShoppingCartPurchases() {
@@ -197,7 +201,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   notEnoughMoney() {
-    this.openSnackBar("Sorry, you don't have enough money. Please remove some products.", '');
+    this.snackBar.open("Sorry, you don't have enough money. Please remove some products.", '',2000);
   }
 
   get street() {

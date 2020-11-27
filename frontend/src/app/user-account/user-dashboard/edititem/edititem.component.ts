@@ -10,6 +10,7 @@ import {Product} from "../../../models/product.model";
 import {ProductsService} from "../../../services/products.service";
 import {environment} from "../../../../environments/environment";
 import {Approval} from "../../../models/approval";
+import {SnackBarService} from "../../../services/snackBar.service";
 
 export interface Type {
   value: string;
@@ -50,7 +51,7 @@ export class EdititemComponent implements OnInit {
     private httpClient: HttpClient,
     private fb: FormBuilder,
     private productsService: ProductsService,
-    public snackBar: MatSnackBar) {
+    public snackBar: SnackBarService) {
   }
 
   productId: number;
@@ -77,11 +78,8 @@ export class EdititemComponent implements OnInit {
     }
     ).subscribe();
   };
-  
-  refresh(): void {
-    window.location.reload();
-  }
-  
+
+
   checkWallet(): void {
     this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
       (moneyInWallet: number) => {

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarService} from "../../../services/snackBar.service";
 
 export interface Type {
   value: string;
@@ -44,7 +45,7 @@ export class LendItemComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
     private fb: FormBuilder) { }
@@ -72,7 +73,7 @@ export class LendItemComponent implements OnInit {
     });
 
 
-  
+
    types: Type[] = [
       {value: 'product', display: 'Product'},
       {value: 'service', display: 'Service'}
@@ -109,9 +110,9 @@ premiers: IsPremier[] = [
 ];
 
 
-  
 
-ngOnInit(): void { 
+
+ngOnInit(): void {
   this.checkWallet();
   this.id = JSON.parse(localStorage.getItem('user')).userId;
 }
@@ -146,7 +147,7 @@ checkWallet(): void {
   get duration() { return this.lendformular.get("duration") };
   get sellOrLend() { return this.lendformular.get("sellOrLend") };
   get status() { return this.lendformular.get("status") };
-  get deliveryPossible() { return this.lendformular.get("deliveryPossible") };  
+  get deliveryPossible() { return this.lendformular.get("deliveryPossible") };
 
 
   post() {
@@ -155,10 +156,10 @@ checkWallet(): void {
     }
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.lendformular.value).subscribe((res: any) => {
-      this.openSnackBar('You successfully posted!', '');
+      this.snackBar.open('You successfully posted!', '', 3000);
     }, (error: any) => {
-      this.openSnackBar('Posting was not possible, please try again', '');
-    }); 
+      this.snackBar.open('Posting was not possible, please try again', '', 3000);
+    });
 }
 clear() {
   this.lendformular.reset();
@@ -167,9 +168,5 @@ clear() {
   //this.username.setValue("");
 }
 
-openSnackBar(message: string, action: string) {
-  this.snackBar.open(message, action, {
-    duration: 8000,
-  });
-}
+
 }

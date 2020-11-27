@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import {AuthService} from "../auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {BehaviorSubject, Observable} from "rxjs";
+import {SnackBarService} from "../services/snackBar.service";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class UserLoginComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
-              public snackBar: MatSnackBar) {
+              public snackBar: SnackBarService) {
 
     this.loggedIn$ = authService.loggedIn$
   }
@@ -36,17 +37,6 @@ export class UserLoginComponent implements OnInit {
     this.checkUserStatus()
   }
 
-  /**
-   * Displays a message at the bottom of the screen
-   *
-   * @param message, a string with the message to display
-   * @param action
-   */
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 8000,
-    });
-  }
 
   /**
    * Checks the user status
@@ -72,10 +62,10 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('user', JSON.stringify(res.user));
       this.checkUserStatus();
-      this.openSnackBar('You successfully logged in!', '')
+      this.snackBar.open('You successfully logged in!', '', 3000)
     }, (error: any) => {
        this.checkUserStatus();
-       this.openSnackBar('Login was not successful, please check username and password', '')
+       this.snackBar.open('Login was not successful, please check username and password', '', 3000)
      });
   }
 
@@ -90,7 +80,7 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('user');
 
     this.checkUserStatus();
-    this.openSnackBar('You successfully logged out!', '')
+    this.snackBar.open('You successfully logged out!', '', 3000)
   }
 changeResetPasword(){
   this.resetPassword=!(this.resetPassword)

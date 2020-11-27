@@ -63,10 +63,10 @@
               Total Price: {{quantity*product.price }} Fr
             </p>
 
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">BUY</button>
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend' && !(product.userId == userId)" (click)="addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">RENT</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">BUY</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend' && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">RENT</button>
 
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="addProductToWishList(product, quantity)" style="width: 15%;">WISH</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="wishListService.addProductToWishList(product, quantity)" style="width: 15%;">WISH</button>
 
           <p class="btnitem" *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
 

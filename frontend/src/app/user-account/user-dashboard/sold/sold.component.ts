@@ -11,6 +11,7 @@ import { Purchase } from 'src/app/models/purchase.model';
 import {environment} from '../../../../environments/environment';
 import { async } from 'rxjs/internal/scheduler/async';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {SnackBarService} from "../../../services/snackBar.service";
 
 @Component({
   selector: 'app-sold',
@@ -26,7 +27,7 @@ export class SoldComponent implements OnInit {
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private soldService: SoldService,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private users: CurrentUser) {
 
 }
@@ -52,14 +53,10 @@ export class SoldComponent implements OnInit {
         "notificationCheck": true,
       }
     ).subscribe((res: any) => {
-      this.openSnackBar("Product was marked as ", '');
+      this.snackBar.open("Product was marked as ", '', 3000);
     }, (error: any) => {
-      this.openSnackBar(error.error, '');
+      this.snackBar.open(error.error, '', 3000);
     });
   }
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    })
-  }
+
 }

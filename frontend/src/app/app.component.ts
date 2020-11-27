@@ -15,6 +15,7 @@ import {CurrentUser} from './services/current-user';
 export class AppComponent implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   listOfNotification$:Observable<Purchase[]>;
+  title = "frontend";
   constructor(private authService: AuthService, private currentUser:CurrentUser) {
 
     this.loggedIn$ = authService.loggedIn$

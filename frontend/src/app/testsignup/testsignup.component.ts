@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarService} from "../services/snackBar.service";
 export interface Gender {
   value: string;
   display: string;
@@ -29,7 +30,7 @@ export class TestsignupComponent implements OnInit {
     private httpClient: HttpClient,
     private fb: FormBuilder,
     private customValidator: CustomValidationService,
-    public snackBar: MatSnackBar
+    public snackBar: SnackBarService
   ) {}
 
 
@@ -139,17 +140,12 @@ export class TestsignupComponent implements OnInit {
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register',
       this.userForm.value).subscribe((res: any) => {
-      this.openSnackBar('You successfully registered!', '');
+      this.snackBar.open('You successfully registered!', '', 3000);
     }, (error: any) => {
-      this.openSnackBar('Registering was not possible, please try again', '');
+      this.snackBar.open('Registering was not possible, please try again', '', 3000);
     }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
 }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 8000,
-    });
-  }
 
 }
 

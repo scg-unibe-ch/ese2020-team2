@@ -4,12 +4,11 @@ import {AuthService} from "../../auth/auth.service";
 import {FormBuilder} from "@angular/forms";
 import {ProductsService} from "../../services/products.service";
 import {CurrentUser} from "../../services/current-user";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {BehaviorSubject, Observable} from "rxjs";
 import {ShoppingCart} from "../../models/shoppingCart.model";
 import {environment} from "../../../environments/environment";
-import {map} from "rxjs/operators";
-import {Product} from "../../models/product.model";
+import {SnackBarService} from "../../services/snackBar.service";
+import {WishListService} from "../../services/wish-list.service";
 
 @Component({
   selector: 'app-wish-list',
@@ -28,25 +27,20 @@ export class WishListComponent implements OnInit {
               private fb: FormBuilder,
               private productsService: ProductsService,
               private users: CurrentUser,
-              private snackBar: MatSnackBar) {
+              private snackBar: SnackBarService,
+              private wishListService: WishListService) {
 
     this.loggedIn$ = authService.loggedIn$;
   };
 
   ngOnInit(): void {
-    this.getWishList();
+    this.wishList$ = this.wishListService.getWishList()
     this.calculatePrices();
-
-  }
-
-  getWishList(): void {
-    this.wishList$ = this.httpClient.get<ShoppingCart[]>(environment.endpointURL + 'cart/getAll/' + JSON.parse(localStorage.getItem('user')).userId).
-    pipe(map(shoppingCarts => shoppingCarts.filter(shoppingCart => shoppingCart.wishList === true)));
   }
 
   calculatePrices(): void {
-    this.wishList$.subscribe(shoppingCart => this.totalPrice = shoppingCart.reduce((sum, current) => sum + current.product.price * current.quantity, 0))
-
+    this.wishList$.subscribe(shoppingCart => this.totalPrice = shoppingCart
+      .reduce((sum, current) => sum + current.product.price * current.quantity, 0))
   }
 
   moveWishListProductToShoppingCart(wishListProduct: ShoppingCart) {
@@ -57,19 +51,14 @@ export class WishListComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.openSnackBar("Product moved to shopping cart", '');
+          this.snackBar.open("Product moved to shopping cart", '', 3000);
         } else {
-          this.openSnackBar(error.error.text, '');
-        }
-      })
+          this.snackBar.open(error.error.text, '', 3000);
+        }})
     this.ngOnInit();
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    })
-  }
+
   removeShoppingCartProduct(wishList: ShoppingCart): void {
     if(wishList.shoppingCart === false) {
       this.deleteShoppingCartProduct(wishList)
@@ -79,12 +68,10 @@ export class WishListComponent implements OnInit {
       }).subscribe((res: any) => {},
         (error: any) => {
           if(error.status === 200) {
-            this.openSnackBar("Removed product from wish list", '');
+            this.snackBar.open("Removed product from wish list", '', 3000);
           } else {
-            this.openSnackBar(error.error.text, '');
-          }
-        })
-    }
+            this.snackBar.open(error.error.text, '', 3000);
+          }})}
     this.ngOnInit();
   }
 
@@ -92,11 +79,10 @@ export class WishListComponent implements OnInit {
     this.httpClient.delete(environment.endpointURL + 'cart/delete/' + wishList.cartId).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.openSnackBar("Removed product from wish list", '');
+          this.snackBar.open("Removed product from wish list", '', 3000);
         } else {
-          this.openSnackBar(error.error.text, '');
-        }
-      })
+          this.snackBar.open(error.error.text, '', 3000);
+        }})
     this.ngOnInit();
   }
 
@@ -106,11 +92,11 @@ export class WishListComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.openSnackBar("Quantity updated", '');
+          this.snackBar.open("Quantity updated", '', 3000);
         } else {
-          this.openSnackBar(error.error.text, '');
-        }
-      })
+          this.snackBar.open(error.error.text, '', 3000);
+        }})
     this.ngOnInit();
   }
+
 }

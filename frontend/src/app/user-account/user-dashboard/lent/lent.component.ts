@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import { Purchase } from '../../../models/purchase.model';
 import { SoldService } from 'src/app/services/sold.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {SnackBarService} from "../../../services/snackBar.service";
 
 @Component({
   selector: 'app-lent',
@@ -24,7 +25,7 @@ export class LentComponent implements OnInit {
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private soldService: SoldService,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private users: CurrentUser) {
 
 }
@@ -35,7 +36,7 @@ export class LentComponent implements OnInit {
       sells.filter(purchase => purchase.paymentType === 'wallet points')
     ));
     this.lent$.subscribe(list => this.listOfProduct = list);
-  
+
   }
 
 
@@ -45,16 +46,12 @@ export class LentComponent implements OnInit {
         "notificationCheck": true,
       }
     ).subscribe((res: any) => {
-      this.openSnackBar("Product was marked as ", '');
+      this.snackBar.open("Product was marked as ", '', 3000);
     }, (error: any) => {
-      this.openSnackBar(error.error, '');
+      this.snackBar.open(error.error, '', 3000);
     });
   }
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    })
-  }
+
 
 
 }

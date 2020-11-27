@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { environment } from 'src/environments/environment';
+import {SnackBarService} from "../../../services/snackBar.service";
 
 export interface Type {
   value: string;
@@ -39,7 +40,7 @@ export class SellItemComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
     private fb: FormBuilder) { }
@@ -64,7 +65,7 @@ export class SellItemComponent implements OnInit {
       sellerReview: []
     });
 
-  
+
    types: Type[] = [
       {value: 'product', display: 'Product'},
       {value: 'service', display: 'Service'}
@@ -109,16 +110,16 @@ export class SellItemComponent implements OnInit {
 
 ];
 
-  
 
-  ngOnInit(): void { 
+
+  ngOnInit(): void {
     this.checkWallet();
     this.id = JSON.parse(localStorage.getItem('user')).userId;
 
-    
+
   }
 
-  
+
   get isPremier() { return this.formular.get("isPremier")};
   get type() { return this.formular.get("type") };
   get userId() { return this.formular.get("userId") };
@@ -140,11 +141,11 @@ export class SellItemComponent implements OnInit {
     }
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.formular.value).subscribe((res: any) => {
-      this.openSnackBar('You successfully posted!', '');
+      this.snackBar.open('You successfully posted!', '', 3000);
     }, (error: any) => {
-      this.openSnackBar('Posting was not possible, please try again', '');
+      this.snackBar.open('Posting was not possible, please try again', '', 3000);
     }); this.refresh;
-    
+
 }
 
 updatewallet() {
@@ -174,9 +175,4 @@ clear() {
   //this.username.setValue("");
 }
 
-openSnackBar(message: string, action: string) {
-  this.snackBar.open(message, action, {
-    duration: 8000,
-  });
-}
 }
