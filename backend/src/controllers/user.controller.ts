@@ -28,9 +28,9 @@ userController.post('/register',
             // Once the email id is true, check for the unique username.
             if (!await checkUniqueUserName(req, res)) {
                 if (!isOwnerExist) {
-                await userService.register(req.body)
-                    .then(registered => res.send(registered))
-                    .catch(err => res.status(500).send(err));
+                    await userService.register(req.body)
+                        .then(registered => res.send(registered))
+                        .catch(err => res.status(500).send(err));
                 }
             }
             // If the userName already exits, prompt the user.
@@ -66,5 +66,15 @@ userController.put('/editUser/:id', (req: Request, res: Response) => {
         })
         .catch(err => res.status(500).send(err));
 });
+
+/**
+ * Gets the password reset question, answer and the userId for the password reset functionality.
+ */
+userController.get('/passwordReset/:name',
+    (req: Request, res: Response) => {
+        User.findOne({ attributes: ['userId', 'passwordQuestion', 'passwordAnswer'], where: { userName: req.params.name } })
+            .then(user => res.status(200).send(user))
+            .catch(err => res.status(500).send('User not found.'));
+    });
 
 export const UserController: Router = userController;
