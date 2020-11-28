@@ -52,6 +52,8 @@ export class EdititemComponent implements OnInit {
     private fb: FormBuilder,
     private productsService: ProductsService,
     public snackBar: SnackBarService) {
+
+
   }
 
   productId: number;
@@ -83,7 +85,7 @@ export class EdititemComponent implements OnInit {
   checkWallet(): void {
     this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
       (moneyInWallet: number) => {
-        this.points$=moneyInWallet;
+        this.points$ = moneyInWallet;
     }
     );
   }
@@ -164,16 +166,16 @@ confirm(product: Product): void {
   if (product.isPremier == true) {
     this.updatewallet();
   }
-  this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
-    adminApproval: Approval.pending,
-    typ: product.type,
-    title: product.title,
-    price: product.price,
-    isPremier: product.isPremier,
-    description: product.description,
-    location: product.location,
-    sellOrLend: product.sellOrLend,
-    deliveryPossible: product.deliveryPossible,
+  this.httpClient.put(environment.endpointURL + 'product/edit/' + product?.productId, {
+    adminApproval: Approval?.pending,
+    typ: product?.type,
+    title: product?.title,
+    price: product?.price,
+    isPremier: product?.isPremier,
+    description: product?.description,
+    location: product?.location,
+    sellOrLend: product?.sellOrLend,
+    deliveryPossible: product?.deliveryPossible,
   }).subscribe();
 }
 
