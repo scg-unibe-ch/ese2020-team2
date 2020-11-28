@@ -24,7 +24,6 @@ export class ReviewComponent implements OnInit {
   product$: Observable<Product>;
   loggedIn$: BehaviorSubject<boolean>;
   product: Product;
-  userId: number;
   reviewText: string;
   rating: number;
   purchasedProducts: number[];
@@ -118,7 +117,7 @@ export class ReviewComponent implements OnInit {
       {
         "buyerUserId": JSON.parse(localStorage.getItem('user')).userId,
         "sellerUserId": this.product.userId,
-        "buyerUserName": JSON.parse(localStorage.getItem('user')).userName,
+        "buyerUserName": JSON.parse(localStorage.getItem('user'))?.userName,
         "productId": this.product.productId,
         "reviewText": this.reviewText,
         "rating": this.rating,

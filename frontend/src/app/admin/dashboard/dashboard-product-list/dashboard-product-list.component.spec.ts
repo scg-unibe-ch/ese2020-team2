@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DashboardProductListComponent } from './dashboard-product-list.component';
+import {HttpClientModule} from "@angular/common/http";
 
-describe('TodoListComponent', () => {
+describe('DashboardProductListComponent', () => {
   let component: DashboardProductListComponent;
   let fixture: ComponentFixture<DashboardProductListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardProductListComponent ]
+      declarations: [ DashboardProductListComponent ],
+      imports: [HttpClientModule]
     })
     .compileComponents();
   }));
