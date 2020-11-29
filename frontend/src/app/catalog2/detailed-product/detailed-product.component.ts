@@ -69,8 +69,6 @@ export class DetailedProductComponent implements OnInit {
   }
 
 
-
-
   /**
    * Gets the product, but only if you are the admin or it is approved and simultaneously set to visible in the market
    *

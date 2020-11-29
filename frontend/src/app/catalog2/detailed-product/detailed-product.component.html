@@ -10,36 +10,36 @@
           <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg"  style="width: 100%; height: 100%;"alt="background image">
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
-          <mat-card-title  style="font-size: 230%;">{{product.title}}</mat-card-title>
+          <mat-card-title  style="font-size: 230%;">{{product?.title}}</mat-card-title>
           <mat-card-subtitle>
-            <mat-card-title *ngIf="product.sellOrLend =='sell'">Price: {{product.price}} Fr</mat-card-title>
-            <mat-card-title *ngIf="product.sellOrLend =='lend'">Price: {{product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product?.sellOrLend =='sell'">Price: {{product?.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="product?.sellOrLend =='lend'">Price: {{product?.price}} Fr</mat-card-title>
           </mat-card-subtitle>
           <span>
           <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
             <mat-icon>
-              {{showIcon(i, product.productRating)}}
+              {{showIcon(i, product?.productRating)}}
             </mat-icon>
           </mat-icon>
-          <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
+          <span style="font-size: 150%;"> {{product?.productRating.toFixed(1)}} </span>
           </span>
           <br>
           <div style="float:left;">
             <span class="subtitle" style="display:contents; ">Pieces available: </span>
-            <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
+            <span class="size" style="display:contents; ">{{product?.piecesAvailable}}</span>
         </div>
         <br>
             <p  class="subtitle">Description: </p>
-            <p  class="size">{{product.description}}</p>
+            <p  class="size">{{product?.description}}</p>
             <div style="float:left;">
               <span class="subtitle" style="display:contents; ">Location: </span>
-              <span class="size" style="display:contents; ">{{product.location}}</span>
+              <span class="size" style="display:contents; ">{{product?.location}}</span>
           </div>
           <br>
           <div style="float:left;">
             <span class="subtitle" style="display:contents; ">Delivery: </span>
-            <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
-            <span *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
+            <span *ngIf="product?.deliveryPossible" class="size" style="display:contents; ">possible</span>
+            <span *ngIf="!product?.deliveryPossible" class="size" style="display:contents; ">not possible</span>
         </div>
             <br>
 
@@ -60,13 +60,13 @@
             <br>
             <br>
             <p class="subtitle" style="padding-left: 65%;">
-              Total Price: {{quantity*product.price }} Fr
+              Total Price: {{quantity*product?.price }} Fr
             </p>
 
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">BUY</button>
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend' && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">RENT</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product?.sellOrLend == 'sell' && !(product?.userId == userId)" (click)="shoppingCartService?.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">BUY</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && product?.sellOrLend == 'lend' && !(product?.userId == userId)" (click)="shoppingCartService?.addProductToShoppingCart(product, quantity)" type="submit" style="width: 15%;">RENT</button>
 
-          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="wishListService.addProductToWishList(product, quantity)" style="width: 15%;">WISH</button>
+          <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product?.userId == userId)" (click)="wishListService.addProductToWishList(product, quantity)" style="width: 15%;">WISH</button>
 
           <p class="btnitem" *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
 

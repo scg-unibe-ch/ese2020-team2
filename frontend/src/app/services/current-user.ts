@@ -11,11 +11,13 @@ import {Purchase} from '../models/purchase.model';
   providedIn: 'root'
 })
 export class CurrentUser {
-  UserId = JSON.parse(localStorage.getItem('user'))?.userId;
+  UserId:number;
   currentUser: User;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.UserId=JSON.parse(localStorage.getItem('user'))?.userId;
+  }
 
-  getCurrentUser(): Observable<User> {
+    getCurrentUser(): Observable<User> {
       return this.httpClient.get<User[]>(environment.endpointURL + 'user/all').pipe(map(
         (users: User[]) => users.find(user => user.userName === localStorage.getItem('userName'))));
     }
@@ -34,5 +36,8 @@ export class CurrentUser {
   }
   checkNotification(purchase:Purchase){
     this.httpClient.put(environment.endpointURL + 'purchase/edit/' + purchase.getPurchaseId(), {"notificationCheck":true})
+  }
+  getSoldItem(){
+    
   }
 }

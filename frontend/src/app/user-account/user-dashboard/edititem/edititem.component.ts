@@ -52,6 +52,8 @@ export class EdititemComponent implements OnInit {
     private fb: FormBuilder,
     private productsService: ProductsService,
     public snackBar: SnackBarService) {
+
+
   }
 
   productId: number;
@@ -83,7 +85,7 @@ export class EdititemComponent implements OnInit {
   checkWallet(): void {
     this.pointsSub = this.users.getCurrentUserProperty('moneyInWallet').subscribe(
       (moneyInWallet: number) => {
-        this.points$=moneyInWallet;
+        this.points$ = moneyInWallet;
     }
     );
   }
@@ -97,12 +99,11 @@ export class EdititemComponent implements OnInit {
     {
       type: ["", Validators.required],
       title: ["", Validators.required],
-      userName: ["dkdkd"],
+      userName: [this.users.getCurrentUserProperty("userName")],
       price: [0, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
       sellOrLend: ["", Validators.required],
-      status: ["posted"],
       deliveryPossible: [false, Validators.required],
       isPremier: [, Validators.required]
     });
@@ -164,16 +165,16 @@ confirm(product: Product): void {
   if (product.isPremier == true) {
     this.updatewallet();
   }
-  this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
-    adminApproval: Approval.pending,
-    typ: product.type,
-    title: product.title,
-    price: product.price,
-    isPremier: product.isPremier,
-    description: product.description,
-    location: product.location,
-    sellOrLend: product.sellOrLend,
-    deliveryPossible: product.deliveryPossible,
+  this.httpClient.put(environment.endpointURL + 'product/edit/' + product?.productId, {
+    adminApproval: Approval?.pending,
+    typ: product?.type,
+    title: product?.title,
+    price: product?.price,
+    isPremier: product?.isPremier,
+    description: product?.description,
+    location: product?.location,
+    sellOrLend: product?.sellOrLend,
+    deliveryPossible: product?.deliveryPossible,
   }).subscribe();
 }
 

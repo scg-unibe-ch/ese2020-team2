@@ -1,7 +1,7 @@
 <div style = "margin: auto; text-align: center">
-<mat-button-toggle (click) ="toggleReview()" *ngIf="(!reviewExists) && purchasedProducts.includes(productId) && !showReview && (loggedIn$ | async)"> Add Review </mat-button-toggle>
-<mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts.includes(productId) && !showReview && (loggedIn$ | async)"> Edit Review </mat-button-toggle>
-<mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts.includes(productId) && showReview && (loggedIn$ | async)"> Close Review </mat-button-toggle>
+<mat-button-toggle (click) ="toggleReview()" *ngIf="(!reviewExists) && purchasedProducts?.includes(productId) && !showReview && (loggedIn$ | async)"> Add Review </mat-button-toggle>
+<mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts?.includes(productId) && !showReview && (loggedIn$ | async)"> Edit Review </mat-button-toggle>
+<mat-button-toggle (click) ="toggleReview()" *ngIf="reviewExists && purchasedProducts?.includes(productId) && showReview && (loggedIn$ | async)"> Close Review </mat-button-toggle>
 </div>
 
 <mat-card class="mat-elevation-z4" style="width: 50%; margin: auto; text-align: center" *ngIf = showReview>

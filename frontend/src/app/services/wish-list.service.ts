@@ -6,7 +6,6 @@ import {SnackBarService} from "./snackBar.service";
 import {ShoppingCart} from "../models/shoppingCart.model";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {Purchase} from "../models/purchase.model";
 
 @Injectable({
   providedIn: 'root'
