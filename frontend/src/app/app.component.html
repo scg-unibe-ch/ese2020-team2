@@ -40,7 +40,7 @@
       <mat-icon>favorite</mat-icon>
     </button>
     <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
-    matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="hidden || (listOfNotification$ | async)?.length===0" (click)="toggleBadgeVisibility()">
+    matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
       <mat-icon><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
     </button>
     <button  matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" routerLink="/login">
