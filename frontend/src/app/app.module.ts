@@ -26,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatDialogModule} from "@angular/material/dialog";
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {AuthGuardService} from "./auth/auth-guard.service";
@@ -53,6 +54,9 @@ import { ShoppingCartComponent } from './user-account/shopping-cart/shopping-car
 import { ReviewComponent } from './catalog2/review/review.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { WishListComponent } from './user-account/wish-list/wish-list.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { ModalComponent } from './modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +64,7 @@ import { WishListComponent } from './user-account/wish-list/wish-list.component'
     UserLoginComponent,
     TestsignupComponent,
     UserAccountComponent,
+    ModalComponent,
     WalletComponent,
     HomeComponent,
     CatalogComponent,
@@ -95,14 +100,19 @@ import { WishListComponent } from './user-account/wish-list/wish-list.component'
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatCardModule,
     Ng5SliderModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
     MatSelectModule,
+    NgxSliderModule,
     AppRoutingModule,
     MatSelectCountryModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
     MatTooltipModule,
@@ -128,7 +138,8 @@ import { WishListComponent } from './user-account/wish-list/wish-list.component'
 
   ],
   bootstrap: [
-    AppComponent
-  ]
+    AppComponent,
+  ],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

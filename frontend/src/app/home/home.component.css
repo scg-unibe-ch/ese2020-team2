@@ -1,25 +1,111 @@
-dl {
-    display: flex;
-    flex-flow: row wrap;
-    border: solid rgba(8, 89, 164, 0.6);
-    border-width: 1px 1px 0 0;
+
+.outer {
+  overflow:scroll;
+  height: 77%;
+  overflow-x: hidden;
+}
+
+.inner {
+  padding-right: 2%;
+  padding-left: 2%; 
+  
+}
+
+
+
+.flexExpand {
+  flex: 1 1 auto;
+}
+.size{
+  font-size: 120%;
+}
+
+.left-half {
+  float: left;
+  width: 42%;
+
   }
-  dt {
-    flex-basis: 20%;
-    padding: 2px 4px;
-    background: rgba(8, 89, 164, 0.6);
-    text-align: right;
-    color: #fff;
+  .right-half {
+    
+  width: 52%;
   }
-  dd {
-    flex-basis: 70%;
-    flex-grow: 1;
-    margin: 0;
-    padding: 2px 4px;
-    border-bottom: 1px solid rgba(8, 89, 164, 0.6);
-    background: rgba(255, 255, 255, 0.39);
-    color:  rgba(0, 0, 0, 1);
+
+.leftup-half {
+    float: left;
+    width: 60%;
+
+    }
+.rightup-half {
+    
+    float: right;
+    width: 37%;
+    }
+
+.subtitle{
+  font-size: 120%;
+  font-weight: 500;
+}
+.btn {
+  background-color: rgba(42, 49, 56, 0.616); /* Blue background */
+  text-align: center;
+  height: 35px;
+  color: white; 
+  cursor: pointer; /* Mouse pointer on hover */
   }
-  p {  
-    color:  rgba(0, 0, 0, 1);
+  .btn:hover {
+    background-color: rgba(115, 137, 160, 0.781); /* Green */
+    color:black;
   }
+
+  .btnitem {
+    background-color: rgba(184, 195, 206, 0.616); /* Blue background */
+    text-align: center;
+    height: 35px;
+    color: black; 
+    cursor: pointer; /* Mouse pointer on hover */
+    }
+    .btnitem:hover {
+      background-color: rgba(115, 137, 160, 0.781); /* Green */
+      color:black;
+    }
+
+    .btn-gradient {
+      text-decoration: none;
+      background-color: rgba(184, 195, 206, 0.616);
+      height: 35px;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.21);
+      border-bottom: 3px solid rgba(0,0,0,0.21);
+      border-radius: 5px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    }
+    .btn-gradient:hover {
+      background-color: rgba(115, 137, 160, 0.781); /* Green */
+      color:black;
+    }
+
+    .btn-gradient-trans {
+      text-decoration: none;
+      background-color: rgba(184, 195, 206, 0.5);
+      height: 35px;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.81);
+      border-bottom: 3px solid rgba(0,0,0,0.21);
+      border-radius: 5px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    }
+    .btn-gradient-trans:hover {
+      background-color: rgba(115, 137, 160, 0.781); /* Green */
+      color:black;
+    }
+
+  .btn span {
+    display: block;
+    text-align: center;
+
+    font-size: 95%;
+}

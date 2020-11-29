@@ -49,7 +49,6 @@
     background-color: rgba(42, 49, 56, 0.616); /* Blue background */
     text-align: center;
     height: 35px;
-    width: 6%;
     color: white; 
     cursor: pointer; /* Mouse pointer on hover */
     }
@@ -62,7 +61,6 @@
       background-color: rgba(184, 195, 206, 0.616); /* Blue background */
       text-align: center;
       height: 35px;
-      width: 6%;
       color: black; 
       cursor: pointer; /* Mouse pointer on hover */
       }
@@ -70,6 +68,41 @@
         background-color: rgba(115, 137, 160, 0.781); /* Green */
         color:black;
       }
+
+      .btn-gradient {
+        text-decoration: none;
+        background-color: rgba(184, 195, 206, 0.616);
+        height: 35px;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid rgba(0,0,0,0.21);
+        border-bottom: 3px solid rgba(0,0,0,0.21);
+        border-radius: 5px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+      }
+      .btn-gradient:hover {
+        background-color: rgba(115, 137, 160, 0.781); /* Green */
+        color:black;
+      }
+
+      .btn-gradient-trans {
+        text-decoration: none;
+        background-color: rgba(184, 195, 206, 0.5);
+        height: 35px;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid rgba(0,0,0,0.81);
+        border-bottom: 3px solid rgba(0,0,0,0.21);
+        border-radius: 5px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+      }
+      .btn-gradient-trans:hover {
+        background-color: rgba(115, 137, 160, 0.781); /* Green */
+        color:black;
+      }
+
     .btn span {
       display: block;
       text-align: center;
