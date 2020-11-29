@@ -65,6 +65,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     visibleInMarket!: boolean;
     productRating!: number;
     isPremier!: boolean;
+
     public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
@@ -169,6 +170,11 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
         Product.hasMany(Review, {
             as: 'review',
             foreignKey: 'reviewId',
+            constraints: false
+        });
+        Product.hasMany(ProductImage, {
+            as: 'Images',
+            foreignKey: 'fileId',
             constraints: false
         });
     }
