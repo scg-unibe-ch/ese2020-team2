@@ -35,7 +35,7 @@ const imageFilter = (req: any, file: any, cb: (arg0: any, arg1: boolean) => void
         cb(new Error('Wrong file format, please choose .png or .jpeg files'), false);
     }
 
-}
+};
 const uploadImages = multer({
     storage: imageStorage,
     limits: {
