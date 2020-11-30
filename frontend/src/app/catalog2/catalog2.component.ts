@@ -6,15 +6,15 @@ import {ProductsService} from '../services/products.service';
 import {BehaviorSubject, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {CurrentUser} from '../services/current-user';
-import {Options, LabelType} from 'ng5-slider';
 import {Approval} from "../models/approval";
 import {WishListService} from "../services/wish-list.service";
 import {ShoppingCartService} from "../services/shopping-cart.service";
+import { Options } from "@angular-slider/ngx-slider";
 
 @Component({
   selector: 'app-catalog2',
   templateUrl: './catalog2.component.html',
-  styleUrls: ['./catalog2.component.css']
+  styleUrls: ['./catalog2.component.scss']
 })
 export class Catalog2Component implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
@@ -31,19 +31,17 @@ export class Catalog2Component implements OnInit {
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
+  
   options: Options = {
     floor: 0,
-    ceil: 50,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '<b>Min price:</b> $' + value;
-        case LabelType.High:
-          return '<b>Max price:</b> $' + value;
-        default:
-          return '$' + value;
-      }
+    ceil: 100,
+    translate: (value: number): string => {
+      return '$' + value;
+    },
+    combineLabels: (minValue: string, maxValue: string): string => {
+      return 'from ' + minValue + ' up to ' + maxValue;
     }
+  
   };
   a: number;
 
@@ -56,7 +54,9 @@ export class Catalog2Component implements OnInit {
               public shoppingCartService: ShoppingCartService) {
 
     this.loggedIn$ = authService.loggedIn$;
+    if (this.loggedIn$.value == true){
     this.userId = JSON.parse(localStorage.getItem('user')).userId;
+  }
 
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);

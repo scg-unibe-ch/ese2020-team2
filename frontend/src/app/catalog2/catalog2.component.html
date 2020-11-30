@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<mat-toolbar style=" background-color: rgba(92, 106, 121, 0.616 ); height: 7%;" >
+<mat-toolbar style=" background-color: rgba(92, 106, 121, 0.616 ); height: 8%;" >
   <span>FILTER: </span>
   <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616); ">FOR SALE </button>
   <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" >FOR SALE</button>
@@ -39,7 +39,8 @@
 <span class="flexExpand"></span>
 
 
-<ng5-slider style="width: 17%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" [options]="options"></ng5-slider>
+<ngx-slider style="width: 17%; color: black;" [(value)]="minValue" [(highValue)]="maxValue"   (userChangeEnd)="filter(minValue,maxValue,filtersl,filterps,sortby,location,search)" [options]="options"></ngx-slider>
+
 <span class="flexExpand"></span>
 <span style="width: 14%;">
   <input type="text" [(ngModel)]="search">
@@ -92,18 +93,9 @@
             </div>
 
                 </mat-card-content>
-                <mat-card-actions>
-                  <div style="text-align: center;">
-                  <button mat-button [routerLink]="['/product', product.productId]" style="width: 20%;">VIEW</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'sell' && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index]); " type="submit" style="width: 20%;">BUY</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async) && product.sellOrLend == 'lend'" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index]); " type="submit" style="width: 20%;">RENT</button>
-                    <button mat-button *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index]); " style="width: 20%;">BUY</button>
-                  </div>
-                    <p *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
-
-                    <button mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
-                     <button mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
-                  </mat-card-actions>
+                <br>
+                  <button class="btn-gradient-trans" [routerLink]="['/product', product.productId]" style="width: 90%;">VIEW</button>
+                  
               </mat-card>
 
 
@@ -135,49 +127,40 @@
                 <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
 
               <mat-card-content>
-                <div class="left-half">
-                <div style="float:left;">
+                <div >
                   <span class="subtitle" style="display:contents; ">Pieces available: </span>
                   <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
               </div>
               <br>
-              <br>
-              <div style="float:left;">
+              <div >
                 <span class="subtitle" style="display:contents; ">Location: </span>
                 <span class="size" style="display:contents; ">{{product.location}}</span>
             </div>
-            <br>
-            <br>
-            <div style="float:left;">
+            <br>  
+            <div >
               <span class="subtitle" style="display:contents; ">Delivery: </span>
               <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
               <span   *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
           </div>
 
-               <br>
-               </div>
-               <div class="right-half">
-
-               </div>
               </mat-card-content>
-              <mat-card-actions>
-                <button mat-button class="btnitem" [routerLink]="['/product', product.productId]" style="width: 20%;">VIEW</button>
-                <select  *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" style="width: 19%;" [(ngModel)]="quantity[index]"  class="btnitem">
+                <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
+
+                <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)"[(ngModel)]="quantity[index]" >
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                 </select>
 
-               <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 10%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
 
-                  <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 10%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
 
-                  <p class="btnitem" *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
+               
 
-                  <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
-                   <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
+                <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
+                 <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
 
-                </mat-card-actions>
             </mat-card>
 
 
@@ -219,24 +202,21 @@
 
                <br>
               </mat-card-content>
-              <mat-card-actions>
-                <button mat-button class="btnitem" [routerLink]="['/product', product.productId]" style="width: 20%;">VIEW</button>
-                <select  *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" style="width: 19%;" [(ngModel)]="quantity[index]"  class="btnitem">
+              <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
+
+                <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)"[(ngModel)]="quantity[index]" >
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                 </select>
 
-               <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 10%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
 
-                  <button mat-button class="btnitem" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 10%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
 
-                  <p class="btnitem" *ngIf = "!(loggedIn$ | async)" style="text-align: center; font-size: 120%;">Log in to buy item</p>
 
-                  <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
-                   <button class="btnitem" mat-button *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
-
-                </mat-card-actions>
+                <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
+                 <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
             </mat-card>
             </div>
           </div>

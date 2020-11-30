@@ -45,6 +45,7 @@ export class ShoppingCartComponent implements OnInit {
       street: ["", Validators.required],
       city: ["", Validators.required],
       pinCode: ["", Validators.required],
+      role: ["admin"]
     }
   );
   countrys: Country[] = [

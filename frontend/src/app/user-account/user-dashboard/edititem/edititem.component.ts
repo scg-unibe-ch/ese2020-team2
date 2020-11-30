@@ -99,12 +99,11 @@ export class EdititemComponent implements OnInit {
     {
       type: ["", Validators.required],
       title: ["", Validators.required],
-      userName: ["dkdkd"],
+      userName: [this.users.getCurrentUserProperty("userName")],
       price: [0, Validators.required],
       description: ["", Validators.required],
       location: ["", Validators.required],
       sellOrLend: ["", Validators.required],
-      status: ["posted"],
       deliveryPossible: [false, Validators.required],
       isPremier: [, Validators.required]
     });

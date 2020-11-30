@@ -16,7 +16,7 @@ import {CurrentUser} from '../services/current-user';
 export class UserAccountComponent implements OnInit{
 
   listOfNotification$:Observable<Purchase[]>;
-  listOfNot:Purchase[];
+  listOfNot:Array<Purchase>= new Array;
   constructor(private currentUser:CurrentUser) {}
 
   ngOnInit(){
