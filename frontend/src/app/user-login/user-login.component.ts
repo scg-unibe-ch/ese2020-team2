@@ -5,6 +5,8 @@ import {AuthService} from "../auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {BehaviorSubject, Observable} from "rxjs";
 import {SnackBarService} from "../services/snackBar.service";
+import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,12 +22,14 @@ export class UserLoginComponent implements OnInit {
   resetPassword = false;
   question = '';
   anwer = '';
+  test:any;
 
   secureEndpointResponse = '';
   hide= true;
   loggedIn$: BehaviorSubject<boolean>;
 
   constructor(private httpClient: HttpClient,
+              private router: Router,
               private authService: AuthService,
               public snackBar: SnackBarService) {
 
@@ -80,13 +84,24 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('user');
 
     this.checkUserStatus();
-    this.snackBar.open('You successfully logged out!', '', 3000)
+    window.location.reload();
+    this.snackBar.open('You successfully logged out!', '', 3000);
   }
 changeResetPasword(){
   this.resetPassword=!(this.resetPassword)
 }
-getQuestions(){}
+getQuestions(){
+  //var list=this.httpClient.get(environment.endpointURL + 'user/existanceOf/'+ this.userName);
+  //list.subscribe(item=> userId=item.userId); 
+  //if(userId==null){
+  //this.snackBar.open('It does not exist an user with the given userName', '', 3000);
+  //}// else
+    this.router.navigate(['resetPassword/'+this.userName])
+ // list.subscribe(item=>this.test=item.toString)
+}
 
-toForgotPassword(){this.changeResetPasword()}
+toForgotPassword(){
+  this.changeResetPasword()
+}
 toLogIn(){this.changeResetPasword()}
 }
