@@ -26,13 +26,15 @@ export class ProductImage extends Model<ProductImageAttributes, ProductImageCrea
                 fileId: {
                     type: DataTypes.INTEGER,
                     autoIncrement: true,
-                    primaryKey: true,
+                    primaryKey: true
                 },
                 productId: {
                     type: DataTypes.INTEGER,
+                    allowNull: false
                 },
                 userId: {
                     type: DataTypes.INTEGER,
+                    allowNull: false
                 },
                 fileName: {
                     type: DataTypes.STRING,
