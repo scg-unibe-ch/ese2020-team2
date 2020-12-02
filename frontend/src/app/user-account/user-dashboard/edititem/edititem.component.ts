@@ -105,7 +105,7 @@ export class EdititemComponent implements OnInit {
       location: ["", Validators.required],
       sellOrLend: ["", Validators.required],
       deliveryPossible: [false, Validators.required],
-      isPremier: [, Validators.required]
+      isPremier: [true, Validators.required]
     });
 
 
@@ -170,6 +170,7 @@ confirm(product: Product): void {
     typ: product?.type,
     title: product?.title,
     price: product?.price,
+    
     isPremier: product?.isPremier,
     description: product?.description,
     location: product?.location,

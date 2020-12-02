@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<mat-toolbar style=" background-color: rgba(92, 106, 121, 0.616 ); height: 8%;" >
+<mat-toolbar style=" background-color:rgba(221, 227, 235, 0.616); height: 8%; border: black; border-bottom: solid; " >
   <span>FILTER: </span>
   <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616); ">FOR SALE </button>
   <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" >FOR SALE</button>
@@ -101,7 +101,7 @@
 
 
 
-              <mat-card *ngIf="product.isPremier == true"  style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ;">
+              <mat-card *ngIf="product.isPremier == true"  class="mat-elevation-z4" style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ; ">
                 <div class="leftup-half">
 
 

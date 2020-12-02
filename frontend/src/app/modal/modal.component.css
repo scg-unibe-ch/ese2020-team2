@@ -24,3 +24,36 @@
     background-color: #4e4e4e;
     color: white;
 }
+
+.leftup-half {
+    float: left;
+    width: 18%;
+
+    }
+
+    .middle-half {
+        float: left;
+        width: 80%;
+    
+        }
+.rightup-half {
+    
+    float: right;
+    width: 33%;
+    }
+   
+    .subtitle{
+        font-size: 120%;
+        font-weight: 500;
+        padding-top: 10.5px;
+      }
+    .btn {
+        background-color: rgba(92, 106, 121, 0.616); /* Blue background */
+        color: black; 
+        cursor: pointer; /* Mouse pointer on hover */
+        }
+      
+      .btn:hover {
+        background-color: rgba(115, 137, 160, 0.781); /* Green */
+        color: rgb(148, 144, 144);
+      }
