@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .mat-normal {
   height: 40% !important; 
   
@@ -6,6 +8,7 @@
   .card {
   max-height: 285px !important;
   height: 285px !important;
+  @include mat-elevation(4);
   }
   
   .imgcard {
@@ -28,7 +31,6 @@
   color: white; /* White text */
   padding: 12px 16px; /* Some padding */
   font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
   }
   /* Darker background on mouse-over */
   .btn:hover {

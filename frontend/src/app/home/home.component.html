@@ -1,13 +1,19 @@
+<mat-toolbar style=" background-color: rgba(221, 227, 235, 0.616); height: 8%; border: black; border-bottom: solid; " >
+  <p style="width: 22%; float: left; padding-left: 2%;">Welcome to our Shopping Site!   </p><p style="width: 25%; float: left;">Here you can find some highlighted items!   </p><p style="width: 30%; float: left;"> To see them all head to the catalog!</p>
+  </mat-toolbar>
+
 <div class="outer">
 
     <div class="inner">
 
+     
+      
 
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
             <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" fxLayoutAlign=" stretch" *ngFor="let product of products$ | async; let index = index" [attr.quantity]="index">
 
 
-<mat-card *ngIf="product.isPremier == true"  style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ;">
+<mat-card *ngIf="product.isPremier == true" class="mat-elevation-z4" style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ;">
     <div class="leftup-half">
 
 

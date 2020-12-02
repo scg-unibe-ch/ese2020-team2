@@ -12,21 +12,21 @@
 <!-- This tool bar is the same for every page/component. Buttons change if logged in or not-->
 
 
-  <mat-toolbar [style.backgroundColor]="'rgba(22, 23, 24, 0.816  )'" style="height: 10%;">
+  <mat-toolbar class="mat-elevation-z4" [style.backgroundColor]="'rgba(22, 23, 24, 0.816  )'" style="height: 10%;">
     <button matTooltip="Home" class="btn" btn btn-success routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
-    <button  matTooltip=" User Registration" *ngIf = "!(loggedIn$ | async)" class="btn" routerLink="/register">
-      <mat-icon>assignment</mat-icon>
-    </button>
+   
     <button  matTooltip=" View Products" class="btn" routerLink="/catalog2">
-      <mat-icon><i class="fa fa-product-hunt" aria-hidden="true"></i>
-      </mat-icon>
+      <mat-icon>shop_two</mat-icon>
     </button>
       <button  class="btn" btn btn-success (click)="openModal()"><mat-icon><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></mat-icon></button>
 
     <div class="content"><span  style="color: white;">ESE Project</span> </div>
     <span class="example-spacer"></span>
+    <button  matTooltip=" User Registration" *ngIf = "!(loggedIn$ | async)" class="btn" routerLink="/register">
+      <mat-icon>assignment</mat-icon>
+    </button>
     <button  matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn" routerLink="/login">
        <mat-icon>forward</mat-icon>
     </button>
