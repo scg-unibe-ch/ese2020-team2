@@ -56,6 +56,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { WishListComponent } from './user-account/wish-list/wish-list.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ModalComponent } from './modal/modal.component';
+import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { ModalComponent } from './modal/modal.component';
     ShoppingCartComponent,
     ReviewComponent,
     WishListComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
