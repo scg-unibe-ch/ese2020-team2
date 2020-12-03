@@ -11,6 +11,24 @@ export class UserService {
         return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
     }
 
+    public updateUser(user: UserAttributes, userId: string): Promise<User> {
+        const saltRounds = 12;
+        if (user.password != null) {
+            user.password = bcrypt.hashSync(user.password, saltRounds);
+        }
+        return User.findByPk(userId)
+            .then(found => {
+                if (found != null) {
+                    found.update(user)
+                    .then(updated => Promise.resolve(updated));
+                } else {
+                    return Promise.reject({ message: 'User not found.' });
+                }
+            })
+            .catch(err => Promise.reject({ message: err }));
+    }
+
+
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
         const secret = process.env.JWT_SECRET;
         return User.findOne({
@@ -18,15 +36,16 @@ export class UserService {
                 userName: loginRequestee.userName
             }
         })
-        .then(user => {
-            if (bcrypt.compareSync(loginRequestee.password, user.password)) {// compares the hash with the password from the lognin request
-                const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '2h' });
-                return Promise.resolve({ user, token });
-            } else {
-                return Promise.reject({ message: 'not authorized' });
-            }
-        })
-        .catch(err => Promise.reject({ message: err }));
+            .then(user => {
+                // compares the hash with the password from the lognin request
+                if (bcrypt.compareSync(loginRequestee.password, user.password)) {
+                    const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '2h' });
+                    return Promise.resolve({ user, token });
+                } else {
+                    return Promise.reject({ message: 'not authorized' });
+                }
+            })
+            .catch(err => Promise.reject({ message: err }));
     }
 
     public getAll(): Promise<User[]> {

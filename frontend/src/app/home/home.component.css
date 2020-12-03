@@ -35,6 +35,10 @@
     width: 60%;
 
     }
+
+    .example-spacer {
+      flex: 1 1 auto;
+    }
 .rightup-half {
     
     float: right;

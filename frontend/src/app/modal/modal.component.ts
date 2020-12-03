@@ -16,13 +16,13 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loggedIn$ = this.authService.loggedIn$
   }
   get isAdmin() {
     return this.authService.hasRole(Role.Admin);
   }
 
   actionFunction() {
-    alert("I am a work in progress");
     this.closeModal();
   }
 

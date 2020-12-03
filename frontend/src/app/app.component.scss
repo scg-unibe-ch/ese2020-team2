@@ -1,4 +1,4 @@
-
+@import '~@angular/material/theming';
   /* makes the mat-form-field placeholders more visible */
 
 ::ng-deep .mat-form-field-label{
@@ -16,8 +16,9 @@
 }
 
 .btn {
-  background-color: rgba(92, 106, 121, 0.616); /* Blue background */
+  background-color: rgba(221, 227, 235, 0.616); /* Blue background */
   color: black; 
+  
   cursor: pointer; /* Mouse pointer on hover */
   }
 
@@ -40,7 +41,8 @@
   /* code for the background image */
 
 body {
-  background-image: url( https://i.ibb.co/3r51XgR/IMG-20201109-172250.jpg);
+  background-image: url( https://i.ibb.co/Mnx3JMn/IMG-20201201-232629.jpg );
+  
 
 
   background-position: center center;

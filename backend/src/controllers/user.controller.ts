@@ -53,18 +53,14 @@ userController.get('/all', verifyToken, // you can add middleware on specific re
     }
 );
 
-userController.put('/editUser/:id', (req: Request, res: Response) => {
-    User.findByPk(req.params.id)
-        .then(found => {
-            if (found != null) {
-                found.update(req.body).then(() => {
-                    res.status(200).send('User information updated successfully.');
-                });
-            } else {
-                res.status(404).send('User not found.');
-            }
-        })
-        .catch(err => res.status(500).send(err));
+userController.put('/editUser/:id', async (req: Request, res: Response) => {
+    if (User.findByPk(req.params.id)) {
+        userService.updateUser(req.body, req.params.id)
+            .then(registered => res.status(200).send('User updated successfully.'))
+            .catch(err => res.status(500).send(err));
+    } else {
+        res.status(404).send('User not found.');
+    }
 });
 
 /**
@@ -73,7 +69,13 @@ userController.put('/editUser/:id', (req: Request, res: Response) => {
 userController.get('/passwordReset/:name',
     (req: Request, res: Response) => {
         User.findOne({ attributes: ['userId', 'passwordQuestion', 'passwordAnswer'], where: { userName: req.params.name } })
-            .then(user => res.status(200).send(user))
+            .then(found => {
+                if (found != null) {
+                    res.status(200).send(found);
+                } else {
+                    res.status(404).send('UserName does not exist.');
+                }
+            })
             .catch(err => res.status(500).send('User not found.'));
     });
 

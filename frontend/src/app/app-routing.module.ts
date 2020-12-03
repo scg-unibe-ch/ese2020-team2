@@ -17,6 +17,7 @@ import {DetailedProductComponent} from "./catalog2/detailed-product/detailed-pro
 import {ShoppingCartComponent} from "./user-account/shopping-cart/shopping-cart.component";
 import {ReviewComponent} from "./catalog2/review/review.component";
 import {WishListComponent} from "./user-account/wish-list/wish-list.component";
+import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'catalog', component: CatalogComponent},
   { path: 'catalog2', component: Catalog2Component},
   { path: 'product/:id', component: DetailedProductComponent},
+  { path: 'resetPassword/:name', component: ResetPasswordComponent},
   { path: 'review/:id/:buyerId/:purchaseId', component: ReviewComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
 

@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
+<mat-card class="mat-elevation-z4" style="background-color: rgba(221, 227, 235, 1); height: 12;">
   <span *ngIf="infoMessage.length > 0">{{ infoMessage }}</span>
   <div *ngIf="!(loggedIn$ | async) && !(resetPassword)">
       <mat-form-field>
@@ -11,6 +11,11 @@
       </mat-form-field>
       <button mat-flat-button color="primary" (click)="login()">Login</button>  
       <button mat-flat-button style="background-color:rgba(228, 62, 62, 0.858)" (click)="toForgotPassword()">Reset Password</button>
+      <span class="example-spacer"></span>
+      <p style="font-size: 120%; display: inline;" >got no account?</p>
+      <button style="display: inline;" mat-flat-button color="primary"  *ngIf = "!(loggedIn$ | async)"  routerLink="/register">
+        register
+      </button>
   </div>
 
   <div *ngIf="!(loggedIn$ | async) && (resetPassword)">
@@ -26,7 +31,12 @@
     You are currently logged in as {{ userName }}
   </div>
 
+
 </mat-card>
+<!--<mat-card>
+  
+ <button>{{test}}</button> 
+</mat-card>-->
 <!--
 <mat-card class="mat-elevation-z4" [style.backgroundColor]="'rgba(8, 89, 164, 0.6  )'">
   <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
