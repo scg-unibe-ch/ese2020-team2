@@ -9,20 +9,13 @@
   </span>
 </div>
 </div></mat-card>
-<mat-tab-group animationDuration="1ms">
-  
-  <mat-tab label="Wallet">
-    <app-wallet></app-wallet>
-  </mat-tab>
-
-
-  <mat-tab label="Post Item">
-    <app-post-item></app-post-item>
-  </mat-tab>
-
-  <mat-tab label="Dashboard">
-    <app-user-dashboard></app-user-dashboard>
-  </mat-tab>
-
-
-</mat-tab-group>
+<!-- displays all the tabs and the links to the relative component-->
+  <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      {{link.label}}
+      </a>
+  </nav>
+  <router-outlet></router-outlet>
