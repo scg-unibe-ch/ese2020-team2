@@ -3,6 +3,9 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./auth/auth.service";
 import {CurrentUser} from "./services/current-user";
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -12,10 +15,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],imports: [
-        HttpClientModule,
+        HttpClientModule, BrowserAnimationsModule
       ], providers: [
-        AuthService, CurrentUser
-      ]
+        AuthService, CurrentUser, 
+      ],
     }).compileComponents();
   }));
 
@@ -30,7 +33,7 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual("frontend");
   });
-
+  
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();

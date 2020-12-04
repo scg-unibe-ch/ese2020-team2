@@ -70,11 +70,9 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
     }
   }
   changePassword(){
-    this.httpClient.put(environment.endpointURL + 'user/editUser/'+ this.userId, this.userForm.value).subscribe((res: any) => {
-      this.snackBar.open('You successfully changed the password!', '', 3000, "success");
-    }, (error: any) => {
-      this.snackBar.open('Registering was not possible, please try again', '', 3000, "warning");
-    });
+
+    this.httpClient.put(environment.endpointURL + 'user/editUser/'+ this.userId, this.userForm.value).subscribe();
+
     this.router.navigate(['login']);
   }
 
