@@ -18,6 +18,14 @@ import {ShoppingCartComponent} from "./user-account/shopping-cart/shopping-cart.
 import {ReviewComponent} from "./catalog2/review/review.component";
 import {WishListComponent} from "./user-account/wish-list/wish-list.component";
 import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
+import { WalletComponent } from './user-account/wallet/wallet.component';
+import { PostItemComponent } from './user-account/post-item/post-item.component';
+import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
+import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
+import { PurchasedComponent } from './user-account/user-dashboard/purchased/purchased.component';
+import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
+import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
+import { LendItemComponent } from './user-account/post-item/lend-item/lend-item.component';
 
 
 const routes: Routes = [
@@ -26,17 +34,32 @@ const routes: Routes = [
   { path: 'register', component: TestsignupComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'account', component: UserAccountComponent,
-    canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User,Role.Admin]}},
+    canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User,Role.Admin]},
+    children:[
+      { path: '', redirectTo:'wallet', pathMatch: 'full'},
+      { path: 'wallet', component:WalletComponent},
+      { path: 'postItem', component:PostItemComponent,
+        children:[
+          {path: '', redirectTo:'sell', pathMatch:'full'},
+        {path: 'sell',component:SellItemComponent},
+        {path: 'lend',component:LendItemComponent},
+        ]},
+      { path: 'dashboard', component:UserDashboardComponent, 
+      children:[
+        {path: '', redirectTo:'posted', pathMatch:'full'},
+        {path: 'posted',component:PostedComponent},
+        {path: 'sold',component:SoldComponent},
+        {path: 'lent',component:LentComponent},
+        {path: 'purchasedHistory', component:PurchasedComponent}
+      ]},
+    ]},
   { path: 'edititem/:id', component: EdititemComponent,
-    canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
-  { path: 'dashboard', component: UserDashboardComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
   { path: 'shopping-cart', component: ShoppingCartComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
   { path: 'wish-list', component: WishListComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
-  { path: 'catalog', component: CatalogComponent},
-  { path: 'catalog2', component: Catalog2Component},
+  { path: 'catalog', component: Catalog2Component},
   { path: 'product/:id', component: DetailedProductComponent},
   { path: 'resetPassword/:name', component: ResetPasswordComponent},
   { path: 'review/:id/:buyerId/:purchaseId', component: ReviewComponent,
@@ -60,6 +83,7 @@ const routes: Routes = [
   { path: "**", component: NotFoundComponent},
 
 ];
+export const appRouting = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [],
