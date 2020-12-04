@@ -116,7 +116,7 @@ purchaseController.post('/add/',
  */
 purchaseController.get('/getAllBuyerPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { buyerUserId: req.params.id } })
+        Purchase.findAll({ where: { buyerUserId: req.params.id }, include: [Purchase.associations.user, Purchase.associations.product] })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
