@@ -44,7 +44,7 @@ const routes: Routes = [
         {path: 'sell',component:SellItemComponent},
         {path: 'lend',component:LendItemComponent},
         ]},
-      { path: 'dashboard', component:UserDashboardComponent, 
+      { path: 'dashboard', component:UserDashboardComponent,
       children:[
         {path: '', redirectTo:'posted', pathMatch:'full'},
         {path: 'posted',component:PostedComponent},
@@ -59,7 +59,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
   { path: 'wish-list', component: WishListComponent,
     canActivate: [AuthGuardService], canLoad: [AuthGuardService], data: {roles: [Role.User, Role.Admin]}},
-  { path: 'catalog', component: Catalog2Component},
+  { path: 'catalog2', component: Catalog2Component},
   { path: 'product/:id', component: DetailedProductComponent},
   { path: 'resetPassword/:name', component: ResetPasswordComponent},
   { path: 'review/:id/:buyerId/:purchaseId', component: ReviewComponent,
