@@ -26,5 +26,7 @@ export class ShoppingCart {
     public shoppingCart: boolean,
   // True if product is in the wish list
   public wishList: boolean,
+    // True if the buyer wants the product to be delivered
+    public deliveryRequested: boolean,
 ) {}
 }

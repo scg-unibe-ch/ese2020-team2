@@ -47,8 +47,8 @@ purchaseController.post('/addCart/',
                     if (quantity <= 0) {
                         res.status(500).send('Select a valid quantity. \nFailed when adding product ' + product.title);
                     }
-                    res.status(500).send('The product has only ' + product.piecesAvailable + ' pieces available.'
-                        + '\nFailed when adding product ' + product.title);
+                    res.status(500).send('The product "' + product.title + '" has only ' + product.piecesAvailable + ' pieces available.'
+                        + '\nPlease reduce the quantity.');
                 }
             } else {
                 if (buyer.userId === product.userId) {

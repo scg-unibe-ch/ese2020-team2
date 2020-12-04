@@ -37,12 +37,17 @@
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
 
-            <mat-select   style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]" placeholder="{{shoppingCart.quantity}}" (selectionChange)= "editShoppingCartProduct(shoppingCart, quantity[index])">
+            <mat-select   style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]" placeholder="{{shoppingCart.quantity}}" (selectionChange)= "editShoppingCartProduct(shoppingCart, quantity[index], deliveryRequested[index])">
               <mat-option value="{{shoppingCart.quantity}}">{{shoppingCart.quantity}}</mat-option>
-              <mat-option value=1>1</mat-option>
-              <mat-option value=2>2</mat-option>
-              <mat-option value=3>3</mat-option>
+              <mat-option *ngIf="shoppingCart.product.piecesAvailable >=1" value=1>1</mat-option>
+              <mat-option *ngIf="shoppingCart.product.piecesAvailable >=2" value=2>2</mat-option>
+              <mat-option *ngIf="shoppingCart.product.piecesAvailable >=3" value=3>3</mat-option>
             </mat-select>
+          <mat-slide-toggle style="width: 30%;margin-left: 75%;margin-top: 5%;" *ngIf="shoppingCart.product.deliveryPossible"
+            [(ngModel)]="deliveryRequested[index]"
+            (change)="editShoppingCartProduct(shoppingCart, quantity[index], deliveryRequested[index])">
+            {{deliveryRequested[index]? "Delivery" : "Pick up"}}
+          </mat-slide-toggle>
             <br>
             <br>
             <p style="padding-left: 80%;">
@@ -68,7 +73,8 @@
         <p>After the purchase you have <b>{{(points$ | async) - totalPrice}}</b> tokens </p>
         <br>
         <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice < 0" (click)="notEnoughMoney()">Buy <br>(Sorry, you don't have enough money)</button>
-        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice >= 0" (click)="buyShoppingCartProducts()">Buy</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice >= 0 && deliveryRequested.includes(true)" (click)="openModal()">Check address & Buy</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice >= 0 && !deliveryRequested.includes(true)" (click)="buyShoppingCartProducts()">Buy</button>
 
     </mat-card-content>
     </mat-card>

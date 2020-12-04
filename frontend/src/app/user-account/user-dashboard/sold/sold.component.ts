@@ -52,11 +52,12 @@ export class SoldComponent implements OnInit {
       {
         "notificationCheck": true,
       }
-    ).subscribe((res: any) => {
-      this.snackBar.open("Product was marked as ", '', 3000);
-    }, (error: any) => {
-      this.snackBar.open(error.error, '', 3000);
-    });
+    ).subscribe((res: any) => {}, (error: any) => {
+      if(error.status === 200) {
+        this.snackBar.open("Product was marked as ", '', 3000, "info");
+      } else {
+        this.snackBar.open(error.error, '', 3000, "warning");
+      }});
   }
 
 }

@@ -13,7 +13,7 @@ describe('PurchasedComponent', () => {
             declarations: [PurchasedComponent],imports: [HttpClientTestingModule, MatSnackBarModule]
         }).compileComponents();
       spyOn(window.localStorage, 'getItem').and.callFake(function() {
-        return JSON.stringify({"user":"role: user"});
+        return JSON.stringify({"user":"userId: 1"});
       });
     }));
     beforeEach(() => {

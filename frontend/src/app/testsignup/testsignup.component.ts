@@ -140,9 +140,9 @@ export class TestsignupComponent implements OnInit {
   signup() {
     this.httpClient.post(environment.endpointURL + 'user/register',
       this.userForm.value).subscribe((res: any) => {
-      this.snackBar.open('You successfully registered!', '', 3000);
+      this.snackBar.open('You successfully registered!', '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open('Registering was not possible, please try again', '', 3000);
+      this.snackBar.open('Registering was not possible, please try again', '', 3000, "warning");
     }),this.router.navigate(['login', {queryParams: { registered: 'true' } }]);
 }
 

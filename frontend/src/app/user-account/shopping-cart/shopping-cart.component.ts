@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ProductsService} from "../../services/products.service";
 import {BehaviorSubject, Observable} from "rxjs";
@@ -12,6 +12,9 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ShoppingCartPurchase} from "../../models/shoppingCartPurchase.model";
 import {SnackBarService} from "../../services/snackBar.service";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {ModalComponent} from "../../modal/modal.component";
+import {AddressModalComponent} from "./address-modal/address-modal.component";
 
 export interface Country {
   value: string;
@@ -25,7 +28,8 @@ export interface Country {
 })
 export class ShoppingCartComponent implements OnInit {
   shoppingCart$: Observable<ShoppingCart[]>;
-  quantity = [];
+  quantity: number[];
+  deliveryRequested: boolean[];
   points$: Observable<number>;
   loggedIn$: BehaviorSubject<boolean>;
   userId: number;
@@ -63,9 +67,14 @@ export class ShoppingCartComponent implements OnInit {
               private productsService: ProductsService,
               private users: CurrentUser,
               private snackBar: SnackBarService,
-              private shoppingCartService: ShoppingCartService) {
+              private shoppingCartService: ShoppingCartService,
+              private matDialog: MatDialog) {
 
     this.loggedIn$ = authService.loggedIn$;
+
+    matDialog.afterAllClosed.subscribe(() => {
+          this.ngOnInit();})
+
   }
 
   ngOnInit(): void {
@@ -75,6 +84,8 @@ export class ShoppingCartComponent implements OnInit {
     this.getAddressAsString();
     this.getUserMoney();
 
+
+
     if (this.loggedIn$.value == true) {
       this.userId = JSON.parse(localStorage.getItem('user')).userId;
       this.city$ = this.users.getCurrentUserProperty('city');
@@ -82,6 +93,8 @@ export class ShoppingCartComponent implements OnInit {
       this.pinCode$ = this.users.getCurrentUserProperty('pinCode');
       this.country$ = this.users.getCurrentUserProperty('country');
     }
+
+
   }
 
   private getUserMoney() {
@@ -103,7 +116,11 @@ export class ShoppingCartComponent implements OnInit {
 
   getShoppingCart(): void {
     this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
-    this.shoppingCart$.subscribe(shoppingCart => {this.shoppingCart = shoppingCart})
+    this.shoppingCart$.subscribe(shoppingCart => {
+      this.shoppingCart = shoppingCart;
+      this.quantity = shoppingCart.map(shoppingCart => shoppingCart.quantity)
+      this.deliveryRequested = shoppingCart.map(shoppingCart => shoppingCart.deliveryRequested)
+    })
   }
 
   removeShoppingCartProduct(shoppingCartProduct: ShoppingCart): void {
@@ -116,9 +133,9 @@ export class ShoppingCartComponent implements OnInit {
         },
         (error: any) => {
           if (error.status === 200) {
-            this.snackBar.open("Removed product from shopping cart", '', 2000);
+            this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
           } else {
-            this.snackBar.open(error.error.text, '', 2000);
+            this.snackBar.open(error.error.text, '', 2000, "warning");
           }})
     }
     this.ngOnInit();
@@ -129,9 +146,9 @@ export class ShoppingCartComponent implements OnInit {
       },
       (error: any) => {
         if (error.status === 200) {
-          this.snackBar.open("Removed product from shopping cart", '', 2000);
+          this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
         } else {
-          this.snackBar.open(error.error.text, '', 2000);
+          this.snackBar.open(error.error.text, '', 2000, "warning");
         }})
     this.ngOnInit();
   }
@@ -145,42 +162,41 @@ export class ShoppingCartComponent implements OnInit {
       },
       (error: any) => {
         if (error.status === 200) {
-          this.snackBar.open("Product moved to wish list", '', 2000);
+          this.snackBar.open("Product moved to wish list", '', 2000, "info");
         } else {
-          this.snackBar.open(error.error.text, '',2000);
+          this.snackBar.open(error.error.text, '',2000, "warning");
         }})
     this.ngOnInit();
   }
 
-  editShoppingCartProduct(shoppingCartProduct: ShoppingCart, quantity: number): void {
+  editShoppingCartProduct(shoppingCartProduct: ShoppingCart, quantity: number, deliveryRequested: boolean): void {
     this.httpClient.put(environment.endpointURL + 'cart/edit/' + shoppingCartProduct.cartId, {
-      quantity: quantity
+      quantity: quantity,
+      deliveryRequested: deliveryRequested,
     }).subscribe((res: any) => {},
       (error: any) => {
         if (error.status === 200) {
-          this.snackBar.open("Quantity updated", '', 2000);
+          this.snackBar.open("Shopping card has been updated", '', 2000, "info");
         } else {
-          this.snackBar.open(error.error.text, '', 2000);
+          this.snackBar.open(error.error.text, '', 2000, "warning");
         }})
-    this.ngOnInit();
   }
 
   buyShoppingCartProducts(): void {
-    this.shoppingCartPurchases$.subscribe(data => {
+    this.shoppingCartPurchases$.pipe(finalize(() => this.ngOnInit()))
+      .subscribe(data => {
       this.shoppingCartPurchases = data;
-      console.log(this.shoppingCartPurchases);
       this.httpClient.post(environment.endpointURL + 'purchase/addCart/', this.shoppingCartPurchases).subscribe(
         (res: any) => {},
         (error: any) => {
           if (error.status === 200) {
-            this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000);
+            this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
+            this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct)});
           } else {
-            this.snackBar.open(error.error.text, '', 2000);
-          }})
-      this.shoppingCart.forEach(shoppingCartProduct => {
-        this.removeShoppingCartProduct(shoppingCartProduct)
+            this.snackBar.open(error.error.text, '', 2000, "warning");
+          }
+
       })})
-    this.ngOnInit();
   }
 
   private CreateShoppingCartPurchases() {
@@ -192,6 +208,7 @@ export class ShoppingCartComponent implements OnInit {
           JSON.parse(localStorage.getItem('user')).userId,
           element.product.userId,
           this.userAddress,
+          element.deliveryRequested
         )})}))
   }
 
@@ -202,8 +219,21 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   notEnoughMoney() {
-    this.snackBar.open("Sorry, you don't have enough money. Please remove some products.", '',2000);
+    this.snackBar.open("Sorry, you don't have enough money. Please remove some products.", '',
+      2000, "warning");
   }
+
+  openModal() {
+    this.shoppingCartService.ngOnInit();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "65%";
+    dialogConfig.width = "50%";
+    const modalDialog = this.matDialog.open(AddressModalComponent, dialogConfig);
+  }
+
+
 
   get street() {
     return this.userForm.get("street")
@@ -221,3 +251,4 @@ export class ShoppingCartComponent implements OnInit {
     return this.userForm.get("city")
   }
 }
+

@@ -29,6 +29,8 @@ export interface CartAttributes {
     shoppingCart: boolean;
     // True if product is in the wish list
     wishList: boolean;
+    // True if the buyer wants the product to be delivered
+    deliveryRequested: boolean;
 }
 
 export interface CartCreationAttributes extends Optional<CartAttributes, 'cartId'> { }
@@ -56,6 +58,8 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
     sellerUserId!: number;
     shoppingCart!: boolean;
     wishList!: boolean;
+    deliveryRequested!: boolean;
+
 
     public static initialize(sequelize: Sequelize) {
         Cart.init({
@@ -91,6 +95,11 @@ export class Cart extends Model<CartAttributes, CartCreationAttributes> implemen
                     defaultValue: false
                 },
                 wishList: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: false
+                },
+                deliveryRequested: {
                     type: DataTypes.BOOLEAN,
                     allowNull: false,
                     defaultValue: false

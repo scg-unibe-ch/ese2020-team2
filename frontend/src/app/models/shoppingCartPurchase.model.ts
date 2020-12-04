@@ -9,6 +9,8 @@ export class ShoppingCartPurchase {
   // Name of the user who is selling the product.
         public sellerUserId: number,
   // The delivery address
-        public deliveryAddress: string
+        public deliveryAddress: string,
+  // True if the buyer wants the product to be delivered
+  public deliveryRequested: boolean,
       ) {}
     }

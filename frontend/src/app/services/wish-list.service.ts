@@ -33,9 +33,12 @@ export class WishListService {
         "shoppingCart": false
       }
     ).subscribe((res: any) => {
-      this.snackBar.open("Product was added to the wish list", '', 3000);
+      this.snackBar.open("Product was added to the wish list", '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open(error.error, '', 3000);
-    });
+      if (error.status === 200) {
+        this.snackBar.open("Product was added to the wish list", '', 3000, "success");
+      } else {
+        this.snackBar.open(error.error, '', 3000, "warning");
+      }});
   }
 }

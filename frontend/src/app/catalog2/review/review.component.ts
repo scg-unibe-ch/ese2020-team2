@@ -4,7 +4,7 @@ import {ProductsService} from "../../services/products.service";
 import {AuthService} from "../../auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Observable, scheduled} from "rxjs";
-import {defaultIfEmpty, filter, map, startWith} from "rxjs/operators";
+import {defaultIfEmpty, filter, finalize, map, startWith} from "rxjs/operators";
 import {Approval} from "../../models/approval";
 import {Product} from "../../models/product.model";
 import {environment} from "../../../environments/environment";
@@ -122,13 +122,14 @@ export class ReviewComponent implements OnInit {
         "reviewText": this.reviewText,
         "rating": this.rating,
       }
-    ).subscribe((res: any) => {
-      this.snackBar.open("The post of the review was successful", '', 3000);
+    ).pipe(finalize(() => {
+      this.toggleReview();
+      this.ngOnInit();}))
+      .subscribe((res: any) => {
+      this.snackBar.open("The post of the review was successful", '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open(error.error, '', 3000);
+      this.snackBar.open(error.error, '', 3000, "warning");
     });
-    this.ngOnInit();
-
   }
 
 
@@ -139,25 +140,30 @@ export class ReviewComponent implements OnInit {
         "reviewText": this.reviewText,
         "rating": this.rating,
       }
-    ).subscribe((res: any) => {
-      this.snackBar.open("The edit of the review was successful", '', 3000);
-    }, (error: any) => {
-      this.snackBar.open(error.error.text, '', 3000);
-    });
-    this.ngOnInit();
-
+    ).pipe(finalize(() => {
+      this.toggleReview();
+      this.ngOnInit();}))
+      .subscribe((res: any) => {},
+      (error: any) => {
+      if (error.status === 200) {
+        this.snackBar.open("The edit of the review was successful", '', 3000, "success");
+      } else {
+        this.snackBar.open(error.error.text, '', 3000, "warning");
+      }});
   }
 
   deleteReview(): void {
     this.httpClient.request('DELETE', environment.endpointURL + 'review/delete/' + this.reviewId, {
       body: {
         productId: this.productId
-      }}).subscribe((res: any) => {
-      this.snackBar.open("The deletion of the review was successful", '', 3000);
+      }}).pipe(finalize(() => {
+      this.toggleReview();
+      this.ngOnInit();}))
+      .subscribe((res: any) => {
+      this.snackBar.open("The deletion of the review was successful", '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open(error.error.text, '', 3000);
+      this.snackBar.open(error.error.text, '', 3000, "warning");
     })
-    this.ngOnInit();
   }
 
 
@@ -166,7 +172,7 @@ export class ReviewComponent implements OnInit {
   }
 
   onRating(rating: number) {
-    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', 2000);
+    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', 2000, "info");
     this.rating = rating;
   }
 

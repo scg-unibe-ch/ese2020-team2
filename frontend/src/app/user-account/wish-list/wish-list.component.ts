@@ -51,9 +51,9 @@ export class WishListComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.snackBar.open("Product moved to shopping cart", '', 3000);
+          this.snackBar.open("Product moved to shopping cart", '', 3000, "info");
         } else {
-          this.snackBar.open(error.error.text, '', 3000);
+          this.snackBar.open(error.error.text, '', 3000, "warning");
         }})
     this.ngOnInit();
   }
@@ -68,9 +68,9 @@ export class WishListComponent implements OnInit {
       }).subscribe((res: any) => {},
         (error: any) => {
           if(error.status === 200) {
-            this.snackBar.open("Removed product from wish list", '', 3000);
+            this.snackBar.open("Removed product from wish list", '', 3000, "success");
           } else {
-            this.snackBar.open(error.error.text, '', 3000);
+            this.snackBar.open(error.error.text, '', 3000, "warning");
           }})}
     this.ngOnInit();
   }
@@ -79,9 +79,9 @@ export class WishListComponent implements OnInit {
     this.httpClient.delete(environment.endpointURL + 'cart/delete/' + wishList.cartId).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.snackBar.open("Removed product from wish list", '', 3000);
+          this.snackBar.open("Removed product from wish list", '', 3000, "success");
         } else {
-          this.snackBar.open(error.error.text, '', 3000);
+          this.snackBar.open(error.error.text, '', 3000, "warning");
         }})
     this.ngOnInit();
   }
@@ -92,9 +92,9 @@ export class WishListComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if(error.status === 200) {
-          this.snackBar.open("Quantity updated", '', 3000);
+          this.snackBar.open("Quantity updated", '', 3000, "info");
         } else {
-          this.snackBar.open(error.error.text, '', 3000);
+          this.snackBar.open(error.error.text, '', 3000, "warning");
         }})
     this.ngOnInit();
   }

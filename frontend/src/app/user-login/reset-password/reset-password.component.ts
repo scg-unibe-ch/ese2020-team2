@@ -31,10 +31,10 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
     public snackBar: SnackBarService,) {}
 
     userForm = this.fb.group(
-      { 
+      {
         password: ["", Validators.required],
         confirmPassword: ["", Validators.required],
-        
+
       },
       {
         validator: this.customValidator.passwordMatchValidator(
@@ -48,7 +48,7 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
     this.list$=this.httpClient.get(environment.endpointURL + 'user/passwordReset/' +this.userName);
     this.setVariable();
   }
-  
+
   get confirmPassword() { return this.userForm.get("confirmPassword") };
   get password() {
     return this.userForm.get("password");
@@ -61,19 +61,19 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   checkAnswer(){
     this.answerWasCorrect= (this.correctAnswer===(this.answer.toLowerCase()));
     if(this.answerWasCorrect){
-    this.snackBar.open('You answered correctly', '', 3000);
+    this.snackBar.open('You answered correctly', '', 3000, "success");
   } else {
     var sentence='Your answer was wrong. You still have '+this.attempts + ' attempt'
       sentence+=(this.attempts>1?'s':'');
-    this.snackBar.open( sentence, '', 1000);
+    this.snackBar.open( sentence, '', 1000, "warning");
     this.attempts--;
     }
   }
   changePassword(){
     this.httpClient.put(environment.endpointURL + 'user/editUser/'+ this.userId, this.userForm.value).subscribe((res: any) => {
-      this.snackBar.open('You successfully changed the password!', '', 3000);
+      this.snackBar.open('You successfully changed the password!', '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open('Registering was not possible, please try again', '', 3000);
+      this.snackBar.open('Registering was not possible, please try again', '', 3000, "warning");
     });
     this.router.navigate(['login']);
   }

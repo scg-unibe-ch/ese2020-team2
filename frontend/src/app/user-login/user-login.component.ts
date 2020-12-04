@@ -66,10 +66,12 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('user', JSON.stringify(res.user));
       this.checkUserStatus();
-      this.snackBar.open('You successfully logged in!', '', 3000)
+       this.router.navigate(['/catalog2']);
+       this.snackBar.open('You successfully logged in!', '', 3000, "success")
     }, (error: any) => {
        this.checkUserStatus();
-       this.snackBar.open('Login was not successful, please check username and password', '', 3000)
+       this.snackBar.open('Login was not successful, please check username and password', '',
+         3000, "warning")
      });
   }
 
@@ -84,15 +86,14 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('user');
 
     this.checkUserStatus();
-    window.location.reload();
-    this.snackBar.open('You successfully logged out!', '', 3000);
+    this.snackBar.open('You successfully logged out!', '', 3000, "success");
   }
 changeResetPasword(){
   this.resetPassword=!(this.resetPassword)
 }
 getQuestions(){
   //var list=this.httpClient.get(environment.endpointURL + 'user/existanceOf/'+ this.userName);
-  //list.subscribe(item=> userId=item.userId); 
+  //list.subscribe(item=> userId=item.userId);
   //if(userId==null){
   //this.snackBar.open('It does not exist an user with the given userName', '', 3000);
   //}// else

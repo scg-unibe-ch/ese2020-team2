@@ -156,9 +156,9 @@ checkWallet(): void {
     }
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.lendformular.value).subscribe((res: any) => {
-      this.snackBar.open('You successfully posted!', '', 3000);
+      this.snackBar.open('You successfully posted!', '', 3000, "success");
     }, (error: any) => {
-      this.snackBar.open('Posting was not possible, please try again', '', 3000);
+      this.snackBar.open('Posting was not possible, please try again', '', 3000, 'warning');
     });
 }
 clear() {

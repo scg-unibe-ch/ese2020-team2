@@ -46,9 +46,9 @@ export class LentComponent implements OnInit {
         "notificationCheck": true,
       }
     ).subscribe((res: any) => {
-      this.snackBar.open("Product was marked as ", '', 3000);
+      this.snackBar.open("Product was marked as ", '', 3000, "info");
     }, (error: any) => {
-      this.snackBar.open(error.error, '', 3000);
+      this.snackBar.open(error.error, '', 3000, "warning");
     });
   }
 

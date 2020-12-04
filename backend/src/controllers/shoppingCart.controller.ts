@@ -60,8 +60,8 @@ shoppingCartController.post('/add',
                         .then(found => {
                             if (found != null) {
                                 found.update({wishList: true});
+                                res.status(200).send('Product successfully added to the wish list');
                             }
-                            res.status(500).send('Product successfully added to the wish list');
                         });
                 }
                 if (productIdsCart.includes(req.body.productId) && req.body.shoppingCart === true) {
@@ -72,9 +72,9 @@ shoppingCartController.post('/add',
                         .then(found => {
                             if (found != null) {
                                 found.update({shoppingCart: true});
+                                res.status(200).send('Product successfully added to the shopping cart');
                             }
                         });
-                    res.status(500).send('Product successfully added to the shopping cart');
                 }
             }
         }
