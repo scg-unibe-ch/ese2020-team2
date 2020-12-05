@@ -57,6 +57,7 @@ export class DetailedProductComponent implements OnInit {
    * Gets the id of the product, that should be displayed in detail, from the url and loads the product.
    */
   ngOnInit() {
+    this.loggedIn$ = this.authService.loggedIn$;
     this.activatedRoute.params.subscribe(params => {
       this.productId = +params['id']; // (+) converts string 'id' to a number
     });

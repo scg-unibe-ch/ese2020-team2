@@ -1,0 +1,7 @@
+<h1>You have the following notifications:</h1>
+<mat-list *ngFor="let notfication of listOfNot" class="group">
+    <mat-list-item><span>You have <span *ngIf="notfication.product.sellOrLend=='sell'">sold</span>
+        <span *ngIf="notfication.product.sellOrLend=='lend'">lent</span> {{notfication.quantity}} times
+        {{notfication.product.title}}. </span></mat-list-item>
+	<mat-divider></mat-divider>
+</mat-list>

@@ -10,14 +10,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('AppComponent', () => {
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],imports: [
-        HttpClientModule, BrowserAnimationsModule
+        HttpClientModule, BrowserAnimationsModule, MatDialogModule
       ], providers: [
-        AuthService, CurrentUser, 
+        AuthService, CurrentUser, {provide: MatDialogRef, useValue:mockDialogRef}
       ],
     }).compileComponents();
   }));

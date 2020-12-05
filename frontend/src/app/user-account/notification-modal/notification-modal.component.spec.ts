@@ -2,25 +2,26 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
-import { ModalComponent } from './modal.component';
+import { NotificationModalComponent } from './notification-modal.component';
 
-describe('ModalComponent', () => {
-  let component: ModalComponent;
-  let fixture: ComponentFixture<ModalComponent>;
+describe('NotificationModalComponent', () => {
+  let component: NotificationModalComponent;
+  let fixture: ComponentFixture<NotificationModalComponent>;
   const mockDialogRef = {
     close: jasmine.createSpy('close')
   };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent],
-      imports:[HttpClientTestingModule, MatDialogModule],
+      declarations: [ NotificationModalComponent],
+      imports:[MatDialogModule, HttpClientTestingModule],
       providers:[{provide: MatDialogRef, useValue:mockDialogRef}],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalComponent);
+    fixture = TestBed.createComponent(NotificationModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

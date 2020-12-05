@@ -58,9 +58,13 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ModalComponent } from './modal/modal.component';
 import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 import { AddressModalComponent } from './user-account/shopping-cart/address-modal/address-modal.component';
+import { NotificationModalComponent } from './user-account/notification-modal/notification-modal.component';
+
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {CdkTableModule} from "@angular/cdk/table";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -92,6 +96,7 @@ import {CdkTableModule} from "@angular/cdk/table";
     WishListComponent,
     ResetPasswordComponent,
     AddressModalComponent,
+    NotificationModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +115,9 @@ import {CdkTableModule} from "@angular/cdk/table";
     MatDialogModule,
     MatCardModule,
     Ng5SliderModule,
+    FormsModule, 
+    NgbModule,
+    DragDropModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,

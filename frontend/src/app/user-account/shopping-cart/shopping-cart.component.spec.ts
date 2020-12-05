@@ -9,16 +9,21 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
   let fixture: ComponentFixture<ShoppingCartComponent>;
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ShoppingCartComponent ],
       imports: [HttpClientTestingModule, MatSnackBarModule, ReactiveFormsModule, MatSnackBarModule,
-        MatSelectModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule]
+        MatSelectModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule, MatDialogModule],
+        providers:[{provide: MatDialogRef, useValue:mockDialogRef}],
     })
       .compileComponents();
     spyOn(window.localStorage, 'getItem').and.callFake(function() {

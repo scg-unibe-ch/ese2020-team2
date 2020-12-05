@@ -1,14 +1,8 @@
 <!--The account of the user has 3 tabs containing the wallet, the history and the todolist-->
 <mat-card *ngIf="listOfNot.length > 0">
-    <mat-card-title>You have the following notifications:</mat-card-title>
-  <div class="sitemessage">
-  <div>
-  <span *ngFor="let notfication of listOfNot" class="group">
-      <span>You have <span *ngIf="notfication.product.sellOrLend=='sell'">sold</span>
-      <span *ngIf="notfication.product.sellOrLend=='lend'">lent</span> {{notfication.quantity}} times {{notfication.product.title}}. </span>
-  </span>
-</div>
-</div></mat-card>
+    <mat-card-title>You have {{listOfNot.length}} notification<span *ngIf="listOfNot.length>1">s</span>:</mat-card-title>
+    <button (click)="openNotifications()">SEE</button>
+  </mat-card>
 <!-- displays all the tabs and the links to the relative component-->
   <nav mat-tab-nav-bar>
       <a mat-tab-link *ngFor="let link of navLinks"
