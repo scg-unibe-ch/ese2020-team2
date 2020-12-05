@@ -20,14 +20,21 @@ export class AppComponent implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   listOfNotification$:Observable<Purchase[]>;
   title = "frontend";
-  constructor(private authService: AuthService, private currentUser:CurrentUser,
-    public matDialog: MatDialog) {
+  constructor(private authService: AuthService,
+              private currentUser:CurrentUser,
+              public matDialog: MatDialog) {
 
     this.loggedIn$ = authService.loggedIn$
   }
+
+  ngOnChanges() {
+    this.authService.CheckAccessToSecuredEndpoint();
+  }
+
   ngOnInit(){
     this.getNoftification()
-    this.loggedIn$ = this.authService.loggedIn$
+    this.authService.CheckAccessToSecuredEndpoint();
+    //this.loggedIn$ = this.authService.loggedIn$
   }
    get isAdmin() {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
