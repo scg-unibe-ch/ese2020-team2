@@ -49,7 +49,6 @@ export class UserLoginComponent implements OnInit {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
-
     this.authService.CheckAccessToSecuredEndpoint();
   }
 
@@ -68,7 +67,6 @@ export class UserLoginComponent implements OnInit {
       this.checkUserStatus();
        this.router.navigate(['/catalog2']);
        this.snackBar.open('You successfully logged in!', '', 3000, "success")
-
     }, (error: any) => {
        this.checkUserStatus();
        this.snackBar.open('Login was not successful, please check username and password', '',

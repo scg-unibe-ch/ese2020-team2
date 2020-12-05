@@ -31,7 +31,7 @@ export class Catalog2Component implements OnInit {
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
-  
+
   options: Options = {
     floor: 0,
     ceil: 100,
@@ -41,7 +41,7 @@ export class Catalog2Component implements OnInit {
     combineLabels: (minValue: string, maxValue: string): string => {
       return 'from ' + minValue + ' up to ' + maxValue;
     }
-  
+
   };
   a: number;
 
@@ -58,6 +58,7 @@ export class Catalog2Component implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('user')).userId;
   }
 
+
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);
     }
@@ -66,7 +67,9 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.authService.CheckAccessToSecuredEndpoint()
   }
+
 
 
   changefiltersl(filtervalue: string) {
