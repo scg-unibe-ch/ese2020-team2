@@ -23,7 +23,9 @@ export class Purchase {
     public notificationCheck: boolean,
     // True if the buyer wants the product to be delivered
     public deliveryRequested: boolean,
+    // Data of the seller
     public user: User,
+    // Data of the product sold
     public product: Product,
 
   ) {}

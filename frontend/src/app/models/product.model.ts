@@ -10,7 +10,6 @@ export class Product {
     public productId: number,
     public type: string,
     public title: string,
-    public userName: string,
     public price: number,
     public isPremier: boolean,
     public description: string,

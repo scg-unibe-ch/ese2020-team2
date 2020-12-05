@@ -156,8 +156,6 @@ export class SellItemComponent implements OnInit {
     uploadData.append('productImage', this.file);
     uploadData.append('userId', "1");
     uploadData.append('productId', "1");
-
-
     this.httpClient.post(environment.endpointURL + 'image/add/',uploadData
     ).subscribe();
   }
