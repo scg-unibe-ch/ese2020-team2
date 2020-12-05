@@ -43,3 +43,16 @@ textarea {
   background: #4153AF !important;
   color: white !important;
 }
+
+table {
+  width: 100%;
+}
+
+td, th {
+  /*width: 25%;*/
+}
+
+.highlight{
+  background: #eccc6c;
+}
+

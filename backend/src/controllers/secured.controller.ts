@@ -8,7 +8,9 @@ securedEndpoint.use(verifyToken);
 
 securedEndpoint.get('/', (req: Request, res: Response) => {
     // for demonstration purposes the content of the token and a message is returned
-    res.send({message: `This is a secured  Endpoint, ${req.body.tokenPayload.userName}` , decodedToken: req.body.tokenPayload });
+    res.status(200).send({message: 'Authorized'});
+
+    // res.send({message: `This is a secured  Endpoint, ${req.body.tokenPayload.userName}` , decodedToken: req.body.tokenPayload });
 });
 
 export const SecuredController: Router = securedEndpoint;

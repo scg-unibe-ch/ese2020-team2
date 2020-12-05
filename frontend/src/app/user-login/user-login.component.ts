@@ -68,6 +68,7 @@ export class UserLoginComponent implements OnInit {
       this.checkUserStatus();
        this.router.navigate(['/catalog2']);
        this.snackBar.open('You successfully logged in!', '', 3000, "success")
+
     }, (error: any) => {
        this.checkUserStatus();
        this.snackBar.open('Login was not successful, please check username and password', '',
@@ -81,10 +82,8 @@ export class UserLoginComponent implements OnInit {
    */
   logout(): void {
     // Remove user data from local storage
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('user');
 
+    localStorage.clear()
     this.checkUserStatus();
     this.snackBar.open('You successfully logged out!', '', 3000, "success");
   }

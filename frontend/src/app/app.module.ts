@@ -58,6 +58,9 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ModalComponent } from './modal/modal.component';
 import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 import { AddressModalComponent } from './user-account/shopping-cart/address-modal/address-modal.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {CdkTableModule} from "@angular/cdk/table";
 
 
 @NgModule({
@@ -129,6 +132,10 @@ import { AddressModalComponent } from './user-account/shopping-cart/address-moda
     AdminModule,
     MatBadgeModule,
     MatButtonToggleModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    CdkTableModule,
   ],
   providers: [
     [AuthGuardService],

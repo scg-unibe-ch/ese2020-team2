@@ -43,7 +43,7 @@ export class AddressModalComponent implements OnInit  {
       street: ["", Validators.required],
       city: ["", Validators.required],
       pinCode: ["", Validators.required],
-      role: [""],
+      role: this.users.getCurrentUserProperty('role'),
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
     }

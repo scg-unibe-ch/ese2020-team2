@@ -15,12 +15,14 @@ export class ProductsService {
   constructor(private httpClient: HttpClient) {}
 
   /**
-   * Get all the products from the backend.
+   * Get all the products from the backend, that are not marked as deleted.
    *
-   * @return Observable<Product[]>, all the products that are currently in the database of the backend.
+   * @return Observable<Product[]>, all the products that are currently in the database of the backend and are not
+   *         marked as deleted.
    */
   getProducts() : Observable<Product[]> {
      return this.httpClient.get<Product[]>(environment.endpointURL + 'product/getAll')
+       .pipe(map(products => products.filter(product => product.status !== "deleted")))
   }
 
   /**
