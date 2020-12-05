@@ -11,6 +11,8 @@ import { PostItemComponent } from './post-item/post-item.component';
 import { DashboardComponent } from '../admin/dashboard/dashboard.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 
 @Component({
   selector: 'app-user-account',
@@ -23,7 +25,7 @@ export class UserAccountComponent implements OnInit{
   activeLinkIndex = -1;
   listOfNotification$:Observable<Purchase[]>;
   listOfNot:Array<Purchase>= new Array;
-  constructor(private currentUser:CurrentUser, private router:Router) {
+  constructor(private currentUser:CurrentUser, private router:Router, public matDialog: MatDialog) {
     this.navLinks = [
       {
           label: 'Wallet',
@@ -39,6 +41,16 @@ export class UserAccountComponent implements OnInit{
           index: 2
       }, 
   ];
+  }
+  openNotifications() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "50%";
+    dialogConfig.width = "38%";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(NotificationModalComponent, dialogConfig);
   }
 
   ngOnInit(){

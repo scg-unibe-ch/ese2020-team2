@@ -58,6 +58,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ModalComponent } from './modal/modal.component';
 import { ResetPasswordComponent } from './user-login/reset-password/reset-password.component';
 import { AddressModalComponent } from './user-account/shopping-cart/address-modal/address-modal.component';
+import { NotificationModalComponent } from './user-account/notification-modal/notification-modal.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { AddressModalComponent } from './user-account/shopping-cart/address-moda
     WishListComponent,
     ResetPasswordComponent,
     AddressModalComponent,
+    NotificationModalComponent,
   ],
   imports: [
     BrowserModule,
