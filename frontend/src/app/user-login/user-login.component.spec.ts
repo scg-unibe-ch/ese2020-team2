@@ -41,4 +41,10 @@ describe('UserLoginComponent', () => {
     component.toLogIn();
     expect(component.resetPassword).toBeFalse()
   });
+  it('should have not have an userName without typing it', ()=>{
+    expect(component.userName).toBe(null)
+  })
+  it('should have not have an password without typing it', ()=>{
+    expect(component.password).toBe('')
+  })
 });
