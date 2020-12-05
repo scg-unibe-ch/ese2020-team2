@@ -10,6 +10,9 @@ import {Approval} from "../models/approval";
 import {WishListService} from "../services/wish-list.service";
 import {ShoppingCartService} from "../services/shopping-cart.service";
 import { Options } from "@angular-slider/ngx-slider";
+import { of } from 'rxjs';
+import { max } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-catalog2',
@@ -31,7 +34,7 @@ export class Catalog2Component implements OnInit {
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
-  
+
   options: Options = {
     floor: 0,
     ceil: 100,
@@ -41,9 +44,10 @@ export class Catalog2Component implements OnInit {
     combineLabels: (minValue: string, maxValue: string): string => {
       return 'from ' + minValue + ' up to ' + maxValue;
     }
-  
+
   };
   a: number;
+  url: Object;
 
 
   constructor(private httpClient: HttpClient,
@@ -58,6 +62,7 @@ export class Catalog2Component implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('user')).userId;
   }
 
+
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);
     }
@@ -66,7 +71,10 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.getimage();
+    this.authService.CheckAccessToSecuredEndpoint()
   }
+
 
 
   changefiltersl(filtervalue: string) {
@@ -195,6 +203,13 @@ export class Catalog2Component implements OnInit {
   getAllProducts(): void {
       this.filter(this.minValue, this.maxValue, this.filtersl, this.filterps, this.sortby, this.location, this.search);
     this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
+  }
+
+  getimage() {
+    this.httpClient.get(environment.endpointURL + 'image/get/2').subscribe(url => {
+      this.url = url
+        
+    })
   }
 
   showIcon(index: number, rating: number) {

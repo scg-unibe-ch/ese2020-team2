@@ -28,10 +28,14 @@ export class AuthService implements OnInit{
    * Checks if the user can access a secure endpoint that can only be accessed by users by providing their token.
    */
   CheckAccessToSecuredEndpoint() {
-    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
-      this.login = true;
-    }, (error: any) => {
-      this.login = false
+    this.httpClient.get(environment.endpointURL + 'secured').subscribe(
+      (res: any) => {},
+      (error: any) => {
+        if(error.status === 200) {
+          this.login = true;
+        } else {
+          this.login = false
+        }
     });
   }
 

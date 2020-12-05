@@ -72,7 +72,7 @@
                 <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
 
 
-                <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+                <img mat-card-image src="url">
                 <mat-card-content>
                   <div style="float:left;">
                     <span class="subtitle" style="display:contents; ">Pieces available: </span>
@@ -124,7 +124,7 @@
                 </span>
                 </div>
 
-                <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg">
+                <img mat-card-image src="url">
 
               <mat-card-content>
                 <div >
@@ -147,9 +147,9 @@
                 <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
 
                 <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)"[(ngModel)]="quantity[index]" >
-                  <option *ngIf="product.piecesAvailable >=1" value=1>1</option>
-                  <option *ngIf="product.piecesAvailable >=2" value=2>2</option>
-                  <option *ngIf="product.piecesAvailable >=3" value=3>3</option>
+                  <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
+                  <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
+                  <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
                 </select>
 
                 <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
@@ -205,9 +205,9 @@
               <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
 
                 <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)"[(ngModel)]="quantity[index]" >
-                  <option *ngIf="product.piecesAvailable >=1" value=1>1</option>
-                  <option *ngIf="product.piecesAvailable >=2" value=2>2</option>
-                  <option *ngIf="product.piecesAvailable >=3" value=3>3</option>
+                  <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
+                  <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
+                  <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
                 </select>
 
                 <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>

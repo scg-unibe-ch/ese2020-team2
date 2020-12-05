@@ -49,7 +49,6 @@ export class UserLoginComponent implements OnInit {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
-
     this.authService.CheckAccessToSecuredEndpoint();
   }
 
@@ -81,10 +80,8 @@ export class UserLoginComponent implements OnInit {
    */
   logout(): void {
     // Remove user data from local storage
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('user');
 
+    localStorage.clear()
     this.checkUserStatus();
     this.snackBar.open('You successfully logged out!', '', 3000, "success");
   }

@@ -60,6 +60,12 @@ import { ResetPasswordComponent } from './user-login/reset-password/reset-passwo
 import { AddressModalComponent } from './user-account/shopping-cart/address-modal/address-modal.component';
 import { NotificationModalComponent } from './user-account/notification-modal/notification-modal.component';
 
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {CdkTableModule} from "@angular/cdk/table";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -109,6 +115,9 @@ import { NotificationModalComponent } from './user-account/notification-modal/no
     MatDialogModule,
     MatCardModule,
     Ng5SliderModule,
+    FormsModule, 
+    NgbModule,
+    DragDropModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,
@@ -131,6 +140,10 @@ import { NotificationModalComponent } from './user-account/notification-modal/no
     AdminModule,
     MatBadgeModule,
     MatButtonToggleModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    CdkTableModule,
   ],
   providers: [
     [AuthGuardService],

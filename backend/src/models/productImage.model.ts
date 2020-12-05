@@ -1,54 +1,63 @@
-import {Optional, Model, Sequelize, DataTypes, } from 'sequelize';
-import { Product } from './product.model';
-import { User } from './user.model';
-
-// This is the Product model used to save the data about products
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import {User} from './user.model';
+import {Product} from './product.model';
 export interface ProductImageAttributes {
     // Holds the picture id of the product image uploaded
-    fileId: number;
+    productImageId: number;
     // Id of the product
     productId: number;
     // Id of the user
     userId: number;
     // Holds the uploaded file Name
-    fileName: string;
+    filePath: string;
 }
-export interface ProductImageCreationAttributes extends Optional<ProductImageAttributes, 'fileId'> { }
 
+// tells sequelize that todoItemId is not a required field
+export interface ProductImageCreationAttributes extends Optional<ProductImage, 'productImageId'> { }
 export class ProductImage extends Model<ProductImageAttributes, ProductImageCreationAttributes> implements ProductImageAttributes {
-    fileId!: number;
-    productId!: number;
+    productImageId: number;
     userId!: number;
-    fileName!: string;
+    productId!: number;
+    filePath!: string;
 
-    public static initialize(sequelize: Sequelize) {
+    public static initialize(sequelize: Sequelize) { // definition for database
         ProductImage.init({
-                fileId: {
-                    type: DataTypes.INTEGER,
-                    autoIncrement: true,
-                    primaryKey: true
-                },
-                productId: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false
-                },
-                userId: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false
-                },
-                fileName: {
-                    type: DataTypes.STRING,
-                    allowNull: false
-                }
+            productImageId: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true
+            },
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            productId: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            filePath: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
         },
         {
             sequelize,
             tableName: 'productImages'
-            }
+         }
         );
     }
     public static createAssociations() {
-        ProductImage.belongsTo(User);
-        ProductImage.belongsTo(Product);
+        ProductImage.belongsTo(User, {
+            targetKey: 'userId',
+            as: 'user',
+            foreignKey: 'userId',
+            constraints: false
+        });
+        ProductImage.belongsTo(Product, {
+            targetKey: 'productId',
+            as: 'product',
+            foreignKey: 'productId',
+            constraints: false
+        });
     }
 }
