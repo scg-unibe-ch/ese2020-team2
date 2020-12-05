@@ -90,6 +90,7 @@ export class Server {
             .use('/secured', SecuredController)
             .use('/image', ImageController)
             .use('/cart', CartController)
+            .use('/uploads', express.static('uploads'))
             .options('*', cors(options))
             .use(express.static('./src/public'))
             // this is the message you get if you open http://localhost:3000/ when the server is running
