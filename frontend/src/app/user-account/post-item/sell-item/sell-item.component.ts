@@ -6,6 +6,9 @@ import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import { environment } from 'src/environments/environment';
 import {SnackBarService} from "../../../services/snackBar.service";
+import { ProductsService } from 'src/app/services/products.service';
+import { map } from 'rxjs/operators';
+import { Product } from '../../../../../../backend/src/models/product.model';
 
 export interface Type {
   value: string;
@@ -39,6 +42,9 @@ export class SellItemComponent implements OnInit {
   pointsSub: any;
   url: string;
   file: File;
+  products$: any;
+  productid: number;
+  
 
 
   constructor(
@@ -46,6 +52,8 @@ export class SellItemComponent implements OnInit {
     public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
+
+    private productsService: ProductsService,
     private fb: FormBuilder) {
     }
     selectedValue: string;
@@ -117,6 +125,8 @@ export class SellItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkWallet();
+    this.getpostedproductid();
+    
     this.id = JSON.parse(localStorage.getItem('user')).userId;
 
 
@@ -139,23 +149,39 @@ export class SellItemComponent implements OnInit {
   get sellerReview() { return this.formular.get("sellerReview ") };
 
   post() {
-    if (this.isPremier.value == true) {
-      this.updatewallet();
-    }
+    
     this.httpClient.post(environment.endpointURL + 'product/add',
       this.formular.value).subscribe((res: any) => {
       this.snackBar.open('You successfully posted!', '', 3000, "success");
-      this.router.navigate(['account/dashboard/posted'])
     }, (error: any) => {
       this.snackBar.open('Posting was not possible, please try again', '', 3000, "warning");
     });
+    this.getpostedproductid();
+    this.postimage(this.productid);
+    if (this.isPremier.value == true) {
+      this.updatewallet();
+    }
+    this.clear();
 
 }
-  postimage() {
+
+getpostedproductid(): void {
+  this.productsService.getProducts().pipe(map(products =>
+      products.filter(product => product.userId === this.id)
+    )
+    ).subscribe(data => this.productid = data[data.length - 1].productId);
+    }
+  
+
+
+
+
+
+  postimage(productid : number) {
     const uploadData = new FormData();
     uploadData.append('productImage', this.file);
-    uploadData.append('userId', "3");
-    uploadData.append('productId', "4");
+    uploadData.append('userId', this.id.toString());
+    uploadData.append('productId', productid.toString());
 
 
     this.httpClient.post(environment.endpointURL + 'image/add/',uploadData

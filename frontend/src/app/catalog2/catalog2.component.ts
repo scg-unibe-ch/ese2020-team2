@@ -13,6 +13,7 @@ import { Options } from "@angular-slider/ngx-slider";
 import { of } from 'rxjs';
 import { max } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ProductImage } from '../../../../backend/src/models/productImage.model';
 
 @Component({
   selector: 'app-catalog2',
@@ -47,7 +48,7 @@ export class Catalog2Component implements OnInit {
 
   };
   a: number;
-  url: Object;
+  urls = Array.apply(null, Array(100));
 
 
   constructor(private httpClient: HttpClient,
@@ -69,9 +70,16 @@ export class Catalog2Component implements OnInit {
   }
 
 
+
+
   ngOnInit(): void {
+    var i;
+    for (i = 0; i < 100; i++) {
+      this.getimage(i);
+    }
+    
     this.getAllProducts();
-    this.getimage();
+    
     this.authService.CheckAccessToSecuredEndpoint()
   }
 
@@ -205,12 +213,21 @@ export class Catalog2Component implements OnInit {
     this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
   }
 
-  getimage() {
-    this.httpClient.get(environment.endpointURL + 'image/get/2').subscribe(url => {
-      this.url = url
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id+1] = data[0].filePath
+  );
+    
+}
 
-    })
-  }
+
+getimageparam(id: number) {
+  return this.httpClient.get<ProductImage>(environment.endpointURL + 'image/get/' +id).pipe(map(products =>
+    products.filePath));
+
+    }
+  
+
+
 
   showIcon(index: number, rating: number) {
     if (rating >= index + 1) {

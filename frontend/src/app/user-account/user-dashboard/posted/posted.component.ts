@@ -26,6 +26,7 @@ export class PostedComponent implements OnInit, AfterViewInit {
   products$: Observable<Product[]>;
   product: Product;
   products: Product[];
+  id: any;
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private users: CurrentUser) {
@@ -33,7 +34,9 @@ export class PostedComponent implements OnInit, AfterViewInit {
 }
 
   ngOnInit(): void {
+    this.id = JSON.parse(localStorage.getItem('user')).userId;
     this.getAllProductsOfUser()
+    
   }
 
   /**
@@ -41,7 +44,7 @@ export class PostedComponent implements OnInit, AfterViewInit {
    */
   getAllProductsOfUser(): void {
     this.products$ = this.productsService.getProducts().pipe(map(products =>
-        products.filter(product => product.userId === JSON.parse(localStorage.getItem('user')).userId)
+        products.filter(product => product.userId === this.id)
       ));
   }
 
