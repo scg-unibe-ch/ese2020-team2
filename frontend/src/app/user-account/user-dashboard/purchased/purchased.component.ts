@@ -52,7 +52,7 @@ ngOnInit(): void {
 
 
   dataSource = new MatTableDataSource<Purchase>();
-  displayedColumns = ["purchaseId", "quantity", "buyerUserId", "createdAt", "actions"];
+  displayedColumns = ["product.title", "quantity", "buyerUserId", "createdAt", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -69,6 +69,7 @@ ngOnInit(): void {
   ngAfterViewInit() {
     this.purchases$ = this.purchaseService.getPurchases();
     this.purchases$.subscribe(purchases => {
+      console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

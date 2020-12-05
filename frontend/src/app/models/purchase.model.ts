@@ -1,3 +1,6 @@
+import {User} from "./user.model";
+import {Product} from "./product.model";
+
 export class Purchase {
   constructor(
     // Id of the purchase
@@ -20,6 +23,8 @@ export class Purchase {
     public notificationCheck: boolean,
     // True if the buyer wants the product to be delivered
     public deliveryRequested: boolean,
+    public user: User,
+    public product: Product,
 
   ) {}
   getPurchaseId(){return this.purchaseId}

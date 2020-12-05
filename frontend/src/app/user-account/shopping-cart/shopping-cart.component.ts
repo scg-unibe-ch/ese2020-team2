@@ -123,9 +123,9 @@ export class ShoppingCartComponent implements OnInit {
     })
   }
 
-  removeShoppingCartProduct(shoppingCartProduct: ShoppingCart): void {
+  removeShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {
     if (shoppingCartProduct.wishList === false) {
-      this.deleteShoppingCartProduct(shoppingCartProduct)
+      this.deleteShoppingCartProduct(shoppingCartProduct, message)
     } else {
       this.httpClient.put(environment.endpointURL + 'cart/edit/' + shoppingCartProduct.cartId, {
         shoppingCart: false
@@ -141,11 +141,10 @@ export class ShoppingCartComponent implements OnInit {
     this.ngOnInit();
   }
 
-  deleteShoppingCartProduct(shoppingCartProduct: ShoppingCart): void {
-    this.httpClient.delete(environment.endpointURL + 'cart/delete/' + shoppingCartProduct.cartId).subscribe((res: any) => {
-      },
+  deleteShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {
+    this.httpClient.delete(environment.endpointURL + 'cart/delete/' + shoppingCartProduct.cartId).subscribe((res: any) => {},
       (error: any) => {
-        if (error.status === 200) {
+        if (error.status === 200 && message) {
           this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
         } else {
           this.snackBar.open(error.error.text, '', 2000, "warning");
@@ -183,20 +182,22 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   buyShoppingCartProducts(): void {
-    this.shoppingCartPurchases$.pipe(finalize(() => this.ngOnInit()))
+    this.ngOnInit()
+    this.shoppingCartPurchases$.pipe(finalize(() => {
+      this.ngOnInit();
+      this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
+    }))
       .subscribe(data => {
-      this.shoppingCartPurchases = data;
-      this.httpClient.post(environment.endpointURL + 'purchase/addCart/', this.shoppingCartPurchases).subscribe(
-        (res: any) => {},
-        (error: any) => {
-          if (error.status === 200) {
-            this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
-            this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct)});
-          } else {
-            this.snackBar.open(error.error.text, '', 2000, "warning");
-          }
-
-      })})
+        this.shoppingCartPurchases = data;
+        this.httpClient.post(environment.endpointURL + 'purchase/addCart/', this.shoppingCartPurchases).subscribe(
+          (res: any) => {},
+          (error: any) => {
+            if (error.status === 200) {
+              this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
+            } else {
+              this.snackBar.open(error.error, '', 3000, "warning");
+            }})
+      })
   }
 
   private CreateShoppingCartPurchases() {

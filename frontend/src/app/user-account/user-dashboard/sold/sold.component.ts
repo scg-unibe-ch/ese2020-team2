@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductList } from 'src/app/models/product-list.model';
-import { Product } from 'src/app/models/product.model';
 import { SoldService } from 'src/app/services/sold.service';
 import { CurrentUser } from 'src/app/services/current-user';
 import { ProductsService } from 'src/app/services/products.service';
 import {map} from "rxjs/operators";
 import { Purchase } from 'src/app/models/purchase.model';
 import {environment} from '../../../../environments/environment';
-import { async } from 'rxjs/internal/scheduler/async';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import {SnackBarService} from "../../../services/snackBar.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
+import {Product} from "../../../models/product.model";
 
 @Component({
   selector: 'app-sold',
@@ -20,9 +20,8 @@ import {SnackBarService} from "../../../services/snackBar.service";
 })
 export class SoldComponent implements OnInit {
 
-
   sells$: Observable<Purchase[]>;
-  listOfProduct:Purchase[];
+  sells: Purchase[];
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -33,20 +32,10 @@ export class SoldComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.sells$ = this.soldService.getSells().pipe(map(sells =>
-      sells.filter(purchase => purchase.paymentType === 'wallet points')
-    ));
-    this.sells$.subscribe(list => this.listOfProduct = list);
+    this.sells$ = this.soldService.getSells()
+    this.sells$.subscribe(sells => this.sells = sells);
   }
- /* ngOnDestroy(){
-    this.updateLists()
-  }
-  private updateLists() {
-    this.sells$.subscribe(list => list.forEach(element => {
-      this.checkNotification(element);
-    }));
-  }
-*/
+
   checkNotification(sell:Purchase){
     this.httpClient.put(environment.endpointURL + 'purchase/edit/'+ sell.purchaseId,
       {
@@ -54,10 +43,37 @@ export class SoldComponent implements OnInit {
       }
     ).subscribe((res: any) => {}, (error: any) => {
       if(error.status === 200) {
-        this.snackBar.open("Product was marked as ", '', 3000, "info");
+        this.snackBar.open("Product was marked as seen", '', 3000, "info");
       } else {
         this.snackBar.open(error.error, '', 3000, "warning");
       }});
+  }
+
+  dataSource: MatTableDataSource<Purchase> = new MatTableDataSource<Purchase>();
+  displayedColumns = ["productId", "title", "type", "price", "sellOrLend", "deliveryPossible", "productRating", "isPremier",
+    "visibleInMarket", "piecesAvailable", "adminApproval", "disapprovalMsg", "actions"];
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.sells$ = this.sells$ = this.soldService.getSells();
+    this.sells$.subscribe(purchases => {
+      this.dataSource = new MatTableDataSource(purchases);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    })
   }
 
 }

@@ -67,7 +67,6 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.authService.CheckAccessToSecuredEndpoint()
   }
 
 

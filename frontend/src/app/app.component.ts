@@ -27,14 +27,10 @@ export class AppComponent implements OnInit {
     this.loggedIn$ = authService.loggedIn$
   }
 
-  ngOnChanges() {
-    this.authService.CheckAccessToSecuredEndpoint();
-  }
 
   ngOnInit(){
     this.getNoftification()
-    this.authService.CheckAccessToSecuredEndpoint();
-    //this.loggedIn$ = this.authService.loggedIn$
+    this.loggedIn$ = this.authService.loggedIn$
   }
    get isAdmin() {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());

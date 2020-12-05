@@ -37,9 +37,9 @@
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->
-    <ng-container matColumnDef="purchaseId">
+    <ng-container matColumnDef="product.title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> PurchaseId </th>
-      <td mat-cell *matCellDef="let purchase"> {{purchase.purchaseId}} </td>
+      <td mat-cell *matCellDef="let purchase"> {{purchase.product.title}} </td>
     </ng-container>
 
     <!-- Name Column -->
