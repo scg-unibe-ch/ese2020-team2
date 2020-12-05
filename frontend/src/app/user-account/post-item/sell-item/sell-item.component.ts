@@ -152,9 +152,11 @@ export class SellItemComponent implements OnInit {
 
 }
 postimage() {
+  const uploadData = new FormData();
+  uploadData.append('productImage', this.file, this.file.name);
   this.httpClient.post(environment.endpointURL + 'image/add/',{
-    productImage : this.file,
-    userId: 3,
+    productImage : uploadData,
+    userId: this.id,
     productId: 4,
   }).subscribe();
 }
