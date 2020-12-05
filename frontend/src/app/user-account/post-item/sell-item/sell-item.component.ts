@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {CurrentUser} from "../../../services/current-user";
@@ -37,13 +37,17 @@ export class SellItemComponent implements OnInit {
   id: number;
   points$: number;
   pointsSub: any;
+  url: string;
+  file: File;
+ 
 
   constructor(
     private router: Router,
     public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder) { 
+    }
     selectedValue: string;
 
   formular = this.fb.group(
@@ -144,8 +148,15 @@ export class SellItemComponent implements OnInit {
       this.router.navigate(['account/dashboard/posted'])
     }, (error: any) => {
       this.snackBar.open('Posting was not possible, please try again', '', 3000, "warning");
-    }); this.refresh;
+    }); 
 
+}
+postimage() {
+  this.httpClient.post(environment.endpointURL + 'image/add/',{
+    productImage : this.file,
+    userId: 3,
+    productId: 4,
+  }).subscribe();
 }
 
 updatewallet() {
@@ -175,4 +186,19 @@ clear() {
   //this.username.setValue("");
 }
 
+onSelectFile(event) { // called each time file input changes
+  if (event.target.files && event.target.files[0]) {
+    this.file = event.target.files[0]
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      this.url = event.target.result as string;
+    }
+  }
 }
+
+
+}
+

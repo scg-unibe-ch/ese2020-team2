@@ -61,6 +61,8 @@ import { AddressModalComponent } from './user-account/shopping-cart/address-moda
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {CdkTableModule} from "@angular/cdk/table";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -110,6 +112,9 @@ import {CdkTableModule} from "@angular/cdk/table";
     MatDialogModule,
     MatCardModule,
     Ng5SliderModule,
+    FormsModule, 
+    NgbModule,
+    DragDropModule,
     MatTabsModule,
     MatToolbarModule,
     ReactiveFormsModule,

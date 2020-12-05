@@ -29,12 +29,13 @@ export class AppComponent implements OnInit {
 
   ngOnChanges() {
     this.authService.CheckAccessToSecuredEndpoint();
+    this.loggedIn$ = this.authService.loggedIn$
   }
 
   ngOnInit(){
     this.getNoftification()
     this.authService.CheckAccessToSecuredEndpoint();
-    //this.loggedIn$ = this.authService.loggedIn$
+    this.loggedIn$ = this.authService.loggedIn$
   }
    get isAdmin() {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
@@ -42,7 +43,6 @@ export class AppComponent implements OnInit {
 
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
     dialogConfig.height = "50%";
