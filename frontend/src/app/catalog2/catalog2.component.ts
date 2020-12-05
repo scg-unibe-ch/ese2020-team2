@@ -10,6 +10,8 @@ import {Approval} from "../models/approval";
 import {WishListService} from "../services/wish-list.service";
 import {ShoppingCartService} from "../services/shopping-cart.service";
 import { Options } from "@angular-slider/ngx-slider";
+import { of } from 'rxjs';
+import { max } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalog2',
@@ -66,6 +68,10 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    
+   // this.productsService.getProducts().pipe(
+    //  max<Product>((a: Product, b: Product) => a.price < b.price ? -1 : 1),
+   // )
   }
 
 
