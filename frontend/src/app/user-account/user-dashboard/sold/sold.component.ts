@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Observable } from 'rxjs';
 import { SoldService } from 'src/app/services/sold.service';
 import { CurrentUser } from 'src/app/services/current-user';
@@ -18,7 +18,7 @@ import {Product} from "../../../models/product.model";
   templateUrl: './sold.component.html',
   styleUrls: ['./sold.component.css']
 })
-export class SoldComponent implements OnInit {
+export class SoldComponent implements OnInit, AfterViewInit {
 
   sells$: Observable<Purchase[]>;
   sells: Purchase[];
@@ -32,8 +32,7 @@ export class SoldComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.sells$ = this.soldService.getSells()
-    this.sells$.subscribe(sells => this.sells = sells);
+
   }
 
   checkNotification(sell:Purchase){
@@ -49,10 +48,11 @@ export class SoldComponent implements OnInit {
       }});
   }
 
-  dataSource: MatTableDataSource<Purchase> = new MatTableDataSource<Purchase>();
-  displayedColumns = ["productId", "title", "type", "price", "sellOrLend", "deliveryPossible", "productRating", "isPremier",
-    "visibleInMarket", "piecesAvailable", "adminApproval", "disapprovalMsg", "actions"];
 
+  dataSource = new MatTableDataSource<Purchase>();
+  displayedColumns = ["purchase.purchaseId", "purchase.product.title", "purchase.product.type",
+    "purchase.quantity", "purchase.product.price", "purchase.user.userName", "purchase.deliveryRequested",
+    "purchase.paymentType", "purchase.deliveryAddress", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -67,13 +67,13 @@ export class SoldComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.sells$ = this.sells$ = this.soldService.getSells();
+    this.sells$ = this.soldService.getSells()
     this.sells$.subscribe(purchases => {
+      console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
     })
   }
-
 }

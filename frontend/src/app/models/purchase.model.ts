@@ -9,9 +9,9 @@ export class Purchase {
     public productId: number,
     // quantity or number of items purchased
     public quantity: number,
-    // Name of the user who is buying the product.
+    // Id of the user who is buying the product.
     public buyerUserId: number,
-    // Name of the user who is selling the product.
+    // Id of the user who is selling the product.
     public sellerUserId: number,
     // Price in points
     public deliveryAddress: string,
@@ -23,7 +23,7 @@ export class Purchase {
     public notificationCheck: boolean,
     // True if the buyer wants the product to be delivered
     public deliveryRequested: boolean,
-    // Data of the seller
+    // Data of the buyer
     public user: User,
     // Data of the product sold
     public product: Product,

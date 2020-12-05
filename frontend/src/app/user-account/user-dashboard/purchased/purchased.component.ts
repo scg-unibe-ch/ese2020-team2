@@ -15,6 +15,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {ReviewComponent} from "../../../catalog2/review/review.component";
+import {_isNumberValue} from "@angular/cdk/coercion";
 
 @Component({
   selector: 'app-purchased',
@@ -52,8 +53,8 @@ ngOnInit(): void {
 
 
   dataSource = new MatTableDataSource<Purchase>();
-  displayedColumns = ["purchaseId", "product.title", "product.quantity", "product.price", "user.userName", "purchase.deliveryRequested ",
-    "purchase.paymentType", "actions"];
+  displayedColumns = ["purchase.purchaseId", "purchase.product.title", "purchase.quantity", "purchase.product.price",
+    "purchase.user.userName", "purchase.deliveryRequested", "purchase.paymentType", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -72,10 +73,18 @@ ngOnInit(): void {
     this.purchases$.subscribe(purchases => {
       console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
+
+      this.dataSource.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
+      //this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
   }
+  getProperty = (obj, path) => (
+    path.split('.').reduce((o, p) => o && o[p], obj)
+  )
+
+
 
 
 
