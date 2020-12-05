@@ -151,28 +151,16 @@ export class SellItemComponent implements OnInit {
     });
 
 }
-<<<<<<< HEAD
-postimage() {
-  const uploadData = new FormData();
-  uploadData.append('productImage', this.file, this.file.name);
-  this.httpClient.post(environment.endpointURL + 'image/add/',{
-    productImage : uploadData,
-    userId: this.id,
-    productId: 4,
-  }).subscribe();
-}
-=======
   postimage() {
     const uploadData = new FormData();
     uploadData.append('productImage', this.file);
-    uploadData.append('userId', "1");
-    uploadData.append('productId', "1");
+    uploadData.append('userId', "3");
+    uploadData.append('productId', "4");
 
 
     this.httpClient.post(environment.endpointURL + 'image/add/',uploadData
     ).subscribe();
   }
->>>>>>> 1355f13b4b0248eb2307c7c390f95fe21f675631
 
 updatewallet() {
   this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.id,{
