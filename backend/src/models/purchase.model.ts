@@ -38,8 +38,8 @@ export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes,
 export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttributes> implements PurchaseAttributes {
 
     public static associations: {
-        user: Association <Purchase, User>;
-        product: Association <Purchase, Product>;
+        user: Association<Purchase, User>;
+        product: Association<Purchase, Product>;
     };
 
     public getUser!: BelongsToGetAssociationMixin<User>;
@@ -68,15 +68,11 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                autoIncrement: true,
+                autoIncrement: true
             },
             productId: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                // references: {
-                //     model: 'Product',
-                //     key: 'productId'
-                // }
+                allowNull: false
             },
             quantity: {
                 type: DataTypes.NUMBER,

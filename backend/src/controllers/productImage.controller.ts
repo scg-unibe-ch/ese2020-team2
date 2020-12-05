@@ -4,6 +4,10 @@ import fs from 'fs';
 import { Product } from '../models/product.model';
 import { ProductImage } from '../models/productImage.model';
 
+/**
+ * The resposibility of this class is to add and delete product pictures.
+ * It also returns the pictures associated to a particular product.
+ */
 const imageController = express.Router();
 
 // Defining the storage location for the images and renaming the file with uniqe name.
@@ -41,7 +45,9 @@ function getDateTime() {
     return date.replace(/[^a-zA-Z0-9]/g, '');
 }
 
-// Adds a new image to the uploads folder and creates a record in ProductImage table.
+/**
+ * Adds a new image to the uploads folder and creates a record in ProductImage table.
+ */
 imageController.post(
     '/add/', upload.single('productImage'), async (req: Request, res: Response, next: NextFunction) => {
         console.log(req.protocol + '://' + req.get('host'));
@@ -53,7 +59,9 @@ imageController.post(
         }
     });
 
-// Returns all the image URL's for the given product.
+/**
+ * Adds a new image to the uploads folder and creates a record in ProductImage table.Returns all the image URL's for the given product.
+ */
 imageController.get(
     '/get/:productId', async (req: Request, res: Response) => {
         ProductImage.findAll({ where: { productId: req.params.productId }, attributes: ['filePath'] })
@@ -61,16 +69,19 @@ imageController.get(
             .catch(err => res.status(500).send(err));
     });
 
-// Deletes an image from the ProductImage table and the uploads folder.
+/**
+* Deletes an image from the ProductImage table and the uploads folder.
+*/
+
 imageController.delete(
     '/delete/:id', async (req: Request, res: Response) => {
         ProductImage.findByPk(req.params.id)
             .then(found => {
-                if (found != null ) {
+                if (found != null) {
                     found.destroy().then(() => {
                         const fileName = found.filePath.substring(found.filePath.lastIndexOf('/') + 1);
                         try {
-                        fs.unlinkSync('./uploads/' + fileName);
+                            fs.unlinkSync('./uploads/' + fileName);
                         } catch {
                             res.status(500).send('Image does not exist in the directory');
                         }

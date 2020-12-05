@@ -1,18 +1,18 @@
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import {User} from './user.model';
 import {Product} from './product.model';
+
 export interface ProductImageAttributes {
-    // Holds the picture id of the product image uploaded
+    // Holds the picture id of the product image uploaded.
     productImageId: number;
-    // Id of the product
+    // Id of the product.
     productId: number;
-    // Id of the user
+    // Id of the user.
     userId: number;
-    // Holds the uploaded file Name
+    // Holds the uploaded file path.
     filePath: string;
 }
 
-// tells sequelize that todoItemId is not a required field
 export interface ProductImageCreationAttributes extends Optional<ProductImage, 'productImageId'> { }
 export class ProductImage extends Model<ProductImageAttributes, ProductImageCreationAttributes> implements ProductImageAttributes {
     productImageId: number;
@@ -20,7 +20,7 @@ export class ProductImage extends Model<ProductImageAttributes, ProductImageCrea
     productId!: number;
     filePath!: string;
 
-    public static initialize(sequelize: Sequelize) { // definition for database
+    public static initialize(sequelize: Sequelize) {
         ProductImage.init({
             productImageId: {
                 type: DataTypes.INTEGER,

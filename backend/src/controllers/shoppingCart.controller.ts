@@ -1,41 +1,39 @@
-import express, {Request, Response, Router} from 'express';
-import {Product} from '../models/product.model';
-import {User} from '../models/user.model';
-import {Cart} from '../models/shoppingCart.model';
-import {Review} from '../models/review.model';
-import {ShoppingCart} from '../../../frontend/src/app/models/shoppingCart.model';
+import express, { Request, Response, Router } from 'express';
+import { Product } from '../models/product.model';
+import { User } from '../models/user.model';
+import { Cart } from '../models/shoppingCart.model';
 
 const shoppingCartController: Router = express.Router();
 shoppingCartController.use(express.json());
 
-// Add a way to sum together the same products about quantity
+/**
+ * This class handles the shopping cart functionality. It adds, updates and deletes the items from the shopping cart.
+ * It also handles moving the items to the wish list.
+ */
 
 /**
- * Adds a new product in the shopping cart list
+ * Adds a new product in the shopping cart list.
  */
 shoppingCartController.post('/add',
     async (req: Request, res: Response) => {
         const quantity = req.body.quantity;
-        // const { actualProduct } = req.body;
-        const product = await Product.findOne({where: {productId: req.body.productId}});
-        // const prodQuantity = await Product.findOne({ where: { productId: req.body.piecesAvailable } });
-        const buyer = await User.findOne({where: {userId: req.body.buyerUserId}});
-        const seller = await User.findOne({where: {userId: req.body.sellerUserId}});
-        const shoppingCart = await Cart.findAll({where: {userId: req.body.userId, shoppingCart: true}});
-        const wishList = await Cart.findAll({where: {userId: req.body.userId, wishList: true}});
+        const product = await Product.findOne({ where: { productId: req.body.productId } });
+        const buyer = await User.findOne({ where: { userId: req.body.buyerUserId } });
+        const seller = await User.findOne({ where: { userId: req.body.sellerUserId } });
+        const shoppingCart = await Cart.findAll({ where: { userId: req.body.userId, shoppingCart: true } });
+        const wishList = await Cart.findAll({ where: { userId: req.body.userId, wishList: true } });
         const productIdsCart = await shoppingCart.map((value => value.productId));
         const productIdsWish = await wishList.map((value => value.productId));
-
 
         if (buyer && seller && product && buyer.userId !== product.userId && !productIdsCart.includes(req.body.productId) &&
             !productIdsWish.includes(req.body.productId)) {
             if (product.piecesAvailable >= quantity && quantity > 0) {
                 // Adds a new product in the shopping cart.
-                const {cartId} = await Cart.create(req.body);
+                const { cartId } = await Cart.create(req.body);
                 if (cartId === undefined) {
                     res.status(500).send('Adding product failed! Try again');
                 } else {
-                    res.json({cartId});
+                    res.json({ cartId });
                 }
             } else {
                 if (quantity <= 0) {
@@ -56,10 +54,10 @@ shoppingCartController.post('/add',
                     res.status(500).send('You cannot add a product twice to the wish list.');
                 }
                 if (!productIdsWish.includes(req.body.productId) && req.body.wishList === true && req.body.shoppingCart === false) {
-                    Cart.findOne({where: {userId: req.body.userId, productId: req.body.productId}})
+                    Cart.findOne({ where: { userId: req.body.userId, productId: req.body.productId } })
                         .then(found => {
                             if (found != null) {
-                                found.update({wishList: true});
+                                found.update({ wishList: true });
                             }
                             res.status(500).send('Product successfully added to the wish list');
                         });
@@ -68,10 +66,10 @@ shoppingCartController.post('/add',
                     res.status(500).send('You cannot add a product twice. You can change the quantity in the shopping cart');
                 }
                 if (!productIdsCart.includes(req.body.productId) && req.body.shoppingCart === true && req.body.wishList === false) {
-                    Cart.findOne({where: {userId: req.body.userId, productId: req.body.productId}})
+                    Cart.findOne({ where: { userId: req.body.userId, productId: req.body.productId } })
                         .then(found => {
                             if (found != null) {
-                                found.update({shoppingCart: true});
+                                found.update({ shoppingCart: true });
                             }
                         });
                     res.status(500).send('Product successfully added to the shopping cart');
@@ -80,22 +78,21 @@ shoppingCartController.post('/add',
         }
     });
 
-
 /**
- * Get all the products of the shopping cart of a specific user
+ * Returns all the products of the shopping cart of a specific user
  */
 shoppingCartController.get('/getAll/:userId', (req: Request, res: Response) => {
-    Cart.findAll({where: {userId: req.params.userId}, include: [Cart.associations.product]})
+    Cart.findAll({ where: { userId: req.params.userId }, include: [Cart.associations.product] })
         .then(list => res.status(200).send(list))
         .catch(err => res.status(500).send(err));
 });
 
 
 /**
- *  Deletes a product from the shopping cart list by providing the cartId
+ * Deletes a product from the shopping cart list by providing the cartId
  */
 shoppingCartController.delete('/delete/:cartId', (req: Request, res: Response) => {
-    Cart.findOne({where: {cartId: req.params.cartId}})
+    Cart.findOne({ where: { cartId: req.params.cartId } })
         .then(found => {
             if (found != null) {
                 found.destroy().then(() => res.status(200).send('Product removed'));
@@ -107,7 +104,7 @@ shoppingCartController.delete('/delete/:cartId', (req: Request, res: Response) =
 });
 
 /**
- * Gets one specific product from the shopping cart by providing the cartId
+ * Returns one specific product from the shopping cart by providing the cartId
  */
 shoppingCartController.get('/getProduct/:id', (req: Request, res: Response) => {
     Cart.findByPk(req.params.id)
@@ -120,7 +117,7 @@ shoppingCartController.get('/getProduct/:id', (req: Request, res: Response) => {
  */
 shoppingCartController.put('/edit/:cartId', (req: Request, res: Response) => {
     Cart.findOne({
-        where: {cartId: req.params.cartId},
+        where: { cartId: req.params.cartId },
         include: [Cart.associations.product]
     })
         .then(found => {

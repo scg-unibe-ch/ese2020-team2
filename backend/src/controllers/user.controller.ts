@@ -8,51 +8,62 @@ const userController: Router = express.Router();
 const userService = new UserService();
 
 /**
- * The responsibilities of this class is to check user functionalities, such like unique registration inputs
+ * The responsibilities of this class is to check user functionalities, such as unique registration inputs
  * (the user shouldn't be allowed to register as the same name of an other user, the mail should be unique,
  * to also avoid multiple account associated at the same E-mail, etc.)
  */
 
+/**
+*Adds the new user regestrations to the datbase after making the validations.
+*/
 userController.post('/register',
     async (req: Request, res: Response) => {
-        let isOwnerExist = false;
         // Check if there exists a owner already.
         if (req.body.role === 'owner') {
             if (await ownerExist(req, res)) {
-                isOwnerExist = true;
                 res.status(333).send('The application can have only one owner.');
+                return;
             }
         }
         // Check if the email id entered by the new user and make sure it does not exist in the database.
         if (!await checkUniqueEmail(req, res)) {
             // Once the email id is true, check for the unique username.
             if (!await checkUniqueUserName(req, res)) {
-                if (!isOwnerExist) {
                     await userService.register(req.body)
                         .then(registered => res.send(registered))
                         .catch(err => res.status(500).send(err));
-                }
+                    return;
             }
             // If the userName already exits, prompt the user.
             res.status(333).send('User name already exist. Try a different one.');
+            return;
         }
         // If the email already exits, prompt the user.
         res.status(333).send('Email already exist. Try with new one.');
     }
 );
 
+/**
+ *Provides the login service.
+ */
 userController.post('/login',
     (req: Request, res: Response) => {
         userService.login(req.body).then(login => res.send(login)).catch(err => res.status(500).send(err));
     }
 );
 
-userController.get('/all', verifyToken, // you can add middleware on specific requests like that
+/**
+ *Returns the details of all the users.
+ */
+userController.get('/all', verifyToken,
     (req: Request, res: Response) => {
         userService.getAll().then(users => res.send(users)).catch(err => res.status(500).send(err));
     }
 );
 
+/**
+ *Allows to edit a user.
+ */
 userController.put('/editUser/:id', async (req: Request, res: Response) => {
     if (User.findByPk(req.params.id)) {
         userService.updateUser(req.body, req.params.id)

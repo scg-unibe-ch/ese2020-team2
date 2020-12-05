@@ -33,7 +33,7 @@ export interface ProductAttributes {
     // productImages: object[];
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
-    // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected
+    // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected.
     // Allowed inputs: (approved, rejected, pending)
     adminApproval: string;
     // Reason message in case of disapproval by admin.
@@ -119,11 +119,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 allowNull: false,
                 defaultValue: true
             },
-            /*
-                productImages: {
-                type: DataTypes.OBJECT,
-            },
-             */
             adminApproval: {
                 type: DataTypes.STRING,
                 allowNull: false,
