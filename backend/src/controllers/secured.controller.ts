@@ -8,7 +8,7 @@ securedEndpoint.use(verifyToken);
 
 securedEndpoint.get('/', (req: Request, res: Response) => {
     // for demonstration purposes the content of the token and a message is returned
-    res.status(200).send({message: 'Authorized'});
+    res.status(200).send('Authorized');
 
     // res.send({message: `This is a secured  Endpoint, ${req.body.tokenPayload.userName}` , decodedToken: req.body.tokenPayload });
 });

@@ -39,14 +39,14 @@ export class SellItemComponent implements OnInit {
   pointsSub: any;
   url: string;
   file: File;
- 
+
 
   constructor(
     private router: Router,
     public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
-    private fb: FormBuilder) { 
+    private fb: FormBuilder) {
     }
     selectedValue: string;
 
@@ -148,9 +148,10 @@ export class SellItemComponent implements OnInit {
       this.router.navigate(['account/dashboard/posted'])
     }, (error: any) => {
       this.snackBar.open('Posting was not possible, please try again', '', 3000, "warning");
-    }); 
+    });
 
 }
+<<<<<<< HEAD
 postimage() {
   const uploadData = new FormData();
   uploadData.append('productImage', this.file, this.file.name);
@@ -160,6 +161,18 @@ postimage() {
     productId: 4,
   }).subscribe();
 }
+=======
+  postimage() {
+    const uploadData = new FormData();
+    uploadData.append('productImage', this.file);
+    uploadData.append('userId', "1");
+    uploadData.append('productId', "1");
+
+
+    this.httpClient.post(environment.endpointURL + 'image/add/',uploadData
+    ).subscribe();
+  }
+>>>>>>> 1355f13b4b0248eb2307c7c390f95fe21f675631
 
 updatewallet() {
   this.httpClient.put(environment.endpointURL + 'user/editUser/' + this.id,{

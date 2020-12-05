@@ -64,10 +64,10 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('user', JSON.stringify(res.user));
-      this.checkUserStatus();
-       this.router.navigate(['/catalog2']);
+       this.router.navigate(['/catalog']);
        this.snackBar.open('You successfully logged in!', '', 3000, "success")
-    }, (error: any) => {
+       this.checkUserStatus();
+     }, (error: any) => {
        this.checkUserStatus();
        this.snackBar.open('Login was not successful, please check username and password', '',
          3000, "warning")
@@ -80,7 +80,9 @@ export class UserLoginComponent implements OnInit {
    */
   logout(): void {
     // Remove user data from local storage
-
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('user');
     localStorage.clear()
     this.checkUserStatus();
     this.snackBar.open('You successfully logged out!', '', 3000, "success");

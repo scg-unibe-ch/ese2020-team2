@@ -12,13 +12,13 @@ export class SoldService {
   constructor(private httpClient: HttpClient) {}
 
 
-  UserId = JSON.parse(localStorage.getItem('user')).userId;
-
   getSells() : Observable<Purchase[]> {
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerSoldProducts/' + this.UserId)
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerSoldProducts/' +
+      JSON.parse(localStorage.getItem('user')).userId)
  }
 
  getlends() : Observable<Purchase[]> {
-  return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerLendServices/' + this.UserId)
+  return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerLendServices/' +
+    JSON.parse(localStorage.getItem('user')).userId)
 }
 }

@@ -208,7 +208,7 @@ export class Catalog2Component implements OnInit {
   getimage() {
     this.httpClient.get(environment.endpointURL + 'image/get/2').subscribe(url => {
       this.url = url
-        
+
     })
   }
 
