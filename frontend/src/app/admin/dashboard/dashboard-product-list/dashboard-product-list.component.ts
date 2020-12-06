@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {ProductsService} from "../../../services/products.service";
 import {finalize, map} from "rxjs/operators";
 import {Approval} from "../../../models/approval";
+import { ProductImage } from '../../../../../../backend/src/models/productImage.model';
 
 @Component({
   selector: 'app-dashboard-product-list',
@@ -17,14 +18,24 @@ export class DashboardProductListComponent {
   productList$: Observable<Product[]>;
   filter = null;
   Approval = Approval;
+  urls = Array.apply(null, Array(100));
 
   constructor(private httpClient: HttpClient,
               private productsService: ProductsService) {}
 
 
   ngOnInit(): void {
+    var i;
+    for (i = 1; i < 100; i++) {
+      this.getimage(i);
+    }
     this.getAllProducts();
   }
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+  );
+    
+}
 
   /**
    * Get all the products currently stored in the database of the backend

@@ -5,8 +5,10 @@
   <div *ngIf="totalPrice != 0" class="left-half">
     <mat-card  class="card" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
-          <img class="imgcard" mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="36%">
+          <img *ngIf="urls[shoppingCart.product.productId] != null" mat-card-image src={{urls[shoppingCart.product.productId]}} style="height: 100%; width: 100%;" >
+          <img *ngIf="urls[shoppingCart.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" style="height: 100%; width: 100%;" >
+        
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{shoppingCart.product.title}}</mat-card-title>
@@ -20,16 +22,16 @@
             <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
             <br>
             <mat-card-content fxLayout.gt-sm="row">
-            <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
 
             <button class="btn" type="submit"  (click)="removeShoppingCartProduct(shoppingCart, false)"><i class="fa fa-times fa-lg" aria-hidden="true"></i>
             </button>
           </div>
-             <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" >
+             <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
             <button class="btn" type="submit"   (click)="moveShoppingCartProductToWishList(shoppingCart)"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>
             </button>
           </div>
-            <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter">
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
             <button class="btn" type="submit"  [routerLink]="['/product', shoppingCart.productId]"><i class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
             </button>
           </div>

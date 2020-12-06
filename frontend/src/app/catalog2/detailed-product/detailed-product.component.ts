@@ -13,6 +13,7 @@ import {Location} from '@angular/common';
 import {SnackBarService} from "../../services/snackBar.service";
 import {WishListService} from "../../services/wish-list.service";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
+import { ProductImage } from '../../../../../backend/src/models/productImage.model';
 
 @Component({
   selector: 'app-detailed-product',
@@ -30,6 +31,7 @@ export class DetailedProductComponent implements OnInit {
   starCount = 5;
   quantity = 1;
   userId: number;
+  url: string;
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
@@ -61,14 +63,18 @@ export class DetailedProductComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.productId = +params['id']; // (+) converts string 'id' to a number
     });
-
+    this.getimage(this.productId);
     this.loadProductDetails(this.productId);
   }
 
   backClicked() {
     this.location.back();
   }
-
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.url = data[0].filePath
+  );
+    
+}
 
   /**
    * Gets the product, but only if you are the admin or it is approved and simultaneously set to visible in the market

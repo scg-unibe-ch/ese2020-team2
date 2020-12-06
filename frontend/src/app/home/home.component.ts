@@ -10,6 +10,8 @@ import {Approval} from "../models/approval";
 import {WishListService} from "../services/wish-list.service";
 import {ShoppingCartService} from "../services/shopping-cart.service";
 import { Options } from "@angular-slider/ngx-slider";
+import { environment } from 'src/environments/environment';
+import { ProductImage } from '../../../../backend/src/models/productImage.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -31,18 +33,9 @@ export class HomeComponent {
   minValue: number = 0;
   maxValue: number = 50;
   
-  options: Options = {
-    floor: 0,
-    ceil: 100,
-    translate: (value: number): string => {
-      return '$' + value;
-    },
-    combineLabels: (minValue: string, maxValue: string): string => {
-      return 'from ' + minValue + ' up to ' + maxValue;
-    }
-  
-  };
+
   a: number;
+  urls = Array.apply(null, Array(100));
 
 
 
@@ -66,137 +59,38 @@ this.ratingArray.push(index);
 }
 
 ngOnInit(): void {
-this.getAllProducts();
-}
+  var i;
+  for (i = 1; i < 100; i++) {
+    this.getimage(i);
+  }
+  
+  
+  this.getAllProducts();
 
 
-changefiltersl(filtervalue: string) {
-this.filtersl = filtervalue;
-};
 
-changefilterps(filtervalue: string) {
-this.filterps = filtervalue;
-};
-
-changeminValue(value: number) {
-this.minValue = value;
-}
-
-changemaxValue(value: number) {
-this.maxValue = value;
-}
-
-changesearch(search: string) {
-this.search = search;
-}
-
-changesortby(sortby: string) {
-this.sortby = sortby;
-}
-
-changelocation(location: string) {
-this.location = location
+  
 }
 
 
 
-filter(minValue: number, maxValue: number, filtersl: string, filterps: string, sortby: string, location: string, search: string) {
-if (search == "" && sortby == "") {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-  )).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-    && product.location.toLowerCase().includes(location.toLowerCase())
-  )).sort(x => x.isPremier ? -1 : 1)
-)
-)
-}
-} else if (search == "" && sortby == "maxprice") {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.price <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-  )).sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-  product.price <= maxValue && product.status == "available" && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
-)).sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-}
-} else if (search == "" && sortby == "lowestprice") {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-  product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-)).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue &&
-  product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
-)).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-}
-} else if (sortby == "lowestprice") {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-  )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue && product.price <= maxValue
-  && product.status == "available" && product.sellOrLend !== filtersl && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
-)).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-}
-} else if (sortby == "maxprice") {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && product.sellOrLend !== filtersl && product.type !== filterps
-  )).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.price >= minValue && product.price
-  <= maxValue && product.status == "available" && product.sellOrLend !== filtersl && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.type !== filterps && product.location.toLowerCase().includes(location.toLowerCase())
-)).sort((a, b) => a.price > b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-
-}
-} else {
-if (location == "") {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
-    && (product.title.includes(search) || product.description.includes(search) || product.price == parseInt(search))))
-    .sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-} else {
-this.products$ = this.productsService.getProducts().pipe(map(products =>
-  products.filter(product => (product.price >= minValue && product.price <= maxValue && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.status == "available" && (product.sellOrLend !== filtersl && product.type !== filterps)
-    && (product.title.includes(search) || product.description.includes(search) || product.price == parseInt(search)) && product.location.toLowerCase().includes(location.toLowerCase())))
-    .sort((a, b) => a.price < b.price ? 1 : -1).sort(x => x.isPremier ? -1 : 1)
-)
-)
-}
-}
+getimage(id: number) {
+  this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+);
 }
 
 
 getAllProducts(): void {
-this.filter(this.minValue, this.maxValue, this.filtersl, this.filterps, this.sortby, this.location, this.search);
-this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
+  this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.status == "available" 
+  && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.isPremier == true
+  ))
+  ))
+  this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
+
 }
+
+
+
 
 showIcon(index: number, rating: number) {
 if (rating >= index + 1) {

@@ -11,15 +11,14 @@
   @include mat-elevation(4);
   }
 
-  .imgcard {
-  height: max-content;
-  max-height: 270px !important;
-  object-fit: cover !important;
-  padding-left: 5%;
-  padding-top: 5%;
-  padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
-  }
-
+  .img {
+    height: max-content; 
+    object-fit: cover !important;
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+    }
+  
   .outer {
   overflow:scroll;
   height: 77%;

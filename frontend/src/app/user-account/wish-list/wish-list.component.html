@@ -5,9 +5,10 @@
     <mat-card class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
-          <img class="imgcard" mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="background image">
-        </div>
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
+          <img *ngIf="urls[wishList.product.productId] != null" mat-card-image src={{urls[wishList.product.productId]}} style="height: 100%; width: 100%;" >
+          <img *ngIf="urls[wishList.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" style="height: 100%; width: 100%;" >
+         </div>
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{wishList.product.title}}</mat-card-title>
           <mat-card-subtitle>
             <mat-card-title *ngIf="wishList.product.sellOrLend =='sell'">Price: {{wishList.product.price}} Fr</mat-card-title>
@@ -19,20 +20,20 @@
           <p>Delivery: {{wishList.product.deliveryPossible}}</p>
           <br>
           <mat-card-content fxLayout.gt-sm="row">
-            <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
 
-              <button matTooltip=" remove item" class="btn" type="submit"  (click)="removeShoppingCartProduct(wishList)"><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-              </button>
-            </div>
-               <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
-              <button matTooltip="add to cart" class="btn" type="submit"   (click)="moveWishListProductToShoppingCart(wishList)"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i>
-              </button>
-            </div>
-              <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter">
-              <button matTooltip=" view item" class="btn" type="submit"  [routerLink]="['/product', wishList.productId]"><i class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
-              </button>
-            </div>
-      </mat-card-content>
+            <button class="btn" type="submit"  (click)="removeShoppingCartProduct(wishList, false)"><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+             <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
+            <button class="btn" type="submit"   (click)="moveWishListProductToShoppingCart(wishList)"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
+            <button class="btn" type="submit"  [routerLink]="['/product', wishList.productId]"><i class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+        </mat-card-content>
     </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
 

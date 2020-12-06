@@ -15,6 +15,7 @@ import {ShoppingCartService} from "../../services/shopping-cart.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {ModalComponent} from "../../modal/modal.component";
 import {AddressModalComponent} from "./address-modal/address-modal.component";
+import { ProductImage } from '../../../../../backend/src/models/productImage.model';
 
 export interface Country {
   value: string;
@@ -43,6 +44,7 @@ export class ShoppingCartComponent implements OnInit {
   shoppingCartPurchases$: Observable<ShoppingCartPurchase[]>;
   shoppingCartPurchases: ShoppingCartPurchase[];
   userAddress: string;
+  urls = Array.apply(null, Array(100));
   userForm = this.fb.group(
     {
       country: ["", Validators.required],
@@ -78,6 +80,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var i;
+    for (i = 1; i < 10; i++) {
+      this.getimage(i);
+    }
     this.getShoppingCart();
     this.calculatePrices();
     this.CreateShoppingCartPurchases();
@@ -96,6 +102,13 @@ export class ShoppingCartComponent implements OnInit {
 
 
   }
+
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+  );
+    
+}
+
 
   private getUserMoney() {
     this.points$ = this.users.getCurrentUserProperty('moneyInWallet');

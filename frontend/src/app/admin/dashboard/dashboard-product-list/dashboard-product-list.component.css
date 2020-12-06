@@ -2,6 +2,13 @@
   overflow:scroll;
   height: 80%;
 }
+.box-2 {
+  flex-direction: column;
+  justify-content: center;
+  height: max-content;
+  flex: 1;
+}
+
 
 .inner {
   padding-right: 2%;
@@ -13,10 +20,6 @@
 mat-button-toggle-group {
   margin-left: 0px;
   margin-bottom: 15px;
-}
-/deep/ button, input {
-  margin-left: 0px !important;
-  margin-right: 15px !important;
 }
 .bg-red {
   background-color: #f59292;
