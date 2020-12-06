@@ -27,19 +27,11 @@
 
 -->
 <br>
-<mat-form-field style="background: white">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filter..." #input>
-</mat-form-field>
-
-
   <button mat-button style="background: white" [ngClass]="{'bg-yellow': filter === ''}"(click)="filter = '';ngAfterViewInit()">All</button>
   <button mat-button style="background: white" [ngClass]="{'bg-red': filter === 'new'}"(click)="filter = 'new';ngAfterViewInit()">Unseen by seller</button>
   <button mat-button style="background: white" [ngClass]="{'bg-blue': filter === 'pending'}" (click)="filter = 'pending'; ngAfterViewInit()">Pending</button>
   <button mat-button style="background: white" [ngClass]="{'bg-green': filter === 'shipped'}"(click)="filter = 'shipped'; ngAfterViewInit()">Shipped</button>
-
 <p>
-
 <div>
   <table mat-table [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
 
@@ -68,9 +60,9 @@
       <td mat-cell *matCellDef="let purchase"> {{purchase.product.price}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="user.userName">
+    <ng-container matColumnDef="seller.userName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Seller</th>
-      <td mat-cell *matCellDef="let purchase">{{purchase.user.userName}} </td>
+      <td mat-cell *matCellDef="let purchase">{{purchase.seller.userName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="deliveryRequested">

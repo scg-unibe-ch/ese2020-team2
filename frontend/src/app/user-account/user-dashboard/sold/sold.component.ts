@@ -61,8 +61,8 @@ export class SoldComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource<Purchase>();
   displayedColumns = ["createdAt", "purchaseId", "product.title", "product.type","product.sellOrLend",
-    "quantity", "product.price", "user.userName", "deliveryRequested",
-    "paymentType", "deliveryAddress", "user.email", "actions"];
+    "quantity", "product.price", "buyer.userName", "deliveryRequested",
+    "paymentType", "deliveryAddress", "buyer.email", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

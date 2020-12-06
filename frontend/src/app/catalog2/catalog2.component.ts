@@ -37,8 +37,8 @@ export class Catalog2Component implements OnInit {
   maxValue: number = 50;
 
   options: Options = {
-    floor: 0,
-    ceil: 100,
+    floor: this.minValue,
+    ceil: this.maxValue,
     translate: (value: number): string => {
       return '$' + value;
     },
@@ -63,7 +63,10 @@ export class Catalog2Component implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('user')).userId;
   }
 
-
+    this.products$.subscribe(products => {
+      const prices = products.map((a) => a.price)
+      this.maxValue = Math.max(...prices);
+    });
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);
     }
@@ -77,10 +80,13 @@ export class Catalog2Component implements OnInit {
     for (i = 0; i < 100; i++) {
       this.getimage(i);
     }
-    
+
     this.getAllProducts();
-    
+
     this.authService.CheckAccessToSecuredEndpoint()
+
+
+
   }
 
 
@@ -216,7 +222,7 @@ export class Catalog2Component implements OnInit {
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id+1] = data[0].filePath
   );
-    
+
 }
 
 
@@ -225,7 +231,7 @@ getimageparam(id: number) {
     products.filePath));
 
     }
-  
+
 
 
 

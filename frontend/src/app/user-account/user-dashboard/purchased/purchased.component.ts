@@ -55,7 +55,7 @@ ngOnInit(): void {
 
   dataSource = new MatTableDataSource<Purchase>();
   displayedColumns = ["createdAt", "purchaseId", "product.title", "quantity", "product.price",
-    "user.userName", "deliveryRequested", "paymentType", "actions"];
+    "seller.userName", "deliveryRequested", "paymentType", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

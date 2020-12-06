@@ -12,10 +12,9 @@ export class PurchaseService {
   constructor(private httpClient: HttpClient) {}
 
 
-UserId = JSON.parse(localStorage.getItem('user')).userId;
-
   getPurchases(): Observable<Purchase[]> {
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' + this.UserId)
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' +
+      JSON.parse(localStorage.getItem('user')).userId)
  }
 
   /**
@@ -24,7 +23,8 @@ UserId = JSON.parse(localStorage.getItem('user')).userId;
    * @param userId the user which purchases should be fetched from the backend
    */
   getPurchasesByUserId(userId: number): Observable<Purchase[]> {
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' + userId)
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' +
+      JSON.parse(localStorage.getItem('user')).userId)
   }
 
 }

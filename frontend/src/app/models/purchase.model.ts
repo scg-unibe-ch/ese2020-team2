@@ -24,7 +24,9 @@ export class Purchase {
     // True if the buyer wants the product to be delivered
     public deliveryRequested: boolean,
     // Data of the buyer
-    public user: User,
+    public buyer: User,
+    // Data of the seller
+    public seller: User,
     // Data of the product sold
     public product: Product,
 
