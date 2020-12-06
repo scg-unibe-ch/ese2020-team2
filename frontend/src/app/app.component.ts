@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
     localStorage.removeItem('user');
-    localStorage.clear()
+    //localStorage.clear()
     this.checkUserStatus();
     this.snackBar.open('You successfully logged out!', '', 3000, "success");
     this.router.navigate(['/home']);

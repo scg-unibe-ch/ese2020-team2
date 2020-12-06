@@ -32,7 +32,7 @@ export class HomeComponent {
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
-  
+
 
   a: number;
   urls = Array.apply(null, Array(100));
@@ -50,7 +50,7 @@ export class HomeComponent {
 
 this.loggedIn$ = authService.loggedIn$;
 if (this.loggedIn$.value == true){
-this.userId = JSON.parse(localStorage.getItem('user')).userId;
+this.userId = JSON.parse(localStorage.getItem('user'))?.userId;
 }
 
 for (let index = 0; index < this.starCount; index++) {
@@ -63,13 +63,13 @@ ngOnInit(): void {
   for (i = 1; i < 100; i++) {
     this.getimage(i);
   }
-  
-  
+
+
   this.getAllProducts();
 
 
 
-  
+
 }
 
 
@@ -81,7 +81,7 @@ getimage(id: number) {
 
 
 getAllProducts(): void {
-  this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.status == "available" 
+  this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.status == "available"
   && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.isPremier == true
   ))
   ))
