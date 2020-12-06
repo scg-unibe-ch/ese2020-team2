@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Product} from "../models/product.model";
 import { environment } from 'src/environments/environment';
 import {map, filter} from "rxjs/operators";
+import {JAN} from "@angular/material/core";
 
 @Injectable({
   providedIn: "root"
@@ -31,8 +32,8 @@ export class ProductsService {
    * @param id the id number of the product you want to get from the backend
    */
   getProductById(id: number) : Observable<Product> {
-    return this.httpClient.get<Product>(environment.endpointURL + 'product/get/' + id)
-      .pipe(filter(product => product.status !== "deleted"));
+    return this.httpClient.get<Product>(environment.endpointURL + 'product/get/' + JSON.parse(localStorage.getItem('user')).userId)
+      .pipe(filter(product => product.status !== "deleted"))
   }
 
   /**

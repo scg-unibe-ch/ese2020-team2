@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {SnackBarService} from "../services/snackBar.service";
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {AppComponent} from "../app.component";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class UserLoginComponent implements OnInit {
   constructor(private httpClient: HttpClient,
               private router: Router,
               private authService: AuthService,
-              public snackBar: SnackBarService) {
+              public snackBar: SnackBarService,
+              private app: AppComponent) {
 
     this.loggedIn$ = authService.loggedIn$
   }
@@ -67,6 +69,7 @@ export class UserLoginComponent implements OnInit {
        this.router.navigate(['/catalog']);
        this.snackBar.open('You successfully logged in!', '', 3000, "success")
        this.checkUserStatus();
+       this.app.ngOnInit();
      }, (error: any) => {
        this.checkUserStatus();
        this.snackBar.open('Login was not successful, please check username and password', '',
@@ -78,7 +81,7 @@ export class UserLoginComponent implements OnInit {
   /**
    * Loges the user out and shows a message if logout was successful
    */
-  logout(): void {
+  public logout(): void {
     // Remove user data from local storage
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');

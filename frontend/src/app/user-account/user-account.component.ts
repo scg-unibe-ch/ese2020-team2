@@ -36,17 +36,13 @@ export class UserAccountComponent implements OnInit{
 
     this.navLinks = [
       {
-          label: 'Wallet',
-          link: './wallet',
-          index: 0
-      }, {
           label: 'Post Item',
           link: './postItem',
-          index: 1
+          index: 0
       }, {
           label: 'Dashboard',
           link: './dashboard',
-          index: 2
+          index: 1
       },
   ];
   }

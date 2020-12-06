@@ -16,7 +16,7 @@
     <button matTooltip="Home" class="btn" btn btn-success routerLink="/home">
       <mat-icon>home</mat-icon>
     </button>
-   
+
     <button  matTooltip=" View Products" class="btn" routerLink="/catalog">
       <mat-icon>shop_two</mat-icon>
     </button>
@@ -36,16 +36,53 @@
     <button  matTooltip="Wish List" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/wish-list">
       <mat-icon>favorite</mat-icon>
     </button>
-    <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
+<!--    <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" routerLink="/account"
     matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
       <mat-icon><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
-    </button>
-    <button  matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" routerLink="/login">
+    </button>-->
+<!--    <button  matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" routerLink="/login">
       <mat-icon>clear</mat-icon>
+    </button>-->
+
+
+    <button mat-icon-button *ngIf="(loggedIn$ | async)"  [matMenuTriggerFor]="menu" matTooltip= "Menu"
+            matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
+      <mat-icon>account_box</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item disabled>
+        <mat-icon>person</mat-icon>
+        <span>{{(userName$ | async)}}</span>
+      </button>
+
+      <button mat-menu-item disabled>
+        <mat-icon>attach_money</mat-icon>
+        <span>{{(points$ | async)}}</span>
+      </button>
+
+      <button mat-menu-item routerLink="account/postItem/sell">
+        <mat-icon>add_box</mat-icon>
+        <span>Post Product</span>
+      </button>
+
+      <button mat-menu-item routerLink="account/dashboard/posted">
+        <mat-icon matBadge="{{(listOfNotification$ | async)?.length}}" matBadgeColor="accent" matBadgePosition="before" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
+          view_list</mat-icon>
+        <span>Dashboard</span>
+      </button>
+
+      <button mat-menu-item *ngIf="(loggedIn$ | async)" (click)="logout()">
+        <mat-icon>clear</mat-icon>
+        <span>Logout</span>
+      </button>
+
+    </mat-menu>
+
     <button  matTooltip = "Administrator" *ngIf = "(isAdmin)"class="btn" routerLink="/admin/dashboard">
       Administrator
     </button>
+
   </mat-toolbar>
 
 <!-- Here the components are loaded depending on which route/path the user is. See app.module.ts for the connection between routes and components-->
