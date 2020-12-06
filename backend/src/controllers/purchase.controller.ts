@@ -116,7 +116,10 @@ purchaseController.post('/add/',
  */
 purchaseController.get('/getAllBuyerPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { buyerUserId: req.params.id }, include: [Purchase.associations.user, Purchase.associations.product] })
+        Purchase.findAll({
+            where: { buyerUserId: req.params.id },
+            include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+        })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
@@ -126,10 +129,14 @@ purchaseController.get('/getAllBuyerPurchases/:id',
  */
 purchaseController.get('/getAllSellerSold/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { sellerUserId: req.params.id }, include: [Purchase.associations.user, Purchase.associations.product] })
+        Purchase.findAll({
+            where: { sellerUserId: req.params.id }, include: [
+                Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+        })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
+
 
 /**
  * Returns all the products that are only sold by a user(seller) linked with the product and the user details.
@@ -138,7 +145,7 @@ purchaseController.get('/getAllSellerSoldProducts/:id',
     (req: Request, res: Response) => {
         Purchase.findAll({
             where: { sellerUserId: req.params.id, isSold: true },
-            include: [Purchase.associations.user, Purchase.associations.product]
+            include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
         })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
@@ -148,14 +155,14 @@ purchaseController.get('/getAllSellerSoldProducts/:id',
 * Returns all the products that are only lend by a user(seller) linked with the product and the user details.
 */
 purchaseController.get('/getAllSellerLendServices/:id',
-    (req: Request, res: Response) => {
-        Purchase.findAll({
-            where: { sellerUserId: req.params.id, isSold: false },
-            include: [Purchase.associations.user, Purchase.associations.product]
-        })
-            .then(list => res.status(200).send(list))
-            .catch(err => res.status(500).send(err));
-    });
+(req: Request, res: Response) => {
+    Purchase.findAll({
+        where: { sellerUserId: req.params.id, isSold: false },
+        include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+    })
+        .then(list => res.status(200).send(list))
+        .catch(err => res.status(500).send(err));
+});
 
 /**
  * Edits the user purchase details.
