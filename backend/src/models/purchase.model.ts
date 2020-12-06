@@ -40,17 +40,19 @@ export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes,
 export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttributes> implements PurchaseAttributes {
 
     public static associations: {
-        user: Association <Purchase, User>;
+        buyer: Association <Purchase, User>;
+        seller: Association <Purchase, User>;
         product: Association <Purchase, Product>;
     };
 
-    public getUser!: BelongsToGetAssociationMixin<User>;
-    public addUser!: BelongsToSetAssociationMixin<User, number>;
+    public getUsers!: BelongsToGetAssociationMixin<User>;
+    public addUsers!: BelongsToSetAssociationMixin<User, number>;
     public getProduct!: BelongsToGetAssociationMixin<Product>;
     public addProduct!: BelongsToSetAssociationMixin<Product, number>;
 
 
-    public readonly user?: User;
+    public readonly buyer?: User;
+    public readonly seller?: User;
     public readonly product?: Product;
 
     purchaseId!: number;
@@ -129,8 +131,14 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     public static createAssociations() {
         Purchase.belongsTo(User, {
             targetKey: 'userId',
-            as: 'user',
+            as: 'buyer',
             foreignKey: 'buyerUserId',
+            constraints: false
+        });
+        Purchase.belongsTo(User, {
+            targetKey: 'userId',
+            as: 'seller',
+            foreignKey: 'sellerUserId',
             constraints: false
         });
         Purchase.belongsTo(Product, {
