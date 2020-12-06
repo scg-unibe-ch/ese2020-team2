@@ -38,7 +38,7 @@ export class Catalog2Component implements OnInit {
 
   options: Options = {
     floor: 0,
-    ceil: 100,
+    ceil: 300,
     translate: (value: number): string => {
       return '$' + value;
     },
@@ -74,7 +74,7 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     var i;
-    for (i = 0; i < 100; i++) {
+    for (i = 1; i < 100; i++) {
       this.getimage(i);
     }
     
@@ -214,7 +214,7 @@ export class Catalog2Component implements OnInit {
   }
 
   getimage(id: number) {
-    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id+1] = data[0].filePath
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
   );
     
 }

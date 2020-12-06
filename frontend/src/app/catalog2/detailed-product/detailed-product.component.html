@@ -7,7 +7,9 @@
     <mat-card  class="card"  >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%">
-          <img mat-card-image src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg"  style="width: 100%; height: 100%;"alt="background image">
+          <img *ngIf="url != null" mat-card-image src={{url}} style="width: 100%; height: 100%;">
+          <img *ngIf="url == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" style="width: 100%; height: 100%;">
+
         </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
           <mat-card-title  style="font-size: 230%;">{{product?.title}}</mat-card-title>

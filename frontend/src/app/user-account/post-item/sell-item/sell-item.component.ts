@@ -126,7 +126,9 @@ export class SellItemComponent implements OnInit {
   ngOnInit(): void {
     this.checkWallet();
     this.getpostedproductid();
-    
+    if(this.productid == null){
+      this.productid = 1;
+    }
     this.id = JSON.parse(localStorage.getItem('user')).userId;
 
 
@@ -155,21 +157,28 @@ export class SellItemComponent implements OnInit {
       this.snackBar.open('You successfully posted!', '', 3000, "success");
     }, (error: any) => {
       this.snackBar.open('Posting was not possible, please try again', '', 3000, "warning");
-    });
-    this.getpostedproductid();
+    }
+    );
+    
+    this.donothing();
+    if(this.file != null){
     this.postimage(this.productid);
+  }
     if (this.isPremier.value == true) {
       this.updatewallet();
     }
     this.clear();
 
 }
+  donothing() {
+    
+  }
 
 getpostedproductid(): void {
   this.productsService.getProducts().pipe(map(products =>
       products.filter(product => product.userId === this.id)
     )
-    ).subscribe(data => this.productid = data[data.length - 1].productId);
+    ).subscribe(data => this.productid = data[data.length-1].productId + 1);
     }
   
 

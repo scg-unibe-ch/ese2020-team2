@@ -9,6 +9,7 @@ import {ShoppingCart} from "../../models/shoppingCart.model";
 import {environment} from "../../../environments/environment";
 import {SnackBarService} from "../../services/snackBar.service";
 import {WishListService} from "../../services/wish-list.service";
+import { ProductImage } from '../../../../../backend/src/models/productImage.model';
 
 @Component({
   selector: 'app-wish-list',
@@ -20,6 +21,7 @@ export class WishListComponent implements OnInit {
   wishList$: Observable<ShoppingCart[]>;
   loggedIn$: BehaviorSubject<boolean>;
   quantity = [];
+  urls = Array.apply(null, Array(100));
   totalPrice: number;
 
   constructor(private httpClient: HttpClient,
@@ -34,9 +36,18 @@ export class WishListComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    var i;
+    for (i = 1; i < 100; i++) {
+      this.getimage(i);
+    }
     this.wishList$ = this.wishListService.getWishList()
     this.calculatePrices();
   }
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+  );
+    
+}
 
   calculatePrices(): void {
     this.wishList$.subscribe(shoppingCart => this.totalPrice = shoppingCart

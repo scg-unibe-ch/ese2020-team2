@@ -12,8 +12,11 @@
   }
 
  
-  .box-2 {
+  section {
     display: flex;
+    flex-flow: column;
+  }
+  .box-2 {
 		flex-direction: column;
     justify-content: center;
     height: max-content;
@@ -37,11 +40,22 @@
     width: 52%;
     }
 
+    .left {
+      float: left;
+      width: 60%;
+  
+      }
+      .right {
+        float: right;
+      width: 35%;
+      }
   .leftup-half {
       float: left;
       width: 60%;
   
       }
+
+     
   .rightup-half {
       
       float: right;
