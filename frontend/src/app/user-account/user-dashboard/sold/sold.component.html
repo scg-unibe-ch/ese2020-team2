@@ -33,70 +33,102 @@
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Filter..." #input>
 </mat-form-field>
+
+<button mat-button style="background: grey; color: white; margin-left: 15px" [ngClass]="{'bg-grey': filter === ''}"(click)="filter = '';ngAfterViewInit()">All</button>
+<button mat-button style="background: grey; color: white" [ngClass]="{'bg-grey': filter === 'sell'}" (click)="filter = 'sell'; ngAfterViewInit()">Sold</button>
+<button mat-button style="background: grey; color: white" [ngClass]="{'bg-grey': filter === 'lend'}"(click)="filter = 'lend'; ngAfterViewInit()">Lend</button>
+
+<button mat-button style="background: white; margin-left: 15px" [ngClass]="{'bg-yellow': filter2 === ''}"(click)="filter2 = '';ngAfterViewInit()">All</button>
+<button mat-button style="background: white; margin-left: 15px" [ngClass]="{'bg-red': filter2 === 'new'}"(click)="filter2 = 'new';ngAfterViewInit()">New</button>
+<button mat-button style="background: white" [ngClass]="{'bg-blue': filter2 === 'pending'}" (click)="filter2 = 'pending'; ngAfterViewInit()">Pending</button>
+<button mat-button style="background: white" [ngClass]="{'bg-green': filter2 === 'shipped'}"(click)="filter2 = 'shipped'; ngAfterViewInit()">Shipped</button>
+
 <p>
 
 <div>
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort matSort matSortActive="createdAt" matSortDirection="desc">
 
-    <ng-container matColumnDef="purchase.purchaseId">
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+      <td mat-cell *matCellDef="let purchase">{{DateParse(purchase.createdAt)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="purchaseId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let purchase"> {{purchase.purchaseId}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.product.title">
+    <ng-container matColumnDef="product.title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
       <td mat-cell *matCellDef="let purchase"> {{purchase.product.title}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.product.type">
+    <ng-container matColumnDef="product.type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
       <td mat-cell *matCellDef="let purchase"> {{purchase.product.type}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.product.sellOrLend">
+    <ng-container matColumnDef="product.sellOrLend">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sell/Lend</th>
       <td mat-cell *matCellDef="let purchase"> {{purchase.product.sellOrLend}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.quantity">
+    <ng-container matColumnDef="quantity">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
       <td mat-cell *matCellDef="let purchase">{{purchase.quantity}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.product.price">
+    <ng-container matColumnDef="product.price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
       <td mat-cell *matCellDef="let purchase"> {{purchase.product.price}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.user.userName">
+    <ng-container matColumnDef="user.userName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Buyer</th>
       <td mat-cell *matCellDef="let purchase">{{purchase.user.userName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.deliveryRequested">
+    <ng-container matColumnDef="deliveryRequested">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery</th>
       <td mat-cell *matCellDef="let purchase">{{purchase.deliveryRequested}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.paymentType">
+    <ng-container matColumnDef="paymentType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment</th>
       <td mat-cell *matCellDef="let purchase">{{purchase.paymentType}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchase.deliveryAddress">
+    <ng-container matColumnDef="deliveryAddress">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Address</th>
       <td mat-cell *matCellDef="let purchase">{{purchase.deliveryAddress}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="user.email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let purchase">{{purchase.user.email}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell  *matHeaderCellDef >Actions</th>
       <td mat-cell *matCellDef="let purchase" >
-        <button mat-button [routerLink]="['/product', purchase.product.productId]">Add review</button>
+        <mat-button-toggle-group #group="matButtonToggleGroup" [value]="purchase.notificationCheck" (change)="purchase.notificationCheck=group.value; checkNotification(purchase, purchase.notificationCheck)">
+          <mat-button-toggle value="new" [ngClass]="{'bg-red':purchase.notificationCheck === 'new'}" >
+            New
+          </mat-button-toggle>
+          <mat-button-toggle value="pending"[ngClass]="{'bg-blue':purchase.notificationCheck === 'pending'}" >
+            Pending
+          </mat-button-toggle>
+          <mat-button-toggle value="shipped" [ngClass]="{'bg-green':purchase.notificationCheck === 'shipped'}" >
+            Shipped
+          </mat-button-toggle>
+        </mat-button-toggle-group>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row [ngClass]="{'highlight': !row.notificationCheck}" *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row [ngClass]="{'bg-red': row.notificationCheck === 'new',
+    'bg-blue': row.notificationCheck === 'pending',
+    'bg-green': row.notificationCheck === 'shipped'}" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>

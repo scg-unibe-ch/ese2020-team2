@@ -8,3 +8,35 @@
     padding-right: 2%;
     padding-left: 2%;
   }
+
+mat-button-toggle-group {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+}
+/deep/ button, input {
+  margin-left: 0px !important;
+  margin-right: 15px !important;
+  text-align: center;
+}
+
+.bg-red {
+  background-color: #f59292!important;;
+}
+
+.bg-green {
+  background-color: #7fe57f!important;;
+}
+
+.bg-blue {
+  background-color: #7fdaec !important;
+}
+.bg-yellow {
+  background-color: #E7AF5F !important;
+}
+
+.bg-grey{
+  background-color: black !important;
+}

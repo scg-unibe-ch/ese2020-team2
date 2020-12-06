@@ -33,7 +33,7 @@ export class PostedComponent implements OnInit, AfterViewInit {
 }
 
   ngOnInit(): void {
-    this.getAllProductsOfUser()
+    //this.getAllProductsOfUser()
   }
 
   /**
@@ -52,7 +52,7 @@ export class PostedComponent implements OnInit, AfterViewInit {
    */
   onProductDelete(product: Product): void{
     this.httpClient.delete(environment.endpointURL + 'product/delete/' + product.productId).pipe(
-      finalize(() => this.getAllProductsOfUser())).subscribe()
+      finalize(() => this.ngAfterViewInit())).subscribe()
   }
 
   changeVisibleInMarket(product: Product): void {
@@ -63,7 +63,7 @@ export class PostedComponent implements OnInit, AfterViewInit {
   }
 
   dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>();
-  displayedColumns = ["productId", "title", "type", "price", "sellOrLend", "deliveryPossible", "productRating", "isPremier",
+  displayedColumns = ["createdAt","productId", "title", "type", "price", "sellOrLend", "deliveryPossible", "productRating", "isPremier",
     "visibleInMarket", "piecesAvailable", "adminApproval", "disapprovalMsg", "actions"];
 
 
@@ -80,12 +80,16 @@ export class PostedComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.products$ = this.productsService.getProducts();
+    this.getAllProductsOfUser();
     this.products$.subscribe(products => {
       this.dataSource = new MatTableDataSource(products);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
     })
+  }
+
+  DateParse(date: any){
+    return new Date(Date.parse(date)).toLocaleString()
   }
 }

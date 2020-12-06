@@ -12,6 +12,10 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {Product} from "../../../models/product.model";
+import {_isNumberValue} from "@angular/cdk/coercion";
+import {NotificationService} from "../../../services/notification.service";
+import {AppComponent} from "../../../app.component";
+import Instance = WebAssembly.Instance;
 
 @Component({
   selector: 'app-sold',
@@ -22,12 +26,16 @@ export class SoldComponent implements OnInit, AfterViewInit {
 
   sells$: Observable<Purchase[]>;
   sells: Purchase[];
+  filter = "";
+  filter2 = "";
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private soldService: SoldService,
     private snackBar: SnackBarService,
-    private users: CurrentUser) {
+    private users: CurrentUser,
+              private notificationService: NotificationService,
+              private app: AppComponent) {
 
 }
 
@@ -35,14 +43,16 @@ export class SoldComponent implements OnInit, AfterViewInit {
 
   }
 
-  checkNotification(sell:Purchase){
+  checkNotification(sell: Purchase, status: boolean){
     this.httpClient.put(environment.endpointURL + 'purchase/edit/'+ sell.purchaseId,
       {
-        "notificationCheck": true,
+        "notificationCheck": status,
       }
     ).subscribe((res: any) => {}, (error: any) => {
       if(error.status === 200) {
-        this.snackBar.open("Product was marked as seen", '', 3000, "info");
+        this.ngAfterViewInit();
+        this.app.ngOnInit();
+        this.notificationService.getNotification();
       } else {
         this.snackBar.open(error.error, '', 3000, "warning");
       }});
@@ -50,30 +60,70 @@ export class SoldComponent implements OnInit, AfterViewInit {
 
 
   dataSource = new MatTableDataSource<Purchase>();
-  displayedColumns = ["purchase.purchaseId", "purchase.product.title", "purchase.product.type",
-    "purchase.quantity", "purchase.product.price", "purchase.user.userName", "purchase.deliveryRequested",
-    "purchase.paymentType", "purchase.deliveryAddress", "actions"];
+  displayedColumns = ["createdAt", "purchaseId", "product.title", "product.type","product.sellOrLend",
+    "quantity", "product.price", "user.userName", "deliveryRequested",
+    "paymentType", "deliveryAddress", "user.email", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
   ngAfterViewInit() {
-    this.sells$ = this.soldService.getSells()
+    this.filterSellOrLend(this.filter, this.filter2);
     this.sells$.subscribe(purchases => {
       console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
-      this.dataSource.sort = this.sort;
+      this.dataSource.sortingDataAccessor =
+        (data: any, sortHeaderId: string): string | number => {
+          let value = null;
+          if (sortHeaderId.includes('.')) {
+            const ids = sortHeaderId.split('.');
+            value = data;
+            ids.forEach(function (x) {
+              value = value? value[x]: null;
+            });
+          } else {
+            value = data[sortHeaderId];
+          }
+          return _isNumberValue(value) ? Number(value) : value;
+        };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
     })
+
   }
+
+  DateParse(date: any){
+    return new Date(Date.parse(date)).toLocaleString()
+  }
+
+  filterSellOrLend(filter: string, filter2: string): void {
+    if (filter === "" && filter2 === "") {
+      this.sells$ = this.soldService.getSells()
+    }
+    if (filter !== "" && filter2 === "") {
+      this.sells$ = this.soldService.getSells()
+        .pipe(map(sells => sells.filter(sell => sell.product.sellOrLend === filter)))
+    }
+    if (filter === "" && filter2 !== "") {
+      this.sells$ = this.soldService.getSells()
+        .pipe(map(sells => sells.filter(sell => sell.notificationCheck === filter2)))
+    }
+    if (filter !== "" && filter2 !== "") {
+      this.sells$ = this.soldService.getSells()
+        .pipe(map(sells => sells.filter(sell => sell.product.sellOrLend === filter && sell.notificationCheck === filter2)))
+    }
+  }
+
+
+
 }

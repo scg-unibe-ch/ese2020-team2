@@ -28,10 +28,11 @@ export class ProductsService {
   /**
    * Gets the the product specified by the id number from the backend
    *
-   * @param id the id number of the product you want to get from the backedn
+   * @param id the id number of the product you want to get from the backend
    */
   getProductById(id: number) : Observable<Product> {
     return this.httpClient.get<Product>(environment.endpointURL + 'product/get/' + id)
+      .pipe(filter(product => product.status !== "deleted"));
   }
 
   /**

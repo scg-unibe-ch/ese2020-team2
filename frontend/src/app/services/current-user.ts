@@ -26,18 +26,4 @@ export class CurrentUser {
       map((users: User[]) => users.find(user => user.userName === localStorage.getItem('userName'))),
       pluck(property));
   }
-  getNotification(){
-    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerSold/'+  this.UserId)
-    .pipe(map((purchases: Purchase[]) => purchases.filter(purchase => !(purchase.notificationCheck))
-    ));
-  }
-  getNumberOfnotification(){
-    return this.getNotification().subscribe(value =>value.length);
-  }
-  checkNotification(purchase:Purchase){
-    this.httpClient.put(environment.endpointURL + 'purchase/edit/' + purchase.getPurchaseId(), {"notificationCheck":true})
-  }
-  getSoldItem(){
-    
-  }
 }

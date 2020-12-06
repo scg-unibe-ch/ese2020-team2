@@ -39,75 +39,68 @@
 <p>
 
 <div>
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
 
-    <!-- Position Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+      <td mat-cell *matCellDef="let purchase">{{DateParse(purchase.createdAt)}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="productId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let product"> {{product.productId}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
       <td mat-cell *matCellDef="let product"> {{product.title}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
       <td mat-cell *matCellDef="let product">{{product.type}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
       <td mat-cell *matCellDef="let product"> {{product.price}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="sellOrLend">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Sell/Lend </th>
       <td mat-cell *matCellDef="let product"> {{product.sellOrLend}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="deliveryPossible">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Delivery </th>
       <td mat-cell *matCellDef="let product"> {{product.deliveryPossible}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="productRating">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
       <td mat-cell *matCellDef="let product"> {{product.productRating.toFixed(1)}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="isPremier">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Promoted </th>
       <td mat-cell *matCellDef="let product"> {{product.isPremier}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="visibleInMarket">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> In Catalog </th>
       <td mat-cell *matCellDef="let product"> {{product.visibleInMarket}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="piecesAvailable">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Pieces </th>
       <td mat-cell *matCellDef="let product"> {{product.piecesAvailable}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="adminApproval">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Approval </th>
       <td mat-cell *matCellDef="let product"> {{product.adminApproval}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="disapprovalMsg">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Disapproval Msg </th>
       <td mat-cell *matCellDef="let product"> {{product.disapprovalMsg}} </td>

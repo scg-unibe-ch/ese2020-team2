@@ -13,6 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'app-user-account',
@@ -20,12 +21,19 @@ import { NotificationModalComponent } from './notification-modal/notification-mo
   styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent implements OnInit{
-  title = 'angular-material-tab-router';  
+  title = 'angular-material-tab-router';
   navLinks: any[];
   activeLinkIndex = -1;
   listOfNotification$:Observable<Purchase[]>;
   listOfNot:Array<Purchase>= new Array;
-  constructor(private currentUser:CurrentUser, private router:Router, public matDialog: MatDialog) {
+  userName: string;
+  constructor(private currentUser:CurrentUser,
+              private router:Router,
+              public matDialog: MatDialog,
+              private notificationService: NotificationService) {
+
+    this.userName = JSON.parse(localStorage.getItem("user")).userName
+
     this.navLinks = [
       {
           label: 'Wallet',
@@ -39,7 +47,7 @@ export class UserAccountComponent implements OnInit{
           label: 'Dashboard',
           link: './dashboard',
           index: 2
-      }, 
+      },
   ];
   }
   openNotifications() {
@@ -55,13 +63,14 @@ export class UserAccountComponent implements OnInit{
 
   ngOnInit(){
     this.updateIndex()
-    this.getNoftification()
+    this.getNotification()
     this.listOfNotification$.subscribe(list => this.listOfNot=list)
   }
 
-  getNoftification(){
-    this.listOfNotification$ = this.currentUser.getNotification()
+  getNotification(){
+    this.listOfNotification$ = this.notificationService.getNotification()
   }
+
   updateIndex(){
     this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));

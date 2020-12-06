@@ -27,6 +27,7 @@ export class PurchasedComponent implements OnInit, AfterViewInit {
   purchases$: Observable<Purchase[]>;
   review = "";
   productsIds: number[];
+  filter = "";
 
 
   constructor(private httpClient: HttpClient,
@@ -53,8 +54,8 @@ ngOnInit(): void {
 
 
   dataSource = new MatTableDataSource<Purchase>();
-  displayedColumns = ["purchase.purchaseId", "purchase.product.title", "purchase.quantity", "purchase.product.price",
-    "purchase.user.userName", "purchase.deliveryRequested", "purchase.paymentType", "actions"];
+  displayedColumns = ["createdAt", "purchaseId", "product.title", "quantity", "product.price",
+    "user.userName", "deliveryRequested", "paymentType", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -69,20 +70,43 @@ ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.purchases$ = this.purchaseService.getPurchases();
+    this.filterNotificationCheck(this.filter);
     this.purchases$.subscribe(purchases => {
       console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
-
-      this.dataSource.sortingDataAccessor = (obj, property) => this.getProperty(obj, property);
-      //this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.dataSource.sortingDataAccessor =
+        (data: any, sortHeaderId: string): string | number => {
+          let value = null;
+          if (sortHeaderId.includes('.')) {
+            const ids = sortHeaderId.split('.');
+            value = data;
+            ids.forEach(function (x) {
+              value = value? value[x]: null;
+            });
+          } else {
+            value = data[sortHeaderId];
+          }
+          return _isNumberValue(value) ? Number(value) : value;
+        };
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+
     })
   }
-  getProperty = (obj, path) => (
-    path.split('.').reduce((o, p) => o && o[p], obj)
-  )
+
+  DateParse(date: any){
+    return new Date(Date.parse(date)).toLocaleString()
+  }
+
+
+  filterNotificationCheck(filter: string): void {
+    if (filter === "") {
+      this.purchases$ = this.purchaseService.getPurchases();
+    } else {
+      this.purchases$ = this.purchaseService.getPurchases()
+        .pipe(map(purchases => purchases.filter(purchase => purchase.notificationCheck=== filter)))
+    }
+  }
 
 
 

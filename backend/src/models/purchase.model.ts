@@ -27,8 +27,8 @@ export interface PurchaseAttributes {
     paymentType: string;
     // True if the payment is done with wallet points.
     walletPayment: boolean;
-    // True if the User saw the Notification.
-    notificationCheck: boolean;
+    // New, Pending or Shipped if the User saw the Notification
+    notificationCheck: string;
     // Type of purchase. Sell or Lent. true for 'sell' and false for 'lend'
     isSold: boolean;
     // True if the buyer wants the product to be delivered
@@ -61,7 +61,7 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     deliveryAddress!: string;
     paymentType!: string;
     walletPayment!: boolean;
-    notificationCheck!: boolean;
+    notificationCheck!: string;
     isSold!: boolean;
     deliveryRequested!: boolean;
 
@@ -107,8 +107,8 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                 defaultValue: true
             },
             notificationCheck: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false
+                type: DataTypes.STRING,
+                defaultValue: 'new'
             },
             isSold: {
                 type: DataTypes.BOOLEAN,

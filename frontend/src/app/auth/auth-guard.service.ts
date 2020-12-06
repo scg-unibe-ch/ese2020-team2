@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate {
    * @return true, if user is logged in, false if user is not logged in.
    */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
+    this.auth.CheckAccessToSecuredEndpoint();
     if (!this.auth.isAuthenticated()) {
       this.router.navigate(['/login']);
       return false;

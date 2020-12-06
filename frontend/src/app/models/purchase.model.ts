@@ -19,8 +19,8 @@ export class Purchase {
     public paymentType: string,
     // True if the payment is done with wallet points.
     public walletPayment: boolean,
-    // True if the User saw the Notification
-    public notificationCheck: boolean,
+    // New, Pending or Shipped if the User saw the Notification
+    public notificationCheck: string,
     // True if the buyer wants the product to be delivered
     public deliveryRequested: boolean,
     // Data of the buyer

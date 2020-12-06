@@ -21,7 +21,6 @@ import { ResetPasswordComponent } from './user-login/reset-password/reset-passwo
 import { WalletComponent } from './user-account/wallet/wallet.component';
 import { PostItemComponent } from './user-account/post-item/post-item.component';
 import { SoldComponent } from './user-account/user-dashboard/sold/sold.component';
-import { LentComponent } from './user-account/user-dashboard/lent/lent.component';
 import { PurchasedComponent } from './user-account/user-dashboard/purchased/purchased.component';
 import { PostedComponent } from './user-account/user-dashboard/posted/posted.component';
 import { SellItemComponent } from './user-account/post-item/sell-item/sell-item.component';
@@ -48,9 +47,9 @@ const routes: Routes = [
       children:[
         {path: '', redirectTo:'posted', pathMatch:'full'},
         {path: 'posted',component:PostedComponent},
-        {path: 'sold',component:SoldComponent},
-        {path: 'lent',component:LentComponent},
-        {path: 'purchasedHistory', component:PurchasedComponent}
+        {path: 'sold-lent',component:SoldComponent},
+        //{path: 'lent',component:LentComponent},
+        {path: 'purchased', component:PurchasedComponent}
       ]},
     ]},
   { path: 'edititem/:id', component: EdititemComponent,

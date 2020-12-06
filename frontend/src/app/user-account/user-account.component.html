@@ -1,8 +1,12 @@
 <!--The account of the user has 3 tabs containing the wallet, the history and the todolist-->
-<mat-card *ngIf="listOfNot.length > 0">
-    <mat-card-title>You have {{listOfNot.length}} notification<span *ngIf="listOfNot.length>1">s</span>:</mat-card-title>
-    <button (click)="openNotifications()">SEE</button>
-  </mat-card>
+<mat-card style="background: #ED5281" *ngIf="listOfNot.length > 0">
+    <mat-card-title style="text-align: center; color: white">You have {{listOfNot.length}} new sells</mat-card-title>
+  <div style="text-align: center;">
+    <button mat-raised-button color="primary" [routerLink]="['/account/dashboard/sold-lent']">See sells</button>
+  </div>
+
+
+</mat-card>
 <!-- displays all the tabs and the links to the relative component-->
   <nav mat-tab-nav-bar>
       <a mat-tab-link *ngFor="let link of navLinks"
@@ -11,5 +15,6 @@
       [active]="rla.isActive">
       {{link.label}}
       </a>
+
   </nav>
   <router-outlet></router-outlet>

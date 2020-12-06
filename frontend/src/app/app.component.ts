@@ -9,6 +9,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {  MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import {CurrentUser} from './services/current-user';
+import {NotificationService} from "./services/notification.service";
 
 @Component({
   selector: 'app-root',
@@ -22,14 +23,15 @@ export class AppComponent implements OnInit {
   title = "frontend";
   constructor(private authService: AuthService,
               private currentUser:CurrentUser,
-              public matDialog: MatDialog) {
-
+              public matDialog: MatDialog,
+              private notificationService: NotificationService) {
+    //this.getNotification()
     this.loggedIn$ = authService.loggedIn$
   }
 
 
   ngOnInit(){
-    this.getNoftification()
+    this.getNotification()
     this.loggedIn$ = this.authService.loggedIn$
   }
    get isAdmin() {
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit {
     const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
   }
 
-  getNoftification(){
-    this.listOfNotification$ = this.currentUser.getNotification()
+  getNotification(){
+    this.listOfNotification$ = this.notificationService.getNotification()
   }
 }
