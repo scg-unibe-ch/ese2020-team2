@@ -34,8 +34,8 @@ export class Catalog2Component implements OnInit {
   quantity: number[];
   loopnumber: number;
   minValue: number = 0;
-  maxValue: number = 10;
-  ceil: number = 10;
+  maxValue: number = 9999;
+  ceil: number = 9999;
 
   options: Options = {
     floor: 0,
