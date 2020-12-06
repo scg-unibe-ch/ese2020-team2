@@ -12,6 +12,13 @@
   }
 
  
+  .box-2 {
+    display: flex;
+		flex-direction: column;
+    justify-content: center;
+    height: max-content;
+		flex: 1;
+	}
 
   .flexExpand {
     flex: 1 1 auto;

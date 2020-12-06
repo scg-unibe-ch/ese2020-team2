@@ -131,6 +131,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             foreignKey: 'purchaseId',
             constraints: false
         });
+        User.hasMany(Purchase, {
+            as: 'soldOrLent',
+            foreignKey: 'sellerUserId',
+            constraints: false
+        });
         User.hasMany(Review, {
             as: 'review',
             foreignKey: 'reviewId',

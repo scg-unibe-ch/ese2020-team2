@@ -85,8 +85,7 @@
 
 
 
-
-        <button class="btn" (click)="postimage(); "  type="submit" style="width: 23%;">Post</button>
+        <button class="btn" (click)="post();  "  type="submit" style="width: 23%;">Post</button>
       </div>
     </mat-card>
 
@@ -111,12 +110,3 @@
 </section>
 
 
-<form method="POST" action="/image/add" enctype="multipart/form-data">
-  <div>
-    <label>Select your profile picture:</label>
-    <input type="file" name="profile_pic" />
-  </div>
-  <div>
-    <input type="submit" name="btn_upload_profile_pic" value="Upload" />
-  </div>
-</form>
