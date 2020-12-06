@@ -74,15 +74,19 @@ export class Catalog2Component implements OnInit {
 
   ngOnInit(): void {
     var i;
-    for (i = 0; i < 100; i++) {
-      this.getimage(i);
-    }
+  for (i = 1; i < 100; i++) {
+    this.getimage(i);
+  }
 
     this.getAllProducts();
 
     this.authService.CheckAccessToSecuredEndpoint()
   }
 
+  getimage(id: number) {
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+  );
+  }
 
 
   changefiltersl(filtervalue: string) {
@@ -213,11 +217,6 @@ export class Catalog2Component implements OnInit {
     this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
   }
 
-  getimage(id: number) {
-    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id+1] = data[0].filePath
-  );
-
-}
 
 
 getimageparam(id: number) {
