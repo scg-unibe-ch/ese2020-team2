@@ -27,12 +27,14 @@ export class UserAccountComponent implements OnInit{
   listOfNotification$:Observable<Purchase[]>;
   listOfNot:Array<Purchase>= new Array;
   userName: string;
+  showNotification: boolean;
   constructor(private currentUser:CurrentUser,
               private router:Router,
               public matDialog: MatDialog,
               private notificationService: NotificationService) {
 
     this.userName = JSON.parse(localStorage.getItem("user")).userName
+    this.updateIndex()
 
     this.navLinks = [
       {
@@ -58,9 +60,9 @@ export class UserAccountComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.updateIndex()
     this.getNotification()
-    this.listOfNotification$.subscribe(list => this.listOfNot=list)
+    //this.listOfNotification$.subscribe(list => this.listOfNot=list)
+    this.listOfNotification$.subscribe(purchases => {this.showNotification = purchases.length >= 1})
   }
 
   getNotification(){

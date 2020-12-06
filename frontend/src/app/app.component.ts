@@ -11,6 +11,7 @@ import { ModalComponent } from './modal/modal.component';
 import {CurrentUser} from './services/current-user';
 import {NotificationService} from "./services/notification.service";
 import {SnackBarService} from "./services/snackBar.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
               public matDialog: MatDialog,
               private notificationService: NotificationService,
               private snackBar: SnackBarService,
+              private router: Router,
               ) {
     this.loggedIn$ = this.authService.loggedIn$
     this.userName$ = this.currentUser.getCurrentUserProperty("userName");
@@ -74,7 +76,8 @@ export class AppComponent implements OnInit {
     localStorage.clear()
     this.checkUserStatus();
     this.snackBar.open('You successfully logged out!', '', 3000, "success");
-    window.location.reload();
+    this.router.navigate(['/home']);
+
 
   }
 
