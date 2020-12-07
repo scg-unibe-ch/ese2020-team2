@@ -6,7 +6,7 @@
     <mat-card  class="card" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="36%">
-          <img *ngIf="urls[shoppingCart.product.productId] != null" mat-card-image src={{urls[shoppingCart.product.productId]}} style="height: 100%; width: 100%;" >
+          <img *ngIf="urls[shoppingCart.product.productId] != null" mat-card-image src={{urls[shoppingCart.product.productId]}} class="centered" >
           <img *ngIf="urls[shoppingCart.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" style="height: 100%; width: 100%;" >
         
         </div>

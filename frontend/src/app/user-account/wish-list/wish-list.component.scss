@@ -24,16 +24,9 @@ section {
         }
 
 
-        .imgcard {
-            height: max-content; 
-            max-height: 270px !important; 
-            object-fit: cover !important;
-            padding-left: 5%;
-            padding-top: 5%;
-            padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
-            }
-            .card {
-                max-height: 285px !important;
-                height: 285px !important;
-                @include mat-elevation(4);
-                }
+                .centered {
+                    height: max-content; 
+                    object-fit: cover !important;
+                    padding-left: 5%;
+                    padding-top: 5%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+                    }

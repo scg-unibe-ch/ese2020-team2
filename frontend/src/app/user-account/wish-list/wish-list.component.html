@@ -4,9 +4,9 @@
 <section class="container" *ngIf="totalPrice != 0">
     <mat-card class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
-          <img *ngIf="urls[wishList.product.productId] != null" mat-card-image src={{urls[wishList.product.productId]}} style="height: 100%; width: 100%;" >
-          <img *ngIf="urls[wishList.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" style="height: 100%; width: 100%;" >
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%">
+          <img *ngIf="urls[wishList.product.productId] != null" mat-card-image src={{urls[wishList.product.productId]}} class="centered" >
+          <img *ngIf="urls[wishList.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" class="centered" >
          </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{wishList.product.title}}</mat-card-title>

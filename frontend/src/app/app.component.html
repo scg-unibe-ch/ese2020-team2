@@ -20,7 +20,7 @@
     <button  matTooltip=" View Products" class="btn" routerLink="/catalog">
       <mat-icon>shop_two</mat-icon>
     </button>
-      <button  class="btn" btn btn-success (click)="openModal()"><mat-icon><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></mat-icon></button>
+      <button  class="btn" btn btn-success (click)="openModal()"><mat-icon>question_answer</mat-icon></button>
 
     <div class="content"><span  style="color: white;">ESE Project</span> </div>
     <span class="example-spacer"></span>
@@ -45,7 +45,7 @@
     </button>-->
 
 
-    <button mat-icon-button *ngIf="(loggedIn$ | async)"  [matMenuTriggerFor]="menu" matTooltip= "Menu"
+    <button class="btn" *ngIf="(loggedIn$ | async)"  [matMenuTriggerFor]="menu" matTooltip= "Menu"
             matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
       <mat-icon>account_box</mat-icon>
     </button>

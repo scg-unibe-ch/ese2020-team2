@@ -11,12 +11,10 @@
   @include mat-elevation(4);
   }
 
-  .img {
-    height: max-content; 
+  .centered {
     object-fit: cover !important;
     padding-left: 5%;
-    padding-top: 5%;
-    padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+    padding-top: 5%;/* this centers and crops the image so that it doesn't break the aspect ratio */
     }
   
   .outer {

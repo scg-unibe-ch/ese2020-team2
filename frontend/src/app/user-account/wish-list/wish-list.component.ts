@@ -36,17 +36,30 @@ export class WishListComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    var i;
-    for (i = 1; i < 100; i++) {
-      this.getimage(i);
-    }
-    this.wishList$ = this.wishListService.getWishList()
+    this.getProductIds();
     this.calculatePrices();
   }
+
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
   );
     
+}
+
+getProductIds(): void {
+  this.wishList$ = this.wishListService.getWishList()
+  this.wishList$.subscribe(wishList => {
+    
+    const productIds = wishList.map(wishList => wishList.productId)
+    
+    
+    for (var i = 0; i < productIds.length; i++) {
+      this.getimage(productIds[i]);
+      //Do something
+  }
+  })
+    
+  
 }
 
   calculatePrices(): void {
