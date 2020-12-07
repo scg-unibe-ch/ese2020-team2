@@ -71,25 +71,21 @@ export class ShoppingCartComponent implements OnInit {
               private snackBar: SnackBarService,
               private shoppingCartService: ShoppingCartService,
               private matDialog: MatDialog) {
-
+                this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
     this.loggedIn$ = authService.loggedIn$;
-
+   
     matDialog.afterAllClosed.subscribe(() => {
           this.ngOnInit();})
 
   }
 
   ngOnInit(): void {
-    var i;
-    for (i = 1; i < 10; i++) {
-      this.getimage(i);
-    }
+    
     this.getShoppingCart();
     this.calculatePrices();
     this.CreateShoppingCartPurchases();
     this.getAddressAsString();
     this.getUserMoney();
-
 
 
     if (this.loggedIn$.value == true) {
@@ -100,7 +96,7 @@ export class ShoppingCartComponent implements OnInit {
       this.country$ = this.users.getCurrentUserProperty('country');
     }
 
-
+    
   }
 
   getimage(id: number) {
@@ -131,9 +127,16 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
     this.shoppingCart$.subscribe(shoppingCart => {
       this.shoppingCart = shoppingCart;
+      const productIds = shoppingCart.map(shoppingCart => shoppingCart.productId)
       this.quantity = shoppingCart.map(shoppingCart => shoppingCart.quantity)
       this.deliveryRequested = shoppingCart.map(shoppingCart => shoppingCart.deliveryRequested)
+      for (var i = 0; i < productIds.length; i++) {
+        this.getimage(productIds[i]);
+        //Do something
+    }
     })
+      
+    
   }
 
   removeShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {

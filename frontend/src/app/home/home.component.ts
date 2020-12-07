@@ -59,16 +59,7 @@ this.ratingArray.push(index);
 }
 
 ngOnInit(): void {
-  var i;
-  for (i = 1; i < 100; i++) {
-    this.getimage(i);
-  }
-  
-  
   this.getAllProducts();
-
-
-
   
 }
 
@@ -85,7 +76,12 @@ getAllProducts(): void {
   && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.isPremier == true
   ))
   ))
-  this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
+  this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1);
+    const productIds = products.map(products => products.productId)
+    for (var i = 0; i < productIds.length; i++) {
+      this.getimage(productIds[i]);
+      //Do something
+  }})
 
 }
 

@@ -25,10 +25,6 @@ export class DashboardProductListComponent {
 
 
   ngOnInit(): void {
-    var i;
-    for (i = 1; i < 100; i++) {
-      this.getimage(i);
-    }
     this.getAllProducts();
   }
   getimage(id: number) {
@@ -42,6 +38,13 @@ export class DashboardProductListComponent {
    */
   getAllProducts(): void {
     this.productList$ = this.productsService.getProducts();
+    this.productList$.subscribe(products => {
+      const productIds = products.map(products => products.productId)
+      for (var i = 0; i < productIds.length; i++) {
+        this.getimage(productIds[i]);
+        //Do something
+    }})
+  
   }
 
   /**

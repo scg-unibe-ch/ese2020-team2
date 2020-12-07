@@ -73,10 +73,8 @@ export class Catalog2Component implements OnInit {
 
 
   ngOnInit(): void {
-    var i;
-  for (i = 1; i < 100; i++) {
-    this.getimage(i);
-  }
+    
+    
 
     this.getAllProducts();
 
@@ -214,10 +212,15 @@ export class Catalog2Component implements OnInit {
 
   getAllProducts(): void {
       this.filter(this.minValue, this.maxValue, this.filtersl, this.filterps, this.sortby, this.location, this.search);
-    this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1)})
+    this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1);
+      const productIds = products.map(products => products.productId)
+      for (var i = 0; i < productIds.length; i++) {
+        this.getimage(productIds[i]);
+        //Do something
+    }})
   }
 
-
+ 
 
 getimageparam(id: number) {
   return this.httpClient.get<ProductImage>(environment.endpointURL + 'image/get/' +id).pipe(map(products =>

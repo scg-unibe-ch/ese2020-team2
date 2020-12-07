@@ -24,16 +24,28 @@ img {
   .subtitle{
     font-size: 120%;
     font-weight: 500;
+    
+  }
+
+  .flex-grow {
+    flex-grow: 1;
   }
 
   .btn {
-    background-color: rgba(42, 49, 56, 0.616); /* Blue background */
-    color: white; 
-    width: 17%;
-    margin-left: 80% !important;
-    cursor: pointer; /* Mouse pointer on hover */
+    background-color: rgb(67, 87, 179); /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
     }
+    /* Darker background on mouse-over */
     .btn:hover {
-      background-color: rgb(42, 49, 56); /* Green */
-      color: white;
+    background-color: rgb(18, 41, 109);
+    }
+
+    .box-2 {
+      flex-direction: row;
+      justify-content: center;
+      height: max-content;
+      flex: 1;
     }
