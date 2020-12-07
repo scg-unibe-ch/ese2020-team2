@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import {CurrentUser} from "../../../services/current-user";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarService} from "../../../services/snackBar.service";
+import { ProductsService } from 'src/app/services/products.service';
+import { map } from 'rxjs/operators';
 
 export interface Type {
   value: string;
@@ -42,12 +44,17 @@ export class LendItemComponent implements OnInit {
   id: number;
   points$: number;
   pointsSub: any;
+  url: string;
+  file: File;
+  products$: any;
+  productid: number;
 
   constructor(
     private router: Router,
     public snackBar: SnackBarService,
     private users: CurrentUser,
     private httpClient: HttpClient,
+    private productsService: ProductsService,
     private fb: FormBuilder) { }
     selectedValue: string;
 
@@ -114,6 +121,10 @@ premiers: IsPremier[] = [
 
 ngOnInit(): void {
   this.checkWallet();
+  this.getpostedproductid();
+  if(this.productid == null){
+    this.productid = 1;
+  }
   this.id = JSON.parse(localStorage.getItem('user')).userId;
 }
 
@@ -161,7 +172,40 @@ checkWallet(): void {
     }, (error: any) => {
       this.snackBar.open('Posting was not possible, please try again', '', 3000, 'warning');
     });
+    this.donothing();
+    if(this.file != null){
+    this.postimage(this.productid);
+  }
 }
+
+
+donothing() {
+    
+}
+
+getpostedproductid(): void {
+this.productsService.getProducts().pipe(map(products =>
+    products.filter(product => product.userId === this.id)
+  )
+  ).subscribe(data => this.productid = data[data.length-1].productId + 1);
+  }
+
+
+
+
+
+
+postimage(productid : number) {
+  const uploadData = new FormData();
+  uploadData.append('productImage', this.file);
+  uploadData.append('userId', this.id.toString());
+  uploadData.append('productId', productid.toString());
+
+
+  this.httpClient.post(environment.endpointURL + 'image/add/',uploadData
+  ).subscribe();
+}
+
 clear() {
   this.lendformular.reset();
   this.lendformular.controls['userName'].setValue(localStorage.getItem('userName'));
@@ -169,5 +213,17 @@ clear() {
   //this.username.setValue("");
 }
 
+onSelectFile(event) { // called each time file input changes
+  if (event.target.files && event.target.files[0]) {
+    this.file = event.target.files[0]
+    var reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      this.url = event.target.result as string;
+    }
+  }
+}
 
 }

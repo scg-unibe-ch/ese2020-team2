@@ -45,7 +45,7 @@
     </button>-->
 
 
-    <button class="btn" *ngIf="(loggedIn$ | async)"  [matMenuTriggerFor]="menu" matTooltip= "Menu"
+    <button class="btn" *ngIf="(loggedIn$ | async)"  [matMenuTriggerFor]="menu" matTooltip= "Menu" 
             matBadge="{{(listOfNotification$ | async)?.length}}" matBadgePosition="before" matBadgeColor="accent" [matBadgeHidden]="(listOfNotification$ | async)?.length===0">
       <mat-icon>account_box</mat-icon>
     </button>
