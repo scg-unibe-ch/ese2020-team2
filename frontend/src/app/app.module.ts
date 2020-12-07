@@ -65,6 +65,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {CdkTableModule} from "@angular/cdk/table";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -115,7 +116,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatCardModule,
     Ng5SliderModule,
-    FormsModule, 
+    FormsModule,
     NgbModule,
     DragDropModule,
     MatTabsModule,
@@ -144,6 +145,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatTableModule,
     MatSortModule,
     CdkTableModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
   ],
   providers: [
     [AuthGuardService],

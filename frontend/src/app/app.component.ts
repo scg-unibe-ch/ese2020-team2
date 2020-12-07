@@ -10,6 +10,8 @@ import {  MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import {CurrentUser} from './services/current-user';
 import {NotificationService} from "./services/notification.service";
+import {SnackBarService} from "./services/snackBar.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -21,18 +23,28 @@ export class AppComponent implements OnInit {
   loggedIn$: BehaviorSubject<boolean>;
   listOfNotification$:Observable<Purchase[]>;
   title = "frontend";
-  constructor(private authService: AuthService,
+  userName$: Observable<String>;
+  points$: Observable<number>;
+  userToken: string;
+  userName: string;
+
+
+  constructor(public authService: AuthService,
               private currentUser:CurrentUser,
               public matDialog: MatDialog,
-              private notificationService: NotificationService) {
-    //this.getNotification()
-    this.loggedIn$ = authService.loggedIn$
+              private notificationService: NotificationService,
+              private snackBar: SnackBarService,
+              private router: Router,
+              ) {
+    this.loggedIn$ = this.authService.loggedIn$
+    this.userName$ = this.currentUser.getCurrentUserProperty("userName");
+    this.points$ = this.currentUser.getCurrentUserProperty("moneyInWallet")
   }
-
 
   ngOnInit(){
     this.getNotification()
-    this.loggedIn$ = this.authService.loggedIn$
+    this.userName$ = this.currentUser.getCurrentUserProperty("userName");
+    this.points$ = this.currentUser.getCurrentUserProperty("moneyInWallet")
   }
    get isAdmin() {
     return (this.authService.hasRole(Role.Admin) && this.authService.isAuthenticated());
@@ -51,5 +63,31 @@ export class AppComponent implements OnInit {
 
   getNotification(){
     this.listOfNotification$ = this.notificationService.getNotification()
+  }
+
+  /**
+   * Loges the user out and shows a message if logout was successful
+   */
+  logout(): void {
+    // Remove user data from local storage
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('user');
+    //localStorage.clear()
+    this.checkUserStatus();
+    this.snackBar.open('You successfully logged out!', '', 3000, "success");
+    this.router.navigate(['/home']);
+
+
+  }
+
+  /**
+   * Checks the user status
+   */
+  checkUserStatus(): void{
+    // Get user data from local storage
+    this.userToken = localStorage.getItem('userToken');
+    this.userName = localStorage.getItem('userName');
+    this.authService.CheckAccessToSecuredEndpoint();
   }
 }

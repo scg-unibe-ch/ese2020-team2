@@ -13,7 +13,7 @@ export class NotificationService {
 
   getNotification(){
     return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerSold/'+
-    JSON.parse(localStorage.getItem('user')).userId)
+    JSON.parse(localStorage.getItem('user'))?.userId)
       .pipe(map((purchases: Purchase[]) => purchases.filter(purchase => purchase.notificationCheck === "new")
       ));
   }

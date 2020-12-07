@@ -34,11 +34,12 @@ export class Catalog2Component implements OnInit {
   quantity: number[];
   loopnumber: number;
   minValue: number = 0;
-  maxValue: number = 50;
+  maxValue: number = 9999;
+  ceil: number = 9999;
 
   options: Options = {
     floor: 0,
-    ceil: 100,
+    ceil: this.ceil,
     translate: (value: number): string => {
       return '$' + value;
     },
@@ -77,13 +78,25 @@ export class Catalog2Component implements OnInit {
     
 
     this.getAllProducts();
-
+    this.changeSliderOptions();
     this.authService.CheckAccessToSecuredEndpoint()
   }
 
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
   );
+  }
+  /**
+   * Changes the ciel of the price filter (slider)
+   */
+  changeSliderOptions() {
+    this.productsService.getProducts().subscribe(products => {
+      const newOptions: Options = Object.assign({}, this.options);
+      this.ceil = Math.max.apply(Math, products.map(function(o) { return o.price; }))
+      newOptions.ceil = this.ceil;
+      this.options = newOptions;
+      this.changemaxValue();
+    })
   }
 
 
@@ -99,8 +112,8 @@ export class Catalog2Component implements OnInit {
     this.minValue = value;
   }
 
-  changemaxValue(value: number) {
-    this.maxValue = value;
+  changemaxValue() {
+    this.maxValue = this.ceil;
   }
 
   changesearch(search: string) {

@@ -16,6 +16,7 @@ import {_isNumberValue} from "@angular/cdk/coercion";
 import {NotificationService} from "../../../services/notification.service";
 import {AppComponent} from "../../../app.component";
 import Instance = WebAssembly.Instance;
+import {UserAccountComponent} from "../../user-account.component";
 
 @Component({
   selector: 'app-sold',
@@ -34,6 +35,7 @@ export class SoldComponent implements OnInit, AfterViewInit {
     private soldService: SoldService,
     private snackBar: SnackBarService,
     private users: CurrentUser,
+              private userAccount: UserAccountComponent,
               private notificationService: NotificationService,
               private app: AppComponent) {
 
@@ -52,6 +54,7 @@ export class SoldComponent implements OnInit, AfterViewInit {
       if(error.status === 200) {
         this.ngAfterViewInit();
         this.app.ngOnInit();
+        this.userAccount.ngOnInit()
         this.notificationService.getNotification();
       } else {
         this.snackBar.open(error.error, '', 3000, "warning");

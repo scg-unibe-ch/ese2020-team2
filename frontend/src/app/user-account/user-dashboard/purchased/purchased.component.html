@@ -28,7 +28,7 @@
 -->
 <br>
   <button mat-button style="background: white" [ngClass]="{'bg-yellow': filter === ''}"(click)="filter = '';ngAfterViewInit()">All</button>
-  <button mat-button style="background: white" [ngClass]="{'bg-red': filter === 'new'}"(click)="filter = 'new';ngAfterViewInit()">Unseen by seller</button>
+  <button mat-button style="background: white" [ngClass]="{'bg-red': filter === 'new'}"(click)="filter = 'new';ngAfterViewInit()">Not Seen by seller</button>
   <button mat-button style="background: white" [ngClass]="{'bg-blue': filter === 'pending'}" (click)="filter = 'pending'; ngAfterViewInit()">Pending</button>
   <button mat-button style="background: white" [ngClass]="{'bg-green': filter === 'shipped'}"(click)="filter = 'shipped'; ngAfterViewInit()">Shipped</button>
 <p>
