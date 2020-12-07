@@ -26,14 +26,12 @@ export class UserAccountComponent implements OnInit{
   activeLinkIndex = -1;
   listOfNotification$:Observable<Purchase[]>;
   listOfNot:Array<Purchase>= new Array;
-  userName: string;
   showNotification: boolean;
   constructor(private currentUser:CurrentUser,
               private router:Router,
               public matDialog: MatDialog,
               private notificationService: NotificationService) {
 
-    this.userName = JSON.parse(localStorage.getItem("user")).userName
     this.updateIndex()
 
     this.navLinks = [

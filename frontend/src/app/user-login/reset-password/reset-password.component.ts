@@ -18,7 +18,7 @@ userId:number;
 question: string;
 correctAnswer: string;
 answer:string;
-userName: string;
+userName = '';
 answerWasCorrect:boolean=false;
 word:string;
 attempts:number=3;

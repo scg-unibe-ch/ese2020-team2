@@ -28,9 +28,9 @@ export class DashboardProductListComponent {
     this.getAllProducts();
   }
   getimage(id: number) {
-    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0]?.filePath
   );
-    
+
 }
 
   /**
@@ -44,7 +44,7 @@ export class DashboardProductListComponent {
         this.getimage(productIds[i]);
         //Do something
     }})
-  
+
   }
 
   /**

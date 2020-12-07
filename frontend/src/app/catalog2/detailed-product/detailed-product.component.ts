@@ -71,9 +71,9 @@ export class DetailedProductComponent implements OnInit {
     this.location.back();
   }
   getimage(id: number) {
-    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.url = data[0].filePath
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.url = data[0]?.filePath
   );
-    
+
 }
 
   /**

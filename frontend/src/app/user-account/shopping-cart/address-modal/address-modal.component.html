@@ -35,7 +35,7 @@
         </mat-form-field>
 
         <mat-form-field style="width: 50%;">
-          <mat-select formControlName="country" placeholder="Country">
+          <mat-select formControlName="country" placeholder="Country" ngDefaultControl>
             <mat-option *ngFor="let country of countrys" [value]="country.value" >
               {{country.display}}
             </mat-option>

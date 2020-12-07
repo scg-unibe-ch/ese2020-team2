@@ -6,6 +6,9 @@ import {CurrentUser} from "./services/current-user";
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {RouterTestingModule} from "@angular/router/testing";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 
@@ -18,7 +21,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],imports: [
-        HttpClientModule, BrowserAnimationsModule, MatDialogModule
+        HttpClientModule, BrowserAnimationsModule, MatDialogModule, MatSnackBarModule, RouterTestingModule, MatMenuModule
       ], providers: [
         AuthService, CurrentUser, {provide: MatDialogRef, useValue:mockDialogRef}
       ],
@@ -36,7 +39,7 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual("frontend");
   });
-  
+
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();

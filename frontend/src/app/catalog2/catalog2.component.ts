@@ -74,8 +74,8 @@ export class Catalog2Component implements OnInit {
 
 
   ngOnInit(): void {
-    
-    
+
+
 
     this.getAllProducts();
     this.changeSliderOptions();
@@ -83,7 +83,7 @@ export class Catalog2Component implements OnInit {
   }
 
   getimage(id: number) {
-    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
+    this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0]?.filePath
   );
   }
   /**
@@ -233,7 +233,7 @@ export class Catalog2Component implements OnInit {
     }})
   }
 
- 
+
 
 getimageparam(id: number) {
   return this.httpClient.get<ProductImage>(environment.endpointURL + 'image/get/' +id).pipe(map(products =>
