@@ -14,7 +14,7 @@ const userService = new UserService();
  */
 
 /**
-*Adds the new user regestrations to the datbase after making the validations.
+*Adds the new user registrations to the database after making the validations.
 */
 userController.post('/register',
     async (req: Request, res: Response) => {
@@ -65,7 +65,7 @@ userController.get('/all', verifyToken,
  *Allows to edit a user.
  */
 userController.put('/editUser/:id', async (req: Request, res: Response) => {
-    if (User.findByPk(req.params.id)) {
+    if (await User.findByPk(req.params.id)) {
         userService.updateUser(req.body, req.params.id)
             .then(registered => res.status(200).send('User updated successfully.'))
             .catch(err => res.status(500).send(err));

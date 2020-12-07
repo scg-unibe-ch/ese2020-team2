@@ -3,14 +3,15 @@ import multer from 'multer';
 import fs from 'fs';
 import { Product } from '../models/product.model';
 import { ProductImage } from '../models/productImage.model';
+//import { ProductImageService } from "../services/productImage.service";
 
 /**
- * The resposibility of this class is to add and delete product pictures.
+ * The responsibility of this class is to add and delete product pictures.
  * It also returns the pictures associated to a particular product.
  */
 const imageController = express.Router();
 
-// Defining the storage location for the images and renaming the file with uniqe name.
+// Defining the storage location for the images and renaming the file with unique name.
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/');
@@ -52,7 +53,7 @@ imageController.post(
     '/add/', upload.single('productImage'), async (req: Request, res: Response, next: NextFunction) => {
         console.log(req.protocol + '://' + req.get('host'));
         req.body.filePath = req.protocol + '://' + req.get('host') + (req.file.destination).substring(1) + req.file.filename;
-        if (Product.findOne({ where: { productId: req.body.productId, userId: req.body.userId } })) {
+        if (await Product.findOne({ where: { productId: req.body.productId, userId: req.body.userId } })) {
             ProductImage.create(req.body).then(image_added => res.send(image_added)).catch(err => res.status(500).send(err));
         } else {
             res.status(404).send('No such product or user found.');
