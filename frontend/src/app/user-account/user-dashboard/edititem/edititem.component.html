@@ -12,7 +12,7 @@
 
         <mat-form-field>
           <input style="font-size: large;" required matInput placeholder="Title" type="text"
-            formControlName="title" [(ngModel)]="product.title" (ngModelChange)="product.title=$event">
+            formControlName="title" [ngModel]="product.title" (ngModelChange)="product.title=$event">
           <mat-error *ngIf="title.invalid"> title is required</mat-error>
         </mat-form-field>
 
@@ -31,7 +31,7 @@
         <mat-form-field>
           <mat-select formControlName="type" placeholder="Type" [ngModel]="product.type" (ngModelChange)="product.type=$event">
             <mat-option *ngFor="let type of types" [value]="type.value">
-              {{type?.display}}
+              {{type.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -39,7 +39,7 @@
         <mat-form-field>
           <mat-select formControlName="sellOrLend" placeholder="Sell/Lend" [ngModel]="product.sellOrLend" (ngModelChange)="product.sellOrLend=$event">
             <mat-option *ngFor="let contract of contracts" [value]="contract.value">
-              {{contract?.display}}
+              {{contract.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -47,7 +47,7 @@
         <mat-form-field>
           <mat-select formControlName="deliveryPossible" placeholder="Delivery" [ngModel]="product.deliveryPossible" (ngModelChange)="product.deliveryPossible=$event">
             <mat-option *ngFor="let delivery of deliverys" [value]="delivery.value">
-              {{delivery?.display}}
+              {{delivery.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -63,7 +63,7 @@
         <mat-form-field *ngIf="!(product.isPremier)">
           <mat-select style="font-size: large;" formControlName="isPremier" [ngModel]="product.isPremier" (ngModelChange)="product.isPremier=$event" type="boolean" placeholder="Upgrade">
             <mat-option *ngFor="let premier of premiers" [value]="premier.value">
-              {{premier?.display}}
+              {{premier.display}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -73,6 +73,6 @@
       </div>
     </mat-card>
 
-    <button class="btn btn-warning" [disabled]="editformular.invalid" [routerLink]="['/account']" (click)="confirm(product); clear()" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
+    <button class="btn btn-warning" [disabled]="editformular.invalid" (click)="confirm(product); clear()" type="submit" style="background-color: rgb(51, 180, 51);">Confirm</button>
 
   </form>

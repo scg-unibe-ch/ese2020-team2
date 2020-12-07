@@ -112,10 +112,12 @@ export class ShoppingCartService implements OnInit {
       }).subscribe((res: any) => {
         },
         (error: any) => {
-          if (error.status === 200) {
+          if (error.status === 200 && message) {
             this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
           } else {
-            this.snackBar.open(error.error.text, '', 2000, "warning");
+            if(message) {
+              this.snackBar.open(error.error.text, '', 2000, "warning");
+            }
           }})
     }
     this.ngOnInit();
@@ -127,7 +129,9 @@ export class ShoppingCartService implements OnInit {
         if (error.status === 200 && message) {
           this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
         } else {
-          this.snackBar.open(error.error.text, '', 2000, "warning");
+          if(message) {
+            this.snackBar.open(error.error.text, '', 2000, "warning");
+          }        
         }})
     this.ngOnInit();
   }

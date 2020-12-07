@@ -25,7 +25,7 @@ export class Catalog2Component implements OnInit {
   products$: Observable<Product[]>;
   ratingArray = [];
   starCount = 5;
-  userId: number;
+  userId$: Observable<string>;
   sortby: string = "";
   search: string = "";
   location: string = "";
@@ -52,6 +52,7 @@ export class Catalog2Component implements OnInit {
   urls = Array.apply(null, Array(100));
 
 
+
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
               private users: CurrentUser,
@@ -61,7 +62,7 @@ export class Catalog2Component implements OnInit {
 
     this.loggedIn$ = authService.loggedIn$;
     if (this.loggedIn$.value == true){
-    this.userId = JSON.parse(localStorage.getItem('user')).userId;
+    this.userId$ = this.users.getCurrentUserProperty("userId")
   }
 
 

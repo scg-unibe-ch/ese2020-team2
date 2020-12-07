@@ -31,11 +31,8 @@ export class AddressModalComponent implements OnInit  {
   firstName$: Observable<any>;
   lastName$: Observable<any>;
   role$: Observable<any>;
-  shoppingCartPurchases$: Observable<ShoppingCartPurchase[]>;
   shoppingCartPurchases: ShoppingCartPurchase[];
-  shoppingCart$: Observable<ShoppingCart[]>;
   shoppingCart: ShoppingCart[];
-  userAddress: string;
 
 
   userForm = this.fb.group(

@@ -1,6 +1,6 @@
 <!--The account of the user has 3 tabs containing the wallet, the history and the todolist-->
-<mat-card style="background: #ED5281" *ngIf="showNotification">
-    <mat-card-title style="text-align: center; color: white">You have {{(listOfNotification$ | async)?.length}} new sells</mat-card-title>
+<mat-card style="background: #EFCDCD" *ngIf="showNotification">
+    <mat-card-title style="text-align: center; color: black">You have {{(listOfNotification$ | async)?.length}} new sells</mat-card-title>
   <div style="text-align: center;">
     <button mat-raised-button color="primary" [routerLink]="['/account/dashboard/sold-lent']">See sells</button>
   </div>

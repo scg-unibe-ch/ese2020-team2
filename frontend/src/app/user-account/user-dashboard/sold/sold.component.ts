@@ -82,7 +82,6 @@ export class SoldComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.filterSellOrLend(this.filter, this.filter2);
     this.sells$.subscribe(purchases => {
-      console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
       this.dataSource.sortingDataAccessor =
         (data: any, sortHeaderId: string): string | number => {

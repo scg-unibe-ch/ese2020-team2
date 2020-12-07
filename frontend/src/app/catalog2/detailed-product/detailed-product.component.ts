@@ -48,10 +48,6 @@ export class DetailedProductComponent implements OnInit {
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArray.push(index);
     }
-
-    if (this.loggedIn$.value == true) {
-      this.userId = JSON.parse(localStorage.getItem('user')).userId;
-    }
   }
 
 

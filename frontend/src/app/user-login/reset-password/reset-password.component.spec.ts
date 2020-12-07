@@ -16,7 +16,7 @@ describe('ResetPasswordComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ResetPasswordComponent ],
-      imports: [HttpClientModule, MatSnackBarModule, ReactiveFormsModule, BrowserAnimationsModule, MatFormFieldModule,RouterTestingModule.withRoutes(
+      imports: [HttpClientTestingModule, MatSnackBarModule, ReactiveFormsModule, BrowserAnimationsModule, MatFormFieldModule,RouterTestingModule.withRoutes(
         [{path: 'error/not-found', component: NotFoundComponent}])],
     })
     .compileComponents();

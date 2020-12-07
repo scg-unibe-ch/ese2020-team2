@@ -165,23 +165,25 @@ confirm(product: Product): void {
   if (product.isPremier == true) {
     this.updatewallet();
   }
-  this.httpClient.put(environment.endpointURL + 'product/edit/' + product?.productId, {
-    adminApproval: Approval?.pending,
-    typ: product?.type,
-    title: product?.title,
-    price: product?.price,
-    
-    isPremier: product?.isPremier,
-    description: product?.description,
-    location: product?.location,
-    sellOrLend: product?.sellOrLend,
-    deliveryPossible: product?.deliveryPossible,
+  this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {
+    adminApproval: Approval.pending,
+    typ: product.type,
+    title: product.title,
+    price: product.price,
+
+    isPremier: product.isPremier,
+    description: product.description,
+    location: product.location,
+    sellOrLend: product.sellOrLend,
+    deliveryPossible: product.deliveryPossible,
   }).subscribe();
-}
+      this.router.navigate(['account/dashboard/posted']);
+
+    }
 
 clear() {
   this.editformular.reset();
-  //this.username.setValue("");
+
 }
 
 }

@@ -11,11 +11,13 @@ import {skipWhile} from "rxjs/operators";
  */
 export class AuthService implements OnInit{
 
-  loggedIn$ = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
   loggedIn: boolean;
+  loggedIn$: BehaviorSubject<boolean>;
 
   constructor(private httpClient: HttpClient) {
       this.CheckAccessToSecuredEndpoint();
+    this.loggedIn$ = new BehaviorSubject<boolean>(!!localStorage.getItem('userToken'));
+
   }
 
   ngOnInit() {

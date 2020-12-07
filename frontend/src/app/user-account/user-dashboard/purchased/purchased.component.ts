@@ -72,7 +72,6 @@ ngOnInit(): void {
   ngAfterViewInit() {
     this.filterNotificationCheck(this.filter);
     this.purchases$.subscribe(purchases => {
-      console.log(purchases);
       this.dataSource = new MatTableDataSource(purchases);
       this.dataSource.sortingDataAccessor =
         (data: any, sortHeaderId: string): string | number => {

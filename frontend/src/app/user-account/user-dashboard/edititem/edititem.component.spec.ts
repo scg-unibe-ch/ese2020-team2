@@ -12,6 +12,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('EdititemComponent', () => {
     let component: EdititemComponent;
@@ -20,6 +21,7 @@ describe('EdititemComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [EdititemComponent],
+          schemas: [CUSTOM_ELEMENTS_SCHEMA],
           imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(
             [{path: 'account', component: UserAccountComponent}]),
             ReactiveFormsModule, MatSnackBarModule,

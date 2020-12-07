@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {RouterTestingModule} from "@angular/router/testing";
 import {MatMenuModule} from "@angular/material/menu";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 
 
@@ -21,7 +22,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],imports: [
-        HttpClientModule, BrowserAnimationsModule, MatDialogModule, MatSnackBarModule, RouterTestingModule, MatMenuModule
+        HttpClientTestingModule, BrowserAnimationsModule, MatDialogModule, MatSnackBarModule, RouterTestingModule, MatMenuModule
       ], providers: [
         AuthService, CurrentUser, {provide: MatDialogRef, useValue:mockDialogRef}
       ],
