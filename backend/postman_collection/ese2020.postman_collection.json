@@ -1,67 +1,40 @@
 {
 	"info": {
-		"_postman_id": "d777af06-c630-4138-8628-5dc5880c6ae6",
-		"name": "ese2020",
+		"_postman_id": "5cc001d3-f7a8-48e0-b788-c6833a9d6c01",
+		"name": "ESE 2020",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "static resources",
+			"name": "todolist get",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/images/tech_overview.png",
+					"raw": "http://localhost:3000/todolist",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"images",
-						"tech_overview.png"
+						"todolist"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "secured endpoint",
+			"name": "todolist post",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkpvbmF0aGFuIiwidXNlcklkIjoyLCJpYXQiOjE1OTk0NzgwMTYsImV4cCI6MTU5OTQ4NTIxNn0.Jr97kF4fFvM0cAujHBsXL3m1BNRXV2jS4lwzlUIljME",
-							"type": "string"
-						}
-					]
-				},
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/secured",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"secured"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user login",
-			"request": {
-				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"Jonathan\",\r\n    \"password\": \"notSecure2\"\r\n}",
+					"raw": "{\r\n    \"name\":\"ESE-2020-HarikaSR1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,28 +42,27 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/user/login",
+					"raw": "http://localhost:3000/todolist",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"user",
-						"login"
+						"todolist"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "user registration",
+			"name": "User registration1",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\":\"Nora\",\r\n    \"password\":\"notSecure12\"\r\n}",
+					"raw": "  {\r\n    \"userName\": \"user1\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"user1@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,12 +85,21 @@
 			"response": []
 		},
 		{
-			"name": "user list",
+			"name": "User registration2",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"userName\": \"user2\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"user2@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/user/",
+					"raw": "http://localhost:3000/user/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,39 +107,20 @@
 					"port": "3000",
 					"path": [
 						"user",
-						""
+						"register"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "todolist list",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/todolist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"todolist"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "todolist add",
+			"name": "User Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"ESE-2020\"\r\n}",
+					"raw": "{\r\n    \"userName\": \"user1\",\r\n    \"password\": \"1234SR\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,122 +128,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/todolist",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"todolist"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "todoitem delete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/todoitem/7",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"todoitem",
-						"7"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "todolist delete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/todolist/4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"todolist",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "todoitem add",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"welcome\",\r\n    \"done\":\"false\",\r\n    \"todoListId\":\"2\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/todoitem",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"todoitem"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "welcome page",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user login nora",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"userName\":\"Nora\",\r\n    \"password\":\"notSecure12\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/user/login",
+					"raw": "http://localhost:3000/user/login/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -289,7 +136,783 @@
 					"port": "3000",
 					"path": [
 						"user",
-						"login"
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"user1\",\r\n    \"email\": \"user1@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": \"1234\",\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"moneyInWallet\": 100,\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"What is your favorite hobby?\",\r\n    \"passwordAnswer\": \"Painting\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user/editUser/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"editUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\" : \"product\",\r\n    \"title\": \"product1\",\r\n    \"userId\": 1,\r\n    \"price\":1,\r\n    \"description\": \"This is a new product called product1\",\r\n    \"location\":\"Bern\",\r\n    \"sellOrLend\": \"sell\",\r\n    \"piecesAvailable\": 10,\r\n    \"status\":\"available\",\r\n    \"deliveryPossible\": true,\r\n    \"isPremier\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product/add/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\" : \"product\",\r\n    \"title\": \"product1\",\r\n    \"userId\": 1,\r\n    \"price\":1,\r\n    \"description\": \"This is a new product called product1\",\r\n    \"location\":\"Bern\",\r\n    \"sellOrLend\": \"sell\",\r\n    \"piecesAvailable\": 10,\r\n    \"status\":\"available\",\r\n    \"deliveryPossible\": true,\r\n    \"productRating\": 0,\r\n    \"isPremier\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product/edit/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"edit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/product/get/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add purchase",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0e10f4c-d6e7-48eb-ab4f-cd09a5db0b61",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/purchase/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add purchase cart",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0e10f4c-d6e7-48eb-ab4f-cd09a5db0b61",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\",\r\n    \"paymentType\": \"wallet points\",\r\n    \"walletPayment\": true\r\n},\r\n{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\",\r\n    \"paymentType\": \"wallet points\",\r\n    \"walletPayment\": true\r\n}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/purchase/addCart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"addCart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit purchase",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0e10f4c-d6e7-48eb-ab4f-cd09a5db0b61",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/purchase/edit/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"edit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get AllBuyerPurchases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/purchase/getAllBuyerPurchases/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"getAllBuyerPurchases",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get AllSellerSold",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/purchase/getAllSellerSold/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"getAllSellerSold",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get AllSellerSoldProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/purchase/getAllSellerSoldProducts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"getAllSellerSoldProducts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get AllSellerLendServices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/purchase/getAllSellerLendServices/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"purchase",
+						"getAllSellerLendServices",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add review",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"sellerUserId\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"buyerUserName\" : \"user2\",\r\n    \"reviewText\": \"review text here\",\r\n    \"rating\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/add/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit review",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"sellerUserId\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"buyerUserName\" : \"user2\",\r\n    \"reviewText\": \"review text here\",\r\n    \"rating\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/edit/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"edit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete review",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"reviewText\": \"review2 text\",\r\n    \"rating\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Buyer Reviews",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"reviewText\": \"review1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/getBuyerReviews/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"getBuyerReviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Reviews",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"reviewText\": \"review1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/getProductReviews/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"getProductReviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Seller Reviews",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a26fa127-6aec-4308-acb0-b673573fb338",
+						"exec": [
+							"const dateNow= new Date();\r",
+							"pm.environment.set('currentDate', dateNow.toISOString())"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 2,\r\n    \"productId\": 1,\r\n    \"purchaseId\":1,\r\n    \"reviewText\": \"review1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/review/getSellerReviews/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"review",
+						"getSellerReviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Password reset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"user1\",\r\n    \"password\": \"1234SR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user/passwordReset/user1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"passwordReset",
+						"user1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productImage",
+							"type": "file",
+							"src": "/C:/Users/Harika/Desktop/Semester3/Introduction_to_Software_Engineering/Project/parrot.jpg"
+						},
+						{
+							"key": "userId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productId",
+							"value": "1",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/image/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"image",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/image/get/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"image",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Image",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/image/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"image",
+						"delete",
+						"1"
 					]
 				}
 			},

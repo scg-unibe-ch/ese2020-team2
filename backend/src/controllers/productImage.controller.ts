@@ -42,7 +42,6 @@ const upload = multer({
 // Returns a string with current date and time without special characters.
 function getDateTime() {
     const date = new Date().toISOString();
-    console.log(date);
     return date.replace(/[^a-zA-Z0-9]/g, '');
 }
 
