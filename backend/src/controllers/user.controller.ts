@@ -65,7 +65,7 @@ userController.get('/all', verifyToken,
  *Allows to edit a user.
  */
 userController.put('/editUser/:id', async (req: Request, res: Response) => {
-    if (await User.findByPk(req.params.id)) {
+    if (User.findByPk(req.params.id)) {
         userService.updateUser(req.body, req.params.id)
             .then(registered => res.status(200).send('User updated successfully.'))
             .catch(err => res.status(500).send(err));

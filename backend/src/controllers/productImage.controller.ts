@@ -3,7 +3,7 @@ import multer from 'multer';
 import fs from 'fs';
 import { Product } from '../models/product.model';
 import { ProductImage } from '../models/productImage.model';
-//import { ProductImageService } from "../services/productImage.service";
+
 
 /**
  * The responsibility of this class is to add and delete product pictures.
