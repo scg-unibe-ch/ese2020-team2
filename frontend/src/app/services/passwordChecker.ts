@@ -9,8 +9,17 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class CustomValidationService {
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient) { }
+/**
+ * Checks if the two given strings are equal
+ * 
+ * If eather password or confirmPassword are null, it will return null
+ * If there are errors but not a password mismatch, then it returns null
+ * If if the password and the confirmPassword are not equal, it will set an error withpasswordMissmatch true
+ * Otherwise it will sets the errors as null
+ * @param password rapresents password
+ * @param confirmPassword rapresents the confirm password
+ */
   passwordMatchValidator(password: string, confirmPassword: string) {
     return (formGroup: FormGroup) => {
       const passwordControl = formGroup.controls[password];

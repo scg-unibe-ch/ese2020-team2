@@ -9,16 +9,21 @@ import { Purchase } from '../models/purchase.model';
 })
 export class SoldService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-
-  getSells() : Observable<Purchase[]> {
+/**
+ * Gets all sold product done by the current user
+ */
+  getSells(): Observable<Purchase[]> {
     return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerSoldProducts/' +
       JSON.parse(localStorage.getItem('user')).userId)
- }
+  }
 
- getlends() : Observable<Purchase[]> {
-  return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerLendServices/' +
-    JSON.parse(localStorage.getItem('user')).userId)
-}
+  /**
+   * Gets all lended item by the current user
+   */
+  getlends(): Observable<Purchase[]> {
+    return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllSellerLendServices/' +
+      JSON.parse(localStorage.getItem('user')).userId)
+  }
 }

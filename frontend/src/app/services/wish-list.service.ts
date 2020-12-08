@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Product} from "../models/product.model";
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {SnackBarService} from "./snackBar.service";
-import {ShoppingCart} from "../models/shoppingCart.model";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import { Product } from "../models/product.model";
+import { environment } from "../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { SnackBarService } from "./snackBar.service";
+import { ShoppingCart } from "../models/shoppingCart.model";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,22 @@ import {Observable} from "rxjs";
 export class WishListService {
 
   constructor(public httpClient: HttpClient,
-              public snackBar: SnackBarService) {
+    public snackBar: SnackBarService) {
   }
 
+  /**
+   * Returns the whish lits of the current user
+   */
   getWishList(): Observable<ShoppingCart[]> {
     return this.httpClient.get<ShoppingCart[]>(environment.endpointURL + 'cart/getAll/' + JSON.parse(localStorage.getItem('user')).userId).
-    pipe(map(shoppingCarts => shoppingCarts.filter(shoppingCart => shoppingCart.wishList === true)));
+      pipe(map(shoppingCarts => shoppingCarts.filter(shoppingCart => shoppingCart.wishList === true)));
   }
 
+  /**
+   * Adds a given product to the whish list of the current user
+   * @param product that the user wants to add in his/her whish list
+   * @param quantity 
+   */
   addProductToWishList(product: Product, quantity: number) {
     this.httpClient.post(environment.endpointURL + 'cart/add',
       {
@@ -39,6 +47,7 @@ export class WishListService {
         this.snackBar.open("Product was added to the wish list", '', 3000, "success");
       } else {
         this.snackBar.open(error.error, '', 3000, "warning");
-      }});
+      }
+    });
   }
 }

@@ -9,13 +9,16 @@ import { Purchase } from '../models/purchase.model';
 })
 export class PurchaseService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
 
+  /**
+   * Gets all the purchased items from the current user
+   */
   getPurchases(): Observable<Purchase[]> {
     return this.httpClient.get<Purchase[]>(environment.endpointURL + 'purchase/getAllBuyerPurchases/' +
       JSON.parse(localStorage.getItem('user')).userId)
- }
+  }
 
   /**
    * Gets all the purchases of the provided user from the backend
