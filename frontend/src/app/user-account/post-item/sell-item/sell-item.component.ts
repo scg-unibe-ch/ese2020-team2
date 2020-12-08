@@ -93,6 +93,11 @@ export class SellItemComponent implements OnInit {
   {value: false, display: 'NO'}
 ];
 
+premiersnotenough: IsPremier[] = [
+  {value: false, display: 'NO'},
+];
+
+
  locations: Location[] = [
   {value: 'bern', display: 'Bern'},
   {value: 'zürich', display: 'Zürich'},
@@ -168,6 +173,7 @@ export class SellItemComponent implements OnInit {
       this.updatewallet();
     }
     this.clear(); 
+    this.router.navigate(['/account/dashboard/posted']);
 
 
 }

@@ -30,16 +30,16 @@
 </div>
 </div>
 -->
-
+<section class="outer">
 <br>
-<mat-form-field style="background: white">
+<mat-form-field style="background: white" class="mat-elevation-z6">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Filter..." #input>
 </mat-form-field>
 <p>
 
 <div>
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
+  <table mat-table class="mat-elevation-z6" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
 
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
@@ -121,6 +121,7 @@
     <tr mat-row [ngClass]="{'highlight': row.notificationCheck === true}" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+  <mat-paginator class="mat-elevation-z4" [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
 </div>
 
+</section>

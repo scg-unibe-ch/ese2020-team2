@@ -26,14 +26,16 @@
 </div>
 
 -->
-<br>
-  <button mat-button style="background: white" [ngClass]="{'bg-yellow': filter === ''}"(click)="filter = '';ngAfterViewInit()">All</button>
-  <button mat-button style="background: white" [ngClass]="{'bg-red': filter === 'new'}"(click)="filter = 'new';ngAfterViewInit()">Not Seen by seller</button>
-  <button mat-button style="background: white" [ngClass]="{'bg-blue': filter === 'pending'}" (click)="filter = 'pending'; ngAfterViewInit()">Pending</button>
-  <button mat-button style="background: white" [ngClass]="{'bg-green': filter === 'shipped'}"(click)="filter = 'shipped'; ngAfterViewInit()">Shipped</button>
-<p>
+
+  <section class="outer">
+  <br>
+    <button mat-button style="background: white" [ngClass]="{'bg-yellow': filter === ''}"(click)="filter = '';ngAfterViewInit()">All</button>
+    <button mat-button style="background: white" [ngClass]="{'bg-red': filter === 'new'}"(click)="filter = 'new';ngAfterViewInit()">Not Seen by seller</button>
+    <button mat-button style="background: white" [ngClass]="{'bg-blue': filter === 'pending'}" (click)="filter = 'pending'; ngAfterViewInit()">Pending</button>
+    <button mat-button style="background: white" [ngClass]="{'bg-green': filter === 'shipped'}"(click)="filter = 'shipped'; ngAfterViewInit()">Shipped</button>
+  <p>
 <div>
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
+  <table mat-table class="mat-elevation-z6" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
 
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
@@ -88,6 +90,7 @@
     'bg-green': row.notificationCheck === 'shipped'}" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+  <mat-paginator class="mat-elevation-z4" [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
 </div>
 
+</section>
