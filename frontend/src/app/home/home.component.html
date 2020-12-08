@@ -63,24 +63,19 @@
              <div style=" bottom:0px;">
                 <button  class="btn-gradient"[routerLink]="['/product', product?.productId]" style="width: 18%;">VIEW</button>
 
-                <select   style="width: 18%; " class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product?.userId == userId)"[(ngModel)]="quantity[index]" >
+                <select   style="width: 18%; " class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product?.userId == (userId$ | async))"[(ngModel)]="quantity[index]" >
                   <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
                   <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
                   <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
-                  <option *ngIf="product?.piecesAvailable >=5" value=3>5</option>
-                  <option *ngIf="product?.piecesAvailable >=10" value=3>10</option>
-                  <option *ngIf="product?.piecesAvailable >=15" value=3>15</option>
-                  <option *ngIf="product?.piecesAvailable >=20" value=3>20</option>
-                  <option *ngIf="product?.piecesAvailable >=50" value=3>50</option>
-                  <option *ngIf="product?.piecesAvailable >=100" value=3>100</option>
+
                 </select>
 
-                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product?.userId == userId)" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
-
-                <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
-
-
-
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product?.userId == (userId$ | async))"
+                        (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit"
+                        style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product?.userId == (userId$ | async))"
+                        (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;">
+                  <i class="fa fa-heart" aria-hidden="true"></i></button>
                 <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
                  <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
                 </div>

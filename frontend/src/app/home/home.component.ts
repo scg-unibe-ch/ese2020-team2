@@ -22,7 +22,7 @@ export class HomeComponent {
   products$: Observable<Product[]>;
   ratingArray = [];
   starCount = 5;
-  userId: number;
+  //userId: number;
   sortby: string = "";
   search: string = "";
   location: string = "";
@@ -32,8 +32,7 @@ export class HomeComponent {
   loopnumber: number;
   minValue: number = 0;
   maxValue: number = 50;
-
-
+  userId$: Observable<number>;
   a: number;
   urls = Array.apply(null, Array(100));
 
@@ -49,9 +48,9 @@ export class HomeComponent {
     public shoppingCartService: ShoppingCartService) {
 
 this.loggedIn$ = authService.loggedIn$;
-if (this.loggedIn$.value == true){
-this.userId = JSON.parse(localStorage.getItem('user'))?.userId;
-}
+    if (this.loggedIn$.value == true){
+      this.userId$ = this.users.getCurrentUserProperty("userId")
+    }
 
 for (let index = 0; index < this.starCount; index++) {
 this.ratingArray.push(index);
@@ -60,7 +59,7 @@ this.ratingArray.push(index);
 
 ngOnInit(): void {
   this.getAllProducts();
-  
+
 }
 
 
