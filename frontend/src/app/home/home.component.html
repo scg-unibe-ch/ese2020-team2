@@ -116,8 +116,8 @@
             </mat-icon>
             <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
           </div>
-          <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-          <img *ngIf="urls[product.productId] == null" mat-card-image
+          <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product?.productId]"src={{urls[product.productId]}}>
+          <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product?.productId]"
             src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
 
 
