@@ -67,6 +67,64 @@
 					"response": []
 				},
 				{
+					"name": "User Registration denied: already existing userName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"userName\": \"user2\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"noUser@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Registration denied: already existing Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"userName\": \"noUser\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"user1@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "User Login",
 					"request": {
 						"method": "POST",
@@ -74,6 +132,66 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userName\": \"user1\",\r\n    \"password\": \"1234SR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login denied: Usernare does not exist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"NoUser\",\r\n    \"password\": \"1234SR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login denied: Wrong password for user1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"user1\",\r\n    \"password\": \"wrongPW\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,64 +239,6 @@
 								"user",
 								"editUser",
 								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "User Registration denied because of already existing userName",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "  {\r\n    \"userName\": \"user2\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"noUser@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/user/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"user",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "User Registration denied because of already existing Email",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "  {\r\n    \"userName\": \"noUser\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"user1@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/user/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"user",
-								"register"
 							]
 						}
 					},
