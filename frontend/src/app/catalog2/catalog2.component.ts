@@ -75,9 +75,7 @@ export class Catalog2Component implements OnInit {
 
 
   ngOnInit(): void {
-
-
-
+    this.userId$ = this.users.getCurrentUserProperty("userId")
     this.getAllProducts();
     this.changeSliderOptions();
     this.authService.CheckAccessToSecuredEndpoint()
@@ -93,7 +91,7 @@ export class Catalog2Component implements OnInit {
   changeSliderOptions() {
     this.productsService.getProducts().subscribe(products => {
       const newOptions: Options = Object.assign({}, this.options);
-      this.ceil = Math.max.apply(Math, products.filter(product => 
+      this.ceil = Math.max.apply(Math, products.filter(product =>
         product.visibleInMarket==true).map(
         function(o) { return o.price; }))
       this.ceil = Math.ceil(this.ceil / 10) * 10;

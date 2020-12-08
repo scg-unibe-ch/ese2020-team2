@@ -56,3 +56,6 @@ td, th {
   background: #eccc6c;
 }
 
+.mat-snack-bar-container {
+  margin-top: 10px !important;
+}

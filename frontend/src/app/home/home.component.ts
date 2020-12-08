@@ -59,6 +59,7 @@ this.ratingArray.push(index);
 
 ngOnInit(): void {
   this.getAllProducts();
+  this.userId$ = this.users.getCurrentUserProperty("userId")
 
 }
 
