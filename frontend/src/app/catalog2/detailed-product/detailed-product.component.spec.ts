@@ -5,18 +5,23 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterTestingModule} from "@angular/router/testing";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {NotFoundComponent} from "../../error/not-found/not-found.component";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 describe('DetailedProductComponent', () => {
   let component: DetailedProductComponent;
   let fixture: ComponentFixture<DetailedProductComponent>;
-
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
+ 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DetailedProductComponent, NotFoundComponent ],
-      imports: [HttpClientModule, MatSnackBarModule,  RouterTestingModule.withRoutes(
+      imports: [HttpClientModule, MatSnackBarModule, MatDialogModule,  RouterTestingModule.withRoutes(
         [{path: 'error/not-found', component: NotFoundComponent}])],
-      providers: []
+      providers: [{provide: MatDialogRef, useValue:mockDialogRef}]
     })
     .compileComponents();
     spyOn(window.localStorage, 'getItem').and.callFake(function() {
