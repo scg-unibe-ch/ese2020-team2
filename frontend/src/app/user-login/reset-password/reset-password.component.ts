@@ -13,15 +13,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-list$:Observable<any>;
-userId:number;
+list$: Observable<any>;
+userId: number;
 question: string;
 correctAnswer: string;
 answer:string;
 userName = '';
-answerWasCorrect:boolean=false;
-word:string;
-attempts:number=3;
+answerWasCorrect: boolean = false;
+word: string;
+attempts: number = 3;
 passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   constructor(private httpClient: HttpClient,
     private router: Router,
@@ -34,7 +34,6 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
       {
         password: ["", Validators.required],
         confirmPassword: ["", Validators.required],
-
       },
       {
         validator: this.customValidator.passwordMatchValidator(
@@ -43,6 +42,7 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
         )
       }
     );
+
   ngOnInit(): void {
     this.userName = this.activatedRoute.snapshot.paramMap.get("name");
     this.list$=this.httpClient.get(environment.endpointURL + 'user/passwordReset/' +this.userName);
@@ -53,13 +53,15 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
   get password() {
     return this.userForm.get("password");
   }
+
   setVariable(){
     this.list$.subscribe(item => this.userId = item.userId)
     this.list$.subscribe(item => this.question=item.passwordQuestion)
     this.list$.subscribe(item => this.correctAnswer = (item.passwordAnswer.toLowerCase()))
   }
+
   checkAnswer(){
-    this.answerWasCorrect= (this.correctAnswer===(this.answer.toLowerCase()));
+    this.answerWasCorrect = (this.correctAnswer === this.answer.toLowerCase());
     if(this.answerWasCorrect){
     this.snackBar.open('You answered correctly', '', 3000, "success");
   } else {
@@ -69,10 +71,9 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
       this.blockAccount();
     }
   }
+
   changePassword(){
-
     this.httpClient.put(environment.endpointURL + 'user/editUser/'+ this.userId, this.userForm.value).subscribe();
-
     this.router.navigate(['login']);
   }
 

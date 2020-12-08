@@ -71,16 +71,17 @@ export class ShoppingCartComponent implements OnInit {
               private snackBar: SnackBarService,
               private shoppingCartService: ShoppingCartService,
               private matDialog: MatDialog) {
-                this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
+
+    this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
     this.loggedIn$ = authService.loggedIn$;
-   
+
     matDialog.afterAllClosed.subscribe(() => {
           this.ngOnInit();})
 
   }
 
   ngOnInit(): void {
-    
+
     this.getShoppingCart();
     this.calculatePrices();
     this.CreateShoppingCartPurchases();
@@ -96,13 +97,13 @@ export class ShoppingCartComponent implements OnInit {
       this.country$ = this.users.getCurrentUserProperty('country');
     }
 
-    
+
   }
 
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0].filePath
   );
-    
+
 }
 
 
@@ -110,8 +111,6 @@ export class ShoppingCartComponent implements OnInit {
     this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
   }
 
-
-  
   private getAddressAsString() {
     this.users.getCurrentUser().subscribe(user => {
       this.userAddress = [user.firstName, user.lastName, user.street, user.pinCode, user.city, user.country]
@@ -134,11 +133,8 @@ export class ShoppingCartComponent implements OnInit {
       this.deliveryRequested = shoppingCart.map(shoppingCart => shoppingCart.deliveryRequested)
       for (var i = 0; i < productIds.length; i++) {
         this.getimage(productIds[i]);
-        //Do something
     }
     })
-      
-    
   }
 
   removeShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {
@@ -147,25 +143,30 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.httpClient.put(environment.endpointURL + 'cart/edit/' + shoppingCartProduct.cartId, {
         shoppingCart: false
-      }).subscribe((res: any) => {
-        },
+      }).subscribe(
+        (res: any) => {},
         (error: any) => {
-          if (error.status === 200) {
+          if (error.status === 200 && message) {
             this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
           } else {
-            this.snackBar.open(error.error.text, '', 2000, "warning");
+            if(message) {
+              this.snackBar.open(error.error.text, '', 2000, "warning");
+            }
           }})
     }
     this.ngOnInit();
   }
 
   deleteShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {
-    this.httpClient.delete(environment.endpointURL + 'cart/delete/' + shoppingCartProduct.cartId).subscribe((res: any) => {},
+    this.httpClient.delete(environment.endpointURL + 'cart/delete/' + shoppingCartProduct.cartId).subscribe(
+      (res: any) => {},
       (error: any) => {
         if (error.status === 200 && message) {
           this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
         } else {
-          this.snackBar.open(error.error.text, '', 2000, "warning");
+          if(message) {
+            this.snackBar.open(error.error.text, '', 2000, "warning");
+          }
         }})
     this.ngOnInit();
   }
@@ -193,6 +194,7 @@ export class ShoppingCartComponent implements OnInit {
     }).subscribe((res: any) => {},
       (error: any) => {
         if (error.status === 200) {
+          this.ngOnInit();
           this.snackBar.open("Shopping card has been updated", '', 2000, "info");
         } else {
           this.snackBar.open(error.error.text, '', 2000, "warning");
@@ -203,7 +205,6 @@ export class ShoppingCartComponent implements OnInit {
     this.ngOnInit()
     this.shoppingCartPurchases$.pipe(finalize(() => {
       this.ngOnInit();
-      this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
     }))
       .subscribe(data => {
         this.shoppingCartPurchases = data;
@@ -211,6 +212,7 @@ export class ShoppingCartComponent implements OnInit {
           (res: any) => {},
           (error: any) => {
             if (error.status === 200) {
+              this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
               this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
             } else {
               this.snackBar.open(error.error, '', 3000, "warning");

@@ -75,7 +75,6 @@ export class ShoppingCartService implements OnInit {
     this.ngOnInit()
     this.shoppingCartPurchases$.pipe(finalize(() => {
       this.ngOnInit();
-      this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
     }))
       .subscribe(data => {
         this.shoppingCartPurchases = data;
@@ -83,6 +82,7 @@ export class ShoppingCartService implements OnInit {
           (res: any) => {},
           (error: any) => {
             if (error.status === 200) {
+              this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
               this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
             } else {
               this.snackBar.open(error.error, '', 3000, "warning");
@@ -109,8 +109,8 @@ export class ShoppingCartService implements OnInit {
     } else {
       this.httpClient.put(environment.endpointURL + 'cart/edit/' + shoppingCartProduct.cartId, {
         shoppingCart: false
-      }).subscribe((res: any) => {
-        },
+      }).subscribe(
+        (res: any) => {},
         (error: any) => {
           if (error.status === 200 && message) {
             this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
@@ -131,7 +131,7 @@ export class ShoppingCartService implements OnInit {
         } else {
           if(message) {
             this.snackBar.open(error.error.text, '', 2000, "warning");
-          }        
+          }
         }})
     this.ngOnInit();
   }
