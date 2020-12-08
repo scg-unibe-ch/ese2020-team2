@@ -1,11 +1,11 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment} from "../../../../environments/environment";
-import {Product} from "../../../models/product.model";
-import {Observable} from "rxjs";
-import {ProductsService} from "../../../services/products.service";
-import {finalize, map} from "rxjs/operators";
-import {Approval} from "../../../models/approval";
+import { environment } from "../../../../environments/environment";
+import { Product } from "../../../models/product.model";
+import { Observable } from "rxjs";
+import { ProductsService } from "../../../services/products.service";
+import { finalize, map } from "rxjs/operators";
+import { Approval } from "../../../models/approval";
 import { ProductImage } from '../../../../../../backend/src/models/productImage.model';
 
 @Component({
@@ -21,7 +21,7 @@ export class DashboardProductListComponent {
   urls = Array.apply(null, Array(100));
 
   constructor(private httpClient: HttpClient,
-              private productsService: ProductsService) {}
+    private productsService: ProductsService) { }
 
 
   ngOnInit(): void {
@@ -29,9 +29,9 @@ export class DashboardProductListComponent {
   }
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.urls[id] = data[0]?.filePath
-  );
+    );
 
-}
+  }
 
   /**
    * Get all the products currently stored in the database of the backend
@@ -43,7 +43,8 @@ export class DashboardProductListComponent {
       for (var i = 0; i < productIds.length; i++) {
         this.getimage(productIds[i]);
         //Do something
-    }})
+      }
+    })
 
   }
 
@@ -52,7 +53,7 @@ export class DashboardProductListComponent {
    *
    * @param approval, can be pending, rejected, approved and null (for no filter)
    */
-  filterProducts(approval: Approval): void{
+  filterProducts(approval: Approval): void {
     if (approval !== null) {
       this.productList$ = this.productsService.getProducts().pipe(map(products =>
         products.filter(product => product.adminApproval === approval)))
@@ -69,8 +70,8 @@ export class DashboardProductListComponent {
    *
    * @param product, the product that was edited
    */
-  onProductUpdate(product: Product): void{
-    if(product.adminApproval === Approval.approved) {
+  onProductUpdate(product: Product): void {
+    if (product.adminApproval === Approval.approved) {
       product.disapprovalMsg = '';
     }
     this.httpClient.put(environment.endpointURL + 'product/edit/' + product.productId, {

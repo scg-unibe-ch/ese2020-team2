@@ -12,11 +12,11 @@ describe('ModalComponent', () => {
   };
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent],
-      imports:[HttpClientTestingModule, MatDialogModule],
-      providers:[{provide: MatDialogRef, useValue:mockDialogRef}],
+      declarations: [ModalComponent],
+      imports: [HttpClientTestingModule, MatDialogModule],
+      providers: [{ provide: MatDialogRef, useValue: mockDialogRef }],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
