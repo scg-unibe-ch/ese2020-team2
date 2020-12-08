@@ -1,26 +1,51 @@
-# ese2020-project-scaffolding
-
-## About
-This project contains an Angular frontend and an NodeJs backend which uses Express as a framework. The website displays todolists which can be customized with items to complete. Every list and item is saved in a database, meaning they will still be available after you restart the website or the backend. 
+## Team 2: ESE2020 Project
 
 ## Prerequisite
-First of all you have to install [NodeJs](https://nodejs.org/de/download/), which comes per default with the packet manager [npm](https://www.npmjs.com/get-npm).
-To verify the installation worked, type `npm -v` and `node -v` in your favourite command line interface (cli). If a version number appears and no error message appears the installation was successful.
+You should have installed [NodeJS and npm](https://nodejs.org/en/download/) (they come as one) in order to run the application.  
+Make sure the backend is running according to its [README](https://github.com/scg-unibe-ch/ese2020-project-scaffolding/blob/master/backend/README.md).
 
 ## Start
-If you would like to use this scaffolding as a basis for your actual project (which we recommend): 
-- please download or clone your teams repository (for example, by running `git clone https://github.com/scg-unibe-ch/ese2020-team1>` at your desired location ), 
-- download as a zip file or clone this repository inside your team's repository,
-- unzip if downloaded as a zip,
-- and ***delete the .git folder*** from this repository (WARNING: keep .git folder from your team's repo). 
-Then you can follow the README in the frontend folder and backend folder respectively.<br>
+- navigate to the frontend folder `cd ese2020-project-scaffolding/frontend` within the same repo where you set up the backend
+- run `npm install`
+- run `npm run dev`
+- open your browser with the url [http://localhost:4200](http://localhost:4200/)
+
+**If you encounter CORS errors within your browser, add the [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en) extension (version for Google Chrome) to your browser.**
+
+## Login
+
+To explore our website, we provide you with the following user and admin roles:
+````
+User: user
+Password: notSecure12
+Password reset answer: answer
+
+Admin: admin
+Password: notSecure12
+Password reset answer: answer
+````
+We did not preload the database with other data like products, reviews, purchases et cetera. This way you can experience all the functionality and see for yourself if it is working.
+
+We wish you a lot uf fun exploring our project.
 
 
-## General Information
-Note that the folders deliverables, frontend and backend are present on the top level of the repository. Your repository should also contain these three folders. 
-You should take the rest of the structure as a guide but you may also use your own folder structure.
+##Troubleshooting
 
-## Technologies 
-The image below gives you an overview on the different technologies used. You can find informations about them by consulting the [reading list](https://github.com/scg-unibe-ch/ese2020/wiki/Reading-list). It shows a request the frontend makes to the backend.
+If something is not working please try to change the package.json:
+````
+from:   "main": "build/server.js"
+to:     "main": "build/backend/src/server.js"
+````
+If this is not helping please contact us: [E-Mail](mailto:yves.zimmermann1@students.unibe.ch)
 
-![image overview](./backend/src/public/images/tech_overview.png)
+Best regards
+
+**Team 2**
+
+Harika Putta  
+Marco Lord  
+Blendi Shala  
+Rocco Manz  
+Yves Zimmermann
+
+

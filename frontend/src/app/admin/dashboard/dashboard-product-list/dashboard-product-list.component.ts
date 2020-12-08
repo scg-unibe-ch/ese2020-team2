@@ -42,7 +42,6 @@ export class DashboardProductListComponent {
       const productIds = products.map(products => products.productId)
       for (var i = 0; i < productIds.length; i++) {
         this.getimage(productIds[i]);
-        //Do something
       }
     })
 

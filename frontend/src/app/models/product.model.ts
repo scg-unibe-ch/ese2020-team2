@@ -2,11 +2,9 @@ import {Approval} from './approval';
 
 export class Product {
 
-// Has to be extended
   constructor(
 
     public sellerReview: string[],
-
     public productId: number,
     public type: string,
     public title: string,

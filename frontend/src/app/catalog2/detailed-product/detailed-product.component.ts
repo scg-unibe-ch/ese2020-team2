@@ -108,6 +108,11 @@ export class DetailedProductComponent implements OnInit {
       })
   }
 
+  /**
+   * Updates the star rating
+   * @param index, the place in the star rating
+   * @param rating, a number reflecting the rating
+   */
   showIcon(index: number, rating: number) {
     if (rating >= index + 1) {
       return 'star';
@@ -115,10 +120,6 @@ export class DetailedProductComponent implements OnInit {
       return 'star_border';
     }
   }
-
-
-
-
 
 
   openModal() {
