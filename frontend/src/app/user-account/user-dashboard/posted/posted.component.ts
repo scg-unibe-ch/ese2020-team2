@@ -9,7 +9,6 @@ import {Observable} from "rxjs";
 import { Routes } from '@angular/router';
 import { EdititemComponent } from '../edititem/edititem.component';
 import { environment } from 'src/environments/environment';
-import {TodoItem} from "../../../models/todo-item.model";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Purchase} from "../../../models/purchase.model";
