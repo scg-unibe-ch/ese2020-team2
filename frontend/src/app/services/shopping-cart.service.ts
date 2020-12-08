@@ -8,7 +8,7 @@ import {finalize, map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {ShoppingCartPurchase} from "../models/shoppingCartPurchase.model";
 import {CurrentUser} from "./current-user";
-import {ShoppingCartComponent} from "../user-account/shopping-cart/shopping-cart.component";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,8 @@ export class ShoppingCartService implements OnInit {
 
   constructor(public httpClient: HttpClient,
               public snackBar: SnackBarService,
-              private users: CurrentUser) { }
+              private users: CurrentUser,
+              private router: Router) { }
 
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class ShoppingCartService implements OnInit {
     this.getShoppingCartForService();
     this.CreateShoppingCartPurchases();
     this.getAddressAsString();
+
   }
 
     getShoppingCart(): Observable<ShoppingCart[]> {
@@ -84,10 +86,13 @@ export class ShoppingCartService implements OnInit {
             if (error.status === 200) {
               this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
               this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
+              this.ngOnInit();
             } else {
               this.snackBar.open(error.error, '', 3000, "warning");
             }})
         })
+    this.ngOnInit();
+
   }
 
    CreateShoppingCartPurchases() {
@@ -117,8 +122,10 @@ export class ShoppingCartService implements OnInit {
           } else {
             if(message) {
               this.snackBar.open(error.error.text, '', 2000, "warning");
-            }
-          }})
+            }}
+          this.router.navigate(['/shopping-cart']);
+          this.ngOnInit();
+        })
     }
     this.ngOnInit();
   }
@@ -131,8 +138,11 @@ export class ShoppingCartService implements OnInit {
         } else {
           if(message) {
             this.snackBar.open(error.error.text, '', 2000, "warning");
-          }
-        }})
+          }}
+        this.router.navigate(['/shopping-cart']);
+        window.location.reload();
+        this.ngOnInit();
+      })
     this.ngOnInit();
   }
 

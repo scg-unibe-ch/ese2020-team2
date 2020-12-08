@@ -73,14 +73,11 @@ getimage(id: number) {
 
 getAllProducts(): void {
   this.products$ = this.productsService.getProducts().pipe(map(products => products.filter(product => (product.status == "available"
-  && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.isPremier == true
-  ))
-  ))
+  && product.adminApproval == Approval.approved && product.visibleInMarket == true && product.isPremier == true))))
   this.products$.subscribe(products => {this.a = products.length; this.quantity = Array(this.a).fill(1);
     const productIds = products.map(products => products.productId)
     for (var i = 0; i < productIds.length; i++) {
       this.getimage(productIds[i]);
-      //Do something
   }})
 
 }
