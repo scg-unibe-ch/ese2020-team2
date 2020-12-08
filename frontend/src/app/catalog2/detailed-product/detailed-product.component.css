@@ -10,13 +10,84 @@
   padding-right: 15%;
 }
 
-img {
-  height: max-content; 
-  object-fit: cover !important;
-  padding-left: 5%;
-  padding-top: 5%;
-  padding-right: 3%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+.fullimg {
+  height: 100%; 
+  width: 100%;
+  object-fit: cover ;
+  transition: 0.5s;
+  padding-left: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  /* this centers and crops the image so that it doesn't break the aspect ratio */
   }
+  .fullimg:hover{
+    cursor: pointer;
+  }
+  .modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)}
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+  /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+.modal-backdrop
+{
+    opacity:0.5 !important;
+}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin-left: 18%;
+  margin-right: 18%;
+  margin-bottom: 10%;
+  padding: 0;
+  overflow: hidden !important;
+  width: 70%;
+  max-width: 1200px;
+}
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
   .size{
     font-size: 120%;
   }

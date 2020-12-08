@@ -47,6 +47,11 @@
         font-weight: 500;
         padding-top: 10.5px;
       }
+      .subtitle2{
+        font-size: 120%;
+        font-weight: 500;
+        padding-top: 28.5px;
+      }
     .btn {
         background-color: rgba(92, 106, 121, 0.616); /* Blue background */
         color: black; 

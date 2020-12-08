@@ -65,6 +65,7 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
+import { ModalimgComponent } from './modalimg/modalimg.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
     ResetPasswordComponent,
     AddressModalComponent,
     NotificationModalComponent,
+    ModalimgComponent,
   ],
   imports: [
     BrowserModule,

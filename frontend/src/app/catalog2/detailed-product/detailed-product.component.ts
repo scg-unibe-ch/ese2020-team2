@@ -14,6 +14,8 @@ import {SnackBarService} from "../../services/snackBar.service";
 import {WishListService} from "../../services/wish-list.service";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
 import { ProductImage } from '../../../../../backend/src/models/productImage.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalimgComponent } from 'src/app/modalimg/modalimg.component';
 
 @Component({
   selector: 'app-detailed-product',
@@ -33,12 +35,17 @@ export class DetailedProductComponent implements OnInit {
   userId: number;
   url: string;
 
+
+
+  
+
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
               private snackBar: SnackBarService,
+              public matDialog: MatDialog,
               private location: Location,
               public wishListService: WishListService,
               public shoppingCartService: ShoppingCartService) {
@@ -107,6 +114,20 @@ export class DetailedProductComponent implements OnInit {
     } else {
       return 'star_border';
     }
+  }
+
+  
+
+  
+
+  
+  openModal() {
+    document.getElementById("myModal").style.display = "block";
+  }
+  
+  // Close the Modal
+  closeModal() {
+    document.getElementById("myModal").style.display = "none";
   }
 
 }

@@ -94,6 +94,7 @@ export class Catalog2Component implements OnInit {
     this.productsService.getProducts().subscribe(products => {
       const newOptions: Options = Object.assign({}, this.options);
       this.ceil = Math.max.apply(Math, products.map(function(o) { return o.price; }))
+      this.ceil = Math.ceil(this.ceil / 10) * 10;
       newOptions.ceil = this.ceil;
       this.options = newOptions;
       this.changemaxValue();
