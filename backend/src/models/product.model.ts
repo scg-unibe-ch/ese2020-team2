@@ -1,5 +1,5 @@
 
-import { Optional, Model, Sequelize, DataTypes, HasManyGetAssociationsMixin } from 'sequelize';
+import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { User } from './user.model';
 import { Purchase } from './purchase.model';
 import { Review } from './review.model';
@@ -29,8 +29,6 @@ export interface ProductAttributes {
     piecesAvailable: number;
     // Status if the product is available or lent or sold out
     status: string;
-    // Parameter for adding the Product Image
-    // productImages: object[];
     // Possibility of door delivery. True by default
     deliveryPossible: boolean;
     // Approval from the Admin. 'pending' by default. Changes when the admin approved to approved or rejected.
@@ -65,8 +63,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     visibleInMarket!: boolean;
     productRating!: number;
     isPremier!: boolean;
-
-    public getProductImage!: HasManyGetAssociationsMixin<ProductImage>;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({

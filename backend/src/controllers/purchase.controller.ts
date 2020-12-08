@@ -7,7 +7,7 @@ import { PurchaseService } from '../services/purchase.service';
 
 /**
  * This controller is to add, delete and update the purchases to the purchase model.
- * It also returns the purchases with variuos required conditions to the frontend.
+ * It also returns the purchases with various required conditions to the frontend.
  */
 const purchaseController: Router = express.Router();
 purchaseController.use(express.json());

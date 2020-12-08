@@ -3,8 +3,8 @@ import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
 
 /**
- * The resposibility of this class is to handle the product creatins, deletion and updations.
- * It also returns the list of product requires for the catolog.
+ * The responsibility of this class is to handle the product creating, deletion and updating.
+ * It also returns the list of product requires for the catalog.
  */
 
 const productController: Router = express.Router();
@@ -23,7 +23,7 @@ productController.delete('/delete/:id', async (req: Request, res: Response) => {
     const productStatus = 'deleted';
     Product.findByPk(req.params.id).then(found => {
         if (found != null) {
-            if (found.userId !== 0) {
+            if (found.status !== 'deleted') {
                 found.update({
                     status: productStatus
                 }).then(() => res.status(200).send('Product is removed successfully.'));

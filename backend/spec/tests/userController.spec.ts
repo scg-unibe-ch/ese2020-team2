@@ -2,6 +2,8 @@ import { UserController } from '../../src/controllers/user.controller';
 import { User } from '../../src/models/user.model';
 import {and} from "sequelize";
 
+/*
+
 beforeEach(function(){
     jasmine.setDefaultSpyStrategy(and => and.returnValue("lol"))
 });
@@ -35,3 +37,4 @@ describe("The 'toBe' matcher compares with ===", function() {
     });
 
 });
+*/

@@ -65,9 +65,9 @@ userController.get('/all', verifyToken,
  *Allows to edit a user.
  */
 userController.put('/editUser/:id', async (req: Request, res: Response) => {
-    if (User.findByPk(req.params.id)) {
+    if (await User.findByPk(req.params.id)) {
         userService.updateUser(req.body, req.params.id)
-            .then(registered => res.status(200).send('User updated successfully.'))
+            .then(() => res.status(200).send('User updated successfully.'))
             .catch(err => res.status(500).send(err));
     } else {
         res.status(404).send('User not found.');
@@ -87,7 +87,7 @@ userController.get('/passwordReset/:name',
                     res.status(404).send('UserName does not exist.');
                 }
             })
-            .catch(err => res.status(500).send('User not found.'));
+            .catch(() => res.status(500).send('User not found.'));
     });
 
 export const UserController: Router = userController;

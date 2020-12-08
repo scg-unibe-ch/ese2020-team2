@@ -125,6 +125,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "User Registration denied because of already existing userName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"userName\": \"user2\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"noUser@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Registration denied because of already existing Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"userName\": \"noUser\",\r\n    \"password\": \"1234SR\",\r\n    \"email\": \"user1@sr.com\",\r\n    \"firstName\": \"Harika\",\r\n    \"lastName\": \"Putta\",\r\n    \"gender\": \"Female\",\r\n    \"telephone\": \"+41 123456789\",\r\n    \"street\": \"SRsr\",\r\n    \"pinCode\": 1234,\r\n    \"city\": \"SRsr\",\r\n    \"country\": \"SRsr\",\r\n    \"role\": \"user\",\r\n    \"passwordQuestion\": \"what is your married name?\",\r\n    \"passwordAnswer\": \"Kantipudi\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -219,6 +277,49 @@
 					"response": []
 				},
 				{
+					"name": "Edit product denied: Product not found",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a3d609aa-aa4a-42ac-98c2-a907e62bc577",
+								"exec": [
+									"const dateNow= new Date();\r",
+									"pm.environment.set('currentDate', dateNow.toISOString())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"product\",\r\n    \"title\": \"product1\",\r\n    \"userId\": 1,\r\n    \"price\":1,\r\n    \"description\": \"This is a new product called product1\",\r\n    \"location\":\"Bern\",\r\n    \"sellOrLend\": \"sell\",\r\n    \"piecesAvailable\": 10,\r\n    \"status\":\"available\",\r\n    \"deliveryPossible\": true,\r\n    \"productRating\": 0,\r\n    \"isPremier\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/product/edit/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"edit",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get product",
 					"request": {
 						"method": "GET",
@@ -234,6 +335,46 @@
 								"product",
 								"get",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product denied: Product not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"getAll"
 							]
 						}
 					},
@@ -281,6 +422,49 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete product denied: Product not found",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "62b52d2c-456a-4eb5-989e-9dec6edb2e85",
+								"exec": [
+									"const dateNow= new Date();\r",
+									"pm.environment.set('currentDate', dateNow.toISOString())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/product/delete/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"delete",
+								"1000"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -308,6 +492,170 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/purchase/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchase",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add purchase Denied: can't buy 0 quantity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b5609eeb-5a0b-4811-9948-9d8169de7b38",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 0,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/purchase/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchase",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add purchase Denied: can't buy more then available quantity",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "23ef86d3-d6dc-485a-a553-f3106b846246",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 50,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/purchase/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchase",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add purchase Denied: can't buy your own product",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bffa92c2-7d4d-44cd-a639-b5f2b0dac7c3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 1,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/purchase/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchase",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add purchase Denied: User2 has not enough money to buy productId3",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9b5fc11b-a4ed-41ee-8d6f-a59445dfd315",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 3,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -407,6 +755,48 @@
 								"purchase",
 								"edit",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit purchase Denied: Purchase not found",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cd58d7fd-aaef-4c9b-8b3c-0e4c66550125",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 1,\r\n    \"buyerUserId\": 2,\r\n    \"sellerUserId\": 1,\r\n    \"deliveryAddress\": \"Bern, 3027, Switzerland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/purchase/edit/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"purchase",
+								"edit",
+								"1000"
 							]
 						}
 					},
