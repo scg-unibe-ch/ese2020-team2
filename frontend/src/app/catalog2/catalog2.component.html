@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<mat-toolbar style=" background-color:rgba(221, 227, 235, 0.616); height: 8%; border: black; border-bottom: solid; " >
+<mat-toolbar style="background-color:rgba(221, 227, 235, 0.616); height: 8%; border: black; border-bottom: solid">
   <span>FILTER: </span>
   <button *ngIf="filtersl == 'lend'" mat-button (click)= "changefiltersl('');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" style="background-color: rgba(49, 66, 141, 0.616); ">FOR SALE </button>
   <button *ngIf="filtersl !== 'lend'" mat-button (click)= "changefiltersl('lend');filter(minValue,maxValue,filtersl,filterps,sortby,location,search)"  class="btn" >FOR SALE</button>
@@ -68,7 +68,7 @@
                 <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
                 <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
               </div>
-              
+
             </div>
             <div>
                 <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
@@ -242,7 +242,7 @@
 
                   <div class="left">
                     <mat-card-title>{{product.title}}</mat-card-title>
-      
+
                     <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
                     <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
                   </div>
@@ -257,7 +257,7 @@
                    </div>
                 <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product.productId]" src={{urls[product.productId]}}>
                 <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product.productId]" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
-               
+
                 <div class="box box-2"></div>
                 <mat-card-content >
                   <div >
@@ -275,23 +275,23 @@
                 <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
                 <span   *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
             </div>
-  
+
                 </mat-card-content>
                <div style=" bottom:0px;">
                   <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
-  
+
                   <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))"[(ngModel)]="quantity[index]" >
                     <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
                     <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
                     <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
                   </select>
-  
+
                   <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
-  
+
                   <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
-  
-  
-  
+
+
+
                   <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
                    <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
                   </div>

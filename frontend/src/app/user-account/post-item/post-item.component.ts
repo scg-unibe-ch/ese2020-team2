@@ -7,17 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./post-item.component.css']
 })
 export class PostItemComponent implements OnInit {
-  title = 'angular-material-tab-router';  
+  title = 'angular-material-tab-router';
   navLinks: any[];
   activeLinkIndex = -1;
   constructor(private router:Router) {
     this.navLinks = [
       {
-        label: 'SELL',
+        label: 'Sell',
         link: './sell',
         index: 0
     }, {
-        label: 'LEND',
+        label: 'Lend',
         link: './lend',
         index: 1
     },
@@ -31,5 +31,5 @@ export class PostItemComponent implements OnInit {
     this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
   });
-  } 
+  }
 }

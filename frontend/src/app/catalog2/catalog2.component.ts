@@ -51,8 +51,6 @@ export class Catalog2Component implements OnInit {
   a: number;
   urls = Array.apply(null, Array(100));
 
-
-
   constructor(private httpClient: HttpClient,
               private authService: AuthService,
               private users: CurrentUser,
