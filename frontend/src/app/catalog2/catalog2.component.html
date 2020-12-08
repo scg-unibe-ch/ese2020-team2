@@ -56,50 +56,55 @@
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
             <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" fxLayoutAlign=" stretch" *ngFor="let product of products$ | async; let index = index" [attr.quantity]="index">
 
-              <mat-card *ngIf="product.userId == (userId$ | async) && product.isPremier == false" style="background-color: rgb(81, 78, 95); opacity: 80%; display: flex; flex-direction: column; width: 100%;" class="mat-elevation-z4">
-                  <mat-card-title>{{product.title}}</mat-card-title>
-                <mat-card-subtitle>
-                  <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
-                  <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
-                </mat-card-subtitle>
-              <div>
+              <mat-card *ngIf="product.isPremier == false && product.userId ==(userId$ | async)"  class="mat-elevation-z4"  style=" border-width: 5px;   border-style: solid; background-color: rgb(81, 78, 95);opacity: 80%; border-color: rgb(59, 57, 66) ;  display:flex; flex-direction: column; width: 100%;">
+
+                <div style="display: flex; flex-direction: row;">
+
+
+
+              <div class="left">
+                <mat-card-title>{{product.title}}</mat-card-title>
+
+                <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+                <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+              </div>
+              
+            </div>
+            <div>
                 <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
                   <mat-icon>
                     {{showIcon(i, product.productRating)}}
                   </mat-icon>
                 </mat-icon>
-
                 <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
-              </div>
+               </div>
+                <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product.productId]" src={{urls[product.productId]}}>
+                <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product.productId]" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
 
-                <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-                <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
-                <div class="box box-2"></div>
-                <mat-card-content>
-                  <div style="float:left;">
-                    <span class="subtitle" style="display:contents; ">Pieces available: </span>
-                    <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
-                </div>
-                <br>
-                <br>
-                <div style="float:left;">
-                  <span class="subtitle" style="display:contents; ">Location: </span>
-                  <span class="size" style="display:contents; ">{{product.location}}</span>
+
+                  <div class="box box-2"></div>
+              <mat-card-content >
+                <div >
+                  <span class="subtitle" style="display:contents; ">Pieces available: </span>
+                  <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
               </div>
               <br>
-              <br>
-              <div style="float:left;">
-                <span class="subtitle" style="display:contents; ">Delivery: </span>
-                <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
-                <span *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
+              <div >
+                <span class="subtitle" style="display:contents; ">Location: </span>
+                <span class="size" style="display:contents; ">{{product.location}}</span>
             </div>
+            <br>
+            <div >
+              <span class="subtitle" style="display:contents; ">Delivery: </span>
+              <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
+              <span   *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
+          </div>
 
-                </mat-card-content>
-                <br>
-                  <button class="btn-gradient-trans" [routerLink]="['/product', product.productId]" style="width: 90%;">VIEW</button>
-
-              </mat-card>
-
+              </mat-card-content>
+             <div style=" bottom:0px;">
+                <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 90%;">VIEW</button>
+                </div>
+            </mat-card>
 
 
 
@@ -128,8 +133,8 @@
                 </mat-icon>
                 <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
                </div>
-                <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-                <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
+                <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product.productId]" src={{urls[product.productId]}}>
+                <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product.productId]" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
 
 
                   <div class="box box-2"></div>
@@ -196,8 +201,8 @@
               </mat-icon>
               <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
              </div>
-              <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-              <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
+              <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product.productId]" src={{urls[product.productId]}}>
+              <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product.productId]" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
 
 
                 <div class="box box-2"></div>
@@ -230,61 +235,67 @@
 
 
 
-              <mat-card *ngIf="!(product.userId == (userId$ | async)) && product.isPremier == false"  class="mat-elevation-z4"  style="display: flex; flex-direction: column; width: 100%;">
-                <mat-card-title>{{product.title}}</mat-card-title>
-              <mat-card-subtitle>
-                <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
-                <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
-              </mat-card-subtitle>
-              <div>
-                <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
-                  <mat-icon>
-                    {{showIcon(i, product.productRating)}}
-                  </mat-icon>
-                </mat-icon>
-                <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
-              </div>
-                <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-                <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
-                <div class="box box-2"></div>
-                <mat-card-content>
-                <div style="float:left;">
-                  <span class="subtitle" style="display:contents; ">Pieces available: </span>
-                  <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
-              </div>
-              <br>
-              <br>
-              <div style="float:left;">
-                <span class="subtitle" style="display:contents; ">Location: </span>
-                <span class="size" style="display:contents; ">{{product.location}}</span>
-            </div>
-            <br>
-            <br>
-            <div style="float:left;">
-              <span class="subtitle" style="display:contents; ">Delivery: </span>
-              <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
-              <span *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
-          </div>
-
-               <br>
-              </mat-card-content>
-              <div>
-              <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
-
-                <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))"[(ngModel)]="quantity[index]" >
-                  <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
-                  <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
-                  <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
-                </select>
-
-                <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
-
-                <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
+              <mat-card *ngIf="!(product.userId == (userId$ | async)) && product.isPremier == false"  class="mat-elevation-z4"  style="display: flex; flex-direction: column; width: 100%; border-width: 5px;   border-style: solid; border-color: rgb(197, 197, 179) ;">
+                <div style="display: flex; flex-direction: row;">
 
 
-                <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
-                 <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
+
+                  <div class="left">
+                    <mat-card-title>{{product.title}}</mat-card-title>
+      
+                    <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+                    <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+                  </div>
                 </div>
+                <div>
+                    <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+                      <mat-icon>
+                        {{showIcon(i, product.productRating)}}
+                      </mat-icon>
+                    </mat-icon>
+                    <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
+                   </div>
+                <img *ngIf="urls[product.productId] != null" class="fullimg" [routerLink]="['/product', product.productId]" src={{urls[product.productId]}}>
+                <img *ngIf="urls[product.productId] == null" class="fullimg" [routerLink]="['/product', product.productId]" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
+               
+                <div class="box box-2"></div>
+                <mat-card-content >
+                  <div >
+                    <span class="subtitle" style="display:contents; ">Pieces available: </span>
+                    <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
+                </div>
+                <br>
+                <div >
+                  <span class="subtitle" style="display:contents; ">Location: </span>
+                  <span class="size" style="display:contents; ">{{product.location}}</span>
+              </div>
+              <br>
+              <div >
+                <span class="subtitle" style="display:contents; ">Delivery: </span>
+                <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
+                <span   *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
+            </div>
+  
+                </mat-card-content>
+               <div style=" bottom:0px;">
+                  <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 18%;">VIEW</button>
+  
+                  <select   style="width: 18%;" class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))"[(ngModel)]="quantity[index]" >
+                    <option *ngIf="product?.piecesAvailable >=1" value=1>1</option>
+                    <option *ngIf="product?.piecesAvailable >=2" value=2>2</option>
+                    <option *ngIf="product?.piecesAvailable >=3" value=3>3</option>
+                  </select>
+  
+                  <button class="btn-gradient" *ngIf = "(loggedIn$ | async) && !(product.userId == (userId$ | async))" (click)="shoppingCartService.addProductToShoppingCart(product, quantity[index])" type="submit" style="width: 18%;"> <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+  
+                  <button class="btn-gradient" *ngIf = "(loggedIn$ | async)" (click)="wishListService.addProductToWishList(product, quantity[index])" style="width: 18%;"><i class="fa fa-heart" aria-hidden="true"></i></button>
+  
+  
+  
+                  <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)"  routerLink="/login">TO LOGIN</button>
+                   <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
+                  </div>
+
             </mat-card>
             </div>
           </div>

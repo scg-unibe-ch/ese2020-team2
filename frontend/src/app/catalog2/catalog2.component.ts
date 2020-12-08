@@ -93,7 +93,9 @@ export class Catalog2Component implements OnInit {
   changeSliderOptions() {
     this.productsService.getProducts().subscribe(products => {
       const newOptions: Options = Object.assign({}, this.options);
-      this.ceil = Math.max.apply(Math, products.map(function(o) { return o.price; }))
+      this.ceil = Math.max.apply(Math, products.filter(product => 
+        product.visibleInMarket==true).map(
+        function(o) { return o.price; }))
       this.ceil = Math.ceil(this.ceil / 10) * 10;
       newOptions.ceil = this.ceil;
       this.options = newOptions;

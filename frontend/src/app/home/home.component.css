@@ -129,3 +129,13 @@ section {
 
     font-size: 95%;
 }
+
+.fullimg {
+  height: 45% ; 
+  width: 100%;
+  object-fit: cover ;
+  transition: 0.5s;
+  
+  cursor: pointer;
+  /* this centers and crops the image so that it doesn't break the aspect ratio */
+  }
