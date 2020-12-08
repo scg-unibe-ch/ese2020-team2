@@ -3,7 +3,9 @@
 
 ::ng-deep .mat-form-field-label{
    color:#000 !important;
+   margin: 0px;
 }
+
 
 
 .biginput
@@ -42,19 +44,18 @@
 
 body {
   background-image: url( https://i.ibb.co/Mnx3JMn/IMG-20201201-232629.jpg );
+  margin: 0px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
 
 
-
-  background-position: center center;
-
-
-  background-repeat: no-repeat;
-
-  background-attachment: fixed;
 
   background-size: cover;
 
   background-color: #464646;
+
+  overflow: hidden !important;
 }
 
 
@@ -93,5 +94,6 @@ mat-dialog-container#modal-component {
   padding: 10px;
   background-color: white;
 }
+
 
 

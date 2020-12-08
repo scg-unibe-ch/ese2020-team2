@@ -12,7 +12,7 @@
         <div class="content" fxLayout="row wrap" fxLayoutGap="2%" >
             <div fxFlex="23%" fxFlex.xs="100%" fxFlex.sm="33%" fxLayoutAlign=" stretch" *ngFor="let product of products$ | async; let index = index" [attr.quantity]="index">
 
-              <mat-card  class="mat-elevation-z4" style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ;  display:flex; flex-direction: column; width: 100%;">
+              <mat-card  *ngIf="!(product.userId ==(userId$ | async))" class="mat-elevation-z4" style=" border-width: 5px;   border-style: solid; border-color: rgb(201, 204, 22) ;  display:flex; flex-direction: column; width: 100%;">
 
                 <div style="display: flex; flex-direction: row;">
 
@@ -80,6 +80,62 @@
                  <button class="btn-gradient" *ngIf = "!(loggedIn$ | async)" routerLink="/register">TO SIGN UP</button>
                 </div>
             </mat-card>
+
+
+            <mat-card *ngIf="product.userId ==(userId$ | async)"  class="mat-elevation-z4" style=" border-width: 5px;background-color: rgb(81, 78, 95);opacity: 80%;   border-style: solid; border-color: rgb(201, 204, 22) ;  display:flex; flex-direction: column; width: 100%;">
+
+              <div style="display: flex; flex-direction: row;">
+
+
+
+            <div class="left">
+              <mat-card-title>{{product.title}}</mat-card-title>
+
+              <mat-card-title *ngIf="product.sellOrLend =='sell'">For Sale: {{product.price}} Fr</mat-card-title>
+              <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
+            </div>
+            <span class="fa-stack fa-3x"  >
+              <i class="fa fa-certificate fa-stack-2x"></i>
+              <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+            </span>
+          </div>
+          <div>
+              <mat-icon color = "accent" *ngFor="let ratingId of ratingArray;index as i">
+                <mat-icon>
+                  {{showIcon(i, product.productRating)}}
+                </mat-icon>
+              </mat-icon>
+              <span style="font-size: 150%;"> {{product.productRating.toFixed(1)}} </span>
+             </div>
+              <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
+              <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
+
+
+                <div class="box box-2"></div>
+            <mat-card-content >
+              <div >
+                <span class="subtitle" style="display:contents; ">Pieces available: </span>
+                <span class="size" style="display:contents; ">{{product.piecesAvailable}}</span>
+            </div>
+            <br>
+            <div >
+              <span class="subtitle" style="display:contents; ">Location: </span>
+              <span class="size" style="display:contents; ">{{product.location}}</span>
+          </div>
+          <br>
+          <div >
+            <span class="subtitle" style="display:contents; ">Delivery: </span>
+            <span *ngIf="product.deliveryPossible" class="size" style="display:contents; ">possible</span>
+            <span   *ngIf="!product.deliveryPossible" class="size" style="display:contents; ">not possible</span>
+        </div>
+
+            </mat-card-content>
+           <div style=" bottom:0px;">
+              <button  class="btn-gradient"[routerLink]="['/product', product.productId]" style="width: 90%;">VIEW</button>
+
+
+              </div>
+          </mat-card>
 </div>
 </div>
 </div>
