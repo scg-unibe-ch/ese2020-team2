@@ -4,82 +4,103 @@
 <section class="container">
   <div *ngIf="totalPrice != 0" class="left-half">
 
-   
 
-    <mat-card  class="mat-elevation-z4" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index" >
- 
+
+    <mat-card class="mat-elevation-z4" *ngFor="let shoppingCart of (shoppingCart$ | async); let index = index">
+
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="36%">
-          <img *ngIf="urls[shoppingCart.product.productId] != null" src={{urls[shoppingCart.product.productId]}} class="fullimg" [routerLink]="['/product', shoppingCart.productId]">
-          <img *ngIf="urls[shoppingCart.product.productId] == null" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" class="fullimg" [routerLink]="['/product', shoppingCart.productId]">
-        
-        </div>
-        
+          <img *ngIf="urls[shoppingCart.product.productId] != null" src={{urls[shoppingCart.product.productId]}}
+            class="fullimg" [routerLink]="['/product', shoppingCart.productId]">
+          <img *ngIf="urls[shoppingCart.product.productId] == null"
+            src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg"
+            class="fullimg" [routerLink]="['/product', shoppingCart.productId]">
 
-       
+        </div>
+
+
+
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{shoppingCart.product.title}}</mat-card-title>
           <mat-card-subtitle>
-            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='sell'">Price: {{shoppingCart.product.price}} Fr</mat-card-title>
-            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='lend'">Price: {{shoppingCart.product.price}} Fr</mat-card-title>
+            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='sell'">Price: {{shoppingCart.product.price}} Fr
+            </mat-card-title>
+            <mat-card-title *ngIf="shoppingCart.product.sellOrLend =='lend'">Price: {{shoppingCart.product.price}} Fr
+            </mat-card-title>
           </mat-card-subtitle>
 
-            <p>{{shoppingCart.product.piecesAvailable}}</p>
-            <p>Location: {{shoppingCart.product.location}}</p>
-            <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
-            <br>
-            <mat-card-content fxLayout.gt-sm="row">
-            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
-
-            <button class="btn" type="submit"  (click)="removeShoppingCartProduct(shoppingCart, false)"><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-            </button>
-          </div>
-             <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter" >
-            <button class="btn" type="submit"   (click)="moveShoppingCartProductToWishList(shoppingCart)"><i class="fa fa-heart fa-lg" aria-hidden="true"></i>
-            </button>
-          </div>
+          <p>{{shoppingCart.product.piecesAvailable}}</p>
+          <p>Location: {{shoppingCart.product.location}}</p>
+          <p>Delivery: {{shoppingCart.product.deliveryPossible}}</p>
+          <br>
+          <mat-card-content fxLayout.gt-sm="row">
             <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
-            <button class="btn" type="submit"  [routerLink]="['/product', shoppingCart.productId]"><i class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
-            </button>
-          </div>
-        </mat-card-content>
+
+              <button class="btn" type="submit" (click)="removeShoppingCartProduct(shoppingCart, false)"><i
+                  class="fa fa-times fa-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
+              <button class="btn" type="submit" (click)="moveShoppingCartProductToWishList(shoppingCart)"><i
+                  class="fa fa-heart fa-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div fxLayout.gt-sm="column" fxFlex.gt-sm="50%" class="gutter">
+              <button class="btn" type="submit" [routerLink]="['/product', shoppingCart.productId]"><i
+                  class="fa fa-search-plus fa-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+          </mat-card-content>
         </div>
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" >
+        <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter">
 
-            <mat-select   style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]" placeholder="{{shoppingCart.quantity}}" (selectionChange)= "editShoppingCartProduct(shoppingCart, quantity[index], deliveryRequested[index])">
-              <mat-option value="{{shoppingCart.quantity}}">{{shoppingCart.quantity}}</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=1 && shoppingCart.quantity !=1" value=1>1</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=2 && shoppingCart.quantity !=2" value=2>2</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=3 && shoppingCart.quantity !=3" value=3>3</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=5 && shoppingCart.quantity !=5" value=3>5</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=10 && shoppingCart.quantity !=10" value=3>10</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=15 && shoppingCart.quantity !=15" value=3>15</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=20 && shoppingCart.quantity !=20" value=3>20</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=50 && shoppingCart.quantity !=50" value=3>50</mat-option>
-              <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=100 && shoppingCart.quantity !=100" value=3>100</mat-option>
+          <mat-select style="width: 17%;margin-left: 80%;margin-top: 20%;" [(ngModel)]="quantity[index]"
+            placeholder="{{shoppingCart.quantity}}"
+            (selectionChange)="editShoppingCartProduct(shoppingCart, quantity[index], deliveryRequested[index])">
+            <mat-option value="{{shoppingCart.quantity}}">{{shoppingCart.quantity}}</mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=1 && shoppingCart.quantity !=1" value=1>1
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=2 && shoppingCart.quantity !=2" value=2>2
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=3 && shoppingCart.quantity !=3" value=3>3
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=5 && shoppingCart.quantity !=5" value=3>5
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=10 && shoppingCart.quantity !=10" value=3>10
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=15 && shoppingCart.quantity !=15" value=3>15
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=20 && shoppingCart.quantity !=20" value=3>20
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=50 && shoppingCart.quantity !=50" value=3>50
+            </mat-option>
+            <mat-option *ngIf="shoppingCart.product?.piecesAvailable >=100 && shoppingCart.quantity !=100" value=3>100
+            </mat-option>
 
-            </mat-select>
-          <mat-slide-toggle style="width: 30%;margin-left: 75%;margin-top: 5%;" *ngIf="shoppingCart.product?.deliveryPossible"
-            [(ngModel)]="deliveryRequested[index]"
+          </mat-select>
+          <mat-slide-toggle style="width: 30%;margin-left: 75%;margin-top: 5%;"
+            *ngIf="shoppingCart.product?.deliveryPossible" [(ngModel)]="deliveryRequested[index]"
             (change)="editShoppingCartProduct(shoppingCart, quantity[index], deliveryRequested[index])">
             {{deliveryRequested[index]? "Delivery" : "Pick up"}}
           </mat-slide-toggle>
-            <br>
-            <br>
-            <p style="padding-left: 80%;">
-              CHF: {{shoppingCart.quantity * shoppingCart.product.price}}
-            </p>
+          <br>
+          <br>
+          <p style="padding-left: 80%;">
+            CHF: {{shoppingCart.quantity * shoppingCart.product.price}}
+          </p>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
   <div *ngIf="totalPrice == 0" class="left-halfimage">
-    <img  style="opacity: 90%; border: 5px; border-color: black; border-style: solid;" src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-cute-disappointed-shopping-bag-flat-thin-line-vector-id841884438?k=6&m=841884438&s=612x612&w=0&h=bjPqjzm_fAOcZOO5ug9ILjffPkKH09fL_REAaRA0VVM=" alt="">
+    <img style="opacity: 90%; border: 5px; border-color: black; border-style: solid;"
+      src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-cute-disappointed-shopping-bag-flat-thin-line-vector-id841884438?k=6&m=841884438&s=612x612&w=0&h=bjPqjzm_fAOcZOO5ug9ILjffPkKH09fL_REAaRA0VVM="
+      alt="">
 
   </div>
   <div class="right-half">
     <mat-card class="mat-elevation-z4">
-      <mat-card-content >
+      <mat-card-content>
         <mat-card-title>Your purchase</mat-card-title>
         <br>
         <p>You have <b>{{points$ | async}}</b> tokens </p>
@@ -88,84 +109,91 @@
         <br>
         <p>After the purchase you have <b>{{(points$ | async) - totalPrice}}</b> tokens </p>
         <br>
-        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice < 0" (click)="notEnoughMoney()">Buy <br>(Sorry, you don't have enough money)</button>
-        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice >= 0 && deliveryRequested.includes(true)" (click)="openModal()">Check address & Buy</button>
-        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;" *ngIf="(points$ | async) - totalPrice >= 0 && !deliveryRequested.includes(true)" (click)="buyShoppingCartProducts()">Buy</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;"
+          *ngIf="(points$ | async) - totalPrice < 0" (click)="notEnoughMoney()">Buy <br>(Sorry, you don't have enough
+          money)</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;"
+          *ngIf="(points$ | async) - totalPrice >= 0 && deliveryRequested.includes(true)" (click)="openModal()">Check
+          address & Buy</button>
+        <button style="width: 92%; height: 10%;min-height: 50px; padding-left: 10%; padding-right: 10%;"
+          *ngIf="(points$ | async) - totalPrice >= 0 && !deliveryRequested.includes(true)"
+          (click)="buyShoppingCartProducts()">Buy</button>
 
-    </mat-card-content>
+      </mat-card-content>
     </mat-card>
 
 
     <mat-card class="mat-elevation-z4">
       <div fxLayout.gt-sm="column" fxFlex.gt-sm="80%">
-      <mat-card-content >
-        <mat-card-title>Shipping address</mat-card-title>
-        <div class="class1">
-          <div class="class2">
-            city:{{  (city$ | async)  }}
+        <mat-card-content>
+          <mat-card-title>Shipping address</mat-card-title>
+          <div class="class1">
+            <div class="class2">
+              city:{{  (city$ | async)  }}
 
-          </div>
-              <div class="class3">
-                Pincode: {{  (pinCode$ | async)  }}
             </div>
-        </div>
-        <div class="class1">
-          <div class="class2">
-            Country: {{  (country$ | async)  }}
+            <div class="class3">
+              Pincode: {{  (pinCode$ | async)  }}
+            </div>
+          </div>
+          <div class="class1">
+            <div class="class2">
+              Country: {{  (country$ | async)  }}
 
-          </div>
-              <div class="class3">
-                street: {{  (street$ | async)  }}
             </div>
-        </div>
+            <div class="class3">
+              street: {{  (street$ | async)  }}
+            </div>
+          </div>
+          <br>
+          <mat-card-title style="margin-top: 5%;">Edit</mat-card-title>
+          <form [formGroup]="userForm">
+            <mat-form-field style="width: 50%;">
+              <mat-select formControlName="country" placeholder="Country">
+                <mat-option *ngFor="let country of countrys" [value]="country.value">
+                  {{country.display}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+
+            <mat-form-field style="width: 50%;">
+              <input matInput placeholder="City" type="text" formControlName="city" id="inputCity">
+            </mat-form-field>
+
+
+
+            <mat-form-field style="width: 50%;">
+              <input matInput placeholder="Pincode" type="text" formControlName="pinCode" id="inputPinCode">
+            </mat-form-field>
+
+
+            <mat-form-field style="width: 50%;">
+              <mat-label>Street</mat-label>
+              <input matInput placeholder="Street" type="text" formControlName="street" id="inputStreet">
+            </mat-form-field>
+          </form>
+
+
+
+        </mat-card-content>
+      </div>
+      <div fxLayout.gt-sm="column" fxFlex.gt-sm="20%">
         <br>
-        <mat-card-title style="margin-top: 5%;">Edit</mat-card-title>
-        <form [formGroup]="userForm">
-        <mat-form-field style="width: 50%;">
-      <mat-select formControlName="country" placeholder="Country">
-        <mat-option *ngFor="let country of countrys" [value]="country.value" >
-          {{country.display}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button class="btn" [disabled]="userForm.invalid" (click)="updateAddress()"><i
+            class="fa fa-check-square-o  "></i></button>
 
 
-
-    <mat-form-field style="width: 50%;">
-      <input matInput placeholder="City" type="text" formControlName="city" id="inputCity">
-    </mat-form-field>
-
-
-
-    <mat-form-field style="width: 50%;">
-      <input matInput placeholder="Pincode" type="text" formControlName="pinCode" id="inputPinCode">
-    </mat-form-field>
-
-
-    <mat-form-field style="width: 50%;">
-      <mat-label>Street</mat-label>
-      <input matInput placeholder="Street" type="text" formControlName="street" id="inputStreet">
-    </mat-form-field>
-  </form>
-
-
-
-    </mat-card-content>
-  </div>
-  <div fxLayout.gt-sm="column" fxFlex.gt-sm="20%">
-<br>
-<br>
-<br>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <button class="btn"  [disabled]="userForm.invalid" (click)="updateAddress()"><i class="fa fa-check-square-o  "  ></i></button>
-
-
-  </div>
+      </div>
     </mat-card>
 
   </div>
