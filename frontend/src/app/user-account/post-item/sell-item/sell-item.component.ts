@@ -167,7 +167,8 @@ export class SellItemComponent implements OnInit {
     if (this.isPremier.value == true) {
       this.updatewallet();
     }
-    this.clear();
+    this.clear(); 
+
 
 }
   donothing() {
@@ -176,7 +177,7 @@ export class SellItemComponent implements OnInit {
 
 getpostedproductid(): void {
   this.productsService.getProducts().pipe(map(products =>
-      products.filter(product => product.userId === this.id)
+      products.filter(product => product.userId)
     )
     ).subscribe(data => this.productid = data[data.length-1].productId + 1);
     }
