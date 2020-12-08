@@ -1,3 +1,4 @@
+
 import {
     Optional,
     Model,
@@ -8,7 +9,6 @@ import {
 } from 'sequelize';
 import { User } from './user.model';
 import { Product } from './product.model';
-
 // This is the Purchase model used to save the data about purchases
 export interface PurchaseAttributes {
     // Id of the purchase
@@ -27,29 +27,31 @@ export interface PurchaseAttributes {
     paymentType: string;
     // True if the payment is done with wallet points.
     walletPayment: boolean;
-    // New, Pending or Shipped if the User saw the Notification
-    notificationCheck: string;
+    // True if the User saw the Notification.
+    notificationCheck: boolean;
     // Type of purchase. Sell or Lent. true for 'sell' and false for 'lend'
     isSold: boolean;
-    // True if the buyer wants the product to be delivered
-    deliveryRequested: boolean;
 }
-
 export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes, 'purchaseId'> { }
-
 export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttributes> implements PurchaseAttributes {
 
     public static associations: {
-<<<<<<< HEAD
-        buyer: Association <Purchase, User>;
-        seller: Association <Purchase, User>;
-        product: Association <Purchase, Product>;
-=======
-        buyer: Association<Purchase, User>;
-        seller: Association<Purchase, User>;
-        product: Association<Purchase, Product>;
->>>>>>> 0a09d74493fde376e57096e6a0882fae6eec681f
-    };
+
+
+
+
+   buyer: Association <Purchase, User>;
+   seller: Association <Purchase, User>;
+   product: Association<Purchase, Product>;
+};
+
+
+
+
+
+
+
+
 
     public getUsers!: BelongsToGetAssociationMixin<User>;
     public addUsers!: BelongsToSetAssociationMixin<User, number>;
@@ -57,143 +59,97 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
     public addProduct!: BelongsToSetAssociationMixin<Product, number>;
 
 
-    public readonly buyer?: User;
-    public readonly seller?: User;
-    public readonly product?: Product;
+public readonly buyer?: User;
+public readonly seller?: User;
 
-    purchaseId!: number;
-    productId!: number;
-    quantity!: number;
-    buyerUserId!: number;
-    sellerUserId!: number;
-    deliveryAddress!: string;
-    paymentType!: string;
-    walletPayment!: boolean;
-    notificationCheck!: string;
-    isSold!: boolean;
-    deliveryRequested!: boolean;
 
-    public static initialize(sequelize: Sequelize) {
-        Purchase.init({
-                purchaseId: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    allowNull: false,
-                    autoIncrement: true
-                },
-                productId: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false
-                },
-                quantity: {
-                    type: DataTypes.NUMBER,
-                    allowNull: false,
-                    defaultValue: 1
-                },
-                buyerUserId: {
-                    type: DataTypes.NUMBER,
-                    allowNull: false
-                },
-                sellerUserId: {
-                    type: DataTypes.NUMBER,
-                    allowNull: false
-                },
-                deliveryAddress: {
-                    type: DataTypes.STRING
-                },
-                paymentType: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                    defaultValue: 'wallet points'
-                },
-                walletPayment: {
-                    type: DataTypes.BOOLEAN,
-                    defaultValue: true
-                },
-                notificationCheck: {
-                    type: DataTypes.BOOLEAN,
-                    defaultValue: false
-                },
-                isSold: {
-                    type: DataTypes.BOOLEAN,
-                    allowNull: false
-                },
-            },
-<<<<<<< HEAD
-            productId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                // references: {
-                //     model: 'Product',
-                //     key: 'productId'
-                // }
-            },
-            quantity: {
-                type: DataTypes.NUMBER,
-                allowNull: false,
-                defaultValue: 1
-            },
-            buyerUserId: {
-                type: DataTypes.NUMBER,
-                allowNull: false
-            },
-            sellerUserId: {
-                type: DataTypes.NUMBER,
-                allowNull: false
-            },
-            deliveryAddress: {
-                type: DataTypes.STRING
-            },
-            paymentType: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                defaultValue: 'wallet points'
-            },
-            walletPayment: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: true
-            },
-            notificationCheck: {
-                type: DataTypes.STRING,
-                defaultValue: 'new'
-            },
-            isSold: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false
-            },
-                deliveryRequested: {
-                    type: DataTypes.BOOLEAN,
-                    allowNull: false,
-                    defaultValue: false
-                }, ;
+
+public readonly product?: Product;
+
+purchaseId!: number;
+productId!: number;
+quantity!: number;
+buyerUserId!: number;
+sellerUserId!: number;
+deliveryAddress!: string;
+paymentType!: string;
+walletPayment!: boolean;
+notificationCheck!: boolean;
+isSold!: boolean;
+public static initialize(sequelize: Sequelize) {
+    Purchase.init({
+        purchaseId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull: false,
+            autoIncrement: true
         },
-=======
->>>>>>> 0a09d74493fde376e57096e6a0882fae6eec681f
-            {
-                sequelize,
-                tableName; : 'purchases';
-            }
-        )
-    }
+        productId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        quantity: {
+            type: DataTypes.NUMBER,
+            allowNull: false,
+            defaultValue: 1
+        },
+        buyerUserId: {
+            type: DataTypes.NUMBER,
+            allowNull: false
+        },
+        sellerUserId: {
+            type: DataTypes.NUMBER,
+            allowNull: false
+        },
+        deliveryAddress: {
+            type: DataTypes.STRING
+        },
+        paymentType: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'wallet points'
+        },
+        walletPayment: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        notificationCheck: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        isSold: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+    },
+        {
+            sequelize,
+            tableName: 'purchases'
+        }
+    );
+}
+public static createAssociations() {
+    Purchase.belongsTo(User, {
+        targetKey: 'userId',
 
-    public static createAssociations(); {
-        Purchase.belongsTo(User, {
-            targetKey: 'userId',
-            as: 'buyer',
-            foreignKey: 'buyerUserId',
-            constraints: false
-        });
-        Purchase.belongsTo(User, {
-            targetKey: 'userId',
-            as: 'seller',
-            foreignKey: 'sellerUserId',
-            constraints: false
-        });
-        Purchase.belongsTo(Product, {
-            targetKey: 'productId',
-            as: 'product',
-            foreignKey: 'productId',
-            constraints: false
-        });
-    }
+
+
+
+as: 'buyer',
+foreignKey: 'buyerUserId',
+constraints: false
+});
+Purchase.belongsTo(User, {
+targetKey: 'userId',
+as: 'seller',
+foreignKey: 'sellerUserId',
+constraints: false
+});
+Purchase.belongsTo(Product, {
+targetKey: 'productId',
+as: 'product',
+foreignKey: 'productId',
+constraints: false
+});
+}
 }
