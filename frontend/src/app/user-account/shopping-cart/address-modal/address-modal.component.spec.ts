@@ -10,6 +10,7 @@ import { AddressModalComponent } from './address-modal.component';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AddressModalComponent', () => {
   let component: AddressModalComponent;
@@ -24,7 +25,7 @@ describe('AddressModalComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports:[MatDialogModule, HttpClientTestingModule, MatFormFieldModule, FormsModule,
         ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule,
-        BrowserAnimationsModule],
+        BrowserAnimationsModule, RouterTestingModule],
       providers:[{provide: MatDialogRef, useValue:mockDialogRef}],
 
     })

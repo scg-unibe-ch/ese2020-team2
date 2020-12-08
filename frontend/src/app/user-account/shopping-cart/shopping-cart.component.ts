@@ -16,6 +16,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angula
 import {ModalComponent} from "../../modal/modal.component";
 import {AddressModalComponent} from "./address-modal/address-modal.component";
 import { ProductImage } from '../../../../../backend/src/models/productImage.model';
+import {Router} from "@angular/router";
 
 export interface Country {
   value: string;
@@ -70,7 +71,8 @@ export class ShoppingCartComponent implements OnInit {
               private users: CurrentUser,
               private snackBar: SnackBarService,
               private shoppingCartService: ShoppingCartService,
-              private matDialog: MatDialog) {
+              private matDialog: MatDialog,
+              private router: Router) {
 
     this.shoppingCart$ = this.shoppingCartService.getShoppingCart()
     this.loggedIn$ = authService.loggedIn$;
@@ -96,7 +98,6 @@ export class ShoppingCartComponent implements OnInit {
       this.pinCode$ = this.users.getCurrentUserProperty('pinCode');
       this.country$ = this.users.getCurrentUserProperty('country');
     }
-
 
   }
 
@@ -148,13 +149,14 @@ export class ShoppingCartComponent implements OnInit {
         (error: any) => {
           if (error.status === 200 && message) {
             this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
+            this.ngOnInit();
           } else {
             if(message) {
               this.snackBar.open(error.error.text, '', 2000, "warning");
-            }
-          }})
+            }}
+          this.ngOnInit();
+        })
     }
-    this.ngOnInit();
   }
 
   deleteShoppingCartProduct(shoppingCartProduct: ShoppingCart, message: boolean): void {
@@ -163,11 +165,13 @@ export class ShoppingCartComponent implements OnInit {
       (error: any) => {
         if (error.status === 200 && message) {
           this.snackBar.open("Removed product from shopping cart", '', 2000, "success");
+          this.ngOnInit();
         } else {
           if(message) {
             this.snackBar.open(error.error.text, '', 2000, "warning");
-          }
-        }})
+          }}
+        this.ngOnInit();
+      })
     this.ngOnInit();
   }
 
@@ -176,8 +180,7 @@ export class ShoppingCartComponent implements OnInit {
       "wishList": true,
       "shoppingCart": false,
       "quantity": shoppingCartProduct.quantity
-    }).subscribe((res: any) => {
-      },
+    }).subscribe((res: any) => {},
       (error: any) => {
         if (error.status === 200) {
           this.snackBar.open("Product moved to wish list", '', 2000, "info");
@@ -214,10 +217,15 @@ export class ShoppingCartComponent implements OnInit {
             if (error.status === 200) {
               this.shoppingCart.forEach(shoppingCartProduct => {this.removeShoppingCartProduct(shoppingCartProduct, false)})
               this.snackBar.open("❤️❤️❤️ Thanks for shopping! ❤️❤️❤️", '', 2000, "success");
+              this.ngOnInit();
             } else {
               this.snackBar.open(error.error, '', 3000, "warning");
-            }})
+            }
+            this.router.navigate(['/shopping-cart'])
+          })
       })
+    this.ngOnInit();
+
   }
 
   private CreateShoppingCartPurchases() {

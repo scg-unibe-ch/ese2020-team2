@@ -1,17 +1,17 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Output } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { ProductsService } from "../../services/products.service";
-import { AuthService } from "../../auth/auth.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, Observable, scheduled } from "rxjs";
-import { defaultIfEmpty, filter, finalize, map, startWith } from "rxjs/operators";
-import { Approval } from "../../models/approval";
-import { Product } from "../../models/product.model";
-import { environment } from "../../../environments/environment";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Review } from "../../models/review.model";
-import { PurchaseService } from "../../services/purchase.service";
-import { SnackBarService } from "../../services/snackBar.service";
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {ProductsService} from "../../services/products.service";
+import {AuthService} from "../../auth/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {BehaviorSubject, Observable} from "rxjs";
+import {defaultIfEmpty, filter, finalize, map} from "rxjs/operators";
+import {Approval} from "../../models/approval";
+import {Product} from "../../models/product.model";
+import {environment} from "../../../environments/environment";
+import {Review} from "../../models/review.model";
+import {PurchaseService} from "../../services/purchase.service";
+import {SnackBarService} from "../../services/snackBar.service";
+import {DetailedProductComponent} from "../detailed-product/detailed-product.component";
 
 @Component({
   selector: 'app-review',
@@ -36,12 +36,13 @@ export class ReviewComponent implements OnInit {
   showReview = false;
 
   constructor(private httpClient: HttpClient,
-    private productsService: ProductsService,
-    private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    public snackBar: SnackBarService,
-    public purchaseService: PurchaseService) {
+              private productsService: ProductsService,
+              private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              public snackBar: SnackBarService,
+              public purchaseService: PurchaseService,
+              private detailedProduct: DetailedProductComponent) {
 
     this.loggedIn$ = authService.loggedIn$;
     for (let index = 0; index < this.starCount; index++) {
@@ -60,7 +61,7 @@ export class ReviewComponent implements OnInit {
     this.loadReview(this.productId);
     this.loadAllReviewsOfProduct(this.productId);
     this.purchaseService.getPurchasesByUserId(JSON.parse(localStorage.getItem('user')).userId)
-      .subscribe(purchases => { this.purchasedProducts = purchases.map(purchase => purchase.productId) });
+      .subscribe(purchases => {this.purchasedProducts = purchases.map(purchase => purchase.productId)});
 
   }
 
@@ -80,12 +81,12 @@ export class ReviewComponent implements OnInit {
       defaultIfEmpty(null))
 
     this.product$.subscribe(result => {
-      if (result === null) {
-        this.router.navigate(['/error/not-found'])
-      } else {
-        this.product = result
-      }
-    },
+        if (result === null) {
+          this.router.navigate(['/error/not-found'])
+        } else {
+          this.product = result
+        }
+      },
       error => {
         if (error.status == 404) {
           this.router.navigate(['/error/not-found'])
@@ -125,12 +126,12 @@ export class ReviewComponent implements OnInit {
     ).pipe(finalize(() => {
       this.toggleReview();
       this.ngOnInit();
-    }))
+      this.detailedProduct.ngOnInit();}))
       .subscribe((res: any) => {
-        this.snackBar.open("The post of the review was successful", '', 3000, "success");
-      }, (error: any) => {
-        this.snackBar.open(error.error, '', 3000, "warning");
-      });
+      this.snackBar.open("The post of the review was successful", '', 3000, "success");
+    }, (error: any) => {
+      this.snackBar.open(error.error, '', 3000, "warning");
+    });
   }
 
 
@@ -144,31 +145,29 @@ export class ReviewComponent implements OnInit {
     ).pipe(finalize(() => {
       this.toggleReview();
       this.ngOnInit();
-    }))
-      .subscribe((res: any) => { },
-        (error: any) => {
-          if (error.status === 200) {
-            this.snackBar.open("The edit of the review was successful", '', 3000, "success");
-          } else {
-            this.snackBar.open(error.error.text, '', 3000, "warning");
-          }
-        });
+      this.detailedProduct.ngOnInit();}))
+      .subscribe((res: any) => {},
+      (error: any) => {
+      if (error.status === 200) {
+        this.snackBar.open("The edit of the review was successful", '', 3000, "success");
+      } else {
+        this.snackBar.open(error.error.text, '', 3000, "warning");
+      }});
   }
 
   deleteReview(): void {
     this.httpClient.request('DELETE', environment.endpointURL + 'review/delete/' + this.reviewId, {
       body: {
         productId: this.productId
-      }
-    }).pipe(finalize(() => {
+      }}).pipe(finalize(() => {
       this.toggleReview();
       this.ngOnInit();
-    }))
+      this.detailedProduct.ngOnInit();}))
       .subscribe((res: any) => {
-        this.snackBar.open("The deletion of the review was successful", '', 3000, "success");
-      }, (error: any) => {
-        this.snackBar.open(error.error.text, '', 3000, "warning");
-      })
+      this.snackBar.open("The deletion of the review was successful", '', 3000, "success");
+    }, (error: any) => {
+      this.snackBar.open(error.error.text, '', 3000, "warning");
+    })
   }
 
 

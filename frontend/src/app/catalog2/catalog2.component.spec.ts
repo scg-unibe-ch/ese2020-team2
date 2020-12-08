@@ -5,6 +5,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {WishListService} from "../services/wish-list.service";
 import {SnackBarService} from "../services/snackBar.service";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('Catalog2Component', () => {
   let component: Catalog2Component;
@@ -13,7 +14,7 @@ describe('Catalog2Component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ Catalog2Component ],
-      imports: [HttpClientModule, MatSnackBarModule],
+      imports: [HttpClientModule, MatSnackBarModule, RouterTestingModule],
       providers: [WishListService, SnackBarService,]
     })
     .compileComponents();

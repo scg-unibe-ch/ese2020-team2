@@ -8,6 +8,8 @@ import {RouterModule} from "@angular/router";
 import {NotFoundComponent} from "../../error/not-found/not-found.component";
 import {WishListService} from "../../services/wish-list.service";
 import {SnackBarService} from "../../services/snackBar.service";
+import {DetailedProductComponent} from "../detailed-product/detailed-product.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 describe('ReviewComponent', () => {
   let component: ReviewComponent;
@@ -16,7 +18,8 @@ describe('ReviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ReviewComponent ],
-      imports: [HttpClientModule, MatSnackBarModule, RouterTestingModule.withRoutes(
+      providers:[DetailedProductComponent],
+      imports: [HttpClientModule, MatSnackBarModule, MatDialogModule, RouterTestingModule.withRoutes(
         [{path: 'error/not-found', component: NotFoundComponent}])]
     })
     .compileComponents();

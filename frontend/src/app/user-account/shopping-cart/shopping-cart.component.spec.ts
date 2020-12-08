@@ -10,6 +10,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ShoppingCartComponent', () => {
   let component: ShoppingCartComponent;
@@ -22,7 +23,7 @@ describe('ShoppingCartComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ShoppingCartComponent ],
       imports: [HttpClientTestingModule, MatSnackBarModule, ReactiveFormsModule, MatSnackBarModule,
-        MatSelectModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule, MatDialogModule],
+        MatSelectModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule, MatDialogModule, RouterTestingModule],
         providers:[{provide: MatDialogRef, useValue:mockDialogRef}],
     })
       .compileComponents();
