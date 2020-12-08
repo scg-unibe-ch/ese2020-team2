@@ -92,7 +92,7 @@ export class Catalog2Component implements OnInit {
     this.productsService.getProducts().subscribe(products => {
       const newOptions: Options = Object.assign({}, this.options);
       this.ceil = Math.max.apply(Math, products.filter(product =>
-        product.visibleInMarket == true).map(
+        product.visibleInMarket == true && product.adminApproval == "approved").map(
           function (o) { return o.price; }))
       
       this.ceil = Math.ceil(this.ceil / 10) * 10;

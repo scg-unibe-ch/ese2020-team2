@@ -20,9 +20,10 @@
         
         }
 
-.bigger {
-    font-size: 150%;
-}
+        .bigger {
+            font-size: 150%;
+            color: white    ;
+        }
 
 .btn {
     background-color: rgb(67, 87, 179); /* Blue background */
