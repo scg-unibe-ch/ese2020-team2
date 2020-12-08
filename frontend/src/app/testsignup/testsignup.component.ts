@@ -65,7 +65,7 @@ export class TestsignupComponent implements OnInit {
       telNumber: [""],
       street: [""],
       city: [""],
-      role: ["admin"],
+      role: ["user"],
       pinCode: [""],
       passwordQuestion: ["", Validators.required],
       passwordAnswer: ["", Validators.required],
