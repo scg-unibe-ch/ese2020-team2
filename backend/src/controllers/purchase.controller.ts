@@ -6,15 +6,16 @@ import { User } from '../models/user.model';
 import { PurchaseService } from '../services/purchase.service';
 
 /**
- * This controller is to add the purchase to the purchase model.
+ * This controller is to add, delete and update the purchases to the purchase model.
+ * It also returns the purchases with various required conditions to the frontend.
  */
 const purchaseController: Router = express.Router();
 purchaseController.use(express.json());
 const purchaseService = new PurchaseService();
 
 /**
- * This method creates a new purchase in the purchase model only if the
- * user has more wallet points than the price of the product multiplied by the quantity purchased.
+ * Creates a new purchase in the purchase model only if the user has more wallet points
+ * than the price of the product multiplied by the quantity purchased.
  */
 purchaseController.post('/addCart/',
     async (req: Request, res: Response) => {
@@ -41,7 +42,6 @@ purchaseController.post('/addCart/',
                     } else {
                         await purchaseService.updateUserWallets(currentProduct, res);
                         await purchaseService.updateProductStatus(currentProduct, res);
-                        // res.json({ purchaseId });
                     }
                 } else {
                     if (quantity <= 0) {
@@ -66,7 +66,7 @@ purchaseController.post('/addCart/',
 
 
 /**
-* This method creates a new purchase in the purchase model only if the
+* Creates a new purchase in the purchase model only if the
 * user has more wallet points than the price of the product multiplied by the quantity purchased.
 */
 purchaseController.post('/add/',
@@ -112,29 +112,34 @@ purchaseController.post('/add/',
     });
 
 /**
- * This method if called outputs all bought products of a precise user (buyer)
+ * Returns all bought products of a user(buyer) linked with the product and the user details.
  */
 purchaseController.get('/getAllBuyerPurchases/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { buyerUserId: req.params.id },
-            include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product] })
+        Purchase.findAll({
+            where: { buyerUserId: req.params.id },
+            include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+        })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
 
 /**
- * Outputs all the products that are both sold and lend by a user
+ * Returns all the products that are both sold and lend by a user(seller) linked with the product and the user details.
  */
 purchaseController.get('/getAllSellerSold/:id',
     (req: Request, res: Response) => {
-        Purchase.findAll({ where: { sellerUserId: req.params.id }, include: [
-            Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product] })
+        Purchase.findAll({
+            where: { sellerUserId: req.params.id }, include: [
+                Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+        })
             .then(list => res.status(200).send(list))
             .catch(err => res.status(500).send(err));
     });
 
+
 /**
- * Outputs all the products that are only sold by a user
+ * Returns all the products that are only sold by a user(seller) linked with the product and the user details.
  */
 purchaseController.get('/getAllSellerSoldProducts/:id',
     (req: Request, res: Response) => {
@@ -147,20 +152,20 @@ purchaseController.get('/getAllSellerSoldProducts/:id',
     });
 
 /**
-* Outputs all the products that are only lend by a user
+* Returns all the products that are only lend by a user(seller) linked with the product and the user details.
 */
 purchaseController.get('/getAllSellerLendServices/:id',
-    (req: Request, res: Response) => {
-        Purchase.findAll({
-            where: { sellerUserId: req.params.id, isSold: false },
-            include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
-        })
-            .then(list => res.status(200).send(list))
-            .catch(err => res.status(500).send(err));
-    });
+(req: Request, res: Response) => {
+    Purchase.findAll({
+        where: { sellerUserId: req.params.id, isSold: false },
+        include: [Purchase.associations.buyer, Purchase.associations.seller, Purchase.associations.product]
+    })
+        .then(list => res.status(200).send(list))
+        .catch(err => res.status(500).send(err));
+});
 
 /**
- * This method is to edit a purchase.
+ * Edits the user purchase details.
  */
 
 purchaseController.put('/edit/:id', (req: Request, res: Response) => {

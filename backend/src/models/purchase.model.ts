@@ -40,9 +40,15 @@ export interface PurchaseCreationAttributes extends Optional<PurchaseAttributes,
 export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttributes> implements PurchaseAttributes {
 
     public static associations: {
+<<<<<<< HEAD
         buyer: Association <Purchase, User>;
         seller: Association <Purchase, User>;
         product: Association <Purchase, Product>;
+=======
+        buyer: Association<Purchase, User>;
+        seller: Association<Purchase, User>;
+        product: Association<Purchase, Product>;
+>>>>>>> 0a09d74493fde376e57096e6a0882fae6eec681f
     };
 
     public getUsers!: BelongsToGetAssociationMixin<User>;
@@ -69,12 +75,51 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
 
     public static initialize(sequelize: Sequelize) {
         Purchase.init({
-            purchaseId: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                allowNull: false,
-                autoIncrement: true,
+                purchaseId: {
+                    type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
+                    autoIncrement: true
+                },
+                productId: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false
+                },
+                quantity: {
+                    type: DataTypes.NUMBER,
+                    allowNull: false,
+                    defaultValue: 1
+                },
+                buyerUserId: {
+                    type: DataTypes.NUMBER,
+                    allowNull: false
+                },
+                sellerUserId: {
+                    type: DataTypes.NUMBER,
+                    allowNull: false
+                },
+                deliveryAddress: {
+                    type: DataTypes.STRING
+                },
+                paymentType: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                    defaultValue: 'wallet points'
+                },
+                walletPayment: {
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: true
+                },
+                notificationCheck: {
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
+                },
+                isSold: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false
+                },
             },
+<<<<<<< HEAD
             productId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -120,15 +165,18 @@ export class Purchase extends Model<PurchaseAttributes, PurchaseCreationAttribut
                     type: DataTypes.BOOLEAN,
                     allowNull: false,
                     defaultValue: false
-                },
+                }, ;
         },
+=======
+>>>>>>> 0a09d74493fde376e57096e6a0882fae6eec681f
             {
                 sequelize,
-                tableName: 'purchases'
+                tableName; : 'purchases';
             }
-        );
+        )
     }
-    public static createAssociations() {
+
+    public static createAssociations(); {
         Purchase.belongsTo(User, {
             targetKey: 'userId',
             as: 'buyer',

@@ -5,12 +5,14 @@ import jwt from 'jsonwebtoken';
 
 export class UserService {
 
+    // Generates an encrypted password when adding a new user.
     public register(user: UserAttributes): Promise<UserAttributes> {
         const saltRounds = 12;
         user.password = bcrypt.hashSync(user.password, saltRounds); // hashes the password, never store passwords as plaintext
         return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
     }
 
+    // Updates the user password with encryption for the password reset functionality.
     public updateUser(user: UserAttributes, userId: string): Promise<User> {
         const saltRounds = 12;
         if (user.password != null) {
@@ -20,7 +22,7 @@ export class UserService {
             .then(found => {
                 if (found != null) {
                     found.update(user)
-                    .then(updated => Promise.resolve(updated));
+                        .then(updated => Promise.resolve(updated));
                 } else {
                     return Promise.reject({ message: 'User not found.' });
                 }
@@ -29,6 +31,7 @@ export class UserService {
     }
 
 
+    // Checks for the authorized user login.
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
         const secret = process.env.JWT_SECRET;
         return User.findOne({

@@ -1,4 +1,3 @@
-
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Product } from './product.model';
 import { Purchase } from './purchase.model';
@@ -113,7 +112,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 allowNull: true,
                 defaultValue: ''
             },
-            },
+        },
             {
                 sequelize,
                 tableName: 'users'

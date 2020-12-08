@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { User } from '../models/user.model';
 import { Product } from '../models/product.model';
-import { Json } from 'sequelize/types/lib/utils';
 
 interface SingleProduct {
     productId: number;
@@ -16,7 +15,7 @@ export class PurchaseService {
     * The wallet of the buyer os decremented and the wallet of the seller is incremented.
     */
     public async updateUserWallets(req: SingleProduct, res: Response) {
-        const quantity  = req.quantity;
+        const quantity = req.quantity;
         const product = await Product.findOne({ where: { productId: req.productId } });
         const buyer = await User.findOne({ where: { userId: req.buyerUserId } });
         const seller = await User.findOne({ where: { userId: req.sellerUserId } });
