@@ -20,13 +20,13 @@ productController.post('/add', (req: Request, res: Response) => {
  * Deletes a product by setting its status to deleted.
  */
 productController.delete('/delete/:id', async (req: Request, res: Response) => {
-    const productStatus = 'deleted';
+    req.body.status = 'deleted';
     Product.findByPk(req.params.id).then(found => {
         if (found != null) {
             if (found.status !== 'deleted') {
-                found.update({
-                    status: productStatus
-                }).then(() => res.status(200).send('Product is removed successfully.'));
+                found.update(
+                   req.body
+                ).then(() => res.status(200).send('Product removed successfully.'));
             } else {
                 res.status(500).send('Product already deleted');
             }

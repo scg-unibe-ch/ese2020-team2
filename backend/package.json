@@ -2,7 +2,7 @@
   "name": "backend-scaffolding-crud",
   "version": "0.0.0",
   "private": true,
-  "main": "build/backend/src/server.js",
+  "main": "build/server.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
