@@ -1,10 +1,9 @@
 
 .outer {
-    overflow:scroll;
-    height: 77%;
-    overflow-x: hidden;
-  }
-
+  overflow: auto;
+  height: 82%;
+  overflow-x: hidden;
+}
   .inner {
     padding-left: 2%; 
     

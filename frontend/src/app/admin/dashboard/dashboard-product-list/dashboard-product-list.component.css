@@ -1,6 +1,7 @@
 .outer {
-  overflow:scroll;
-  height: 80%;
+  overflow: auto;
+  height: 86%;
+  overflow-x: hidden;
 }
 .box-2 {
   flex-direction: column;
@@ -11,7 +12,6 @@
 
 
 .inner {
-  padding-right: 2%;
   padding-left: 2%;
 }
 .red {

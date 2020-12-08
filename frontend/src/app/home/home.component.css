@@ -1,7 +1,7 @@
 
 .outer {
-  overflow:scroll;
-  height: 77%;
+  overflow: auto;
+  height: 82%;
   overflow-x: hidden;
 }
 
