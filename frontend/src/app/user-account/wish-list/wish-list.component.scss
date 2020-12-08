@@ -6,8 +6,8 @@ section {
     padding-right: 25%;
     padding-top: 3%;
     padding-bottom: 2%;
-    overflow-y: hidden;
-    height: 76%;
+    overflow-y: auto;
+    height: 90%;
     }
 
     .btn {
@@ -24,9 +24,14 @@ section {
         }
 
 
-                .centered {
-                    height: max-content; 
-                    object-fit: cover !important;
-                    padding-left: 5%;
-                    padding-top: 5%;/* this centers and crops the image so that it doesn't break the aspect ratio */
-                    }
+        .fullimg {
+            height: 100%; 
+            width: 100%;
+            object-fit: cover ;
+            transition: 0.5s;
+            padding-left: 1%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            cursor: pointer;
+            /* this centers and crops the image so that it doesn't break the aspect ratio */
+            }

@@ -5,22 +5,18 @@
 
   }
 
-  .card {
-  max-height: 285px !important;
-  height: 285px !important;
-  @include mat-elevation(4);
-  }
-
-  .centered {
-    object-fit: cover !important;
-    padding-left: 5%;
-    padding-top: 5%;/* this centers and crops the image so that it doesn't break the aspect ratio */
+ 
+  .fullimg {
+    height: 100%; 
+    width: 100%;
+    object-fit: cover ;
+    transition: 0.5s;
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    cursor: pointer;
+    /* this centers and crops the image so that it doesn't break the aspect ratio */
     }
-  
-  .outer {
-  overflow:scroll;
-  height: 77%;
-  }
 
   .btn {
   background-color: rgb(67, 87, 179); /* Blue background */
@@ -39,8 +35,8 @@
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 2%;
-  overflow-y: scroll;
-  height: 80%;
+  overflow-y: auto;
+  height: 90%;
   }
   .class1 {
     width: 100%;

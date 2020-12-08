@@ -2,11 +2,11 @@
 
 
 <section class="container" *ngIf="totalPrice != 0">
-    <mat-card class="card" *ngFor="let wishList of (wishList$ | async); let index = index" >
+    <mat-card class="mat-elevation-z6" *ngFor="let wishList of (wishList$ | async); let index = index" >
       <mat-card-content fxLayout.gt-sm="row">
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%">
-          <img *ngIf="urls[wishList.product.productId] != null" mat-card-image src={{urls[wishList.product.productId]}} class="centered" >
-          <img *ngIf="urls[wishList.product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" class="centered" >
+          <img *ngIf="urls[wishList.product.productId] != null"  src={{urls[wishList.product.productId]}} class="fullimg" [routerLink]="['/product', wishList.productId]">
+          <img *ngIf="urls[wishList.product.productId] == null" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" class="fullimg" [routerLink]="['/product', wishList.productId]">
          </div>
         <div fxLayout.gt-sm="column" fxFlex.gt-sm="40%" class="gutter" style="padding-left: 3%;">
           <mat-card-title>{{wishList.product.title}}</mat-card-title>

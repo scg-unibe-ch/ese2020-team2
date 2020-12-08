@@ -21,8 +21,8 @@
             <mat-card-title *ngIf="product.sellOrLend =='lend'">For Rent: {{product.price}} Fr</mat-card-title>
           </mat-card-subtitle>
 
-          <img *ngIf="urls[product.productId] != null" mat-card-image src={{urls[product.productId]}}>
-          <img *ngIf="urls[product.productId] == null" mat-card-image src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg">
+          <img *ngIf="urls[product.productId] != null"  src={{urls[product.productId]}} class="fullimg" [routerLink]="['/product', product.productId]">
+          <img *ngIf="urls[product.productId] == null" src="https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" class="fullimg" [routerLink]="['/product', product.productId]">
           <div class="box box-2"></div>
           <mat-card-content>
             <p>{{product.description}}</p>

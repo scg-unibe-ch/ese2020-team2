@@ -110,6 +110,8 @@ export class ShoppingCartComponent implements OnInit {
     this.points$ = this.users.getCurrentUserProperty('moneyInWallet');
   }
 
+
+  
   private getAddressAsString() {
     this.users.getCurrentUser().subscribe(user => {
       this.userAddress = [user.firstName, user.lastName, user.street, user.pinCode, user.city, user.country]
