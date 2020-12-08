@@ -1,4 +1,3 @@
-
 export class User {
 
   constructor(
@@ -9,7 +8,6 @@ export class User {
     public firstName: string,
     public lastName: string,
     public gender: string,
-    public telephone: string,
     public street: string,
     public pinCode: string,
     public city: string,

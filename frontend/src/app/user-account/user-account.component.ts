@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import {environment} from "../../environments/environment";
-import {TodoItem} from "../models/todo-item.model";
-import {TodoList} from "../models/todo-list.model";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../../backend/src/models/user.model";
 import { Observable } from 'rxjs';

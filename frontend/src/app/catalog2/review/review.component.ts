@@ -94,6 +94,11 @@ export class ReviewComponent implements OnInit {
       })
   }
 
+  /**
+   * Loads all the reviews from the backend
+   *
+   * @param productId, a number representing the product
+   */
   loadReview(productId: number) {
 
     this.review$ = this.httpClient.get<Review[]>(environment.endpointURL + 'review/getProductReviews/' + productId).pipe(map(reviews =>
@@ -113,6 +118,9 @@ export class ReviewComponent implements OnInit {
     })
   }
 
+  /**
+   * Adds a review to the backend
+   */
   submitReview() {
     this.httpClient.post(environment.endpointURL + 'review/add',
       {
@@ -134,7 +142,9 @@ export class ReviewComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Allows the user to edit the review he already posted
+   */
   editReview() {
     this.httpClient.put(environment.endpointURL + 'review/edit/' + this.reviewId,
       {
@@ -155,6 +165,9 @@ export class ReviewComponent implements OnInit {
       }});
   }
 
+  /**
+   * Deletes a Review that was already posted
+   */
   deleteReview(): void {
     this.httpClient.request('DELETE', environment.endpointURL + 'review/delete/' + this.reviewId, {
       body: {
@@ -170,16 +183,29 @@ export class ReviewComponent implements OnInit {
     })
   }
 
-
+  /**
+   * Loads all the reviews of a product
+   * @param productId, a number representing the product
+   */
   loadAllReviewsOfProduct(productId): void {
     this.reviews$ = this.httpClient.get<Review[]>(environment.endpointURL + 'review/getProductReviews/' + productId)
   }
 
+  /**
+   * Shows the user what rating he choose
+   *
+   * @param rating, a number representing the rating the user choose
+   */
   onRating(rating: number) {
     this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', 2000, "info");
     this.rating = rating;
   }
 
+  /**
+   * Fills out the right amount of stars in the rating
+   *
+   * @param index, a number representing the place of the stars in the star rating
+   */
   updateIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star';
@@ -188,6 +214,12 @@ export class ReviewComponent implements OnInit {
     }
   }
 
+  /**
+   * Updates the visual representation of the star rating
+   *
+   * @param index, a number representing the place of the stars in the star rating
+   * @param rating, a number representing the rating the user choose
+   */
   showIcon(index: number, rating: number) {
     if (rating >= index + 1) {
       return 'star';
@@ -196,6 +228,9 @@ export class ReviewComponent implements OnInit {
     }
   }
 
+  /**
+   * Open or closes the review field
+   */
   toggleReview() {
     this.showReview = !this.showReview;
   }
