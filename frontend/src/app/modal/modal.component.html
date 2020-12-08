@@ -1,67 +1,74 @@
-<p *ngIf = "!(loggedIn$ | async)">
-    Hello, if you are not new to the website, go on with your journy.<br>
-    Otherwise this little guide can help you better understand how our website works.
-    </p>
-    <h2>How to use the website</h2>
+<p *ngIf="!(loggedIn$ | async)">
+  Hello, if you are not new to the website, go on with your journy.<br>
+  Otherwise this little guide can help you better understand how our website works.
+</p>
+<h2>How to use the website</h2>
 
-    <p>
-        As you can see there are some buttons on the top of the website.</p> <p>
-        And you can do the followings by clicking each of them:</p>
+<p>
+  As you can see there are some buttons on the top of the website.</p>
+<p>
+  And you can do the followings by clicking each of them:</p>
 <div class="leftup-half">
-    <button matTooltip="Home" class="btn" btn btn-success >
-        <mat-icon>home</mat-icon>
-      </button>
-      <br><br *ngIf = "!(loggedIn$ | async)">
-      <button  matTooltip=" User Registration" *ngIf = "!(loggedIn$ | async)" class="btn" >
-        <mat-icon>assignment</mat-icon>
-      </button>
-      <br *ngIf = "!(loggedIn$ | async)"><br *ngIf = "!(loggedIn$ | async)">
-      <button  matTooltip="User Login" *ngIf = "!(loggedIn$ | async)" class="btn" >
-        <mat-icon>forward</mat-icon>
-     </button>
-     <br><br  *ngIf = "!(loggedIn$ | async)">
-      <button  matTooltip=" View Products" class="btn">
-        <mat-icon><i class="fa fa-product-hunt" aria-hidden="true"></i>
-        </mat-icon>
-      </button>
-   
-      <br *ngIf = "(loggedIn$ | async)"><br *ngIf = "(loggedIn$ | async)">
-      <button  matTooltip="Shopping Cart" *ngIf = "(loggedIn$ | async)" class="btn" >
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
-      <br *ngIf = "(loggedIn$ | async)"><br *ngIf = "(loggedIn$ | async)">
+  <button matTooltip="Home" class="btn" btn btn-success>
+    <mat-icon>home</mat-icon>
+  </button>
+  <br><br *ngIf="!(loggedIn$ | async)">
+  <button matTooltip=" User Registration" *ngIf="!(loggedIn$ | async)" class="btn">
+    <mat-icon>assignment</mat-icon>
+  </button>
+  <br *ngIf="!(loggedIn$ | async)"><br *ngIf="!(loggedIn$ | async)">
+  <button matTooltip="User Login" *ngIf="!(loggedIn$ | async)" class="btn">
+    <mat-icon>forward</mat-icon>
+  </button>
+  <br><br *ngIf="!(loggedIn$ | async)">
+  <button matTooltip=" View Products" class="btn">
+    <mat-icon><i class="fa fa-product-hunt" aria-hidden="true"></i>
+    </mat-icon>
+  </button>
 
-      <button  matTooltip="Wish List" *ngIf = "(loggedIn$ | async)" class="btn" >
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <br *ngIf = "(loggedIn$ | async)"><br *ngIf = "(loggedIn$ | async)">
-      <button  matTooltip= "User Account" *ngIf = "(loggedIn$ | async)" class="btn" >
-        <mat-icon><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
-      </button>
-      <br *ngIf = "(loggedIn$ | async)"><br *ngIf = "(loggedIn$ | async)">
-      <button  matTooltip = "Logout" *ngIf = "(loggedIn$ | async)"class="btn" >
-        <mat-icon>clear</mat-icon>
-      </button>
-      <br><br >
-      
-      <button  class="btn" btn btn-success><mat-icon><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></mat-icon></button>
+  <br *ngIf="(loggedIn$ | async)"><br *ngIf="(loggedIn$ | async)">
+  <button matTooltip="Shopping Cart" *ngIf="(loggedIn$ | async)" class="btn">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <br *ngIf="(loggedIn$ | async)"><br *ngIf="(loggedIn$ | async)">
+
+  <button matTooltip="Wish List" *ngIf="(loggedIn$ | async)" class="btn">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <br *ngIf="(loggedIn$ | async)"><br *ngIf="(loggedIn$ | async)">
+  <button matTooltip="User Account" *ngIf="(loggedIn$ | async)" class="btn">
+    <mat-icon><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
+  </button>
+  <br *ngIf="(loggedIn$ | async)"><br *ngIf="(loggedIn$ | async)">
+  <button matTooltip="Logout" *ngIf="(loggedIn$ | async)" class="btn">
+    <mat-icon>clear</mat-icon>
+  </button>
+  <br><br>
+
+  <button class="btn" btn btn-success>
+    <mat-icon><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></mat-icon>
+  </button>
 
 </div>
 
 <div class="middle-half">
-<p style="font-size: 120%;
+  <p style="font-size: 120%;
 font-weight: 500;"> This is the homepage button, here you can find some highlighted items.</p>
-<p class="subtitle" *ngIf = "!(loggedIn$ | async)">This is the user registration button. Here you can register yourself and create an account for our website.</p>
-<p class="subtitle" *ngIf = "!(loggedIn$ | async)">This is the user Log in button. Here you can log-in and use additional functionality.</p>
-<p class="subtitle">This is our catalog, here you can search for products and servicises. If you are logged in, you can also buy or rent them.</p>
+  <p class="subtitle" *ngIf="!(loggedIn$ | async)">This is the user registration button. Here you can register yourself
+    and create an account for our website.</p>
+  <p class="subtitle" *ngIf="!(loggedIn$ | async)">This is the user Log in button. Here you can log-in and use
+    additional functionality.</p>
+  <p class="subtitle">This is our catalog, here you can search for products and servicises. If you are logged in, you
+    can also buy or rent them.</p>
 
-<p class="subtitle" *ngIf = "(loggedIn$ | async)"> This is your Shopping cart, here you can add items to checkout and buy them.</p>
-<p class="subtitle" *ngIf = "(loggedIn$ | async)"> This is your Wishlist, here you can add items to buy them at a later date</p>
-<p class="subtitle" *ngIf = "(loggedIn$ | async)"> Your User Account, here you can see your points, post items and see your history</p>
-<p class="subtitle" *ngIf = "(loggedIn$ | async)"> log out....</p>
-<p class="subtitle2" *ngIf = "(loggedIn$ | async)"> here you can find some guide to better use the website.</p>
-<p class="subtitle" *ngIf = "!(loggedIn$ | async)"> here you can find some guide to better use the website.</p>
+  <p class="subtitle" *ngIf="(loggedIn$ | async)"> This is your Shopping cart, here you can add items to checkout and
+    buy them.</p>
+  <p class="subtitle" *ngIf="(loggedIn$ | async)"> This is your Wishlist, here you can add items to buy them at a later
+    date</p>
+  <p class="subtitle" *ngIf="(loggedIn$ | async)"> Your User Account, here you can see your points, post items and see
+    your history</p>
+  <p class="subtitle" *ngIf="(loggedIn$ | async)"> log out....</p>
+  <p class="subtitle2" *ngIf="(loggedIn$ | async)"> here you can find some guide to better use the website.</p>
+  <p class="subtitle" *ngIf="!(loggedIn$ | async)"> here you can find some guide to better use the website.</p>
 
-</div >
-
-
+</div>

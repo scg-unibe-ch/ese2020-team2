@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductsService} from "../../services/products.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "../../models/product.model";
-import {BehaviorSubject, Observable} from "rxjs";
-import {defaultIfEmpty, filter} from "rxjs/operators";
-import {Approval} from "../../models/approval";
+import { ProductsService } from "../../services/products.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Product } from "../../models/product.model";
+import { BehaviorSubject, Observable } from "rxjs";
+import { defaultIfEmpty, filter } from "rxjs/operators";
+import { Approval } from "../../models/approval";
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { environment } from 'src/environments/environment';
-import {Review} from "../../models/review.model";
-import {Location} from '@angular/common';
-import {SnackBarService} from "../../services/snackBar.service";
-import {WishListService} from "../../services/wish-list.service";
-import {ShoppingCartService} from "../../services/shopping-cart.service";
+import { Review } from "../../models/review.model";
+import { Location } from '@angular/common';
+import { SnackBarService } from "../../services/snackBar.service";
+import { WishListService } from "../../services/wish-list.service";
+import { ShoppingCartService } from "../../services/shopping-cart.service";
 import { ProductImage } from '../../../../../backend/src/models/productImage.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ModalimgComponent } from 'src/app/modalimg/modalimg.component';
-
 @Component({
   selector: 'app-detailed-product',
   templateUrl: './detailed-product.component.html',
@@ -37,18 +35,18 @@ export class DetailedProductComponent implements OnInit {
 
 
 
-  
+
 
   constructor(private httpClient: HttpClient,
     private productsService: ProductsService,
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-              private snackBar: SnackBarService,
-              public matDialog: MatDialog,
-              private location: Location,
-              public wishListService: WishListService,
-              public shoppingCartService: ShoppingCartService) {
+    private snackBar: SnackBarService,
+    public matDialog: MatDialog,
+    private location: Location,
+    public wishListService: WishListService,
+    public shoppingCartService: ShoppingCartService) {
 
     this.loggedIn$ = authService.loggedIn$;
 
@@ -75,9 +73,9 @@ export class DetailedProductComponent implements OnInit {
   }
   getimage(id: number) {
     this.httpClient.get(environment.endpointURL + 'image/get/' + id).subscribe((data: ProductImage) => this.url = data[0]?.filePath
-  );
+    );
 
-}
+  }
 
   /**
    * Gets the product, but only if you are the admin or it is approved and simultaneously set to visible in the market
@@ -87,8 +85,8 @@ export class DetailedProductComponent implements OnInit {
    *
    * @param productId the id of the product that should be displayed in detail
    */
-  loadProductDetails(productId){
-    if(JSON.parse(localStorage.getItem('user')).role === 'user') {
+  loadProductDetails(productId) {
+    if (JSON.parse(localStorage.getItem('user')).role === 'user') {
       this.product$ = this.productsService.getProductById(productId).pipe(
         filter(product => product.adminApproval == Approval.approved && product.visibleInMarket == true),
         defaultIfEmpty(null))
@@ -96,16 +94,18 @@ export class DetailedProductComponent implements OnInit {
       this.product$ = this.productsService.getProductById(productId).pipe(defaultIfEmpty(null))
     }
     this.product$.subscribe(result => {
-      if(result === null) {
+      if (result === null) {
         this.router.navigate(['/error/not-found'])
       }
       else {
         this.product = result
-      }},
-    error => {
-      if (error.status ==404) {
-        this.router.navigate(['/error/not-found'])
-      }})
+      }
+    },
+      error => {
+        if (error.status == 404) {
+          this.router.navigate(['/error/not-found'])
+        }
+      })
   }
 
   showIcon(index: number, rating: number) {
@@ -116,15 +116,15 @@ export class DetailedProductComponent implements OnInit {
     }
   }
 
-  
 
-  
 
-  
+
+
+
   openModal() {
     document.getElementById("myModal").style.display = "block";
   }
-  
+
   // Close the Modal
   closeModal() {
     document.getElementById("myModal").style.display = "none";

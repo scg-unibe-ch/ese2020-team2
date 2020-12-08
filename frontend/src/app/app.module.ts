@@ -23,7 +23,6 @@ import { HomeComponent } from './home/home.component';
 import {MatSelectModule} from "@angular/material/select";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import { AppRoutingModule } from './app-routing.module';
-import { CatalogComponent } from './catalog/catalog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -65,8 +64,6 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
-import { ModalimgComponent } from './modalimg/modalimg.component';
-
 
 @NgModule({
   declarations: [
@@ -77,7 +74,6 @@ import { ModalimgComponent } from './modalimg/modalimg.component';
     ModalComponent,
     WalletComponent,
     HomeComponent,
-    CatalogComponent,
     UserDirective,
     UserRoleDirective,
     NotFoundComponent,
@@ -98,7 +94,6 @@ import { ModalimgComponent } from './modalimg/modalimg.component';
     ResetPasswordComponent,
     AddressModalComponent,
     NotificationModalComponent,
-    ModalimgComponent,
   ],
   imports: [
     BrowserModule,

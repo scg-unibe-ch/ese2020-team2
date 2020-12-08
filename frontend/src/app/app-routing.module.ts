@@ -6,7 +6,6 @@ import {TestsignupComponent} from './testsignup/testsignup.component';
 import {UserAccountComponent} from './user-account/user-account.component';
 import {EdititemComponent} from './user-account/user-dashboard/edititem/edititem.component';
 import {UserLoginComponent} from './user-login/user-login.component';
-import {CatalogComponent} from './catalog/catalog.component';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {Role} from "./models/role";
 import {NotFoundComponent} from "./error/not-found/not-found.component";
