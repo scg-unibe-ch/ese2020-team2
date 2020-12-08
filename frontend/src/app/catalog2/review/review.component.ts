@@ -12,6 +12,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Review} from "../../models/review.model";
 import {PurchaseService} from "../../services/purchase.service";
 import {SnackBarService} from "../../services/snackBar.service";
+import {DetailedProductComponent} from "../detailed-product/detailed-product.component";
 
 @Component({
   selector: 'app-review',
@@ -41,7 +42,8 @@ export class ReviewComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               public snackBar: SnackBarService,
-              public purchaseService: PurchaseService) {
+              public purchaseService: PurchaseService,
+              private detailedProduct: DetailedProductComponent) {
 
     this.loggedIn$ = authService.loggedIn$;
     for (let index = 0; index < this.starCount; index++) {
@@ -124,7 +126,8 @@ export class ReviewComponent implements OnInit {
       }
     ).pipe(finalize(() => {
       this.toggleReview();
-      this.ngOnInit();}))
+      this.ngOnInit();
+      this.detailedProduct.ngOnInit();}))
       .subscribe((res: any) => {
       this.snackBar.open("The post of the review was successful", '', 3000, "success");
     }, (error: any) => {
@@ -142,7 +145,8 @@ export class ReviewComponent implements OnInit {
       }
     ).pipe(finalize(() => {
       this.toggleReview();
-      this.ngOnInit();}))
+      this.ngOnInit();
+      this.detailedProduct.ngOnInit();}))
       .subscribe((res: any) => {},
       (error: any) => {
       if (error.status === 200) {
@@ -158,7 +162,8 @@ export class ReviewComponent implements OnInit {
         productId: this.productId
       }}).pipe(finalize(() => {
       this.toggleReview();
-      this.ngOnInit();}))
+      this.ngOnInit();
+      this.detailedProduct.ngOnInit();}))
       .subscribe((res: any) => {
       this.snackBar.open("The deletion of the review was successful", '', 3000, "success");
     }, (error: any) => {
