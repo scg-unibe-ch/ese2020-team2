@@ -2,11 +2,9 @@ import {Product} from './product.model';
 
 export class ShoppingCart {
 
-// Has to be extended
   constructor(
 
     public sellerReview: string[],
-
     // Id of the shopping Cart
     public cartId: number,
     // Id of the product
