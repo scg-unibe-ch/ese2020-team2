@@ -63,10 +63,10 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
     if(this.answerWasCorrect){
     this.snackBar.open('You answered correctly', '', 3000, "success");
   } else {
-    var sentence='Your answer was wrong. You still have '+this.attempts + ' attempt'
-      sentence+=(this.attempts>1?'s':'');
-    this.snackBar.open( sentence, '', 1000, "warning");
     this.attempts--;
+    }
+    if(this.attempts==0){
+      this.blockAccount();
     }
   }
   changePassword(){
@@ -76,4 +76,7 @@ passwordPattern = "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{7,}$";
     this.router.navigate(['login']);
   }
 
+  blockAccount(){
+    this.httpClient.put(environment.endpointURL + 'user/editUser/'+ this.userId, {status:"blocked"}).subscribe();
+  }
 }
